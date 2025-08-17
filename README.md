@@ -3,6 +3,10 @@
 A replit generated IPv6 statistics reporting web service. This was built using replit, modified slightly to run stand alone. 
 A Streamlit web application for visualizing global IPv6 adoption metrics, BGP statistics, and historical trends. Automatically fetches data from Cisco 6lab, BGP Stuff, and other public sources.
 
+![Dashboard Preview](img/v6stats-clouddash.png)
+
+Active production site can be found [here](https://stats.ipv6.army). 
+
 ## Features
 - **Real-time IPv6 adoption rates** by country/ASN
 - **BGP routing table analytics**
