@@ -89,11 +89,15 @@ Create .streamlit/config.toml:
 [theme]
 base = light  # Always use light mode
 primaryColor = #4f8bf9  # Optional: Customize colors
+```
+
+### More variables
+```
 Environment Variables
 Variable	Purpose
 BGP_API_KEY	Auth for BGP data sources
 UPDATE_INTERVAL	Data refresh rate (default: 86400s)
-```
+``` 
 
 # Troubleshooting
 Python is a bear, and I am terrible at it. I had a lot of issues with versions and the venv. Below are some of the thorns I ran into:
