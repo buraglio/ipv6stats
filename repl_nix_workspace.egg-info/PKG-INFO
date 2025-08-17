@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: repl-nix-workspace
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.11
+Requires-Dist: folium>=0.20.0
+Requires-Dist: streamlit-folium>=0.25.1
+Requires-Dist: streamlit>=1.48.1
+Requires-Dist: trafilatura>=2.0.0
+Requires-Dist: requests>=2.32.4
+Requires-Dist: pandas>=2.3.1
+Requires-Dist: numpy>=2.3.2
+Requires-Dist: plotly>=6.3.0
+Requires-Dist: lxml>=5.4.0
+Requires-Dist: lxml-html-clean>=0.4.2
