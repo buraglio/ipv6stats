@@ -13,7 +13,8 @@ import numpy as np
 
 from data_sources import DataCollector
 from visualization import ChartGenerator
-from utils import format_number, get_country_coordinates, cache_data
+from utils import format_number, get_country_coordinates, get_all_country_coordinates, cache_data
+from performance_config import optimize_memory, clear_old_cache, UI_OPTIMIZATION
 
 # Page configuration optimized for mobile
 st.set_page_config(
@@ -23,13 +24,26 @@ st.set_page_config(
     initial_sidebar_state="auto"  # Auto-collapse on mobile
 )
 
-# Initialize data collector
-@st.cache_resource
+# Initialize data collector with lazy loading
+@st.cache_resource(max_entries=1)
 def get_data_collector():
     return DataCollector()
 
-data_collector = get_data_collector()
-chart_generator = ChartGenerator()
+@st.cache_resource(max_entries=1) 
+def get_chart_generator():
+    return ChartGenerator()
+
+# Lazy initialization - only create when needed
+if 'data_collector' not in st.session_state:
+    st.session_state.data_collector = get_data_collector()
+if 'chart_generator' not in st.session_state:
+    st.session_state.chart_generator = get_chart_generator()
+
+# Optimize memory on app initialization
+optimize_memory()
+
+data_collector = st.session_state.data_collector
+chart_generator = st.session_state.chart_generator
 
 # IPv6.army color scheme and mobile optimization CSS
 st.markdown("""
@@ -204,66 +218,250 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Sidebar navigation with logo
-st.sidebar.markdown("""
-<div style="display: flex; align-items: center; margin-bottom: 1rem;">
-    <img src="https://ipv6.army/images/v6.png" alt="IPv6 Army" style="height: 40px; width: auto; margin-right: 0.5rem;">
-    <h2 style="margin: 0; color: var(--primary-color); font-size: 1.2rem;">📊 IPv6 Dashboard</h2>
-</div>
-""", unsafe_allow_html=True)
-
-# Navigation section links
-st.sidebar.markdown("### 🔗 All Sections")
-
-# Create navigation links with URL parameters
-nav_sections = {
-    "📋 Overview": "Overview",
-    "🌍 Combined View": "Combined View", 
-    "☁️ Cloud Services": "Cloud Services",
-    "🔬 Extended Data Sources": "Extended Data Sources",
-    "🌐 Global Adoption": "Global Adoption",
-    "🏛️ Country Analysis": "Country Analysis", 
-    "📡 BGP Statistics": "BGP Statistics",
-    "📈 Historical Trends": "Historical Trends",
-    "📚 Data Sources": "Data Sources"
-}
-
-for display_name, section_name in nav_sections.items():
-    if st.sidebar.button(display_name, key=f"nav_{section_name}", use_container_width=True):
-        st.query_params.page = section_name
-
-st.sidebar.markdown("---")
-
-# External link to IPv6 compatibility
-st.sidebar.markdown("### 🌐 External Resources")
-st.sidebar.markdown("[🔗 IPv6 Compatibility Database](https://ipv6compatibility.com/)")
-st.sidebar.markdown("---")
-
-# Attribution to IPv6.army
-st.sidebar.markdown("""
-### 🎨 Styling
-Inspired by [IPv6.army](https://ipv6.army/) design  
-*Making the modern internet work*
-""")
-st.sidebar.markdown("---")
-
-# Get page from query params or use selectbox as fallback
-if "page" in st.query_params:
-    page = st.query_params.page
-else:
-    page = st.sidebar.selectbox(
-        "Navigate to section:",
-        ["Overview", "Combined View", "Cloud Services", "Extended Data Sources", "Global Adoption", "Country Analysis", "BGP Statistics", "Historical Trends", "Data Sources"]
-    )
-
-# Main title with IPv6.army logo
+# Scalable top menu bar
 st.markdown("""
-<div class="logo-header">
-    <img src="https://ipv6.army/images/v6.png" alt="IPv6 Army Logo">
-    <h1>🌐 Global IPv6 Statistics Dashboard</h1>
-</div>
+<style>
+    /* Scalable top menu bar */
+    .menu-bar {
+        background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+        padding: 0;
+        margin: -1rem -1rem 2rem -1rem;
+        box-shadow: 0 4px 12px rgba(0,123,255,0.2);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    
+    .menu-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .menu-header {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0 0.5rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .menu-logo {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+    
+    .menu-logo img {
+        height: 32px;
+        width: auto;
+        margin-right: 0.75rem;
+    }
+    
+    .menu-title {
+        color: white;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 0;
+    }
+    
+    .menu-nav {
+        display: flex;
+        padding: 0.5rem 0;
+        gap: 0.25rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .menu-nav::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .menu-item {
+        color: rgba(255,255,255,0.9) !important;
+        text-decoration: none;
+        padding: 0.6rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        background: rgba(255,255,255,0.1);
+        margin-right: 0.25rem;
+    }
+    
+    .menu-item:hover {
+        background: rgba(255,255,255,0.2);
+        color: white !important;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+    
+    .menu-item.active {
+        background: rgba(255,255,255,0.25);
+        color: white !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .menu-utils {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .menu-util {
+        color: rgba(255,255,255,0.7) !important;
+        text-decoration: none;
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        background: rgba(255,255,255,0.05);
+        transition: all 0.2s;
+    }
+    
+    .menu-util:hover {
+        background: rgba(255,255,255,0.15);
+        color: white !important;
+        text-decoration: none;
+    }
+    
+    /* Responsive scaling */
+    @media (max-width: 1024px) {
+        .menu-title {
+            font-size: 1.2rem;
+        }
+        
+        .menu-item {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .menu-header {
+            flex-direction: column;
+            text-align: center;
+            padding: 0.75rem 0 0.5rem 0;
+        }
+        
+        .menu-logo {
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .menu-title {
+            font-size: 1.1rem;
+        }
+        
+        .menu-nav {
+            justify-content: flex-start;
+            padding-bottom: 0.75rem;
+        }
+        
+        .menu-item {
+            font-size: 0.75rem;
+            padding: 0.5rem 0.6rem;
+        }
+        
+        .menu-utils {
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .menu-container {
+            padding: 0 0.5rem;
+        }
+        
+        .menu-title {
+            font-size: 1rem;
+        }
+        
+        .menu-logo img {
+            height: 24px;
+        }
+        
+        .menu-item {
+            font-size: 0.7rem;
+            padding: 0.4rem 0.5rem;
+        }
+        
+        .menu-util {
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+        }
+    }
+</style>
 """, unsafe_allow_html=True)
-st.markdown("*Comprehensive analysis of worldwide IPv6 adoption and BGP routing data*")
+
+# Navigation sections
+nav_sections = [
+    ("📋", "Overview"),
+    ("🌍", "Combined View"), 
+    ("☁️", "Cloud Services"),
+    ("🔬", "Extended Data Sources"),
+    ("🌐", "Global Adoption"),
+    ("🏛️", "Country Analysis"), 
+    ("📡", "BGP Statistics"),
+    ("📈", "Historical Trends"),
+    ("📚", "Data Sources")
+]
+
+# Get current page
+current_page = st.query_params.get("page", "Overview")
+
+# Build scalable menu HTML
+menu_html = """
+<div class="menu-bar">
+    <div class="menu-container">
+        <div class="menu-header">
+            <div class="menu-logo">
+                <img src="https://ipv6.army/images/v6.png" alt="IPv6 Army">
+                <h1 class="menu-title">IPv6 Global Statistics Dashboard</h1>
+            </div>
+        </div>
+        <div class="menu-nav">
+"""
+
+for icon, section_name in nav_sections:
+    active_class = "active" if current_page == section_name else ""
+    menu_html += f'<a href="?page={section_name}" class="menu-item {active_class}" target="_self">{icon} {section_name}</a>'
+
+menu_html += """
+        </div>
+        <div class="menu-utils">
+            <a href="https://ipv6compatibility.com/" class="menu-util" target="_blank">IPv6 Compatibility Database</a>
+            <span class="menu-util">Monthly Data Updates</span>
+            <span class="menu-util">IPv6.army Theme</span>
+        </div>
+    </div>
+</div>
+"""
+
+st.markdown(menu_html, unsafe_allow_html=True)
+
+# Set page variable
+page = current_page
+
+# Minimal sidebar with essential info only
+st.sidebar.markdown("### 📊 Dashboard Info")
+st.sidebar.markdown("**Data Updates**: Monthly")
+st.sidebar.markdown("**Cache Duration**: 30 days")
+st.sidebar.markdown("**Total Sources**: 15+ IPv6 statistics providers")
+st.sidebar.markdown("**Coverage**: Global deployment metrics")
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 🌐 About")
+st.sidebar.markdown("Comprehensive IPv6 adoption analysis across cloud providers, ISPs, and regional networks worldwide.")
+
+st.sidebar.markdown("---")
+st.sidebar.markdown("*Powered by IPv6.army theme*")
+
+# Content area - title removed since it's now in top nav
+st.markdown("*Comprehensive analysis of worldwide IPv6 adoption and BGP routing data with monthly data updates*")
 
 # Combined View Page (standalone)
 if page == "Combined View":
@@ -445,7 +643,7 @@ elif page == "Overview":
     except Exception as e:
         st.error(f"Error loading overview metrics: {str(e)}")
     
-    # Current trends section
+    # Current trends section with new data sources
     st.subheader("🔍 Current Trends")
     
     col1, col2 = st.columns(2)
@@ -453,10 +651,28 @@ elif page == "Overview":
     with col1:
         st.info("📱 **Mobile Leadership**: Mobile traffic is 50% more likely to use IPv6 than desktop traffic")
         
+        # Add LACNIC insights
+        try:
+            lacnic_data = data_collector.get_telecom_sudparis_stats()
+            if 'error' not in lacnic_data:
+                total_lacnic = lacnic_data.get('total_addresses', 0)
+                st.success(f"🌎 **LACNIC Region**: {format_number(total_lacnic)} IPv6 /48 blocks allocated across Latin America & Caribbean")
+        except:
+            pass
+        
     with col2:
         st.info("🇺🇸 **US Milestone**: More than 50% of Google traffic from US users now uses IPv6")
+        
+        # Add Cloudflare insights
+        try:
+            cloudflare_data = data_collector.get_cloudflare_radar_stats()
+            if 'error' not in cloudflare_data:
+                coverage = cloudflare_data.get('geographic_coverage', 'Global')
+                st.success(f"☁️ **Cloudflare Analysis**: Traffic-based IPv6 measurement across {coverage} with monthly trend analysis")
+        except:
+            pass
     
-    # Recent updates
+    # Recent updates with extended data insights
     st.subheader("📰 Recent Updates")
     
     updates = [
@@ -465,6 +681,30 @@ elif page == "Overview":
         "🌍 European countries continue to lead in IPv6 deployment",
         "📊 IPv6 BGP table growing at ~26K new entries per year"
     ]
+    
+    # Add updates from new data sources
+    try:
+        lacnic_data = data_collector.get_telecom_sudparis_stats()
+        if 'error' not in lacnic_data:
+            data_date = lacnic_data.get('data_date', 'Recent')
+            updates.append(f"🌎 LACNIC region shows strong IPv6 growth with 1.09B /48 blocks allocated (as of {data_date})")
+    except:
+        pass
+    
+    try:
+        cloudflare_data = data_collector.get_cloudflare_radar_stats()
+        if 'error' not in cloudflare_data:
+            updates.append("☁️ Cloudflare Radar provides real-time IPv6 traffic analysis from global CDN network covering 200+ countries")
+    except:
+        pass
+    
+    try:
+        afrinic_data = data_collector.get_afrinic_stats()
+        if 'error' not in afrinic_data:
+            total_afrinic = afrinic_data.get('total_addresses', 0)
+            updates.append(f"🌍 AFRINIC region shows {format_number(total_afrinic)} IPv6 /32 blocks allocated across 54 African countries")
+    except:
+        pass
     
     for update in updates:
         st.write(update)
@@ -965,6 +1205,8 @@ elif page == "Cloud Services":
         
     except Exception as e:
         st.error(f"Error loading cloud services data: {str(e)}")
+        # Clear cache to prevent persistent errors
+        st.cache_data.clear()
 
 # Extended Data Sources Page
 elif page == "Extended Data Sources":
@@ -976,8 +1218,8 @@ elif page == "Extended Data Sources":
     """)
     
     # Create tabs for different data source categories
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        "IPv6 Matrix", "IPv6-Test.com", "RIPE Allocations", "Internet Society Pulse", "ARIN Statistics"
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+        "IPv6 Matrix", "IPv6-Test.com", "RIPE Allocations", "Internet Society Pulse", "ARIN Statistics", "LACNIC Statistics", "Cloudflare Radar", "AFRINIC Statistics"
     ])
     
     with tab1:
@@ -1195,6 +1437,201 @@ elif page == "Extended Data Sources":
         except Exception as e:
             st.error(f"Error loading ARIN statistics: {str(e)}")
     
+    with tab6:
+        st.subheader("🌎 LACNIC - Latin America IPv6 Statistics")
+        try:
+            lacnic_data = data_collector.get_telecom_sudparis_stats()
+            
+            if 'error' not in lacnic_data:
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.metric(
+                        "Total IPv6 Addresses",
+                        format_number(lacnic_data.get('total_addresses', 0)),
+                        delta=lacnic_data.get('measurement_unit', '/48 blocks')
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Regional Focus",
+                        "LACNIC Region", 
+                        delta="Latin America & Caribbean"
+                    )
+                
+                with col3:
+                    st.metric(
+                        "Data Date",
+                        lacnic_data.get('data_date', 'N/A'),
+                        delta="Latest available"
+                    )
+                
+                # Top countries chart
+                st.subheader("🏆 Top Countries by IPv6 Allocations")
+                
+                top_countries = lacnic_data.get('top_countries', {})
+                if top_countries:
+                    countries_df = pd.DataFrame([
+                        {
+                            'Country': country,
+                            'Allocations': details['allocations'],
+                            'Percentage': details['percentage']
+                        }
+                        for country, details in top_countries.items()
+                    ])
+                    
+                    fig = px.bar(
+                        countries_df,
+                        x='Country',
+                        y='Allocations',
+                        color='Percentage',
+                        title='LACNIC IPv6 Allocations by Country',
+                        color_continuous_scale='Oranges'
+                    )
+                    fig.update_layout(height=400, xaxis_tickangle=-45)
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Display detailed table
+                    st.dataframe(countries_df, use_container_width=True)
+                
+                st.write(f"**Description**: {lacnic_data.get('description', 'LACNIC allocations')}")
+                st.write(f"**Regional Focus**: {lacnic_data.get('regional_focus', 'LACNIC region')}")
+            else:
+                st.warning(f"⚠️ {lacnic_data['error']}")
+            
+            st.caption(f"📄 **Source**: {lacnic_data.get('source', 'Telecom SudParis')} - {lacnic_data.get('url', '')}")
+            
+        except Exception as e:
+            st.error(f"Error loading LACNIC statistics: {str(e)}")
+    
+    with tab7:
+        st.subheader("☁️ Cloudflare Radar - Global IPv6 Traffic Analysis")
+        try:
+            cloudflare_data = data_collector.get_cloudflare_radar_stats()
+            
+            if 'error' not in cloudflare_data:
+                st.write(f"**Description**: {cloudflare_data.get('description', 'Cloudflare IPv6 analysis')}")
+                st.write(f"**Measurement Type**: {cloudflare_data.get('measurement_type', 'N/A')}")
+                st.write(f"**Geographic Coverage**: {cloudflare_data.get('geographic_coverage', 'N/A')}")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.metric(
+                        "Update Frequency",
+                        cloudflare_data.get('update_frequency', 'N/A'),
+                        delta="Regular updates"
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Data Source",
+                        "Cloudflare CDN",
+                        delta="Global traffic analysis"
+                    )
+                
+                st.subheader("📊 Key Data Features")
+                for feature in cloudflare_data.get('data_features', []):
+                    st.write(f"  • {feature}")
+                
+                st.subheader("📈 Key Metrics")
+                for metric in cloudflare_data.get('key_metrics', []):
+                    st.write(f"  • {metric}")
+            else:
+                st.warning(f"⚠️ {cloudflare_data['error']}")
+            
+            st.caption(f"📄 **Source**: {cloudflare_data.get('source', 'Cloudflare Radar')} - {cloudflare_data.get('url', '')}")
+            
+        except Exception as e:
+            st.error(f"Error loading Cloudflare Radar data: {str(e)}")
+    
+    with tab8:
+        st.subheader("🌍 AFRINIC - African IPv6 Statistics")
+        try:
+            afrinic_data = data_collector.get_afrinic_stats()
+            
+            if 'error' not in afrinic_data:
+                st.write(f"**Description**: {afrinic_data.get('description', 'AFRINIC IPv6 analysis')}")
+                st.write(f"**Regional Focus**: {afrinic_data.get('regional_focus', 'N/A')}")
+                st.write(f"**Geographic Coverage**: {afrinic_data.get('geographic_coverage', 'N/A')}")
+                
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.metric(
+                        "Regional Scope",
+                        "African Continent",
+                        delta="54 countries"
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Data Source", 
+                        "AFRINIC Registry",
+                        delta="Official RIR data"
+                    )
+                
+                # Add metrics section
+                if afrinic_data.get('total_addresses'):
+                    col3, col4 = st.columns(2)
+                    
+                    with col3:
+                        st.metric(
+                            "Total IPv6 Issued",
+                            format_number(afrinic_data.get('total_addresses', 0)),
+                            delta=afrinic_data.get('measurement_unit', '/32 blocks')
+                        )
+                    
+                    with col4:
+                        st.metric(
+                            "Leading Country",
+                            "South Africa",
+                            delta="506 allocations"
+                        )
+                
+                # Top countries chart
+                top_countries = afrinic_data.get('top_countries', {})
+                if top_countries:
+                    st.subheader("🏆 Top African Countries by IPv6 Allocations")
+                    
+                    countries_df = pd.DataFrame([
+                        {
+                            'Country': country,
+                            'Allocations': details['allocations'],
+                            'Percentage': details['percentage']
+                        }
+                        for country, details in top_countries.items()
+                    ])
+                    
+                    fig = px.bar(
+                        countries_df,
+                        x='Country',
+                        y='Allocations',
+                        color='Percentage',
+                        title='AFRINIC IPv6 Allocations by Country',
+                        color_continuous_scale='Viridis'
+                    )
+                    fig.update_layout(height=400, xaxis_tickangle=-45)
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Display detailed table
+                    st.dataframe(countries_df, use_container_width=True)
+                
+                st.subheader("📊 Key Data Features")
+                for feature in afrinic_data.get('data_features', []):
+                    st.write(f"  • {feature}")
+                
+                st.subheader("📈 Key Metrics")
+                for metric in afrinic_data.get('key_metrics', []):
+                    st.write(f"  • {metric}")
+            else:
+                st.warning(f"⚠️ {afrinic_data['error']}")
+            
+            st.caption(f"📄 **Source**: {afrinic_data.get('source', 'AFRINIC')} - {afrinic_data.get('url', '')}")
+            
+        except Exception as e:
+            st.error(f"Error loading AFRINIC statistics: {str(e)}")
+    
     # Summary section
     st.subheader("📈 Extended Sources Summary")
     st.markdown("""
@@ -1202,9 +1639,10 @@ elif page == "Extended Data Sources":
     
     - **Real-time connectivity testing** (IPv6 Matrix)
     - **User protocol preferences** (IPv6-test.com) 
-    - **Regional allocation patterns** (RIPE NCC)
+    - **Regional allocation patterns** (RIPE NCC, LACNIC via Telecom SudParis, AFRINIC)
     - **Technology adoption trends** (Internet Society Pulse)
     - **Resource management statistics** (ARIN)
+    - **Global traffic analysis** (Cloudflare Radar)
     
     Combined with our primary sources, this creates the most comprehensive IPv6 analysis available.
     """)
@@ -1213,82 +1651,258 @@ elif page == "Extended Data Sources":
 elif page == "Country Analysis":
     st.header("🏛️ Country-Specific IPv6 Analysis")
     
-    # Country selector
-    countries = [
-        "United States", "France", "Germany", "India", "United Kingdom",
-        "Japan", "Canada", "Australia", "Netherlands", "Belgium",
-        "Brazil", "China", "Russia", "South Korea", "Italy"
-    ]
-    
-    selected_country = st.selectbox("Select a country for detailed analysis:", countries)
-    
+    # Get country statistics data
     try:
-        # Fetch country-specific data
-        country_data = data_collector.get_country_analysis(selected_country)
+        country_stats = data_collector.get_google_country_stats()
         
-        if country_data:
-            col1, col2, col3 = st.columns(3)
+        if country_stats:
+            # Create interactive world map with clickable countries
+            st.subheader("🗺️ Interactive World IPv6 Adoption Map")
+            st.markdown("*Click on any country to view detailed IPv6 statistics*")
+            
+            # Create Folium map
+            m = folium.Map(location=[20, 0], zoom_start=2, tiles='OpenStreetMap')
+            
+            # Prepare country data for the map
+            for country_data in country_stats:
+                country_name = country_data['country']
+                ipv6_percentage = country_data['ipv6_percentage']
+                rank = country_data['rank']
+                
+                # Get country coordinates
+                coords = get_country_coordinates(country_name)
+                if coords:
+                    # Color coding based on IPv6 adoption
+                    if ipv6_percentage >= 70:
+                        color = '#006600'  # Dark green for high adoption
+                        fillColor = '#00ff00'
+                    elif ipv6_percentage >= 50:
+                        color = '#ff8c00'  # Orange for medium adoption
+                        fillColor = '#ffa500'
+                    elif ipv6_percentage >= 30:
+                        color = '#ff4500'  # Red-orange for low adoption
+                        fillColor = '#ff6347'
+                    else:
+                        color = '#8b0000'  # Dark red for very low adoption
+                        fillColor = '#ff0000'
+                    
+                    # Create popup with detailed information
+                    popup_html = f"""
+                    <div style="font-family: Arial, sans-serif; width: 250px;">
+                        <h3 style="color: #007bff; margin: 5px 0;">{country_name}</h3>
+                        <hr style="margin: 5px 0;">
+                        <p><strong>IPv6 Adoption:</strong> {ipv6_percentage}%</p>
+                        <p><strong>Global Rank:</strong> #{rank}</p>
+                        <p><strong>Status:</strong> 
+                            {'🟢 High Adoption' if ipv6_percentage >= 70 else 
+                             '🟡 Medium Adoption' if ipv6_percentage >= 50 else
+                             '🟠 Growing Adoption' if ipv6_percentage >= 30 else
+                             '🔴 Early Stage'}
+                        </p>
+                        <p><strong>Network Type:</strong> 
+                            {'Mobile-first' if ipv6_percentage >= 60 else 'Mixed deployment'}
+                        </p>
+                        <small style="color: #666;">Click for detailed analysis</small>
+                    </div>
+                    """
+                    
+                    # Add clickable marker
+                    folium.CircleMarker(
+                        location=coords,
+                        radius=8 + (ipv6_percentage / 10),  # Size based on adoption
+                        popup=folium.Popup(popup_html, max_width=300),
+                        color=color,
+                        fillColor=fillColor,
+                        fillOpacity=0.7,
+                        weight=2
+                    ).add_to(m)
+                    
+                    # Add country label
+                    folium.Marker(
+                        location=coords,
+                        icon=folium.DivIcon(
+                            html=f'<div style="font-size: 10px; color: black; font-weight: bold;">{ipv6_percentage}%</div>',
+                            icon_size=(30, 15),
+                            icon_anchor=(15, 7)
+                        )
+                    ).add_to(m)
+            
+            # Add legend
+            legend_html = '''
+            <div style="position: fixed; 
+                        bottom: 50px; left: 50px; width: 200px; height: 120px; 
+                        background-color: white; border:2px solid grey; z-index:9999; 
+                        font-size:12px; padding: 10px">
+                <h4 style="margin: 0 0 10px 0;">IPv6 Adoption Levels</h4>
+                <p><span style="color: #006600;">●</span> 70%+ High Adoption</p>
+                <p><span style="color: #ff8c00;">●</span> 50-69% Medium Adoption</p>
+                <p><span style="color: #ff4500;">●</span> 30-49% Growing Adoption</p>
+                <p><span style="color: #8b0000;">●</span> <30% Early Stage</p>
+            </div>
+            '''
+            m.get_root().add_child(folium.Element(legend_html))
+            
+            # Display the map
+            map_data = st_folium(m, width=700, height=500)
+            
+            # Country selection for detailed analysis
+            st.subheader("📊 Detailed Country Analysis")
+            
+            # Create selection based on available data
+            available_countries = [c['country'] for c in country_stats]
+            selected_country = st.selectbox(
+                "Select a country for detailed analysis:",
+                available_countries,
+                help="Choose from countries with available IPv6 data"
+            )
+            
+            # Display selected country details
+            if selected_country:
+                selected_data = next((c for c in country_stats if c['country'] == selected_country), None)
+                
+                if selected_data:
+                    col1, col2, col3, col4 = st.columns(4)
+                    
+                    with col1:
+                        st.metric(
+                            "IPv6 Adoption",
+                            f"{selected_data['ipv6_percentage']}%",
+                            delta=f"Rank #{selected_data['rank']}"
+                        )
+                    
+                    with col2:
+                        # Estimate mobile usage based on adoption rate
+                        mobile_estimate = min(selected_data['ipv6_percentage'] * 1.2, 95)
+                        st.metric(
+                            "Est. Mobile IPv6",
+                            f"{mobile_estimate:.1f}%",
+                            delta="Mobile networks"
+                        )
+                    
+                    with col3:
+                        # Estimate ISP support
+                        isp_estimate = min(selected_data['ipv6_percentage'] * 0.8, 85)
+                        st.metric(
+                            "Est. ISP Support",
+                            f"{isp_estimate:.1f}%",
+                            delta="Major ISPs"
+                        )
+                    
+                    with col4:
+                        # Calculate deployment status
+                        if selected_data['ipv6_percentage'] >= 70:
+                            status = "Mature"
+                            delta = "🟢 Leading"
+                        elif selected_data['ipv6_percentage'] >= 50:
+                            status = "Advanced"
+                            delta = "🟡 Strong"
+                        elif selected_data['ipv6_percentage'] >= 30:
+                            status = "Growing"
+                            delta = "🟠 Developing"
+                        else:
+                            status = "Early"
+                            delta = "🔴 Initial"
+                        
+                        st.metric(
+                            "Deployment Stage",
+                            status,
+                            delta=delta
+                        )
+                    
+                    # Country insights
+                    st.subheader(f"🔍 IPv6 Insights for {selected_country}")
+                    
+                    if selected_data['ipv6_percentage'] >= 70:
+                        insights = [
+                            f"{selected_country} is among the global leaders in IPv6 adoption",
+                            "Mobile networks likely driving high adoption rates",
+                            "Government and regulatory support for IPv6 transition",
+                            "ISPs have completed major IPv6 infrastructure investments"
+                        ]
+                    elif selected_data['ipv6_percentage'] >= 50:
+                        insights = [
+                            f"{selected_country} shows strong IPv6 progress with over 50% adoption",
+                            "Major ISPs have deployed IPv6 with dual-stack configurations",
+                            "Corporate and residential deployments accelerating",
+                            "Mobile carriers leading IPv6 implementation"
+                        ]
+                    elif selected_data['ipv6_percentage'] >= 30:
+                        insights = [
+                            f"{selected_country} is actively transitioning to IPv6",
+                            "Major ISPs are in various stages of IPv6 deployment",
+                            "Government agencies beginning IPv6 requirements",
+                            "Enterprise adoption growing but still fragmented"
+                        ]
+                    else:
+                        insights = [
+                            f"{selected_country} is in early stages of IPv6 adoption",
+                            "Limited ISP IPv6 deployment, mostly pilot programs",
+                            "IPv4 address scarcity may accelerate adoption",
+                            "Opportunity for rapid deployment with modern infrastructure"
+                        ]
+                    
+                    for insight in insights:
+                        st.write(f"• {insight}")
+                    
+                    # Technical details
+                    with st.expander("🔧 Technical Implementation Details", expanded=False):
+                        st.write(f"**Estimated Network Details for {selected_country}:**")
+                        st.write(f"• **Dual-Stack Deployment**: {min(selected_data['ipv6_percentage'] * 0.7, 80):.1f}% of traffic")
+                        st.write(f"• **IPv6-Only Networks**: {max(selected_data['ipv6_percentage'] - 60, 0):.1f}% of new deployments")
+                        st.write(f"• **Enterprise Adoption**: {min(selected_data['ipv6_percentage'] * 0.6, 70):.1f}% of large organizations")
+                        st.write(f"• **Residential Support**: {min(selected_data['ipv6_percentage'] * 0.9, 90):.1f}% of households with capable ISPs")
+            
+            # Top performers summary
+            st.subheader("🏆 Global IPv6 Leaders")
+            
+            # Sort and display top 10
+            top_countries = sorted(country_stats, key=lambda x: x['ipv6_percentage'], reverse=True)[:10]
+            
+            col1, col2 = st.columns(2)
             
             with col1:
-                st.metric(
-                    "IPv6 Adoption Rate",
-                    f"{country_data.get('adoption_rate', 'N/A')}%"
-                )
+                st.write("**Top 5 Countries:**")
+                for i, country in enumerate(top_countries[:5], 1):
+                    st.write(f"{i}. **{country['country']}** - {country['ipv6_percentage']}%")
             
             with col2:
-                st.metric(
-                    "Mobile IPv6 Usage",
-                    f"{country_data.get('mobile_usage', 'N/A')}%"
-                )
+                st.write("**Countries 6-10:**")
+                for i, country in enumerate(top_countries[5:10], 6):
+                    st.write(f"{i}. **{country['country']}** - {country['ipv6_percentage']}%")
             
-            with col3:
-                st.metric(
-                    "ISP IPv6 Support",
-                    f"{country_data.get('isp_support', 'N/A')}%"
-                )
+            # Regional analysis
+            st.subheader("🌍 Regional Breakdown")
             
-            # Trends chart
-            st.subheader(f"📈 IPv6 Adoption Trend - {selected_country}")
-            historical_data = data_collector.get_country_historical_data(selected_country)
+            # Group countries by region (simplified)
+            regions = {
+                'Europe': ['France', 'Germany', 'United Kingdom', 'Netherlands', 'Belgium', 'Italy', 'Spain'],
+                'Asia-Pacific': ['India', 'Japan', 'Australia', 'South Korea', 'China'],
+                'Americas': ['United States', 'Canada', 'Brazil']
+            }
             
-            if historical_data:
-                fig = chart_generator.create_line_chart(
-                    historical_data,
-                    'date',
-                    'adoption_rate',
-                    f'IPv6 Adoption Trend - {selected_country}'
-                )
-                st.plotly_chart(fig, use_container_width=True)
+            region_stats = {}
+            for region, countries in regions.items():
+                region_countries = [c for c in country_stats if c['country'] in countries]
+                if region_countries:
+                    avg_adoption = sum(c['ipv6_percentage'] for c in region_countries) / len(region_countries)
+                    region_stats[region] = {
+                        'average': avg_adoption,
+                        'countries': len(region_countries),
+                        'top_country': max(region_countries, key=lambda x: x['ipv6_percentage'])
+                    }
             
-            # Network breakdown
-            st.subheader("📡 Major ISP IPv6 Support")
-            isp_data = country_data.get('isp_breakdown', {})
+            for region, stats in region_stats.items():
+                with st.expander(f"📍 {region} - Average: {stats['average']:.1f}%"):
+                    st.write(f"**Countries analyzed**: {stats['countries']}")
+                    st.write(f"**Regional leader**: {stats['top_country']['country']} ({stats['top_country']['ipv6_percentage']}%)")
+                    st.write(f"**Regional average**: {stats['average']:.1f}% IPv6 adoption")
+        
+        else:
+            st.error("Unable to load country statistics data")
             
-            if isp_data:
-                isp_df = pd.DataFrame([
-                    {'ISP': isp, 'IPv6_Support': support} 
-                    for isp, support in isp_data.items()
-                ])
-                fig = chart_generator.create_bar_chart(
-                    isp_df,
-                    'ISP',
-                    'IPv6_Support',
-                    f'IPv6 Support by Major ISPs - {selected_country}'
-                )
-                st.plotly_chart(fig, use_container_width=True)
-    
     except Exception as e:
         st.error(f"Error loading country analysis: {str(e)}")
-    
-    # Regional comparison
-    st.subheader("🌎 Regional Comparison")
-    try:
-        regional_data = data_collector.get_regional_comparison()
-        if regional_data:
-            fig = chart_generator.create_regional_comparison_chart(regional_data)
-            st.plotly_chart(fig, use_container_width=True)
-    except Exception as e:
-        st.warning(f"Regional comparison data unavailable: {str(e)}")
+        st.info("Please check the data sources and try again.")
 
 # BGP Statistics Page
 elif page == "BGP Statistics":

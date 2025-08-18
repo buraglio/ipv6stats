@@ -14,14 +14,14 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: Streamlit for rapid web application development
 - **Visualization Library**: Plotly for interactive charts and graphs
 - **Mapping**: Folium integration via streamlit-folium for geographic visualizations
-- **Layout**: Multi-page application with sidebar navigation supporting Overview, Combined View, Cloud Services, Extended Data Sources, IPv6 Compatibility Check, ASN/ISP Query, Global Adoption, Country Analysis, BGP Statistics, Historical Trends, and Data Sources sections
+- **Layout**: Multi-page application with responsive top menu bar navigation supporting Overview, Combined View, Cloud Services, Extended Data Sources, Global Adoption, Country Analysis, BGP Statistics, Historical Trends, and Data Sources sections
 - **Interactive Navigation**: Functional hyperlinks in sidebar with URL parameters for direct section access  
 - **External Resources**: Direct links to IPv6 Compatibility Database and related external tools
 
 ### Data Collection and Processing
 - **Modular Data Sources**: Separate `DataCollector` class handles data aggregation from multiple IPv6 statistics providers
 - **Web Scraping**: Uses Trafilatura for extracting IPv6 statistics from web sources like Google's IPv6 statistics page
-- **Data Caching**: Implements Streamlit's caching mechanisms (@st.cache_data, @st.cache_resource) for performance optimization with 1-hour TTL
+- **Data Caching**: Implements Streamlit's caching mechanisms (@st.cache_data, @st.cache_resource) for performance optimization with 30-day TTL (monthly polling)
 - **Custom Session Management**: HTTP session handling with appropriate User-Agent headers for web scraping
 
 ### Visualization Architecture
@@ -41,6 +41,10 @@ Preferred communication style: Simple, everyday language.
 - **Error Handling**: Logging and fallback mechanisms for data collection failures
 
 ### Recent Updates (August 2025)
+- **Complete 30-Day Caching Implementation**: All data sources now use consistent 30-day caching (2,592,000 seconds) with single cache entries for maximum memory efficiency (August 18, 2025)
+- **Comprehensive CPU & Memory Optimization**: Implemented HTTP connection pooling, reduced timeouts, garbage collection management, and optimized cache parameters across all 26 data collection methods (August 18, 2025)
+- **AFRINIC IPv6 Statistics Integration**: Added African regional IPv6 allocation data covering 54 countries with 11,252 total /32 blocks, completing coverage of all major RIRs (August 18, 2025)
+- **Monthly Data Polling & Top Menu Navigation**: Changed from on-demand to monthly data polling (30-day cache TTL) and replaced sidebar navigation with responsive top menu bar that adapts to screen size (August 17, 2025)
 - **Expanded Cloud Services Coverage**: Added 16 additional cloud providers including Mythic Beasts, Hetzner, Scaleway, OVHcloud, UpCloud, BinaryLane, Fly.io, and others with detailed IPv6 support analysis (August 16, 2025)
 - **IPv6.army Theme Integration**: Applied IPv6.army color scheme (#007bff primary, #eaedf0 background) with logo integration in header and sidebar (August 16, 2025)
 - **Mobile Optimization**: Complete responsive design implementation with auto-collapsing sidebar, optimized CSS, and mobile-friendly layouts (August 16, 2025)
@@ -77,11 +81,13 @@ Preferred communication style: Simple, everyday language.
 - **APNIC IPv6 Measurements**: IPv6 capability measurements across Asia-Pacific networks and regions
 - **Cloudflare Radar IPv6 Report**: Global IPv6 adoption analysis based on traffic to Cloudflare's network with country-level insights and mobile traffic data
 - **Cloudflare DNS Analysis**: DNS-based IPv6 adoption analysis from 1.1.1.1 resolver showing client-side vs server-side IPv6 deployment gaps
-- **Telecom SudParis RIR Statistics**: Historical IPv6 address allocation statistics from Regional Internet Registries with detailed timeline from 1999-2025
+- **Telecom SudParis RIR Statistics**: Historical IPv6 address allocation statistics from LACNIC Regional Internet Registry covering Latin America and Caribbean region with detailed country-by-country breakdown (1.09B /48 blocks allocated)
+- **Cloudflare Radar IPv6 Report**: Global IPv6 adoption analysis based on traffic to Cloudflare's network with country-level insights and mobile traffic data covering 200+ countries
 - **IPv6 Matrix**: Real-time IPv6 enabled host connectivity measurements tracking deployment status across networks (15-year historical data)
 - **IPv6-Test.com Statistics**: Monthly statistics on IPv6 protocol usage evolution, address types, and bandwidth analysis from connection tests (200+ countries)
 - **RIPE NCC IPv6 Allocations**: Country-level IPv6 address allocation statistics within RIPE region covering Europe, Central Asia, and Middle East (182,113 total addresses)
 - **ARIN Statistics & Research**: Comprehensive IPv6 delegation, transfer, and membership statistics for North American region (26,292 member organizations)
+- **AFRINIC IPv6 Statistics**: IPv6 address allocation and deployment statistics for the African region covering 54 countries under AFRINIC Regional Internet Registry
 
 ### Development & Deployment
 - **Python Standard Library**: datetime, time, re, hashlib, logging for core functionality

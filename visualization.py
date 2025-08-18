@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
 import folium
+from streamlit_folium import st_folium
 from typing import Dict, List, Any
 import streamlit as st
 

@@ -13,8 +13,8 @@ def format_number(number: int) -> str:
     else:
         return str(number)
 
-def get_country_coordinates() -> Dict[str, Dict[str, float]]:
-    """Get country coordinates for mapping"""
+def get_all_country_coordinates() -> Dict[str, Dict[str, float]]:
+    """Get all country coordinates for mapping"""
     return {
         'United States': {'lat': 39.8283, 'lon': -98.5795},
         'France': {'lat': 46.2276, 'lon': 2.2137},
@@ -33,6 +33,14 @@ def get_country_coordinates() -> Dict[str, Dict[str, float]]:
         'Italy': {'lat': 41.8719, 'lon': 12.5674},
         'Spain': {'lat': 40.4637, 'lon': -3.7492}
     }
+
+def get_country_coordinates(country_name: str) -> Optional[tuple]:
+    """Get coordinates for a specific country"""
+    coords_dict = get_all_country_coordinates()
+    country_data = coords_dict.get(country_name)
+    if country_data:
+        return (country_data['lat'], country_data['lon'])
+    return None
 
 def cache_data(key: str, data: Any, expiry_hours: int = 1) -> None:
     """Cache data with expiry time"""
@@ -109,7 +117,7 @@ def truncate_text(text: str, max_length: int = 50) -> str:
 
 def validate_country_name(country: str) -> bool:
     """Validate if country name is in our supported list"""
-    supported_countries = get_country_coordinates().keys()
+    supported_countries = get_all_country_coordinates().keys()
     return country in supported_countries
 
 def get_time_range_dates(time_range: str) -> tuple:
