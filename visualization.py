@@ -93,6 +93,145 @@ class ChartGenerator:
         
         return fig
     
+    def create_nist_federal_agency_chart(self, agency_data: Dict[str, Dict]) -> go.Figure:
+        """Create comprehensive federal agency IPv6 adoption chart"""
+        agencies = list(agency_data.keys())
+        adoption_rates = [data['ipv6_adoption'] for data in agency_data.values()]
+        domains_tested = [data['domains_tested'] for data in agency_data.values()]
+        
+        # Clean up agency names for display
+        clean_agencies = [agency.replace('_', ' ').title() for agency in agencies]
+        
+        fig = go.Figure()
+        
+        # Add adoption rate bars
+        fig.add_trace(go.Bar(
+            x=clean_agencies,
+            y=adoption_rates,
+            text=[f"{rate}%" for rate in adoption_rates],
+            textposition='auto',
+            name='IPv6 Adoption Rate',
+            marker=dict(
+                color=adoption_rates,
+                colorscale='RdYlGn',
+                showscale=True,
+                colorbar=dict(title="Adoption %")
+            )
+        ))
+        
+        fig.update_layout(
+            title='Federal Agency IPv6 Adoption Performance (NIST USGv6)',
+            xaxis_title='Federal Agencies',
+            yaxis_title='IPv6 Adoption Percentage',
+            showlegend=False,
+            height=500,
+            xaxis=dict(tickangle=45)
+        )
+        
+        return fig
+    
+    def create_nist_service_breakdown_chart(self, service_data: Dict[str, Dict]) -> go.Figure:
+        """Create federal service IPv6 deployment breakdown chart"""
+        services = list(service_data.keys())
+        clean_services = [service.replace('_', ' ').title() for service in services]
+        percentages = [data['percentage'] for data in service_data.values()]
+        
+        # Create pie chart for service breakdown
+        fig = go.Figure(data=[go.Pie(
+            labels=clean_services,
+            values=percentages,
+            hole=.3,
+            textinfo='label+percent',
+            marker=dict(
+                colors=['#007bff', '#28a745', '#ffc107', '#dc3545'],
+                line=dict(color='#FFFFFF', width=2)
+            )
+        )])
+        
+        fig.update_layout(
+            title='Federal IPv6 Service Deployment Distribution',
+            showlegend=True,
+            height=400
+        )
+        
+        return fig
+        
+    def create_nist_compliance_timeline_chart(self, timeline_data: Dict[str, Dict]) -> go.Figure:
+        """Create federal IPv6 compliance timeline chart"""
+        years = list(timeline_data.keys())
+        adoption_rates = [data['federal_adoption'] for data in timeline_data.values()]
+        milestones = [data['milestone'] for data in timeline_data.values()]
+        
+        fig = go.Figure()
+        
+        # Add line chart for adoption progression
+        fig.add_trace(go.Scatter(
+            x=years,
+            y=adoption_rates,
+            mode='lines+markers+text',
+            text=[f"{rate}%" for rate in adoption_rates],
+            textposition="top center",
+            name='Federal IPv6 Adoption',
+            line=dict(color='#007bff', width=3),
+            marker=dict(size=10)
+        ))
+        
+        # Add target lines
+        fig.add_hline(y=50, line_dash="dash", line_color="orange", 
+                     annotation_text="2024 Target: 50%")
+        fig.add_hline(y=80, line_dash="dash", line_color="red",
+                     annotation_text="2025 Target: 80%")
+        
+        fig.update_layout(
+            title='Federal IPv6 Compliance Timeline (OMB M-21-07)',
+            xaxis_title='Year',
+            yaxis_title='IPv6 Adoption Percentage',
+            height=400,
+            yaxis=dict(range=[0, 100])
+        )
+        
+        return fig
+        
+    def create_nist_geographic_distribution_chart(self, geo_data: Dict[str, Dict]) -> go.Figure:
+        """Create geographic distribution of federal IPv6 deployment"""
+        locations = list(geo_data.keys())
+        clean_locations = [loc.replace('_', ' ').title() for loc in locations]
+        domains = [data['domains'] for data in geo_data.values()]
+        adoption_rates = [data['ipv6_adoption'] for data in geo_data.values()]
+        
+        fig = go.Figure()
+        
+        # Create bubble chart
+        fig.add_trace(go.Scatter(
+            x=clean_locations,
+            y=adoption_rates,
+            mode='markers',
+            marker=dict(
+                size=[d/10 for d in domains],  # Scale down domain counts for bubble size
+                sizemode='area',
+                sizeref=2.*max(domains)/(40.**2),
+                sizemin=4,
+                color=adoption_rates,
+                colorscale='RdYlGn',
+                showscale=True,
+                colorbar=dict(title="Adoption %")
+            ),
+            text=[f"{loc}<br>{domains[i]} domains<br>{adoption_rates[i]}% IPv6" 
+                  for i, loc in enumerate(clean_locations)],
+            hovertemplate='<b>%{text}</b><extra></extra>',
+            name='Federal Locations'
+        ))
+        
+        fig.update_layout(
+            title='Geographic Distribution of Federal IPv6 Deployment',
+            xaxis_title='Location',
+            yaxis_title='IPv6 Adoption Percentage',
+            height=450,
+            xaxis=dict(tickangle=45)
+        )
+        
+        return fig
+
     def create_regional_comparison_chart(self, regional_data: Dict[str, float]) -> go.Figure:
         """Create a regional comparison chart"""
         regions = list(regional_data.keys())

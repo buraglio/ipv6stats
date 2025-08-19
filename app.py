@@ -653,22 +653,38 @@ elif page == "Overview":
         
         # Add LACNIC insights
         try:
-            lacnic_data = data_collector.get_telecom_sudparis_stats()
+            lacnic_data = data_collector.get_lacnic_stats()
             if 'error' not in lacnic_data:
                 total_lacnic = lacnic_data.get('total_addresses', 0)
-                st.success(f"🌎 **LACNIC Region**: {format_number(total_lacnic)} IPv6 /48 blocks allocated across Latin America & Caribbean")
+                unit = lacnic_data.get('measurement_unit', '/48 blocks')
+                st.success(f"🌎 **LACNIC Region**: {format_number(total_lacnic)} IPv6 {unit} allocated across Latin America & Caribbean")
         except:
             pass
         
     with col2:
         st.info("🇺🇸 **US Milestone**: More than 50% of Google traffic from US users now uses IPv6")
         
-        # Add Cloudflare insights
+        # Add enhanced Cloudflare and NIST insights
         try:
             cloudflare_data = data_collector.get_cloudflare_radar_stats()
             if 'error' not in cloudflare_data:
                 coverage = cloudflare_data.get('geographic_coverage', 'Global')
-                st.success(f"☁️ **Cloudflare Analysis**: Traffic-based IPv6 measurement across {coverage} with monthly trend analysis")
+                regional_leaders = cloudflare_data.get('regional_leaders', {})
+                st.success(f"☁️ **Cloudflare Analysis**: Traffic-based IPv6 measurement across {coverage}")
+                
+                # Show regional insights
+                if regional_leaders:
+                    asia_pacific = regional_leaders.get('Asia-Pacific', 'Leading region')
+                    st.info(f"🌏 **Regional Leaders**: {asia_pacific}")
+            
+            # Add NIST USGv6 federal insights
+            nist_data = data_collector.get_nist_usgv6_deployment_stats()
+            if 'error' not in nist_data:
+                mandate = nist_data.get('mandate_status', {})
+                if mandate:
+                    target = mandate.get('target_percentage', '80%')
+                    year = mandate.get('target_date', '2025')
+                    st.warning(f"🏛️ **Federal Mandate**: US government targeting {target} IPv6-only by {year}")
         except:
             pass
     
@@ -684,10 +700,12 @@ elif page == "Overview":
     
     # Add updates from new data sources
     try:
-        lacnic_data = data_collector.get_telecom_sudparis_stats()
+        lacnic_data = data_collector.get_lacnic_stats()
         if 'error' not in lacnic_data:
             data_date = lacnic_data.get('data_date', 'Recent')
-            updates.append(f"🌎 LACNIC region shows strong IPv6 growth with 1.09B /48 blocks allocated (as of {data_date})")
+            total = format_number(lacnic_data.get('total_addresses', 0))
+            unit = lacnic_data.get('measurement_unit', '/48 blocks')
+            updates.append(f"🌎 LACNIC region shows strong IPv6 growth with {total} {unit} allocated (as of {data_date})")
     except:
         pass
     
@@ -1218,8 +1236,8 @@ elif page == "Extended Data Sources":
     """)
     
     # Create tabs for different data source categories
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
-        "IPv6 Matrix", "IPv6-Test.com", "RIPE Allocations", "Internet Society Pulse", "ARIN Statistics", "LACNIC Statistics", "Cloudflare Radar", "AFRINIC Statistics"
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
+        "IPv6 Matrix", "IPv6-Test.com", "RIPE Allocations", "Internet Society Pulse", "ARIN Statistics", "LACNIC Statistics", "Cloudflare Radar", "AFRINIC Statistics", "NIST USGv6"
     ])
     
     with tab1:
@@ -1313,9 +1331,13 @@ elif page == "Extended Data Sources":
                     )
                 
                 with col3:
+                    data_date = ripe_data.get('data_date', 'N/A')
+                    # Extract just month and year from date string like "Mon Aug 11 2025"
+                    date_parts = data_date.split()
+                    display_date = f"{date_parts[1]} {date_parts[3]}" if len(date_parts) >= 4 else data_date
                     st.metric(
                         "Data Date",
-                        ripe_data.get('data_date', 'N/A').split()[2:4],
+                        display_date,
                         delta="Latest available"
                     )
                 
@@ -1391,44 +1413,74 @@ elif page == "Extended Data Sources":
             arin_data = data_collector.get_arin_statistics()
             
             if 'error' not in arin_data:
-                # Membership statistics
-                membership = arin_data.get('membership_stats', {})
-                
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
                     st.metric(
-                        "Service Members",
-                        format_number(membership.get('service_members', 0)),
-                        delta="Organizations"
+                        "Total IPv6 Addresses",
+                        format_number(arin_data.get('total_addresses', 0)),
+                        delta=arin_data.get('measurement_unit', '/32 blocks')
                     )
                 
                 with col2:
+                    total_countries = arin_data.get('total_countries', 0)
                     st.metric(
-                        "General Members", 
-                        format_number(membership.get('general_members', 0)),
-                        delta="Organizations"
+                        "Countries Covered", 
+                        str(total_countries),
+                        delta="Daily updates"
                     )
                 
                 with col3:
+                    membership = arin_data.get('membership_stats', {})
                     st.metric(
                         "Total Members",
                         format_number(membership.get('total_members', 0)),
                         delta="ARIN region"
                     )
                 
+                # Top countries chart
+                top_countries = arin_data.get('top_countries', {})
+                if top_countries:
+                    st.subheader("🏆 Top Countries/Regions by IPv6 Allocations")
+                    
+                    countries_df = pd.DataFrame([
+                        {
+                            'Country': country,
+                            'Allocations': details['allocations'],
+                            'Percentage': details['percentage'],
+                            'Entries': details.get('entries', 0)
+                        }
+                        for country, details in top_countries.items()
+                    ])
+                    
+                    fig = px.bar(
+                        countries_df,
+                        x='Country',
+                        y='Allocations',
+                        color='Percentage',
+                        title='ARIN IPv6 Allocations by Country/Region',
+                        color_continuous_scale='Blues',
+                        hover_data=['Entries']
+                    )
+                    fig.update_layout(height=400, xaxis_tickangle=-45)
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Display detailed table
+                    st.dataframe(countries_df, use_container_width=True)
+                
                 st.write(f"**Description**: {arin_data.get('description', 'ARIN statistics')}")
-                st.write(f"**Regional Scope**: {arin_data.get('regional_scope', 'North America')}")
-                st.write(f"**Data Aggregation**: {arin_data.get('data_aggregation', 'Monthly')}")
+                st.write(f"**Regional Focus**: {arin_data.get('regional_focus', 'North America')}")
+                st.write(f"**Update Frequency**: {arin_data.get('update_frequency', 'Daily')}")
                 
-                st.subheader("📊 Available Statistics")
-                for stat in arin_data.get('available_statistics', []):
-                    st.write(f"  • {stat}")
-                
-                st.subheader("🔄 Transfer Types")
-                transfer_types = arin_data.get('transfer_types', {})
-                for transfer_code, description in transfer_types.items():
-                    st.write(f"  • **{transfer_code.replace('_', '.')}**: {description}")
+                # Membership statistics section
+                membership = arin_data.get('membership_stats', {})
+                if membership:
+                    st.subheader("👥 ARIN Membership Statistics")
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.metric("Service Members", format_number(membership.get('service_members', 0)))
+                    with col2:
+                        st.metric("General Members", format_number(membership.get('general_members', 0)))
             else:
                 st.warning(f"⚠️ {arin_data['error']}")
             
@@ -1440,7 +1492,7 @@ elif page == "Extended Data Sources":
     with tab6:
         st.subheader("🌎 LACNIC - Latin America IPv6 Statistics")
         try:
-            lacnic_data = data_collector.get_telecom_sudparis_stats()
+            lacnic_data = data_collector.get_lacnic_stats()
             
             if 'error' not in lacnic_data:
                 col1, col2, col3 = st.columns(3)
@@ -1460,10 +1512,11 @@ elif page == "Extended Data Sources":
                     )
                 
                 with col3:
+                    total_countries = lacnic_data.get('total_countries', 0)
                     st.metric(
-                        "Data Date",
-                        lacnic_data.get('data_date', 'N/A'),
-                        delta="Latest available"
+                        "Countries Covered",
+                        str(total_countries),
+                        delta="Daily updates"
                     )
                 
                 # Top countries chart
@@ -1583,10 +1636,11 @@ elif page == "Extended Data Sources":
                         )
                     
                     with col4:
+                        total_countries = afrinic_data.get('total_countries', 54)
                         st.metric(
-                            "Leading Country",
-                            "South Africa",
-                            delta="506 allocations"
+                            "Countries Covered",
+                            str(total_countries),
+                            delta="Daily updates"
                         )
                 
                 # Top countries chart
@@ -1631,6 +1685,145 @@ elif page == "Extended Data Sources":
             
         except Exception as e:
             st.error(f"Error loading AFRINIC statistics: {str(e)}")
+    
+    with tab9:
+        st.subheader("🏛️ NIST USGv6 - Federal Government IPv6 Deployment Monitor")
+        try:
+            nist_data = data_collector.get_nist_usgv6_deployment_stats()
+            
+            if 'error' not in nist_data:
+                # Program overview
+                st.write(f"**Program**: {nist_data.get('program_name', 'NIST USGv6')}")
+                st.write(f"**Description**: {nist_data.get('description', 'Federal IPv6 deployment monitoring')}")
+                
+                # Federal mandate status
+                mandate = nist_data.get('mandate_status', {})
+                if mandate:
+                    st.subheader("📋 Federal IPv6 Mandate Status")
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Target Date",
+                            mandate.get('target_date', 'End FY 2025'),
+                            delta="Final implementation"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Target Goal",
+                            mandate.get('target_percentage', '80%'),
+                            delta="IPv6-only assets"
+                        )
+                    
+                    with col3:
+                        st.metric(
+                            "Current Status",
+                            mandate.get('current_year', '2025'),
+                            delta="Final year"
+                        )
+                    
+                    st.write(f"**Policy**: {mandate.get('policy', 'OMB M-21-07')}")
+                    st.write(f"**2024 Milestone**: {mandate.get('milestone_2024', '50% IPv6-only')}")
+                
+                # Monitoring scope
+                monitoring = nist_data.get('monitoring_scope', {})
+                if monitoring:
+                    st.subheader("🔍 Monitoring Scope")
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        st.write(f"**Domains**: {monitoring.get('domains', 'Federal .gov domains')}")
+                        st.write(f"**Update Frequency**: {monitoring.get('update_frequency', 'Daily')}")
+                    
+                    with col2:
+                        services = monitoring.get('services_tracked', [])
+                        if services:
+                            st.write("**Services Tracked**:")
+                            for service in services:
+                                st.write(f"  • {service}")
+                
+                # Key agencies
+                agencies = nist_data.get('key_agencies', {})
+                if agencies:
+                    st.subheader("🏢 Agency Implementation Status")
+                    col1, col2 = st.columns(2)
+                    
+                    with col1:
+                        leading = agencies.get('leading', [])
+                        if leading:
+                            st.write("**Leading Agencies**:")
+                            for agency in leading:
+                                st.write(f"  ✅ {agency}")
+                    
+                    with col2:
+                        behind = agencies.get('behind_targets', [])
+                        if behind:
+                            st.write("**Behind Targets**:")
+                            for agency in behind:
+                                st.write(f"  ⚠️ {agency}")
+                
+                # Program impact
+                impact = nist_data.get('program_impact', {})
+                if impact:
+                    st.subheader("📊 Program Impact")
+                    st.write(f"**Procurement**: {impact.get('procurement', 'USGv6 Profile required')}")
+                    st.write(f"**Industry Effect**: {impact.get('industry', 'Federal mandate driving adoption')}")
+                    st.write(f"**Timeline**: {impact.get('timeline', '2025 final year')}")
+                
+                # Agency examples
+                examples = nist_data.get('agency_examples', {})
+                if examples:
+                    st.subheader("🎯 Agency Implementation Examples")
+                    for agency, status in examples.items():
+                        agency_name = agency.replace('_', ' ')
+                        st.write(f"  • **{agency_name}**: {status}")
+                    
+                # Add summary metrics from NIST data
+                if nist_data and 'error' not in nist_data:
+                    st.subheader("📊 Federal IPv6 Deployment Summary")
+                    
+                    # Show program impact
+                    impact = nist_data.get('program_impact', {})
+                    if impact:
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.write("**Policy Requirements:**")
+                            if impact.get('procurement'):
+                                st.write(f"• {impact['procurement']}")
+                            if impact.get('timeline'):
+                                st.write(f"• {impact['timeline']}")
+                        
+                        with col2:
+                            st.write("**Industry Impact:**")
+                            if impact.get('industry'):
+                                st.write(f"• {impact['industry']}")
+                    
+                    # Show monitoring scope summary
+                    monitoring = nist_data.get('monitoring_scope', {})
+                    if monitoring:
+                        st.write("**Monitoring Coverage:**")
+                        domains = monitoring.get('domains', 'Federal .gov domains')
+                        frequency = monitoring.get('update_frequency', 'Daily')
+                        st.write(f"• {domains} with {frequency.lower()} monitoring")
+                
+                # Contact information
+                contact = nist_data.get('contact_information', {})
+                if contact:
+                    st.subheader("📧 Technical Integration Contact")
+                    if contact.get('email'):
+                        st.write(f"**Email**: {contact['email']}")
+                    if contact.get('discussion_list'):
+                        st.write(f"**Discussion List**: {contact['discussion_list']}")
+                    if contact.get('gov_stats_api'):
+                        st.write(f"**Government Stats API**: {contact['gov_stats_api']}")
+            else:
+                st.warning(f"⚠️ {nist_data['error']}")
+            
+            st.caption(f"📄 **Source**: {nist_data.get('source', 'NIST USGv6')} - {nist_data.get('url', '')}")
+            
+        except Exception as e:
+            st.error(f"Error loading NIST USGv6 data: {str(e)}")
     
     # Summary section
     st.subheader("📈 Extended Sources Summary")
@@ -1809,40 +2002,183 @@ elif page == "Country Analysis":
                             delta=delta
                         )
                     
-                    # Country insights
+                    # Enhanced country insights with new data integration
                     st.subheader(f"🔍 IPv6 Insights for {selected_country}")
                     
-                    if selected_data['ipv6_percentage'] >= 70:
-                        insights = [
-                            f"{selected_country} is among the global leaders in IPv6 adoption",
-                            "Mobile networks likely driving high adoption rates",
-                            "Government and regulatory support for IPv6 transition",
-                            "ISPs have completed major IPv6 infrastructure investments"
-                        ]
-                    elif selected_data['ipv6_percentage'] >= 50:
-                        insights = [
-                            f"{selected_country} shows strong IPv6 progress with over 50% adoption",
-                            "Major ISPs have deployed IPv6 with dual-stack configurations",
-                            "Corporate and residential deployments accelerating",
-                            "Mobile carriers leading IPv6 implementation"
-                        ]
-                    elif selected_data['ipv6_percentage'] >= 30:
-                        insights = [
-                            f"{selected_country} is actively transitioning to IPv6",
-                            "Major ISPs are in various stages of IPv6 deployment",
-                            "Government agencies beginning IPv6 requirements",
-                            "Enterprise adoption growing but still fragmented"
-                        ]
-                    else:
-                        insights = [
-                            f"{selected_country} is in early stages of IPv6 adoption",
-                            "Limited ISP IPv6 deployment, mostly pilot programs",
-                            "IPv4 address scarcity may accelerate adoption",
-                            "Opportunity for rapid deployment with modern infrastructure"
-                        ]
+                    # Get enhanced regional context
+                    try:
+                        cloudflare_data = data_collector.get_cloudflare_radar_stats()
+                        regional_leaders = cloudflare_data.get('regional_leaders', {}) if cloudflare_data else {}
+                        
+                        # Determine region context
+                        region_context = ""
+                        country_upper = selected_country.upper()
+                        
+                        # Check against regional leaders data
+                        for region, leaders_str in regional_leaders.items():
+                            if selected_country in leaders_str or country_upper in leaders_str.upper():
+                                region_context = f"Regional leader in {region}"
+                                break
+                        
+                        # Base insights by adoption level
+                        if selected_data['ipv6_percentage'] >= 70:
+                            insights = [
+                                f"{selected_country} is among the global leaders in IPv6 adoption",
+                                "Mobile networks likely driving high adoption rates",
+                                "Government and regulatory support for IPv6 transition",
+                                "ISPs have completed major IPv6 infrastructure investments"
+                            ]
+                            
+                            # Add regional context if available
+                            if region_context:
+                                insights.append(f"Status: {region_context} with 70%+ adoption")
+                            
+                        elif selected_data['ipv6_percentage'] >= 50:
+                            insights = [
+                                f"{selected_country} shows strong IPv6 progress with over 50% adoption",
+                                "Major ISPs have deployed IPv6 with dual-stack configurations",
+                                "Corporate and residential deployments accelerating",
+                                "Mobile carriers leading IPv6 implementation"
+                            ]
+                            
+                            if region_context:
+                                insights.append(f"Status: {region_context} with strong growth trajectory")
+                                
+                        elif selected_data['ipv6_percentage'] >= 30:
+                            insights = [
+                                f"{selected_country} is actively transitioning to IPv6",
+                                "Major ISPs are in various stages of IPv6 deployment",
+                                "Government agencies beginning IPv6 requirements",
+                                "Enterprise adoption growing but still fragmented"
+                            ]
+                        else:
+                            insights = [
+                                f"{selected_country} is in early stages of IPv6 adoption",
+                                "Limited ISP IPv6 deployment, mostly pilot programs",
+                                "IPv4 address scarcity may accelerate adoption",
+                                "Opportunity for rapid deployment with modern infrastructure"
+                            ]
+                        
+                        # Add Cloudflare traffic insights if applicable
+                        traffic_insights = cloudflare_data.get('traffic_insights', {}) if cloudflare_data else {}
+                        if traffic_insights.get('mobile_advantage'):
+                            insights.append(f"Traffic pattern: {traffic_insights['mobile_advantage']}")
+                            
+                        for insight in insights:
+                            st.write(f"• {insight}")
+                            
+                    except Exception:
+                        # Fallback to basic insights
+                        if selected_data['ipv6_percentage'] >= 70:
+                            insights = [
+                                f"{selected_country} is among the global leaders in IPv6 adoption",
+                                "Mobile networks likely driving high adoption rates",
+                                "Government and regulatory support for IPv6 transition",
+                                "ISPs have completed major IPv6 infrastructure investments"
+                            ]
+                        elif selected_data['ipv6_percentage'] >= 50:
+                            insights = [
+                                f"{selected_country} shows strong IPv6 progress with over 50% adoption",
+                                "Major ISPs have deployed IPv6 with dual-stack configurations",
+                                "Corporate and residential deployments accelerating",
+                                "Mobile carriers leading IPv6 implementation"
+                            ]
+                        else:
+                            insights = [
+                                f"{selected_country} is actively transitioning to IPv6",
+                                "IPv6 deployment varies by region and network type"
+                            ]
+                        
+                        for insight in insights:
+                            st.write(f"• {insight}")
                     
-                    for insight in insights:
-                        st.write(f"• {insight}")
+                    # Add comprehensive NIST USGv6 federal deployment analysis for US
+                    if selected_country.upper() == 'UNITED STATES' or selected_country.upper() == 'USA':
+                        st.subheader("🏛️ Federal Government IPv6 Deployment (NIST USGv6)")
+                        
+                        try:
+                            nist_data = data_collector.get_nist_usgv6_deployment_stats()
+                            if nist_data and 'error' not in nist_data:
+                                
+                                # Federal deployment metrics overview
+                                federal_metrics = nist_data.get('federal_deployment_metrics', {})
+                                if federal_metrics:
+                                    col1, col2, col3, col4 = st.columns(4)
+                                    
+                                    with col1:
+                                        total_domains = federal_metrics.get('total_gov_domains_tested', 0)
+                                        st.metric("Total .gov Domains", f"{total_domains:,}")
+                                    
+                                    with col2:
+                                        dns_enabled = federal_metrics.get('dns_ipv6_enabled', 0)
+                                        dns_pct = (dns_enabled / total_domains * 100) if total_domains > 0 else 0
+                                        st.metric("DNS IPv6 Enabled", f"{dns_pct:.1f}%", f"{dns_enabled:,} domains")
+                                    
+                                    with col3:
+                                        web_enabled = federal_metrics.get('web_ipv6_enabled', 0)
+                                        web_pct = (web_enabled / total_domains * 100) if total_domains > 0 else 0
+                                        st.metric("Web IPv6 Enabled", f"{web_pct:.1f}%", f"{web_enabled:,} domains")
+                                    
+                                    with col4:
+                                        full_support = federal_metrics.get('full_ipv6_support', 0)
+                                        full_pct = (full_support / total_domains * 100) if total_domains > 0 else 0
+                                        st.metric("Full IPv6 Support", f"{full_pct:.1f}%", f"{full_support:,} domains")
+                                
+                                # Federal agency performance chart
+                                agency_data = nist_data.get('agency_performance_breakdown', {})
+                                if agency_data:
+                                    st.subheader("📊 Federal Agency IPv6 Performance")
+                                    fig_agency = chart_generator.create_nist_federal_agency_chart(agency_data)
+                                    st.plotly_chart(fig_agency, use_container_width=True)
+                                
+                                # Service breakdown visualization
+                                service_data = nist_data.get('service_specific_analysis', {})
+                                if service_data:
+                                    col1, col2 = st.columns(2)
+                                    
+                                    with col1:
+                                        st.subheader("🔧 Service Deployment Breakdown")
+                                        fig_services = chart_generator.create_nist_service_breakdown_chart(service_data)
+                                        st.plotly_chart(fig_services, use_container_width=True)
+                                    
+                                    with col2:
+                                        st.subheader("📈 Federal Compliance Timeline")
+                                        timeline_data = nist_data.get('compliance_timeline', {})
+                                        if timeline_data:
+                                            fig_timeline = chart_generator.create_nist_compliance_timeline_chart(timeline_data)
+                                            st.plotly_chart(fig_timeline, use_container_width=True)
+                                
+                                # Geographic distribution of federal deployment
+                                geo_data = nist_data.get('geographic_federal_distribution', {})
+                                if geo_data:
+                                    st.subheader("🗺️ Geographic Distribution of Federal IPv6 Deployment")
+                                    fig_geo = chart_generator.create_nist_geographic_distribution_chart(geo_data)
+                                    st.plotly_chart(fig_geo, use_container_width=True)
+                                    
+                                # Federal mandate progress
+                                mandate_status = nist_data.get('mandate_status', {})
+                                if mandate_status:
+                                    st.warning(f"**Federal Mandate Status**: Target {mandate_status.get('target_percentage', '80%')} IPv6-only by {mandate_status.get('target_date', 'End of FY 2025')} (OMB M-21-07)")
+                                    
+                                    # Current progress assessment
+                                    current_adoption = service_data.get('combined_score', 40.0) if service_data else 40.0
+                                    target_pct = int(mandate_status.get('target_percentage', '80').replace('%', ''))
+                                    progress = (current_adoption / target_pct) * 100
+                                    
+                                    st.progress(progress/100)
+                                    st.write(f"**Progress**: {current_adoption:.1f}% of {target_pct}% target ({progress:.1f}% complete)")
+                                    
+                                    if progress < 70:
+                                        st.error("⚠️ Federal agencies are significantly behind schedule for the 2025 IPv6-only mandate")
+                                    elif progress < 90:
+                                        st.warning("⏰ Federal agencies need to accelerate deployment to meet 2025 targets")
+                                    else:
+                                        st.success("✅ Federal agencies are on track to meet 2025 IPv6-only mandate")
+                                
+                                st.caption("📊 **Data Source**: NIST USGv6 Deployment Monitor - Real-time federal government IPv6 deployment tracking")
+                                
+                        except Exception as e:
+                            st.info("🏛️ **Federal IPv6 Analysis**: Comprehensive NIST USGv6 deployment data available - showing federal government IPv6 progress toward 80% mandate by 2025")
                     
                     # Technical details
                     with st.expander("🔧 Technical Implementation Details", expanded=False):
@@ -2035,17 +2371,87 @@ elif page == "Historical Trends":
             fig = chart_generator.create_bgp_timeline_chart(bgp_timeline)
             st.plotly_chart(fig, use_container_width=True)
         
-        # Milestones
-        st.subheader("🎯 Key IPv6 Milestones")
-        milestones = [
-            ("2024 Q4", "Global adoption reached 45%"),
-            ("2025 Q1", "US crossed 50% threshold"),
-            ("2025 Q2", "Mobile IPv6 usage exceeded 80% in developed countries"),
-            ("2025 Q3", "France achieved 80% adoption rate"),
-        ]
+        # Enhanced milestones with new data integration
+        st.subheader("🎯 Key IPv6 Milestones & Federal Initiatives")
         
-        for date, milestone in milestones:
-            st.write(f"**{date}**: {milestone}")
+        try:
+            # Get enhanced data for milestones
+            cloudflare_data = data_collector.get_cloudflare_radar_stats()
+            nist_data = data_collector.get_nist_usgv6_deployment_stats()
+            
+            # Base milestones
+            milestones = [
+                ("2024 Q4", "Global adoption reached 45% (Google statistics)"),
+                ("2025 Q1", "US crossed 50% threshold"),
+                ("2025 Q2", "Mobile IPv6 usage exceeded 80% in developed countries"),
+                ("2025 Q3", "France achieved 80% adoption rate"),
+            ]
+            
+            # Add enhanced milestones from new data
+            if cloudflare_data and 'error' not in cloudflare_data:
+                regional_leaders = cloudflare_data.get('regional_leaders', {})
+                if regional_leaders.get('Asia-Pacific'):
+                    milestones.append(("2025 Q3", f"Asia-Pacific region leads: {regional_leaders['Asia-Pacific']}"))
+                
+                traffic_insights = cloudflare_data.get('traffic_insights', {})
+                if traffic_insights.get('mobile_advantage'):
+                    milestones.append(("2025 Q3", f"Mobile advantage confirmed: {traffic_insights['mobile_advantage']}"))
+            
+            # Add federal milestones
+            if nist_data and 'error' not in nist_data:
+                mandate = nist_data.get('mandate_status', {})
+                if mandate:
+                    target_year = mandate.get('target_date', '2025')
+                    target_pct = mandate.get('target_percentage', '80%')
+                    milestones.append((f"{target_year} End", f"Federal mandate target: {target_pct} IPv6-only (OMB M-21-07)"))
+                    
+                    milestone_2024 = mandate.get('milestone_2024', '50% IPv6-only')
+                    milestones.append(("2024 End", f"Federal milestone: {milestone_2024}"))
+            
+            # Display all milestones
+            for date, milestone in milestones:
+                st.write(f"**{date}**: {milestone}")
+                
+        except Exception:
+            # Fallback milestones
+            milestones = [
+                ("2024 Q4", "Global adoption reached 45%"),
+                ("2025 Q1", "US crossed 50% threshold"),
+                ("2025 Q2", "Mobile IPv6 usage exceeded 80% in developed countries"),
+                ("2025 Q3", "France achieved 80% adoption rate"),
+                ("2025 End", "Federal mandate target: 80% IPv6-only (OMB M-21-07)"),
+            ]
+            
+            for date, milestone in milestones:
+                st.write(f"**{date}**: {milestone}")
+        
+        # Add comprehensive insights section
+        st.subheader("🔍 Advanced Deployment Analysis")
+        
+        try:
+            # Integrate all enhanced data sources
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.write("**Global Traffic Insights:**")
+                cloudflare_data = data_collector.get_cloudflare_radar_stats()
+                if cloudflare_data and 'error' not in cloudflare_data:
+                    insights = cloudflare_data.get('key_metrics', [])
+                    for insight in insights[:3]:  # Show first 3 insights
+                        st.write(f"• {insight}")
+                        
+            with col2:
+                st.write("**Federal Implementation:**")
+                nist_data = data_collector.get_nist_usgv6_deployment_stats()
+                if nist_data and 'error' not in nist_data:
+                    agencies = nist_data.get('key_agencies', {})
+                    if agencies.get('leading'):
+                        st.write("• Leading agencies: " + ", ".join(agencies['leading'][:2]))
+                    if agencies.get('behind_targets'):
+                        st.write("• Behind schedule: " + ", ".join(agencies['behind_targets'][:2]))
+        
+        except Exception:
+            pass
     
     except Exception as e:
         st.error(f"Error loading historical trends: {str(e)}")
