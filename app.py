@@ -271,6 +271,8 @@ st.markdown("""
         overflow-x: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        justify-content: center;
+        flex-wrap: wrap;
     }
     
     .menu-nav::-webkit-scrollbar {
@@ -328,15 +330,21 @@ st.markdown("""
         text-decoration: none;
     }
     
-    /* Responsive scaling */
+    /* Enhanced Responsive Navigation */
     @media (max-width: 1024px) {
         .menu-title {
             font-size: 1.2rem;
         }
         
         .menu-item {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             padding: 0.5rem 0.75rem;
+            margin-right: 0.2rem;
+        }
+        
+        .menu-nav {
+            justify-content: center;
+            gap: 0.5rem;
         }
     }
     
@@ -357,17 +365,20 @@ st.markdown("""
         }
         
         .menu-nav {
-            justify-content: flex-start;
+            justify-content: center;
             padding-bottom: 0.75rem;
+            gap: 0.4rem;
         }
         
         .menu-item {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             padding: 0.5rem 0.6rem;
+            margin-right: 0;
         }
         
         .menu-utils {
             justify-content: center;
+            gap: 0.4rem;
         }
     }
     
@@ -384,14 +395,38 @@ st.markdown("""
             height: 24px;
         }
         
+        .menu-nav {
+            gap: 0.3rem;
+        }
+        
         .menu-item {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             padding: 0.4rem 0.5rem;
         }
         
         .menu-util {
             font-size: 0.65rem;
             padding: 0.2rem 0.5rem;
+        }
+    }
+    
+    /* Very small screens */
+    @media (max-width: 360px) {
+        .menu-title {
+            font-size: 0.9rem;
+        }
+        
+        .menu-item {
+            font-size: 0.7rem;
+            padding: 0.35rem 0.45rem;
+        }
+        
+        .menu-nav {
+            gap: 0.2rem;
+        }
+        
+        .menu-util {
+            font-size: 0.6rem;
         }
     }
 </style>
