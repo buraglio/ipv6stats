@@ -4,8 +4,20 @@ import json
 from typing import Dict, List, Any, Optional
 import hashlib
 
-def format_number(number: int) -> str:
+def format_number(number) -> str:
     """Format large numbers with appropriate suffixes"""
+    # Handle both string and numeric inputs
+    if isinstance(number, str):
+        # Remove commas and convert to int
+        try:
+            number = int(number.replace(',', ''))
+        except (ValueError, AttributeError):
+            return str(number)  # Return as-is if conversion fails
+    
+    # Ensure we have a numeric value
+    if not isinstance(number, (int, float)):
+        return str(number)
+    
     if number >= 1_000_000:
         return f"{number / 1_000_000:.1f}M"
     elif number >= 1_000:

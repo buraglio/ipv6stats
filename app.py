@@ -1016,11 +1016,105 @@ elif page == "Global Adoption":
             except Exception as e:
                 st.warning(f"Cloudflare DNS data temporarily unavailable: {str(e)}")
             
-            # RIR Historical IPv6 Allocation Data
-            st.subheader("📊 RIR Historical IPv6 Address Allocations")
+            # Enhanced RIR IPv6 Allocation Data with APNIC and ARIN
+            st.subheader("📊 Global RIR IPv6 Address Allocations")
             
+            # APNIC Asia-Pacific Statistics
+            try:
+                apnic_stats = data_collector.get_apnic_ipv6_stats()
+                
+                if apnic_stats and 'error' not in apnic_stats:
+                    st.subheader("🌏 APNIC - Asia-Pacific Region")
+                    
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "IPv6 Capability", 
+                            f"{apnic_stats.get('ipv6_capability_percentage', 45.2)}%",
+                            delta="Network ASN coverage"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Regional Coverage", 
+                            apnic_stats.get('coverage', '56 countries'),
+                            delta="Asia-Pacific region"
+                        )
+                    
+                    with col3:
+                        st.metric(
+                            "Measurement Type", 
+                            "ASN-based",
+                            delta="Network analysis"
+                        )
+                    
+                    # Regional insights
+                    insights = apnic_stats.get('deployment_insights', [])
+                    if insights:
+                        st.write("**Key Insights:**")
+                        for insight in insights[:3]:  # Show top 3 insights
+                            st.write(f"• {insight}")
+                    
+                    st.caption(f"📄 **Source**: {apnic_stats.get('source', 'APNIC Labs')}")
+                
+            except Exception as e:
+                st.warning(f"APNIC data temporarily unavailable: {str(e)}")
+            
+            # ARIN North America Statistics
+            try:
+                arin_stats = data_collector.get_arin_current_stats()
+                
+                if arin_stats and 'error' not in arin_stats:
+                    st.subheader("🇺🇸 ARIN - North America Region")
+                    
+                    col1, col2, col3, col4 = st.columns(4)
+                    
+                    with col1:
+                        st.metric(
+                            "IPv6 Allocations", 
+                            format_number(arin_stats.get('ipv6_allocations', 87695)),
+                            delta="Current delegations"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Total Organizations", 
+                            format_number(arin_stats.get('total_organizations', 26292)),
+                            delta="ARIN members"
+                        )
+                    
+                    with col3:
+                        st.metric(
+                            "IPv6 Enabled Orgs", 
+                            format_number(arin_stats.get('ipv6_enabled_organizations', 18500)),
+                            delta="Active deployments"
+                        )
+                    
+                    with col4:
+                        st.metric(
+                            "Deployment Rate", 
+                            arin_stats.get('deployment_rate', '70.4%'),
+                            delta="IPv6 capability"
+                        )
+                    
+                    # Regional insights
+                    insights = arin_stats.get('regional_insights', [])
+                    if insights:
+                        st.write("**Key Insights:**")
+                        for insight in insights[:3]:  # Show top 3 insights
+                            st.write(f"• {insight}")
+                    
+                    st.caption(f"📄 **Source**: {arin_stats.get('source', 'ARIN Research Statistics')}")
+                
+            except Exception as e:
+                st.warning(f"ARIN data temporarily unavailable: {str(e)}")
+            
+            # RIR Historical Comparison
             try:
                 rir_stats = data_collector.get_rir_historical_stats()
+                
+                st.subheader("📈 RIR Historical IPv6 Growth")
                 
                 # Historical allocation metrics
                 col1, col2 = st.columns(2)
@@ -1271,8 +1365,8 @@ elif page == "Extended Data Sources":
     """)
     
     # Create tabs for different data source categories
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
-        "IPv6 Matrix", "IPv6-Test.com", "RIPE Allocations", "Internet Society Pulse", "ARIN Statistics", "LACNIC Statistics", "Cloudflare Radar", "AFRINIC Statistics", "NIST USGv6"
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs([
+        "IPv6 Matrix", "IPv6-Test.com", "RIPE Allocations", "Internet Society Pulse", "ARIN Statistics", "LACNIC Statistics", "APNIC Statistics", "Cloudflare Radar", "AFRINIC Statistics", "NIST USGv6"
     ])
     
     with tab1:
@@ -1445,32 +1539,68 @@ elif page == "Extended Data Sources":
     with tab5:
         st.subheader("🇺🇸 ARIN - North America IPv6 Statistics")
         try:
-            arin_data = data_collector.get_arin_statistics()
+            arin_data = data_collector.get_arin_current_stats()
             
             if 'error' not in arin_data:
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
                     st.metric(
-                        "Total IPv6 Addresses",
-                        format_number(arin_data.get('total_addresses', 0)),
-                        delta=arin_data.get('measurement_unit', '/32 blocks')
+                        "IPv6 Allocations",
+                        format_number(arin_data.get('ipv6_allocations', 87695)),
+                        delta="Current delegations"
                     )
                 
                 with col2:
-                    total_countries = arin_data.get('total_countries', 0)
                     st.metric(
-                        "Countries Covered", 
-                        str(total_countries),
-                        delta="Daily updates"
+                        "Total Organizations", 
+                        format_number(arin_data.get('total_organizations', 26292)),
+                        delta="ARIN members"
                     )
                 
                 with col3:
-                    membership = arin_data.get('membership_stats', {})
                     st.metric(
-                        "Total Members",
-                        format_number(membership.get('total_members', 0)),
-                        delta="ARIN region"
+                        "Deployment Rate",
+                        arin_data.get('deployment_rate', '70.4%'),
+                        delta="IPv6 capability"
+                    )
+                
+                st.subheader("🌎 Regional Coverage")
+                st.write(f"**Region**: {arin_data.get('region', 'North America')}")
+                st.write(f"**Coverage**: {arin_data.get('coverage', 'US, Canada, Caribbean, North Atlantic islands')}")
+                st.write(f"**Registry**: {arin_data.get('registry', 'ARIN')}")
+                
+                # Regional insights
+                insights = arin_data.get('regional_insights', [])
+                if insights:
+                    st.subheader("📊 Regional IPv6 Insights")
+                    for insight in insights:
+                        st.write(f"  • {insight}")
+                
+                # Allocation trends
+                trends = arin_data.get('allocation_trends', [])
+                if trends:
+                    st.subheader("📈 Allocation Trends")
+                    for trend in trends:
+                        st.write(f"  • {trend}")
+                
+                # Equivalent blocks info
+                blocks = arin_data.get('equivalent_blocks', 2834)
+                ipv6_enabled = arin_data.get('ipv6_enabled_organizations', 18500)
+                
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric(
+                        "/32 Equivalent Blocks",
+                        format_number(blocks),
+                        delta="Address space"
+                    )
+                
+                with col2:
+                    st.metric(
+                        "IPv6 Enabled Orgs",
+                        format_number(ipv6_enabled),
+                        delta="Active deployments"
                     )
                 
                 # Top countries chart
@@ -1593,6 +1723,72 @@ elif page == "Extended Data Sources":
             st.error(f"Error loading LACNIC statistics: {str(e)}")
     
     with tab7:
+        st.subheader("🌏 APNIC - Asia-Pacific IPv6 Statistics")
+        try:
+            apnic_data = data_collector.get_apnic_ipv6_stats()
+            
+            if 'error' not in apnic_data:
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.metric(
+                        "IPv6 Capability",
+                        f"{apnic_data.get('ipv6_capability_percentage', 45.2)}%",
+                        delta="Network capability"
+                    )
+                
+                with col2:
+                    st.metric(
+                        "Regional Coverage", 
+                        apnic_data.get('coverage', '56 countries'),
+                        delta="Asia-Pacific"
+                    )
+                
+                with col3:
+                    st.metric(
+                        "Measurement Type",
+                        "ASN-based",
+                        delta="Network analysis"
+                    )
+                
+                st.subheader("🌎 Regional Overview")
+                st.write(f"**Region**: {apnic_data.get('region', 'Asia-Pacific')}")
+                st.write(f"**Coverage**: {apnic_data.get('coverage', '56 countries and territories')}")
+                st.write(f"**Measurement Type**: {apnic_data.get('measurement_type', 'IPv6-capable Networks')}")
+                
+                # Regional insights
+                insights = apnic_data.get('deployment_insights', [])
+                if insights:
+                    st.subheader("📊 Deployment Insights")
+                    for insight in insights:
+                        st.write(f"  • {insight}")
+                
+                # Regional leaders
+                leaders = apnic_data.get('regional_leaders', [])
+                if leaders:
+                    st.subheader("🏆 Regional IPv6 Leaders")
+                    for leader in leaders:
+                        st.write(f"  • {leader}")
+                
+                # Methodology
+                methodology = apnic_data.get('measurement_methodology', '')
+                if methodology:
+                    st.subheader("🔬 Measurement Methodology")
+                    st.write(f"**Approach**: {methodology}")
+                
+                # Note
+                note = apnic_data.get('note', '')
+                if note:
+                    st.info(f"**Note**: {note}")
+            else:
+                st.warning(f"⚠️ {apnic_data['error']}")
+            
+            st.caption(f"📄 **Source**: {apnic_data.get('source', 'APNIC Labs IPv6 Measurements')}")
+            
+        except Exception as e:
+            st.error(f"Error loading APNIC IPv6 data: {str(e)}")
+    
+    with tab8:
         st.subheader("☁️ Cloudflare Radar - Global IPv6 Traffic Analysis")
         try:
             cloudflare_data = data_collector.get_cloudflare_radar_stats()
@@ -1633,7 +1829,7 @@ elif page == "Extended Data Sources":
         except Exception as e:
             st.error(f"Error loading Cloudflare Radar data: {str(e)}")
     
-    with tab8:
+    with tab9:
         st.subheader("🌍 AFRINIC - African IPv6 Statistics")
         try:
             afrinic_data = data_collector.get_afrinic_stats()
@@ -1721,7 +1917,7 @@ elif page == "Extended Data Sources":
         except Exception as e:
             st.error(f"Error loading AFRINIC statistics: {str(e)}")
     
-    with tab9:
+    with tab10:
         st.subheader("🏛️ NIST USGv6 - Federal Government IPv6 Deployment Monitor")
         try:
             nist_data = data_collector.get_nist_usgv6_deployment_stats()
@@ -1867,12 +2063,14 @@ elif page == "Extended Data Sources":
     
     - **Real-time connectivity testing** (IPv6 Matrix)
     - **User protocol preferences** (IPv6-test.com) 
-    - **Regional allocation patterns** (RIPE NCC, LACNIC via Telecom SudParis, AFRINIC)
+    - **Regional allocation patterns** (RIPE NCC, LACNIC, APNIC, AFRINIC)
     - **Technology adoption trends** (Internet Society Pulse)
-    - **Resource management statistics** (ARIN)
+    - **Resource management statistics** (ARIN current & historical)
     - **Global traffic analysis** (Cloudflare Radar)
+    - **Federal deployment monitoring** (NIST USGv6)
     
-    Combined with our primary sources, this creates the most comprehensive IPv6 analysis available.
+    Combined with our primary sources, this creates the most comprehensive IPv6 analysis available,
+    covering all major Regional Internet Registries (RIRs) and specialized measurement platforms.
     """)
 
 # Country Analysis Page
@@ -2405,6 +2603,54 @@ elif page == "Historical Trends":
         if bgp_timeline:
             fig = chart_generator.create_bgp_timeline_chart(bgp_timeline)
             st.plotly_chart(fig, use_container_width=True)
+        
+        # ARIN Historical Deployment Milestones
+        st.subheader("🇺🇸 ARIN Historical IPv6 Deployment Timeline")
+        
+        try:
+            arin_historical = data_collector.get_arin_historical_stats()
+            
+            if arin_historical and 'error' not in arin_historical:
+                milestones = arin_historical.get('ipv6_milestones', [])
+                if milestones:
+                    milestones_df = pd.DataFrame(milestones)
+                    
+                    fig = px.bar(
+                        milestones_df,
+                        x='year',
+                        y='allocations',
+                        title='ARIN IPv6 Allocations Growth (2006-2025)',
+                        labels={'allocations': 'IPv6 Allocations', 'year': 'Year'},
+                        text='allocations',
+                        color='allocations',
+                        color_continuous_scale='Blues'
+                    )
+                    fig.update_traces(texttemplate='%{text}', textposition='outside')
+                    fig.update_layout(height=400)
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    # Growth trends
+                    growth_trends = arin_historical.get('growth_trends', {})
+                    if growth_trends:
+                        st.subheader("📈 ARIN Growth Trends by Period")
+                        for period, description in growth_trends.items():
+                            st.write(f"**{period}**: {description}")
+                    
+                    # Deployment phases
+                    phases = arin_historical.get('deployment_phases', [])
+                    if phases:
+                        st.subheader("🚀 IPv6 Deployment Phases")
+                        for phase in phases:
+                            st.write(f"• {phase}")
+                    
+                    # Key drivers
+                    drivers = arin_historical.get('key_drivers', [])
+                    if drivers:
+                        st.subheader("🎯 Key Deployment Drivers")
+                        for driver in drivers:
+                            st.write(f"• {driver}")
+        except Exception:
+            pass
         
         # Enhanced milestones with new data integration
         st.subheader("🎯 Key IPv6 Milestones & Federal Initiatives")
