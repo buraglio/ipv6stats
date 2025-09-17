@@ -478,8 +478,8 @@ menu_html += """
 
 st.markdown(menu_html, unsafe_allow_html=True)
 
-# Set page variable
-page = current_page
+# Set current view variable
+current_view = current_page
 
 # Minimal sidebar with essential info only
 st.sidebar.markdown("### 📊 Dashboard Info")
@@ -499,7 +499,7 @@ st.sidebar.markdown("*Powered by IPv6.army theme*")
 st.markdown("*Comprehensive analysis of worldwide IPv6 adoption and BGP routing data with monthly data updates*")
 
 # Combined View Page (standalone)
-if page == "Combined View":
+if current_view == "Combined View":
     st.header("🌍 Combined IPv6 Statistics View")
     st.markdown("*Comprehensive data from all major IPv6 measurement sources*")
     
@@ -520,7 +520,17 @@ if page == "Combined View":
         st.metric("BGP IPv6 Prefixes", "228,789", delta="Routing table")
     
     with col4:
-        st.metric("IPv6-only Support", "12%", delta="Cloud providers")
+        # Add Facebook traffic data to summary metrics
+        try:
+            facebook_data = data_collector.get_facebook_ipv6_stats()
+            if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                platform_insights = facebook_data.get('platform_insights', {})
+                user_base = platform_insights.get('user_base', 'N/A')
+                st.metric("Facebook IPv6 Traffic", f"{facebook_data.get('global_adoption_rate', 'N/A')}%", delta=f"{user_base} users")
+            else:
+                st.metric("IPv6-only Support", "12%", delta="Cloud providers")
+        except Exception:
+            st.metric("IPv6-only Support", "12%", delta="Cloud providers")
     
     # Now show detailed sections
     st.subheader("📊 Detailed Statistics by Source")
@@ -619,6 +629,65 @@ if page == "Combined View":
         except Exception as e:
             st.warning(f"BGP data error: {str(e)}")
     
+    # Facebook IPv6 Platform Statistics
+    with st.expander("📱 Facebook IPv6 Platform Statistics", expanded=True):
+        try:
+            facebook_data = data_collector.get_facebook_ipv6_stats()
+            
+            if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                # Platform metrics
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.metric(
+                        "Facebook IPv6 Traffic", 
+                        f"{facebook_data.get('global_adoption_rate', 'N/A')}%",
+                        delta="Global platform traffic"
+                    )
+                
+                with col2:
+                    platform_insights = facebook_data.get('platform_insights', {})
+                    user_base = platform_insights.get('user_base', 'N/A')
+                    st.metric(
+                        "Platform User Base", 
+                        str(user_base),
+                        delta="Monthly active users"
+                    )
+                
+                with col3:
+                    countries_analyzed = facebook_data.get('countries_analyzed', 'N/A')
+                    st.metric(
+                        "Countries Analyzed", 
+                        str(countries_analyzed),
+                        delta="Geographic coverage"
+                    )
+                
+                # Show top countries if available
+                top_countries = facebook_data.get('top_countries', [])
+                if top_countries and len(top_countries) >= 3:
+                    st.markdown("**🏆 Top IPv6 Countries (Facebook data):**")
+                    top_3 = []
+                    for country in top_countries[:3]:
+                        if isinstance(country, dict) and 'country' in country and 'ipv6_percentage' in country:
+                            try:
+                                pct = float(country['ipv6_percentage'])
+                                top_3.append(f"{country['country']} ({pct}%)")
+                            except (ValueError, TypeError):
+                                continue
+                    
+                    if top_3:
+                        st.write(f"**1.** {top_3[0]}" if len(top_3) > 0 else "")
+                        st.write(f"**2.** {top_3[1]}" if len(top_3) > 1 else "")
+                        st.write(f"**3.** {top_3[2]}" if len(top_3) > 2 else "")
+                
+                st.success(f"✅ Live data loaded from {facebook_data.get('source', 'Facebook IPv6 Statistics')}")
+            else:
+                error_msg = facebook_data.get('error', 'Data not available') if isinstance(facebook_data, dict) else 'Data not available'
+                st.warning(f"Facebook data: {error_msg}")
+                
+        except Exception as e:
+            st.warning(f"Facebook data error: {str(e)}")
+    
     # Summary insights
     st.subheader("🎯 Key Combined Insights")
     
@@ -627,6 +696,7 @@ if page == "Combined View":
         "Website IPv6 support at 49% for top 1000 sites, with security adoption leading",
         "Mobile networks show highest IPv6 adoption rates globally", 
         "BGP table growth steady at ~26,000 new IPv6 prefixes annually",
+        "Facebook platform provides additional insights into regional IPv6 traffic patterns",
         "Deployment gaps remain: only 13.2% actual IPv6 connections vs 43.3% server support"
     ]
     
@@ -634,7 +704,7 @@ if page == "Combined View":
         st.write(f"{i}. {insight}")
 
 # Overview Page
-elif page == "Overview":
+elif current_view == "Overview":
     st.header("📈 IPv6 Adoption Overview")
     
     # Key metrics row
@@ -669,11 +739,38 @@ elif page == "Overview":
             )
         
         with col4:
-            st.metric(
-                "Top Country", 
-                "France (80%)",
-                delta="No change"
-            )
+            # Use Facebook data for top country if available
+            try:
+                facebook_data = data_collector.get_facebook_ipv6_stats()
+                if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                    top_countries = facebook_data.get('top_countries', [])
+                    if top_countries and len(top_countries) > 0:
+                        top_country = top_countries[0]
+                        country_name = top_country.get('country', 'France')
+                        country_pct = top_country.get('ipv6_percentage', 80)
+                        st.metric(
+                            "Top Country (Facebook)", 
+                            f"{country_name} ({country_pct}%)",
+                            delta="Platform traffic"
+                        )
+                    else:
+                        st.metric(
+                            "Top Country", 
+                            "France (80%)",
+                            delta="No change"
+                        )
+                else:
+                    st.metric(
+                        "Top Country", 
+                        "France (80%)",
+                        delta="No change"
+                    )
+            except Exception:
+                st.metric(
+                    "Top Country", 
+                    "France (80%)",
+                    delta="No change"
+                )
     
     except Exception as e:
         st.error(f"Error loading overview metrics: {str(e)}")
@@ -698,6 +795,24 @@ elif page == "Overview":
         
     with col2:
         st.info("🇺🇸 **US Milestone**: More than 50% of Google traffic from US users now uses IPv6")
+        
+        # Add Facebook platform insights
+        try:
+            facebook_data = data_collector.get_facebook_ipv6_stats()
+            if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                global_rate = facebook_data.get('global_adoption_rate', 'N/A')
+                platform_insights = facebook_data.get('platform_insights', {})
+                user_base = platform_insights.get('user_base', '3+ billion users')
+                st.success(f"📱 **Facebook Platform**: {global_rate}% IPv6 traffic across {user_base}")
+                
+                # Show top countries insight
+                top_countries = facebook_data.get('top_countries', [])
+                if top_countries and len(top_countries) >= 2:
+                    top_2 = [f"{c.get('country', '')} ({c.get('ipv6_percentage', 0)}%)" for c in top_countries[:2]]
+                    if len(top_2) == 2:
+                        st.info(f"🏆 **Platform Leaders**: {top_2[0]}, {top_2[1]}")
+        except:
+            pass
         
         # Add enhanced Cloudflare and NIST insights
         try:
@@ -759,17 +874,55 @@ elif page == "Overview":
     except:
         pass
     
+    # Add Facebook platform updates
+    try:
+        facebook_data = data_collector.get_facebook_ipv6_stats()
+        if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+            global_rate = facebook_data.get('global_adoption_rate', 52)
+            countries_analyzed = facebook_data.get('countries_analyzed', 20)
+            platform_insights = facebook_data.get('platform_insights', {})
+            user_base = platform_insights.get('user_base', '3+ billion users')
+            
+            updates.append(f"📱 Facebook platform reports {global_rate}% IPv6 traffic across {user_base} globally")
+            
+            # Add top countries insight
+            top_countries = facebook_data.get('top_countries', [])
+            if top_countries and len(top_countries) >= 3:
+                top_country = top_countries[0]
+                country_name = top_country.get('country', '')
+                country_pct = top_country.get('ipv6_percentage', 0)
+                if country_name and country_pct:
+                    updates.append(f"🏆 {country_name} leads Facebook IPv6 adoption at {country_pct}% of platform traffic")
+    except:
+        pass
+    
     for update in updates:
         st.write(update)
 
 # Global Adoption Page
-elif page == "Global Adoption":
+elif current_view == "Global Adoption":
     st.header("🌍 Global IPv6 Adoption Statistics")
     
     # Data source selection
     source = st.selectbox(
         "Select data source:",
-        ["Google IPv6 Statistics", "APNIC Measurements", "Combined View"]
+        [
+            "Combined View", 
+            "Google IPv6 Statistics", 
+            "Facebook IPv6 Statistics",
+            "Cloudflare Radar", 
+            "APNIC Measurements",
+            "RIPE NCC Official Allocations",
+            "ARIN Official Statistics", 
+            "AFRINIC Official Statistics",
+            "LACNIC Official Statistics",
+            "NIST USGv6 Deployment Monitor",
+            "Team Cymru Bogons",
+            "IPv6 Enabled Statistics", 
+            "Internet Society Pulse",
+            "Eric Vyncke IPv6 Status",
+            "Akamai IPv6 Statistics"
+        ]
     )
     
     try:
@@ -1187,13 +1340,454 @@ elif page == "Global Adoption":
             
             for i, insight in enumerate(insights, 1):
                 st.write(f"{i}. {insight}")
+        
+        elif source == "Facebook IPv6 Statistics":
+            # Fetch and display Facebook data
+            try:
+                facebook_data = data_collector.get_facebook_ipv6_stats()
+                if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                    st.subheader("📱 Facebook Platform IPv6 Statistics")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Global IPv6 Traffic", 
+                            f"{facebook_data.get('global_adoption_rate', 52)}%",
+                            delta="Facebook platform traffic"
+                        )
+                    
+                    with col2:
+                        platform_insights = facebook_data.get('platform_insights', {})
+                        user_base = platform_insights.get('user_base', '3+ billion users')
+                        st.metric("User Base", user_base, delta="Global reach")
+                    
+                    with col3:
+                        st.metric(
+                            "Countries Analyzed", 
+                            facebook_data.get('countries_analyzed', 20),
+                            delta="Top regions"
+                        )
+                    
+                    # Top countries chart
+                    top_countries = facebook_data.get('top_countries', [])
+                    if top_countries:
+                        st.subheader("🏆 Top Countries by Facebook IPv6 Traffic")
+                        df = pd.DataFrame(top_countries[:10])  # Top 10
+                        if not df.empty and 'ipv6_percentage' in df.columns:
+                            fig = chart_generator.create_bar_chart(
+                                df, 
+                                'country', 
+                                'ipv6_percentage',
+                                'Top 10 Countries by Facebook IPv6 Traffic (%)'
+                            )
+                            st.plotly_chart(fig, use_container_width=True)
+                            
+                            # Data table
+                            st.subheader("📋 Detailed Country Statistics")
+                            st.dataframe(df, use_container_width=True)
+                    
+                    st.caption("📄 **Source**: Facebook IPv6 Country Statistics (https://www.facebook.com/ipv6/?tab=ipv6_country)")
+                else:
+                    st.warning("Facebook data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading Facebook data: {str(e)}")
+        
+        elif source == "Cloudflare Radar":
+            # Fetch and display Cloudflare Radar data
+            try:
+                cloudflare_data = data_collector.get_cloudflare_radar_stats()
+                if 'error' not in cloudflare_data:
+                    st.subheader("☁️ Cloudflare Radar IPv6 Traffic Analysis")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Global IPv6 Traffic", 
+                            f"{cloudflare_data.get('global_ipv6_traffic', 36)}%",
+                            delta="HTTP requests to Cloudflare"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Geographic Coverage", 
+                            cloudflare_data.get('geographic_coverage', 'Global'),
+                            delta="Country coverage"
+                        )
+                    
+                    with col3:
+                        st.info(f"📱 {cloudflare_data.get('mobile_advantage', 'Mobile traffic shows higher IPv6 adoption')}")
+                    
+                    # Regional leaders
+                    regional_leaders = cloudflare_data.get('regional_leaders', {})
+                    if regional_leaders:
+                        st.subheader("🌏 Regional IPv6 Leaders")
+                        for region, info in regional_leaders.items():
+                            st.write(f"**{region}**: {info}")
+                    
+                    st.caption(f"📄 **Source**: {cloudflare_data.get('source', 'Cloudflare Radar')} ({cloudflare_data.get('url', '')})")
+                else:
+                    st.warning("Cloudflare Radar data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading Cloudflare Radar data: {str(e)}")
+        
+        elif source == "RIPE NCC Official Allocations":
+            # Fetch and display RIPE data
+            try:
+                ripe_data = data_collector.get_ripe_ipv6_allocations()
+                if 'error' not in ripe_data:
+                    st.subheader("🌍 RIPE NCC IPv6 Allocation Statistics")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Total IPv6 Allocations", 
+                            format_number(ripe_data.get('total_addresses', 26620)),
+                            delta="Europe, Central Asia, Middle East"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Countries Covered", 
+                            ripe_data.get('countries_covered', 76),
+                            delta="RIPE NCC region"
+                        )
+                    
+                    with col3:
+                        data_date = ripe_data.get('data_date', 'Recent')
+                        st.metric("Last Updated", data_date, delta="Daily updates")
+                    
+                    # Top countries
+                    top_countries = ripe_data.get('top_countries', [])
+                    if top_countries:
+                        st.subheader("🏆 Top Countries by IPv6 Allocations")
+                        df = pd.DataFrame(top_countries[:15])  # Top 15
+                        if not df.empty:
+                            fig = chart_generator.create_bar_chart(
+                                df, 
+                                'country', 
+                                'ipv6_allocations',
+                                'Top 15 Countries by IPv6 Allocations'
+                            )
+                            st.plotly_chart(fig, use_container_width=True)
+                    
+                    st.caption(f"📄 **Source**: RIPE NCC Official Delegation Statistics ({ripe_data.get('url', '')})")
+                else:
+                    st.warning("RIPE NCC data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading RIPE NCC data: {str(e)}")
+        
+        elif source == "ARIN Official Statistics":
+            # Fetch and display ARIN data
+            try:
+                arin_data = data_collector.get_arin_statistics()
+                if 'error' not in arin_data:
+                    st.subheader("🌎 ARIN IPv6 Allocation Statistics")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Total IPv6 Allocations", 
+                            format_number(arin_data.get('total_addresses', 87695)),
+                            delta="North American region"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Deployment Rate", 
+                            f"{arin_data.get('deployment_rate', 70.4)}%",
+                            delta="IPv6 deployment progress"
+                        )
+                    
+                    with col3:
+                        st.metric(
+                            "Member Organizations", 
+                            format_number(arin_data.get('member_organizations', 26292)),
+                            delta="ARIN membership"
+                        )
+                    
+                    st.caption(f"📄 **Source**: ARIN Official Delegation Statistics ({arin_data.get('url', '')})")
+                else:
+                    st.warning("ARIN data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading ARIN data: {str(e)}")
+        
+        elif source == "AFRINIC Official Statistics":
+            # Fetch and display AFRINIC data
+            try:
+                afrinic_data = data_collector.get_afrinic_stats()
+                if 'error' not in afrinic_data:
+                    st.subheader("🌍 AFRINIC IPv6 Allocation Statistics")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Total IPv6 /32 Blocks", 
+                            format_number(afrinic_data.get('total_addresses', 1506)),
+                            delta="African region"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Countries Covered", 
+                            afrinic_data.get('countries_covered', 54),
+                            delta="African countries"
+                        )
+                    
+                    with col3:
+                        data_date = afrinic_data.get('data_date', 'Recent')
+                        st.metric("Last Updated", data_date, delta="Daily updates")
+                    
+                    st.caption(f"📄 **Source**: AFRINIC Official Delegation Statistics ({afrinic_data.get('url', '')})")
+                else:
+                    st.warning("AFRINIC data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading AFRINIC data: {str(e)}")
+        
+        elif source == "LACNIC Official Statistics":
+            # Fetch and display LACNIC data
+            try:
+                lacnic_data = data_collector.get_lacnic_stats()
+                if 'error' not in lacnic_data:
+                    st.subheader("🌎 LACNIC IPv6 Allocation Statistics")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        total = lacnic_data.get('total_addresses', 13090)
+                        unit = lacnic_data.get('measurement_unit', '/48 blocks')
+                        st.metric(
+                            f"Total IPv6 {unit}", 
+                            format_number(total),
+                            delta="Latin America & Caribbean"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "Countries Covered", 
+                            lacnic_data.get('countries_covered', 33),
+                            delta="LACNIC region"
+                        )
+                    
+                    with col3:
+                        data_date = lacnic_data.get('data_date', 'Recent')
+                        st.metric("Last Updated", data_date, delta="Daily updates")
+                    
+                    st.caption(f"📄 **Source**: LACNIC Official Delegation Statistics ({lacnic_data.get('url', '')})")
+                else:
+                    st.warning("LACNIC data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading LACNIC data: {str(e)}")
+        
+        elif source == "NIST USGv6 Deployment Monitor":
+            # Fetch and display NIST data
+            try:
+                nist_data = data_collector.get_nist_usgv6_deployment_stats()
+                if 'error' not in nist_data:
+                    st.subheader("🏛️ NIST USGv6 Federal Deployment Monitor")
+                    
+                    # Key metrics
+                    mandate_status = nist_data.get('mandate_status', {})
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        target = mandate_status.get('target_percentage', '80%')
+                        st.metric("Federal Target", target, delta="IPv6-only by 2025")
+                    
+                    with col2:
+                        current_progress = nist_data.get('current_progress', 'In Progress')
+                        st.metric("Mandate Progress", current_progress, delta="OMB M-21-07")
+                    
+                    with col3:
+                        agencies_count = len(nist_data.get('key_agencies', {}).get('leading', []))
+                        st.metric("Leading Agencies", agencies_count, delta="Implementation leaders")
+                    
+                    # Agency insights
+                    key_agencies = nist_data.get('key_agencies', {})
+                    if key_agencies:
+                        st.subheader("🏢 Federal Agency Status")
+                        
+                        leading = key_agencies.get('leading', [])
+                        if leading:
+                            st.success(f"**Leading Agencies**: {', '.join(leading[:3])}")
+                        
+                        behind = key_agencies.get('behind_targets', [])
+                        if behind:
+                            st.warning(f"**Behind Schedule**: {', '.join(behind[:3])}")
+                    
+                    st.caption(f"📄 **Source**: NIST USGv6 Deployment Monitor ({nist_data.get('url', '')})")
+                else:
+                    st.warning("NIST USGv6 data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading NIST USGv6 data: {str(e)}")
+        
+        elif source == "IPv6 Enabled Statistics":
+            # Fetch and display IPv6 Enabled data
+            try:
+                ipv6_enabled_data = data_collector.get_ipv6enabled_stats()
+                if 'error' not in ipv6_enabled_data:
+                    st.subheader("🌐 IPv6 Enabled Network Statistics")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "Global IPv6 Deployment", 
+                            f"{ipv6_enabled_data.get('global_deployment_rate', 85.2)}%",
+                            delta="Monitored networks"
+                        )
+                    
+                    with col2:
+                        networks = ipv6_enabled_data.get('networks_monitored', 75000)
+                        st.metric("Networks Monitored", format_number(networks), delta="Global coverage")
+                    
+                    with col3:
+                        categories = len(ipv6_enabled_data.get('network_categories', []))
+                        st.metric("Network Categories", categories, delta="ISPs, CDNs, Cloud, etc.")
+                    
+                    st.caption(f"📄 **Source**: IPv6 Enabled Statistics ({ipv6_enabled_data.get('url', '')})")
+                else:
+                    st.warning("IPv6 Enabled data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading IPv6 Enabled data: {str(e)}")
+        
+        elif source == "Internet Society Pulse":
+            # Fetch and display Internet Society Pulse data
+            try:
+                pulse_data = data_collector.get_internet_society_pulse_stats()
+                if pulse_data and 'error' not in pulse_data:
+                    st.subheader("🌐 Internet Society Pulse - Website IPv6 Support")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        st.metric(
+                            "IPv6 Websites", 
+                            f"{pulse_data.get('global_ipv6_websites', 49)}%",
+                            delta="Top 1000 sites globally"
+                        )
+                    
+                    with col2:
+                        st.metric(
+                            "HTTPS Websites", 
+                            f"{pulse_data.get('global_https_websites', 95)}%",
+                            delta="Security adoption"
+                        )
+                    
+                    with col3:
+                        st.metric(
+                            "TLS 1.3 Websites", 
+                            f"{pulse_data.get('global_tls13_websites', 86)}%",
+                            delta="Modern encryption"
+                        )
+                    
+                    st.caption(f"📄 **Source**: {pulse_data.get('source', 'Internet Society Pulse')} ({pulse_data.get('url', '')})")
+                else:
+                    st.warning("Internet Society Pulse data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading Internet Society Pulse data: {str(e)}")
+        
+        elif source == "Eric Vyncke IPv6 Status":
+            # Fetch and display Eric Vyncke data
+            try:
+                vyncke_data = data_collector.get_vyncke_stats()
+                if vyncke_data and 'error' not in vyncke_data:
+                    st.subheader("🌐 Eric Vyncke - Website IPv6 Deployment")
+                    
+                    st.info(f"**Measurement Type**: {vyncke_data.get('measurement_type', 'Website IPv6 deployment')}")
+                    st.info(f"**Scope**: {vyncke_data.get('scope', 'Top websites per country')}")
+                    st.info(f"**Focus**: {vyncke_data.get('focus', 'Country-specific website analysis')}")
+                    
+                    st.caption(f"📄 **Source**: {vyncke_data.get('source', 'Eric Vyncke')} ({vyncke_data.get('url', '')})")
+                else:
+                    st.warning("Eric Vyncke data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading Eric Vyncke data: {str(e)}")
+        
+        elif source == "Akamai IPv6 Statistics":
+            # Fetch and display Akamai data
+            try:
+                akamai_data = data_collector.get_akamai_stats()
+                if akamai_data and 'error' not in akamai_data:
+                    st.subheader("🌐 Akamai - Network IPv6 Adoption")
+                    
+                    # Display top networks if available
+                    top_networks = akamai_data.get('top_networks', [])
+                    if top_networks:
+                        st.subheader("🏆 Top IPv6 Networks by Akamai Traffic")
+                        networks_df = pd.DataFrame(top_networks)
+                        if not networks_df.empty:
+                            fig = chart_generator.create_bar_chart(
+                                networks_df,
+                                'network',
+                                'ipv6_percentage',
+                                'Top IPv6 Networks by Akamai Traffic'
+                            )
+                            st.plotly_chart(fig, use_container_width=True)
+                            
+                            # Display network data table
+                            st.subheader("📋 Top Network IPv6 Deployment")
+                            st.dataframe(networks_df, use_container_width=True)
+                    
+                    st.caption(f"📄 **Source**: {akamai_data.get('source', 'Akamai')} ({akamai_data.get('url', '')})")
+                else:
+                    st.warning("Akamai data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading Akamai data: {str(e)}")
+        
+        elif source == "Team Cymru Bogons":
+            # Fetch and display Team Cymru data
+            try:
+                cymru_data = data_collector.get_team_cymru_bogons()
+                if 'error' not in cymru_data:
+                    st.subheader("🛡️ Team Cymru IPv6 Bogon Prefixes")
+                    
+                    # Key metrics
+                    col1, col2, col3 = st.columns(3)
+                    
+                    with col1:
+                        total_prefixes = cymru_data.get('total_prefixes', 153536)
+                        st.metric("Total Bogon Prefixes", format_number(total_prefixes), delta="IPv6 security monitoring")
+                    
+                    with col2:
+                        cache_size = cymru_data.get('cache_size_mb', 2.5)
+                        st.metric("Data Size", f"{cache_size} MB", delta="Cached monthly")
+                    
+                    with col3:
+                        update_freq = cymru_data.get('update_frequency', 'Monthly')
+                        st.metric("Update Frequency", update_freq, delta="BGP route validation")
+                    
+                    # Prefix categories
+                    prefix_analysis = cymru_data.get('prefix_analysis', {})
+                    if prefix_analysis:
+                        st.subheader("📊 Prefix Categories")
+                        for category, count in prefix_analysis.items():
+                            st.write(f"**{category.replace('_', ' ').title()}**: {format_number(count)} prefixes")
+                    
+                    st.caption(f"📄 **Source**: Team Cymru Bogons ({cymru_data.get('url', '')})")
+                else:
+                    st.warning("Team Cymru Bogons data temporarily unavailable. Please try again later.")
+            except Exception as e:
+                st.error(f"Error loading Team Cymru data: {str(e)}")
                 
     except Exception as e:
         st.error(f"Error loading global adoption data: {str(e)}")
         st.info("Please check your internet connection and try refreshing the page.")
 
 # Cloud Services IPv6 Page
-elif page == "Cloud Services":
+elif current_view == "Cloud Services":
     st.header("☁️ IPv6 Support in Cloud Services")
     
     st.markdown("""
@@ -1356,7 +1950,7 @@ elif page == "Cloud Services":
         st.cache_data.clear()
 
 # Extended Data Sources Page
-elif page == "Extended Data Sources":
+elif current_view == "Extended Data Sources":
     st.header("🔬 Extended IPv6 Data Sources")
     
     st.markdown("""
@@ -1397,8 +1991,8 @@ elif page == "Extended Data Sources":
     </style>
     """, unsafe_allow_html=True)
     
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12 = st.tabs([
-        "Matrix", "Test.com", "RIPE", "Pulse", "ARIN", "LACNIC", "APNIC", "Cloudflare", "AFRINIC", "NIST", "Enabled", "Bogons"
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 = st.tabs([
+        "Matrix", "Test.com", "RIPE", "Pulse", "ARIN", "LACNIC", "APNIC", "Cloudflare", "AFRINIC", "NIST", "Enabled", "Bogons", "Facebook"
     ])
     
     with tab1:
@@ -2310,6 +2904,183 @@ elif page == "Extended Data Sources":
         except Exception as e:
             st.error(f"Error loading Team Cymru Bogons data: {str(e)}")
     
+    with tab13:
+        st.subheader("📘 Facebook - IPv6 Platform Traffic Analysis")
+        try:
+            facebook_data = data_collector.get_facebook_ipv6_stats()
+            
+            if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                st.write(f"**Description**: {facebook_data.get('description', 'Facebook IPv6 traffic analysis')}")
+                st.write(f"**Measurement Type**: {facebook_data.get('measurement_type', 'Platform traffic analysis')}")
+                st.write(f"**Scope**: {facebook_data.get('scope', 'Top countries by traffic')}")
+                
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    global_rate = facebook_data.get('global_adoption_rate', 0)
+                    st.metric(
+                        "Global IPv6 Adoption",
+                        f"{global_rate}%",
+                        delta="Platform-wide analysis"
+                    )
+                
+                with col2:
+                    platform_insights = facebook_data.get('platform_insights', {})
+                    user_base = platform_insights.get('user_base', 'N/A')
+                    st.metric(
+                        "User Base",
+                        user_base,
+                        delta="Global reach"
+                    )
+                
+                with col3:
+                    top_countries = facebook_data.get('top_countries', [])
+                    country_count = len(top_countries)
+                    st.metric(
+                        "Countries Analyzed",
+                        f"{country_count}",
+                        delta="Top markets"
+                    )
+                
+                # Top countries by Facebook IPv6 adoption
+                if top_countries:
+                    st.subheader("🏆 Top Countries by Facebook IPv6 Adoption")
+                    
+                    # Create DataFrame for visualization with data validation
+                    chart_data = []
+                    for country in top_countries[:10]:  # Top 10 for chart
+                        if isinstance(country, dict) and 'country' in country and 'ipv6_percentage' in country:
+                            try:
+                                ipv6_pct = float(country['ipv6_percentage'])
+                                if 0 <= ipv6_pct <= 100:  # Validate percentage range
+                                    chart_data.append({
+                                        'country': str(country['country']),
+                                        'ipv6_percentage': ipv6_pct
+                                    })
+                            except (ValueError, TypeError):
+                                continue  # Skip invalid data
+                    
+                    if chart_data:
+                        countries_df = pd.DataFrame(chart_data)
+                        
+                        # Bar chart of top countries
+                        fig = px.bar(
+                            countries_df,
+                            x='country',
+                            y='ipv6_percentage',
+                            color='ipv6_percentage',
+                            title='Facebook IPv6 Adoption by Country (Top 10)',
+                            labels={'ipv6_percentage': 'IPv6 Adoption %', 'country': 'Country'},
+                            color_continuous_scale='viridis'
+                        )
+                        fig.update_layout(
+                            height=400,
+                            showlegend=False,
+                            xaxis_tickangle=-45
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
+                    else:
+                        st.warning("No valid chart data available for visualization.")
+                    
+                    # Show detailed table with resilient column handling
+                    st.subheader("📊 Detailed Country Statistics")
+                    if top_countries and len(top_countries) > 0:
+                        display_df = pd.DataFrame(top_countries)
+                        
+                        # Safely select available columns
+                        available_cols = ['country', 'ipv6_percentage', 'rank']
+                        optional_cols = ['category', 'mobile_advantage', 'notes']
+                        
+                        # Add optional columns if they exist
+                        for col in optional_cols:
+                            if col in display_df.columns:
+                                available_cols.append(col)
+                        
+                        display_df = display_df[available_cols]
+                        
+                        # Rename columns for display
+                        col_names = ['Country', 'IPv6 %', 'Rank']
+                        if 'category' in available_cols:
+                            col_names.append('Category')
+                        if 'mobile_advantage' in available_cols:
+                            col_names.append('Mobile Advantage')
+                        if 'notes' in available_cols:
+                            col_names.append('Notes')
+                        
+                        display_df.columns = col_names
+                        st.dataframe(display_df, use_container_width=True)
+                    else:
+                        st.info("No country data available to display.")
+                
+                # Regional breakdown
+                regional_data = facebook_data.get('regional_data', {})
+                if regional_data:
+                    st.subheader("🌍 Regional Analysis")
+                    
+                    regional_list = []
+                    for region, data in regional_data.items():
+                        if isinstance(data, dict):
+                            try:
+                                avg_adoption = float(data.get('average_adoption', 0))
+                                countries_measured = int(data.get('total_countries_measured', 0))
+                                leading_countries = data.get('leading_countries', [])
+                                if isinstance(leading_countries, list):
+                                    leading_str = ', '.join(str(c) for c in leading_countries[:3])
+                                else:
+                                    leading_str = 'N/A'
+                                
+                                regional_list.append({
+                                    'Region': str(region),
+                                    'Average Adoption': avg_adoption,
+                                    'Countries Measured': countries_measured,
+                                    'Leading Countries': leading_str
+                                })
+                            except (ValueError, TypeError):
+                                continue  # Skip invalid regional data
+                    
+                    if regional_list:
+                        regional_df = pd.DataFrame(regional_list)
+                    else:
+                        st.warning("No valid regional data available for analysis.")
+                    
+                    # Regional bar chart
+                    fig_regional = px.bar(
+                        regional_df,
+                        x='Region',
+                        y='Average Adoption',
+                        title='Regional IPv6 Adoption Averages',
+                        color='Average Adoption',
+                        color_continuous_scale='blues'
+                    )
+                    fig_regional.update_layout(height=350)
+                    st.plotly_chart(fig_regional, use_container_width=True)
+                    
+                    # Regional details table
+                    st.dataframe(regional_df, use_container_width=True)
+                
+                # Key findings
+                key_findings = facebook_data.get('key_findings', [])
+                if key_findings:
+                    st.subheader("🔍 Key Findings")
+                    for finding in key_findings:
+                        st.write(f"  • {finding}")
+                
+                # Platform insights
+                if platform_insights:
+                    st.subheader("📈 Platform Traffic Insights")
+                    traffic_patterns = platform_insights.get('traffic_patterns', [])
+                    for pattern in traffic_patterns:
+                        st.write(f"  • {pattern}")
+            
+            else:
+                st.warning(f"⚠️ {facebook_data['error']}")
+            
+            st.caption(f"📄 **Source**: {facebook_data.get('source', 'Facebook IPv6 Statistics')} - {facebook_data.get('url', '')}")
+            
+        except Exception as e:
+            st.error(f"Error loading Facebook IPv6 data: {str(e)}")
+            st.info("Please check the data source connection and try again.")
+    
     # Summary section
     st.subheader("📈 Extended Sources Summary")
     st.markdown("""
@@ -2331,7 +3102,7 @@ elif page == "Extended Data Sources":
     """)
 
 # Country Analysis Page
-elif page == "Country Analysis":
+elif current_view == "Country Analysis":
     st.header("🏛️ Country-Specific IPv6 Analysis")
     
     # Get country statistics data
@@ -2731,7 +3502,7 @@ elif page == "Country Analysis":
         st.info("Please check the data sources and try again.")
 
 # BGP Statistics Page
-elif page == "BGP Statistics":
+elif current_view == "BGP Statistics":
     st.header("🔀 IPv6 BGP Routing Statistics")
     
     try:
@@ -2827,7 +3598,7 @@ elif page == "BGP Statistics":
         st.error(f"Error loading BGP statistics: {str(e)}")
 
 # Historical Trends Page  
-elif page == "Historical Trends":
+elif current_view == "Historical Trends":
     st.header("📈 Historical IPv6 Adoption Trends")
     
     # Time range selector
@@ -2908,6 +3679,200 @@ elif page == "Historical Trends":
                             st.write(f"• {driver}")
         except Exception:
             pass
+        
+        # Facebook Platform Historical Trends
+        st.subheader("📱 Facebook Platform IPv6 Adoption Trends")
+        
+        try:
+            # Use proper historical interface
+            facebook_historical = data_collector.get_facebook_historical_stats(time_range)
+            
+            # Check if historical data is available
+            if facebook_historical.get('available'):
+                # Display historical series (this branch would handle real historical data)
+                st.success("📈 Historical Facebook data available")
+                # This would plot the actual historical series
+                # For now, this branch won't execute since available=False
+                
+            else:
+                # Historical data not available - show current snapshot with clear messaging
+                st.info(f"📝 **Historical data not available**: {facebook_historical.get('note', 'Facebook provides current platform statistics only.')}")
+                st.info(f"⏱️ **Requested time range**: {time_range}")
+                
+                # Get current snapshot data if available
+                if facebook_historical.get('current_data_available'):
+                    facebook_data = data_collector.get_facebook_ipv6_stats()
+                    
+                    if isinstance(facebook_data, dict) and 'error' not in facebook_data:
+                        # Current adoption metrics
+                        st.subheader("📊 Current Platform Snapshot")
+                        col1, col2, col3 = st.columns(3)
+                        
+                        with col1:
+                            st.metric(
+                                "Current Platform Adoption",
+                                f"{facebook_data.get('global_adoption_rate', 'N/A')}%",
+                                delta="Global traffic"
+                            )
+                        
+                        with col2:
+                            platform_insights = facebook_data.get('platform_insights', {})
+                            user_base = platform_insights.get('user_base', 'N/A')
+                            st.metric(
+                                "Platform Reach",
+                                str(user_base),
+                                delta="Monthly active users"
+                            )
+                        
+                        with col3:
+                            countries_analyzed = facebook_data.get('countries_analyzed', 20)
+                            st.metric(
+                                "Geographic Coverage", 
+                                str(countries_analyzed),
+                                delta="Countries measured"
+                            )
+                        
+                        # Regional snapshot analysis
+                        regional_data = facebook_data.get('regional_data', {})
+                        if regional_data:
+                            st.subheader("🌍 Regional Snapshot Analysis")
+                            
+                            # Extract regional adoption rates
+                            regional_adoption = []
+                            for region, data in regional_data.items():
+                                if isinstance(data, dict):
+                                    try:
+                                        avg_adoption = float(data.get('average_adoption', 0))
+                                        countries_measured = int(data.get('total_countries_measured', 0))
+                                        
+                                        regional_adoption.append({
+                                            'region': str(region),
+                                            'adoption': avg_adoption,
+                                            'countries': countries_measured
+                                        })
+                                    except (ValueError, TypeError):
+                                        continue
+                            
+                            if regional_adoption:
+                                regional_df = pd.DataFrame(regional_adoption)
+                                
+                                # Regional comparison chart (snapshot)
+                                fig_regional = px.bar(
+                                    regional_df,
+                                    x='region',
+                                    y='adoption',
+                                    title='Regional IPv6 Adoption Snapshot (Current Facebook Data)',
+                                    labels={'adoption': 'Average IPv6 Adoption %', 'region': 'Region'},
+                                    color='adoption',
+                                    color_continuous_scale='viridis',
+                                    text='adoption'
+                                )
+                                fig_regional.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
+                                fig_regional.update_layout(height=350)
+                                st.plotly_chart(fig_regional, use_container_width=True)
+                                
+                                # Regional insights
+                                if len(regional_adoption) > 0:
+                                    top_region = max(regional_adoption, key=lambda x: x['adoption'])
+                                    st.write(f"**🏆 Leading region**: {top_region['region']} ({top_region['adoption']:.1f}% adoption)")
+                                    
+                                    total_countries = sum(r['countries'] for r in regional_adoption)
+                                    st.write(f"**🌐 Geographic reach**: {total_countries} countries across {len(regional_adoption)} regions")
+                        
+                        # Platform traffic insights
+                        platform_insights = facebook_data.get('platform_insights', {})
+                        if platform_insights:
+                            st.subheader("📈 Platform Traffic Insights")
+                            traffic_patterns = platform_insights.get('traffic_patterns', [])
+                            if traffic_patterns:
+                                for pattern in traffic_patterns[:3]:  # Show top 3 patterns
+                                    st.write(f"• {pattern}")
+                        
+                        # Opt-in experimental simulated trend
+                        st.subheader("🧪 Experimental Analysis")
+                        show_simulation = st.checkbox(
+                            "Show simulated trend (experimental)",
+                            value=False,
+                            help="Generate a simulated historical trend based on current adoption rate. This is not measured data."
+                        )
+                        
+                        if show_simulation:
+                            st.warning("⚠️ **Simulated Data**: The following chart shows modeled historical progression, not measured data.")
+                            
+                            # Parse time range for proper date handling
+                            import datetime
+                            current_year = datetime.datetime.now().year
+                            
+                            # Map time range to years
+                            if time_range == "Last 6 Months":
+                                months = 6
+                                start_date = datetime.datetime.now() - datetime.timedelta(days=6*30)
+                                periods = [start_date + datetime.timedelta(days=30*i) for i in range(7)]
+                                x_values = [p.strftime('%Y-%m') for p in periods]
+                            elif time_range == "Last Year":
+                                years = list(range(current_year - 1, current_year + 1))
+                                x_values = years
+                            elif time_range == "Last 2 Years":
+                                years = list(range(current_year - 2, current_year + 1))
+                                x_values = years
+                            elif time_range == "Last 5 Years":
+                                years = list(range(current_year - 5, current_year + 1))
+                                x_values = years
+                            else:  # All Time
+                                years = list(range(current_year - 8, current_year + 1))
+                                x_values = years
+                            
+                            # Create simulated data respecting time range
+                            try:
+                                current_adoption = float(facebook_data.get('global_adoption_rate', 52))
+                                simulated_data = []
+                                
+                                for i, x_val in enumerate(x_values):
+                                    # S-curve simulation
+                                    progress = i / (len(x_values) - 1) if len(x_values) > 1 else 1
+                                    adoption = current_adoption * (0.1 + 0.9 * progress)
+                                    
+                                    simulated_data.append({
+                                        'period': str(x_val),
+                                        'adoption': round(adoption, 1)
+                                    })
+                                
+                                if simulated_data:
+                                    sim_df = pd.DataFrame(simulated_data)
+                                    
+                                    fig_sim = px.line(
+                                        sim_df,
+                                        x='period',
+                                        y='adoption',
+                                        title=f'Facebook Platform IPv6 Adoption - Simulated Trend ({time_range})',
+                                        labels={'adoption': 'IPv6 Adoption % (Simulated)', 'period': 'Time Period'},
+                                        markers=True,
+                                        line_shape='spline'
+                                    )
+                                    fig_sim.update_traces(line_color='orange', line_dash='dash')
+                                    fig_sim.update_layout(height=400)
+                                    st.plotly_chart(fig_sim, use_container_width=True)
+                                    
+                                    st.caption("⚠️ **Simulated (not measured)**: Chart shows modeled progression based on typical S-curve adoption patterns")
+                                    
+                            except (ValueError, TypeError):
+                                st.error("Unable to generate simulated trend from current data")
+                        
+                        # Source attribution
+                        st.success(f"✅ Current data loaded from {facebook_data.get('source', 'Facebook IPv6 Statistics')}")
+                        st.caption(f"📄 **Source**: {facebook_data.get('source', 'Facebook IPv6 Statistics')} - {facebook_data.get('url', '')}")
+                        st.caption(f"⏱️ **Time Range**: {time_range} (current snapshot shown - historical series not available)")
+                        st.caption("📊 **Data Type**: Current platform measurements only")
+                        
+                    else:
+                        error_msg = facebook_data.get('error', 'Data not available') if isinstance(facebook_data, dict) else 'Data not available'
+                        st.warning(f"Facebook current data: {error_msg}")
+                else:
+                    st.warning("Facebook platform data temporarily unavailable")
+                    
+        except Exception as e:
+            st.error(f"Facebook historical trends error: {str(e)}")
+            st.caption(f"📄 **Source**: {facebook_historical.get('source', 'Facebook IPv6 Statistics')} - {facebook_historical.get('url', '')}")
         
         # Enhanced milestones with new data integration
         st.subheader("🎯 Key IPv6 Milestones & Federal Initiatives")
@@ -2995,7 +3960,7 @@ elif page == "Historical Trends":
         st.error(f"Error loading historical trends: {str(e)}")
 
 # Data Sources Page
-elif page == "Data Sources":
+elif current_view == "Data Sources":
     st.header("📚 Data Sources & Attribution")
     
     st.markdown("""
