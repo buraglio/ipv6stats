@@ -1,7 +1,7 @@
 [project]
-name = "repl-nix-workspace"
-version = "0.1.0"
-description = "Add your description here"
+name = "ipv6stats"
+version = "1.0.0"
+description = "IPv6 Statistics Dashboard - High-performance Streamlit app for global IPv6 adoption metrics"
 requires-python = ">=3.11"
 dependencies = [
     "folium>=0.20.0",
@@ -13,3 +13,15 @@ dependencies = [
     "numpy>=2.3.2",
     "plotly>=6.3.0",
 ]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pages*"]
+exclude = ["img*", "venv*", "*.egg-info*"]

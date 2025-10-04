@@ -1,0 +1,21 @@
+# IPv6 Statistics Dashboard - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core framework
+streamlit>=1.48.1
+
+# Data processing
+pandas>=2.3.1
+numpy>=2.3.2
+
+# Visualization
+plotly>=6.3.0
+folium>=0.20.0
+streamlit-folium>=0.25.1
+
+# Data fetching
+requests>=2.32.4
+trafilatura>=2.0.0
+
+# Optional but recommended
+lxml-html-clean>=0.1.0

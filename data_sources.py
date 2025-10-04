@@ -412,78 +412,93 @@ class DataCollector:
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_cloudflare_radar_stats(_self) -> Dict[str, Any]:
-        """Fetch IPv6 statistics from Cloudflare Radar"""
+        """
+        Fetch IPv6 statistics from Cloudflare Radar API
+
+        Note: Cloudflare Radar API requires authentication via API key.
+        Set CLOUDFLARE_API_KEY environment variable to enable live data.
+        Otherwise, fallback to estimated data based on recent reports.
+        """
+        import os
+
         try:
-            # Note: Direct scraping of Cloudflare Radar blocked (403), using comprehensive fallback data
-            url = "https://radar.cloudflare.com/reports/ipv6"
-            
-            # Skip direct fetching due to 403 blocking, use comprehensive authentic data instead
-            downloaded = None
-            text = None
-            
-            # Return comprehensive authentic Cloudflare data instead
-            if True:  # Always use fallback data
-                # Key insights from Cloudflare Radar
-                insights = {
-                    'global_ipv6_traffic': 36.0,  # ~36% of traffic over IPv6 
-                    'mobile_ipv6_higher': True,  # Mobile traffic 50% more likely to use IPv6
-                    'measurement_type': 'Traffic to Cloudflare network',
-                    'geographic_coverage': 'Global with country-level detail',
-                    'data_source': 'HTTP request traffic analysis'
+            # Check for API key in environment
+            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+
+            if api_key:
+                # Cloudflare Radar API endpoint for IPv6 vs IPv4 timeseries
+                url = "https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w"
+
+                headers = {
+                    'Authorization': f'Bearer {api_key}'
                 }
-                
-                return {
-                    'global_ipv6_percentage': insights['global_ipv6_traffic'],
-                    'description': 'Global IPv6 adoption analysis based on traffic to Cloudflare network with country-level insights',
-                    'measurement_type': insights['measurement_type'],
-                    'geographic_coverage': insights['geographic_coverage'],
-                    'mobile_advantage': 'Mobile traffic 50% more likely to use IPv6',
-                    'regional_leaders': {
-                        'Asia-Pacific': 'India (70%+), Malaysia (65%+)',
-                        'Europe': 'Germany (60%+), France (55%+)',
-                        'North America': 'US (48%+), Canada (45%+)'
-                    },
-                    'key_metrics': [
-                        f'{insights["global_ipv6_traffic"]}% global IPv6 traffic',
-                        'Mobile devices show 50%+ higher IPv6 usage',
-                        'Real-time CDN traffic analysis',
-                        'Country-level deployment insights'
-                    ],
-                    'last_updated': datetime.now().isoformat(),
-                    'source': 'Cloudflare Radar IPv6 Report',
-                    'url': 'https://radar.cloudflare.com/reports/ipv6'
-                }
+
+                response = _self.session.get(url, headers=headers, timeout=10)
+                response.raise_for_status()
+
+                data = response.json()
+
+                if data.get('success') and 'result' in data:
+                    result = data['result']
+                    series = result.get('serie_0', {})
+
+                    # Get the latest data point
+                    ipv4_values = series.get('IPv4', [])
+                    ipv6_values = series.get('IPv6', [])
+
+                    if ipv6_values and ipv4_values:
+                        # Calculate IPv6 percentage from latest data point
+                        latest_ipv4 = ipv4_values[-1] if ipv4_values else 0
+                        latest_ipv6 = ipv6_values[-1] if ipv6_values else 0
+                        total = latest_ipv4 + latest_ipv6
+
+                        ipv6_percentage = (latest_ipv6 / total * 100) if total > 0 else 0
+
+                        return {
+                            'ipv6_percentage': round(ipv6_percentage, 2),
+                            'global_ipv6_percentage': round(ipv6_percentage, 2),
+                            'ipv4_percentage': round((latest_ipv4 / total * 100) if total > 0 else 0, 2),
+                            'measurement_type': 'HTTP request traffic to Cloudflare network',
+                            'time_period': '52 weeks (1 year)',
+                            'description': 'IPv6 vs IPv4 traffic analysis from Cloudflare Radar API',
+                            'data_points': len(ipv6_values),
+                            'last_updated': datetime.now().isoformat(),
+                            'source': 'Cloudflare Radar API (Live)',
+                            'url': 'https://radar.cloudflare.com/reports/ipv6',
+                            'api_endpoint': url
+                        }
+
+                # Fallback if API structure is unexpected
+                logger.warning("Cloudflare Radar API returned unexpected structure")
+                raise ValueError("Unexpected API response structure")
+            else:
+                # No API key, use fallback
+                logger.info("No CLOUDFLARE_API_KEY set, using estimated data")
+                raise ValueError("No API key configured")
+
         except Exception as e:
-            logger.error(f"Error fetching Cloudflare Radar stats: {e}")
-        
-        return {
-            'global_ipv6_percentage': 35.2,
-            'description': 'Global IPv6 adoption analysis based on traffic to Cloudflare\'s network with comprehensive country-level insights',
-            'measurement_type': 'Global CDN traffic analysis',
-            'geographic_coverage': '200+ countries and territories worldwide',
-            'regional_leaders': {
-                'Asia-Pacific': 'India (70%+), Malaysia (65%+)',
-                'Europe': 'Germany (60%+), France (55%+)',
-                'North America': 'US (48%+), Canada (45%+)',
-                'Latin America': 'Brazil (25%+), Argentina (20%+)',
-                'Africa': 'South Africa (15%+), Nigeria (12%+)'
-            },
-            'traffic_insights': {
-                'mobile_advantage': '40%+ higher IPv6 usage on mobile devices',
-                'enterprise_lag': 'Enterprise networks 15-20% behind consumer adoption',
-                'cdn_acceleration': 'CDN services driving mobile IPv6 growth',
-                'performance_benefit': '15-25% faster page loads with IPv6 in key markets'
-            },
-            'key_metrics': [
-                '35.2% global IPv6 adoption rate (2025)',
-                'Mobile devices show 40%+ higher IPv6 usage',
-                'India leading with 70%+ IPv6 adoption',
-                'Year-over-year growth averaging 10-15%'
-            ],
-            'last_updated': datetime.now().isoformat(),
-            'source': 'Cloudflare Radar IPv6 Analysis',
-            'url': 'https://radar.cloudflare.com/reports/ipv6'
-        }
+            logger.info(f"Using Cloudflare fallback data: {e}")
+
+            # Fallback data based on recent Cloudflare Radar reports
+            # Source: https://radar.cloudflare.com/reports/ipv6 (viewed October 2025)
+            return {
+                'ipv6_percentage': 36.0,
+                'global_ipv6_percentage': 36.0,
+                'ipv4_percentage': 64.0,
+                'description': 'IPv6 traffic analysis (based on recent Cloudflare Radar reports)',
+                'measurement_type': 'HTTP request traffic to Cloudflare network',
+                'time_period': '52 weeks (1 year)',
+                'note': 'Set CLOUDFLARE_API_KEY environment variable for live API data',
+                'last_updated': datetime.now().isoformat(),
+                'source': 'Cloudflare Radar (estimated)',
+                'url': 'https://radar.cloudflare.com/reports/ipv6',
+                'api_endpoint': 'https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w'
+            }
+
+    # Alias for compatibility
+    def get_cloudflare_stats(_self) -> Dict[str, Any]:
+        """Alias for get_cloudflare_radar_stats for compatibility"""
+        return _self.get_cloudflare_radar_stats()
 
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_nist_usgv6_deployment_stats(_self) -> Dict[str, Any]:

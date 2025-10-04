@@ -12,6 +12,9 @@ MEMORY_OPTIMIZATION = {
     'max_cache_entries': 1,  # Single cache entry to save maximum memory
     'lazy_loading': True,  # Enable lazy loading of expensive operations
     'garbage_collection': True,  # Enable periodic garbage collection
+    'session_state_caching': True,  # Cache all data in session_state
+    'conditional_page_loading': True,  # Load only active page data
+    'optimize_dataframes': True,  # Downcast DataFrame dtypes to save memory
 }
 
 # Data loading optimization
@@ -25,9 +28,20 @@ DATA_LOADING = {
 # UI optimization settings
 UI_OPTIMIZATION = {
     'default_expanded': False,  # Keep expanders collapsed by default
-    'pagination_size': 5,  # Show fewer items per page
+    'pagination_size': 10,  # Items per page
     'chart_height': 400,  # Fixed chart height
     'lazy_charts': True,  # Load charts only when requested
+    'lazy_expanders': True,  # Lazy load content in collapsed expanders
+    'max_concurrent_charts': 5,  # Limit simultaneous chart rendering
+    'progressive_loading': True,  # Show content progressively as it loads
+}
+
+# Rendering optimization settings
+RENDERING_OPTIMIZATION = {
+    'use_container_width': True,  # Charts use full container width
+    'reduce_plotly_config': True,  # Minimal Plotly config for faster rendering
+    'cache_chart_data': True,  # Cache processed chart data
+    'debounce_interactions': True,  # Debounce user interactions
 }
 
 def optimize_memory():

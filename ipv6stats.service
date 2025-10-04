@@ -1,0 +1,33 @@
+[Unit]
+Description=IPv6 Statistics Dashboard
+After=network.target
+Documentation=https://github.com/yourusername/ipv6stats
+
+[Service]
+Type=simple
+User=buraglio
+Group=buraglio
+WorkingDirectory=/opt/ipv6stats
+Environment="PATH=/opt/ipv6stats/venv/bin:/usr/local/bin:/usr/bin:/bin"
+Environment="STREAMLIT_SERVER_HEADLESS=true"
+Environment="STREAMLIT_BROWSER_GATHER_USAGE_STATS=false"
+ExecStart=/opt/ipv6stats/venv/bin/streamlit run app.py --server.port=8501 --server.address=::1 --server.headless=true
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ipv6stats
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/ipv6stats
+
+# Resource limits
+MemoryLimit=1G
+CPUQuota=200%
+
+[Install]
+WantedBy=multi-user.target
