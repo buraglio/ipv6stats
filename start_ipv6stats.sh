@@ -20,7 +20,7 @@ set -e  # Exit on error
 
 # Default configuration
 PORT=8501
-HOST="::1"  # IPv6 localhost only for security
+HOST="127.0.0.1"  # localhost only for security
 DEV_MODE=false
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
