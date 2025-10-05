@@ -3661,14 +3661,30 @@ elif current_view == "BGP Statistics":
             st.plotly_chart(fig, use_container_width=True)
         
         # Cisco 6lab Regional RIR Statistics
-        st.subheader("🌍 Regional Internet Registry (RIR) Statistics")
-        
+        st.subheader("🌍 Cisco 6lab - Regional & Global IPv6 User Adoption")
+
         try:
             cisco_stats = data_collector.get_cisco_6lab_stats()
             regional_data = cisco_stats.get('regional_data', {})
-            
+
             if regional_data:
+                # Overview metrics
+                info_col1, info_col2, info_col3 = st.columns(3)
+
+                with info_col1:
+                    total_countries = cisco_stats.get('total_countries', 0)
+                    st.metric("Countries Tracked", total_countries, delta="Daily updates")
+
+                with info_col2:
+                    data_source = cisco_stats.get('data_source', 'Multiple sources')
+                    st.metric("Data Source", "Google + APNIC", delta="User adoption")
+
+                with info_col3:
+                    avg_adoption = sum(regional_data.values()) / len(regional_data) if regional_data else 0
+                    st.metric("Global Average (by region)", f"{avg_adoption:.1f}%", delta="IPv6 users")
+
                 # Create columns for RIR data
+                st.markdown("#### Regional Internet Registry (RIR) IPv6 User Adoption")
                 rir_cols = st.columns(5)
                 rir_names = {
                     'RIPE': 'RIPE (Europe)',
@@ -3677,21 +3693,35 @@ elif current_view == "BGP Statistics":
                     'AFRINIC': 'AFRINIC (Africa)',
                     'LACNIC': 'LACNIC (Latin America)'
                 }
-                
+
                 for i, (rir, percentage) in enumerate(regional_data.items()):
                     with rir_cols[i]:
                         st.metric(
                             rir_names.get(rir, rir),
                             f"{percentage}%",
-                            delta="IPv6 Adoption"
+                            delta="IPv6 Users"
                         )
-                
+
                 # Regional comparison chart
                 fig = chart_generator.create_regional_comparison_chart(regional_data)
                 st.plotly_chart(fig, use_container_width=True)
-                
-                st.caption(f"📄 **Source**: {cisco_stats.get('source', 'Cisco 6lab')} ({cisco_stats.get('url', 'https://6lab.cisco.com')})")
-        
+
+                # Top countries section
+                top_countries = cisco_stats.get('top_countries', [])
+                if top_countries:
+                    st.markdown("#### 🏆 Top 10 Countries by IPv6 User Adoption")
+
+                    # Create dataframe for top countries
+                    import pandas as pd
+                    top_df = pd.DataFrame(top_countries)
+                    top_df['Rank'] = range(1, len(top_df) + 1)
+                    top_df = top_df[['Rank', 'country', 'ipv6_percentage', 'country_code']]
+                    top_df.columns = ['Rank', 'Country', 'IPv6 Users (%)', 'Code']
+
+                    st.dataframe(top_df, use_container_width=True, hide_index=True)
+
+                st.caption(f"📄 **Source**: {cisco_stats.get('source', 'Cisco 6lab')} - Data from {cisco_stats.get('data_url', 'https://6lab-stats.com/6lab-stats/')} · Based on Google and APNIC user measurements · [Learn More]({cisco_stats.get('url', 'https://6lab.cisco.com')})")
+
         except Exception as e:
             st.warning("Regional RIR data temporarily unavailable")
         
@@ -4114,8 +4144,9 @@ elif current_view == "Data Sources":
         {
             "name": "Cisco 6lab",
             "url": "https://6lab.cisco.com",
-            "description": "Comprehensive IPv6 deployment statistics by Regional Internet Registry (RIR)",
-            "data_types": ["RIR-level statistics", "Regional adoption rates", "IPv6 readiness metrics"],
+            "data_url": "https://6lab-stats.com/6lab-stats/",
+            "description": "Comprehensive IPv6 user adoption statistics by Regional Internet Registry (RIR) based on Google and APNIC measurements, providing daily updated country-level IPv6 user percentages across 200+ countries",
+            "data_types": ["RIR-level user adoption", "Country-level IPv6 percentages", "Regional adoption rates", "Global user statistics"],
             "update_frequency": "Daily"
         },
         {

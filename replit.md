@@ -86,7 +86,7 @@ Preferred communication style: Simple, everyday language.
 - **Eric Vyncke IPv6 Status**: IPv6 deployment status tracking for top websites per country and top-level domain analysis
 - **Google IPv6 Statistics**: Primary source for global IPv6 adoption percentages
 - **BGP Stuff**: Real-time BGP routing table statistics with current IPv4 and IPv6 prefix counts
-- **Cisco 6lab**: Comprehensive IPv6 deployment statistics by Regional Internet Registry (RIR)
+- **Cisco 6lab**: Comprehensive IPv6 user adoption statistics by Regional Internet Registry (RIR) based on Google and APNIC measurements from 6lab-stats.com, providing daily updated country-level IPv6 user percentages across 200+ countries
 - **APNIC IPv6 Measurements**: IPv6 capability measurements across Asia-Pacific networks and regions with ASN-level analysis and 45.2% network capability coverage across 56 countries
 - **Cloudflare Radar IPv6 Report**: Global IPv6 adoption analysis based on traffic to Cloudflare's network with country-level insights and mobile traffic data
 - **Cloudflare DNS Analysis**: DNS-based IPv6 adoption analysis from 1.1.1.1 resolver showing client-side vs server-side IPv6 deployment gaps

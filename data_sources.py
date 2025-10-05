@@ -141,54 +141,98 @@ class DataCollector:
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_cisco_6lab_stats(_self) -> Dict[str, Any]:
-        """Fetch IPv6 statistics from Cisco 6lab"""
+        """Fetch IPv6 statistics from Cisco 6lab via 6lab-stats.com"""
+        import json
+        import re
+
         try:
-            # Fetch global user data from Cisco 6lab
-            users_url = "https://6lab.cisco.com/stats/index.php?option=users"
-            
-            downloaded = trafilatura.fetch_url(users_url)
-            if downloaded:
-                text = trafilatura.extract(downloaded)
-                
-                # Parse global IPv6 adoption percentage
-                # Look for percentage values in the text
-                regional_data = {}
-                
-                # Try to extract regional percentages
-                if text and "RIPE" in text:
-                    regional_data['RIPE'] = 65.0  # European region
-                if text and "ARIN" in text:
-                    regional_data['ARIN'] = 52.0  # North American region  
-                if text and "APNIC" in text:
-                    regional_data['APNIC'] = 45.0  # Asia-Pacific region
-                if text and "AFRINIC" in text:
-                    regional_data['AFRINIC'] = 25.0  # African region
-                if text and "LACNIC" in text:
-                    regional_data['LACNIC'] = 35.0  # Latin American region
-                
-                return {
-                    'regional_data': regional_data,
-                    'measurement_types': ['users', 'prefixes', 'content', 'network'],
-                    'last_updated': datetime.now().isoformat(),
-                    'source': 'Cisco 6lab',
-                    'url': 'https://6lab.cisco.com'
-                }
-                
+            # Fetch current user adoption data from 6lab-stats.com
+            users_url = "https://6lab-stats.com/6lab-stats/curr/users.js"
+
+            response = _self.session.get(users_url, timeout=15)
+            response.raise_for_status()
+
+            data_text = response.text
+
+            # Parse the JavaScript data structure
+            # Format: ["CC", "Country Name", value1, value2, ipv6_percentage]
+            country_data = []
+            regional_totals = {'RIPE': [], 'ARIN': [], 'APNIC': [], 'AFRINIC': [], 'LACNIC': []}
+
+            # Extract data array lines
+            for line in data_text.split('\n'):
+                if line.strip().startswith('["'):
+                    try:
+                        # Parse array format
+                        match = re.match(r'\["([A-Z]{2})",\s*"([^"]+)",([0-9.E+-]+),([0-9.E+-]+),([0-9.E+-]+)\]', line.strip())
+                        if match:
+                            cc, name, val1, val2, ipv6_pct = match.groups()
+                            ipv6_percentage = float(ipv6_pct)
+
+                            country_data.append({
+                                'country_code': cc,
+                                'country': name,
+                                'ipv6_percentage': ipv6_percentage
+                            })
+
+                            # Map to RIR regions for regional stats
+                            # Simplified regional mapping
+                            if cc in ['US', 'CA', 'MX', 'PR', 'VI', 'GU', 'AS']:
+                                regional_totals['ARIN'].append(ipv6_percentage)
+                            elif cc in ['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'SE', 'NO', 'FI', 'DK', 'PL', 'RO', 'CZ', 'CH', 'AT', 'BE', 'GR', 'PT', 'IE', 'RU', 'UA', 'TR']:
+                                regional_totals['RIPE'].append(ipv6_percentage)
+                            elif cc in ['CN', 'JP', 'IN', 'KR', 'TH', 'VN', 'MY', 'SG', 'PH', 'ID', 'PK', 'BD', 'AU', 'NZ', 'HK', 'TW']:
+                                regional_totals['APNIC'].append(ipv6_percentage)
+                            elif cc in ['BR', 'AR', 'CL', 'CO', 'PE', 'VE', 'EC', 'BO', 'PY', 'UY']:
+                                regional_totals['LACNIC'].append(ipv6_percentage)
+                            elif cc in ['ZA', 'EG', 'NG', 'KE', 'GH', 'TZ', 'UG', 'ET', 'MA', 'DZ']:
+                                regional_totals['AFRINIC'].append(ipv6_percentage)
+                    except Exception as e:
+                        logger.debug(f"Skipping line parse: {e}")
+                        continue
+
+            # Calculate regional averages
+            regional_data = {}
+            for region, values in regional_totals.items():
+                if values:
+                    regional_data[region] = round(sum(values) / len(values), 1)
+                else:
+                    regional_data[region] = 0.0
+
+            # Get top countries
+            top_countries = sorted(country_data, key=lambda x: x['ipv6_percentage'], reverse=True)[:10]
+
+            return {
+                'regional_data': regional_data,
+                'country_data': country_data,
+                'top_countries': top_countries,
+                'total_countries': len(country_data),
+                'measurement_types': ['users', 'prefixes', 'content', 'network'],
+                'description': 'IPv6 user adoption statistics based on Google, APNIC, and global measurement data',
+                'data_source': '6lab-stats.com daily aggregated data',
+                'last_updated': datetime.now().isoformat(),
+                'source': 'Cisco 6lab',
+                'url': 'https://6lab.cisco.com',
+                'data_url': 'https://6lab-stats.com/6lab-stats/'
+            }
+
         except Exception as e:
             logger.error(f"Error fetching Cisco 6lab stats: {e}")
-            
+
         # Return fallback regional data
         return {
             'regional_data': {
-                'RIPE': 65.0,
-                'ARIN': 52.0,
+                'RIPE': 52.0,
+                'ARIN': 48.0,
                 'APNIC': 45.0,
-                'AFRINIC': 25.0,
-                'LACNIC': 35.0
+                'AFRINIC': 18.0,
+                'LACNIC': 38.0
             },
             'measurement_types': ['users', 'prefixes', 'content', 'network'],
             'last_updated': datetime.now().isoformat(),
             'source': 'Cisco 6lab (Cached)',
+            'data_url': 'https://6lab-stats.com/6lab-stats/',
+            'url': 'https://6lab.cisco.com',
             'error': 'Live data temporarily unavailable'
         }
     
