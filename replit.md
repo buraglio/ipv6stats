@@ -55,7 +55,7 @@ Preferred communication style: Simple, everyday language.
 - **AFRINIC IPv6 Statistics Integration**: Added African regional IPv6 allocation data covering 54 countries with 11,252 total /32 blocks, completing coverage of all major RIRs (August 18, 2025)
 - **Monthly Data Polling & Top Menu Navigation**: Changed from on-demand to monthly data polling (30-day cache TTL) and replaced sidebar navigation with responsive top menu bar that adapts to screen size (August 17, 2025)
 - **Expanded Cloud Services Coverage**: Added 16 additional cloud providers including Mythic Beasts, Hetzner, Scaleway, OVHcloud, UpCloud, BinaryLane, Fly.io, and others with detailed IPv6 support analysis (August 16, 2025)
-- **IPv6.army Theme Integration**: Applied IPv6.army color scheme (#007bff primary, #eaedf0 background) with logo integration in header and sidebar (August 16, 2025)
+- **Custom Theme Integration**: Applied custom color scheme (#007bff primary, #eaedf0 background) with logo integration in header and sidebar (August 16, 2025)
 - **Mobile Optimization**: Complete responsive design implementation with auto-collapsing sidebar, optimized CSS, and mobile-friendly layouts (August 16, 2025)
 - **Navigation Streamlining**: Removed IPv6 Compatibility Check and ASN/ISP Query pages while maintaining external IPv6 Compatibility Database link (August 16, 2025)
 - **Enhanced Navigation**: Functional sidebar hyperlinks with URL parameter routing for direct section access

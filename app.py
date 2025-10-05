@@ -469,8 +469,8 @@ menu_html += """
         </div>
         <div class="menu-utils">
             <a href="https://ipv6compatibility.com/" class="menu-util" target="_blank">IPv6 Compatibility Database</a>
+            <a href="https://tools.forwardingplane.net" class="menu-util" target="_blank">IPv6 Tools</a>
             <span class="menu-util">Monthly Data Updates</span>
-            <span class="menu-util">IPv6.army Theme</span>
         </div>
     </div>
 </div>
@@ -493,7 +493,7 @@ st.sidebar.markdown("### 🌐 About")
 st.sidebar.markdown("Comprehensive IPv6 adoption analysis across cloud providers, ISPs, and regional networks worldwide.")
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("*Powered by IPv6.army theme*")
+st.sidebar.markdown("🔧 [IPv6 Tools](https://tools.forwardingplane.net)")
 
 # Content area - title removed since it's now in top nav
 st.markdown("*Comprehensive analysis of worldwide IPv6 adoption and BGP routing data with monthly data updates*")
@@ -3265,7 +3265,100 @@ elif current_view == "Country Analysis":
                     
                     # Enhanced country insights with new data integration
                     st.subheader(f"🔍 IPv6 Insights for {selected_country}")
-                    
+
+                    # Get Cloudflare country-specific traffic data
+                    country_code = data_collector.get_country_code_from_name(selected_country)
+                    cloudflare_country_data = None
+                    if country_code:
+                        cloudflare_country_data = data_collector.get_cloudflare_country_stats(country_code)
+
+                        # Display Cloudflare traffic data if available
+                        if cloudflare_country_data and 'error' not in cloudflare_country_data:
+                            st.markdown("#### ☁️ Cloudflare Radar Traffic Analysis")
+                            cf_col1, cf_col2, cf_col3 = st.columns(3)
+
+                            with cf_col1:
+                                st.metric(
+                                    "IPv6 Traffic (Cloudflare)",
+                                    f"{cloudflare_country_data.get('ipv6_percentage', 0):.1f}%",
+                                    delta="Last 7 days"
+                                )
+
+                            with cf_col2:
+                                st.metric(
+                                    "IPv4 Traffic (Cloudflare)",
+                                    f"{cloudflare_country_data.get('ipv4_percentage', 0):.1f}%",
+                                    delta="Last 7 days"
+                                )
+
+                            with cf_col3:
+                                # Compare Facebook vs Cloudflare
+                                diff = cloudflare_country_data.get('ipv6_percentage', 0) - selected_data['ipv6_percentage']
+                                st.metric(
+                                    "Difference",
+                                    f"{abs(diff):.1f}%",
+                                    delta="CF vs FB data"
+                                )
+
+                            st.caption(f"📊 **Source**: {cloudflare_country_data.get('source', 'Cloudflare Radar')} - Real-time HTTP traffic analysis · [View on Cloudflare Radar]({cloudflare_country_data.get('url', '')})")
+
+                            # Add visualization comparing data sources
+                            import pandas as pd
+                            import plotly.graph_objects as go
+
+                            comparison_data = pd.DataFrame({
+                                'Source': ['Facebook', 'Cloudflare', 'Facebook', 'Cloudflare'],
+                                'Protocol': ['IPv6', 'IPv6', 'IPv4', 'IPv4'],
+                                'Percentage': [
+                                    selected_data['ipv6_percentage'],
+                                    cloudflare_country_data.get('ipv6_percentage', 0),
+                                    100 - selected_data['ipv6_percentage'],
+                                    cloudflare_country_data.get('ipv4_percentage', 0)
+                                ]
+                            })
+
+                            fig = go.Figure()
+
+                            # Add Facebook data
+                            fig.add_trace(go.Bar(
+                                name='Facebook',
+                                x=['IPv6', 'IPv4'],
+                                y=[selected_data['ipv6_percentage'], 100 - selected_data['ipv6_percentage']],
+                                marker_color=['#3b5998', '#8b9dc3'],
+                                text=[f"{selected_data['ipv6_percentage']:.1f}%", f"{100 - selected_data['ipv6_percentage']:.1f}%"],
+                                textposition='auto',
+                            ))
+
+                            # Add Cloudflare data
+                            fig.add_trace(go.Bar(
+                                name='Cloudflare',
+                                x=['IPv6', 'IPv4'],
+                                y=[cloudflare_country_data.get('ipv6_percentage', 0), cloudflare_country_data.get('ipv4_percentage', 0)],
+                                marker_color=['#f38020', '#fbb040'],
+                                text=[f"{cloudflare_country_data.get('ipv6_percentage', 0):.1f}%", f"{cloudflare_country_data.get('ipv4_percentage', 0):.1f}%"],
+                                textposition='auto',
+                            ))
+
+                            fig.update_layout(
+                                title=f"IPv6 vs IPv4 Traffic Comparison - {selected_country}",
+                                xaxis_title="Protocol",
+                                yaxis_title="Percentage",
+                                barmode='group',
+                                height=400,
+                                showlegend=True,
+                                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+                            )
+
+                            st.plotly_chart(fig, use_container_width=True)
+
+                            # Add explanation of the difference
+                            st.info(f"""
+                            **Understanding the Data Sources**:
+                            - **Facebook**: {selected_data['ipv6_percentage']}% - Based on users accessing Facebook services
+                            - **Cloudflare**: {cloudflare_country_data.get('ipv6_percentage', 0):.1f}% - Based on HTTP requests to Cloudflare's global network
+                            - Different measurement methodologies can show varying results, providing complementary perspectives on IPv6 adoption
+                            """)
+
                     # Get enhanced regional context
                     try:
                         cloudflare_data = data_collector.get_cloudflare_radar_stats()
@@ -3324,7 +3417,18 @@ elif current_view == "Country Analysis":
                         traffic_insights = cloudflare_data.get('traffic_insights', {}) if cloudflare_data else {}
                         if traffic_insights.get('mobile_advantage'):
                             insights.append(f"Traffic pattern: {traffic_insights['mobile_advantage']}")
-                            
+
+                        # Add country-specific Cloudflare insights
+                        if cloudflare_country_data and 'error' not in cloudflare_country_data:
+                            cf_ipv6 = cloudflare_country_data.get('ipv6_percentage', 0)
+                            fb_ipv6 = selected_data['ipv6_percentage']
+
+                            if abs(cf_ipv6 - fb_ipv6) > 10:
+                                if cf_ipv6 > fb_ipv6:
+                                    insights.append(f"Cloudflare data shows {cf_ipv6:.1f}% IPv6 traffic, suggesting broader web traffic has higher IPv6 adoption than social media users")
+                                else:
+                                    insights.append(f"Facebook users show higher IPv6 adoption ({fb_ipv6:.1f}%) compared to general web traffic ({cf_ipv6:.1f}%), indicating mobile-first usage patterns")
+
                         for insight in insights:
                             st.write(f"• {insight}")
                             
@@ -4030,7 +4134,7 @@ elif current_view == "Data Sources":
         },
         {
             "name": "Cloudflare Radar IPv6 Report",
-            "url": "https://radar.cloudflare.com/reports/ipv6",
+            "url": "https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics",
             "description": "Global IPv6 adoption analysis based on traffic to Cloudflare's network with country-level insights and mobile traffic data",
             "data_types": ["HTTP traffic IPv6 percentage", "Country-level adoption", "Mobile vs desktop comparison", "Geographic visualization"],
             "update_frequency": "Monthly"

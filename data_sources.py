@@ -464,7 +464,7 @@ class DataCollector:
                             'data_points': len(ipv6_values),
                             'last_updated': datetime.now().isoformat(),
                             'source': 'Cloudflare Radar API (Live)',
-                            'url': 'https://radar.cloudflare.com/reports/ipv6',
+                            'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
                             'api_endpoint': url
                         }
 
@@ -480,7 +480,7 @@ class DataCollector:
             logger.info(f"Using Cloudflare fallback data: {e}")
 
             # Fallback data based on recent Cloudflare Radar reports
-            # Source: https://radar.cloudflare.com/reports/ipv6 (viewed October 2025)
+            # Source: https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics (viewed October 2025)
             return {
                 'ipv6_percentage': 36.0,
                 'global_ipv6_percentage': 36.0,
@@ -491,7 +491,7 @@ class DataCollector:
                 'note': 'Set CLOUDFLARE_API_KEY environment variable for live API data',
                 'last_updated': datetime.now().isoformat(),
                 'source': 'Cloudflare Radar (estimated)',
-                'url': 'https://radar.cloudflare.com/reports/ipv6',
+                'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
                 'api_endpoint': 'https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w'
             }
 
@@ -499,6 +499,107 @@ class DataCollector:
     def get_cloudflare_stats(_self) -> Dict[str, Any]:
         """Alias for get_cloudflare_radar_stats for compatibility"""
         return _self.get_cloudflare_radar_stats()
+
+    def get_country_code_from_name(_self, country_name: str) -> str:
+        """
+        Convert country name to ISO 3166-1 alpha-2 country code
+
+        Args:
+            country_name: Full country name (e.g., 'United States', 'France')
+
+        Returns:
+            Two-letter ISO country code (e.g., 'US', 'FR') or empty string if not found
+        """
+        # Common country name to ISO code mapping
+        country_mapping = {
+            'UNITED STATES': 'US', 'USA': 'US', 'UNITED STATES OF AMERICA': 'US',
+            'UNITED KINGDOM': 'GB', 'UK': 'GB', 'GREAT BRITAIN': 'GB',
+            'GERMANY': 'DE', 'FRANCE': 'FR', 'INDIA': 'IN', 'CHINA': 'CN',
+            'JAPAN': 'JP', 'SOUTH KOREA': 'KR', 'KOREA': 'KR', 'REPUBLIC OF KOREA': 'KR',
+            'BRAZIL': 'BR', 'CANADA': 'CA', 'AUSTRALIA': 'AU', 'RUSSIA': 'RU',
+            'SPAIN': 'ES', 'ITALY': 'IT', 'MEXICO': 'MX', 'INDONESIA': 'ID',
+            'NETHERLANDS': 'NL', 'SAUDI ARABIA': 'SA', 'TURKEY': 'TR',
+            'SWITZERLAND': 'CH', 'POLAND': 'PL', 'BELGIUM': 'BE', 'SWEDEN': 'SE',
+            'NORWAY': 'NO', 'AUSTRIA': 'AT', 'IRELAND': 'IE', 'DENMARK': 'DK',
+            'FINLAND': 'FI', 'SINGAPORE': 'SG', 'THAILAND': 'TH', 'MALAYSIA': 'MY',
+            'PHILIPPINES': 'PH', 'VIETNAM': 'VN', 'HONG KONG': 'HK',
+            'NEW ZEALAND': 'NZ', 'ARGENTINA': 'AR', 'COLOMBIA': 'CO',
+            'CHILE': 'CL', 'PERU': 'PE', 'SOUTH AFRICA': 'ZA', 'EGYPT': 'EG',
+            'NIGERIA': 'NG', 'KENYA': 'KE', 'GREECE': 'GR', 'PORTUGAL': 'PT',
+            'CZECH REPUBLIC': 'CZ', 'ROMANIA': 'RO', 'HUNGARY': 'HU',
+            'UKRAINE': 'UA', 'ISRAEL': 'IL', 'UAE': 'AE', 'UNITED ARAB EMIRATES': 'AE',
+            'PAKISTAN': 'PK', 'BANGLADESH': 'BD', 'TAIWAN': 'TW'
+        }
+
+        country_upper = country_name.upper().strip()
+        return country_mapping.get(country_upper, '')
+
+    @st.cache_data(ttl=86400, max_entries=250)  # Cache for 24 hours, up to 250 countries
+    def get_cloudflare_country_stats(_self, country_code: str) -> Dict[str, Any]:
+        """
+        Fetch country-specific IPv6 statistics from Cloudflare Radar API
+
+        Args:
+            country_code: ISO 3166-1 alpha-2 country code (e.g., 'US', 'FR', 'IN')
+
+        Returns:
+            Dict containing country-specific IPv6 traffic statistics
+        """
+        import os
+
+        try:
+            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+
+            if api_key and country_code:
+                # Cloudflare Radar API endpoint for country-specific IPv6 data
+                url = f"https://api.cloudflare.com/client/v4/radar/http/summary/ip_version?location={country_code.upper()}&dateRange=7d"
+
+                headers = {
+                    'Authorization': f'Bearer {api_key}'
+                }
+
+                response = _self.session.get(url, headers=headers, timeout=10)
+                response.raise_for_status()
+
+                data = response.json()
+
+                if data.get('success') and 'result' in data:
+                    result = data['result']
+                    summary = result.get('summary_0', {})
+
+                    # Extract IPv4 and IPv6 percentages
+                    ipv4_pct = summary.get('IPv4', 0)
+                    ipv6_pct = summary.get('IPv6', 0)
+
+                    return {
+                        'country_code': country_code.upper(),
+                        'ipv6_percentage': round(ipv6_pct, 2),
+                        'ipv4_percentage': round(ipv4_pct, 2),
+                        'measurement_type': 'HTTP request traffic to Cloudflare network',
+                        'time_period': 'Last 7 days',
+                        'description': f'IPv6 traffic analysis for {country_code.upper()} from Cloudflare Radar',
+                        'last_updated': datetime.now().isoformat(),
+                        'source': 'Cloudflare Radar API (Live)',
+                        'url': f'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
+                        'api_endpoint': url
+                    }
+                else:
+                    logger.warning(f"Cloudflare Radar API returned unexpected structure for {country_code}")
+                    raise ValueError("Unexpected API response structure")
+            else:
+                if not api_key:
+                    logger.info("No CLOUDFLARE_API_KEY set, cannot fetch country-specific data")
+                raise ValueError("No API key configured or invalid country code")
+
+        except Exception as e:
+            logger.info(f"Could not fetch Cloudflare country data for {country_code}: {e}")
+            return {
+                'country_code': country_code.upper(),
+                'error': 'Country-specific data requires CLOUDFLARE_API_KEY',
+                'note': 'Set CLOUDFLARE_API_KEY environment variable for country-level traffic data',
+                'source': 'Cloudflare Radar',
+                'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics'
+            }
 
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_nist_usgv6_deployment_stats(_self) -> Dict[str, Any]:
