@@ -48,42 +48,93 @@ chart_generator = st.session_state.chart_generator
 # IPv6.army exact color scheme matching https://www.ipv6.army
 st.markdown("""
 <style>
-    /* IPv6.army exact color scheme - light mode */
+    /* Dark theme with light text and orange/yellow accents */
     :root {
-        --text-color: #343a40;
-        --text-secondary-color: #6c757d;
-        --background-color: #eaedf0;
-        --secondary-background-color: #64ffda1a;
-        --primary-color: #007bff;
-        --secondary-color: #f8f9fa;
-        --border-color: rgba(0, 0, 0, 0.1);
+        --text-color: #e4e6eb;
+        --text-secondary-color: #b0b3b8;
+        --background-color: #18191a;
+        --secondary-background-color: #242526;
+        --primary-color: #ff8c00;
+        --primary-hover: #ffa500;
+        --secondary-color: #242526;
+        --border-color: #3a3b3c;
     }
 
-    /* Apply IPv6.army styling to Streamlit elements */
+    /* Apply styling to Streamlit elements */
     .stApp {
-        background-color: var(--background-color);
-        color: var(--text-color);
+        background-color: var(--background-color) !important;
     }
 
     .main {
-        background-color: var(--background-color);
-        color: var(--text-color);
+        background-color: var(--background-color) !important;
+        color: var(--text-color) !important;
     }
 
     section[data-testid="stSidebar"] {
-        background-color: var(--secondary-color);
+        background-color: var(--secondary-background-color) !important;
     }
 
     section[data-testid="stSidebar"] > div {
-        background-color: var(--secondary-color);
+        background-color: var(--secondary-background-color) !important;
     }
 
-    /* Override Streamlit's default text colors */
-    .stMarkdown, p, span, div {
+    /* Fix dropdown and select elements - dark theme */
+    .stSelectbox > div > div {
+        background-color: var(--secondary-background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    .stSelectbox label {
+        color: var(--text-color) !important;
+    }
+
+    /* Dropdown menu items - dark theme */
+    div[data-baseweb="select"] > div {
+        background-color: var(--secondary-background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    ul[role="listbox"] {
+        background-color: var(--secondary-background-color) !important;
+    }
+
+    li[role="option"] {
+        color: var(--text-color) !important;
+        background-color: var(--secondary-background-color) !important;
+    }
+
+    li[role="option"]:hover {
+        background-color: #3a3b3c !important;
+    }
+
+    /* Override ALL text colors for readability */
+    .stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown div,
+    p, span, div, label, input, textarea {
         color: var(--text-color) !important;
     }
 
     h1, h2, h3, h4, h5, h6 {
+        color: var(--text-color) !important;
+    }
+
+    /* Expander headers */
+    .streamlit-expanderHeader {
+        color: var(--text-color) !important;
+        background-color: var(--secondary-background-color) !important;
+    }
+
+    /* Dataframe text - light on dark */
+    .dataframe {
+        color: var(--text-color) !important;
+    }
+
+    .dataframe thead th {
+        background-color: var(--secondary-background-color) !important;
+        color: var(--text-color) !important;
+    }
+
+    .dataframe tbody td {
+        background-color: var(--background-color) !important;
         color: var(--text-color) !important;
     }
     
@@ -233,12 +284,12 @@ st.markdown("""
 # Scalable top menu bar
 st.markdown("""
 <style>
-    /* Scalable top menu bar */
+    /* Scalable top menu bar with orange/yellow gradient */
     .menu-bar {
-        background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+        background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
         padding: 0;
         margin: -1rem -1rem 2rem -1rem;
-        box-shadow: 0 4px 12px rgba(0,123,255,0.2);
+        box-shadow: 0 4px 12px rgba(255,140,0,0.3);
         position: sticky;
         top: 0;
         z-index: 1000;
@@ -2003,8 +2054,8 @@ elif current_view == "Extended Data Sources":
     </style>
     """, unsafe_allow_html=True)
     
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13 = st.tabs([
-        "Matrix", "Test.com", "RIPE", "Pulse", "ARIN", "LACNIC", "APNIC", "Cloudflare", "AFRINIC", "NIST", "Enabled", "Bogons", "Facebook"
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14, tab15, tab16, tab17, tab18, tab19 = st.tabs([
+        "Matrix", "Test.com", "RIPE", "Pulse", "ARIN", "LACNIC", "APNIC", "Cloudflare", "AFRINIC", "NIST", "Enabled", "Bogons", "Facebook", "CAIDA", "HE.NET", "RIPE Atlas", "IPv6 Launch", "CIDR Report", "Tranco"
     ])
     
     with tab1:
@@ -3092,14 +3143,435 @@ elif current_view == "Extended Data Sources":
         except Exception as e:
             st.error(f"Error loading Facebook IPv6 data: {str(e)}")
             st.info("Please check the data source connection and try again.")
-    
+
+    with tab14:
+        st.subheader("🔬 CAIDA - AS-Level IPv6 Topology & Measurements")
+        try:
+            caida_topology = data_collector.get_caida_ipv6_topology_stats()
+            caida_as_relations = data_collector.get_caida_ipv6_as_relationships()
+
+            if 'error' not in caida_topology:
+                st.write(f"**Infrastructure**: {caida_topology.get('measurement_infrastructure', 'CAIDA Archipelago')}")
+                st.write(f"**Description**: {caida_topology.get('description', 'IPv6 topology measurements')}")
+                st.write(f"**Measurement Type**: {caida_topology.get('measurement_type', 'Active probing')}")
+
+                # Deployment scale metrics
+                st.subheader("📊 Measurement Infrastructure Scale")
+                deployment = caida_topology.get('deployment_scale', {})
+
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    st.metric(
+                        "Active Monitors",
+                        deployment.get('active_monitors', '~200'),
+                        delta="Global vantage points"
+                    )
+
+                with col2:
+                    st.metric(
+                        "Probe Frequency",
+                        deployment.get('probe_frequency', 'Daily'),
+                        delta="Per prefix"
+                    )
+
+                with col3:
+                    st.metric(
+                        "Historical Data",
+                        deployment.get('data_volume', '7+ TB'),
+                        delta="Since 2007"
+                    )
+
+                # Available datasets
+                datasets = caida_topology.get('available_datasets', [])
+                if datasets:
+                    st.subheader("📚 Available Datasets")
+                    for dataset in datasets:
+                        st.write(f"  • {dataset}")
+
+                # Research applications
+                applications = caida_topology.get('research_applications', [])
+                if applications:
+                    st.subheader("🔬 Research Applications")
+                    for app in applications:
+                        st.write(f"  • {app}")
+
+                # 2025 Research highlight
+                research_2025 = caida_topology.get('recent_research_2025', {})
+                if research_2025:
+                    st.subheader("🏆 2025 Research Highlight")
+                    st.success(f"**{research_2025.get('title', '')}**")
+                    st.write(f"**Venue**: {research_2025.get('venue', '')}")
+                    st.write(f"**Achievement**: {research_2025.get('achievement', '')}")
+                    st.write(f"**Scale**: {research_2025.get('scale', '')}")
+
+                st.caption(f"📄 **Source**: {caida_topology.get('source', 'CAIDA')} - [{caida_topology.get('url', '')}]({caida_topology.get('url', '')})")
+
+            # AS Relationships section
+            if 'error' not in caida_as_relations:
+                st.subheader("🔗 IPv6 AS Relationship Analysis")
+
+                st.write(f"**Dataset**: {caida_as_relations.get('dataset_name', 'CAIDA IPv6 AS Links')}")
+                st.write(f"**Period**: {caida_as_relations.get('measurement_period', 'Dec 2008 - Present')}")
+                st.write(f"**Update Frequency**: {caida_as_relations.get('data_frequency', 'Daily')}")
+
+                # Relationship types
+                rel_types = caida_as_relations.get('relationship_types', [])
+                if rel_types:
+                    st.subheader("🔄 AS Relationship Types")
+                    col1, col2, col3 = st.columns(3)
+
+                    with col1:
+                        if len(rel_types) > 0:
+                            st.info(f"**{rel_types[0]}**")
+                    with col2:
+                        if len(rel_types) > 1:
+                            st.info(f"**{rel_types[1]}**")
+                    with col3:
+                        if len(rel_types) > 2:
+                            st.info(f"**{rel_types[2]}**")
+
+                # Research insights
+                insights = caida_as_relations.get('research_insights', {})
+                if insights:
+                    st.subheader("📈 Research Insights")
+                    for key, value in insights.items():
+                        st.write(f"  • **{key.replace('_', ' ').title()}**: {value}")
+
+                # Data format and applications
+                col_a, col_b = st.columns(2)
+
+                with col_a:
+                    st.subheader("📁 Data Format")
+                    data_format = caida_as_relations.get('data_format', {})
+                    for key, value in data_format.items():
+                        st.write(f"  • **{key.replace('_', ' ').title()}**: {value}")
+
+                with col_b:
+                    st.subheader("🎯 Applications")
+                    apps = caida_as_relations.get('applications', [])
+                    for app in apps[:5]:  # Show top 5
+                        st.write(f"  • {app}")
+
+                # Download information
+                download = caida_as_relations.get('download_info', {})
+                if download:
+                    st.subheader("⬇️ Data Access")
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        st.write(f"**Public Access**: {download.get('public_access', 'N/A')}")
+                        st.write(f"**Registration**: {download.get('registration', 'N/A')}")
+
+                    with col2:
+                        st.write(f"**Format**: {download.get('format', 'N/A')}")
+                        st.write(f"**Size**: {download.get('size', 'N/A')}")
+
+                st.caption(f"📄 **AS Links Dataset**: [{caida_as_relations.get('url', '')}]({caida_as_relations.get('url', '')})")
+
+        except Exception as e:
+            st.error(f"Error loading CAIDA data: {str(e)}")
+            st.info("CAIDA provides comprehensive AS-level IPv6 topology data for research purposes.")
+
+    with tab15:
+        st.subheader("🌐 Hurricane Electric (HE.NET) - Global IPv6 Infrastructure")
+        try:
+            he_stats = data_collector.get_hurricane_electric_stats()
+
+            if 'error' not in he_stats:
+                st.write(f"**Description**: {he_stats.get('description', 'Hurricane Electric IPv6 statistics')}")
+                st.write(f"**Network Type**: {he_stats.get('network_type', 'Global IPv6 backbone')}")
+
+                # Key metrics
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    asns_ipv6 = he_stats.get('asns_with_ipv6', 'N/A')
+                    st.metric(
+                        "ASNs with IPv6",
+                        asns_ipv6,
+                        delta="Autonomous Systems"
+                    )
+
+                with col2:
+                    countries = he_stats.get('countries_ipv6_presence', 'N/A')
+                    st.metric(
+                        "Country Presence",
+                        countries,
+                        delta="Global coverage"
+                    )
+
+                with col3:
+                    prefixes = he_stats.get('ipv6_prefix_count', 'N/A')
+                    st.metric(
+                        "IPv6 Prefixes",
+                        prefixes,
+                        delta="Announced prefixes"
+                    )
+
+                # Top countries
+                top_countries = he_stats.get('top_countries_deployment', [])
+                if top_countries:
+                    st.subheader("🏆 Top Countries by IPv6 Deployment")
+                    for country in top_countries[:5]:
+                        st.write(f"  • {country}")
+
+                # Network characteristics
+                network_char = he_stats.get('network_characteristics', {})
+                if network_char:
+                    st.subheader("🔗 Network Characteristics")
+                    for key, value in network_char.items():
+                        st.write(f"  • **{key.replace('_', ' ').title()}**: {value}")
+
+                st.caption(f"📄 **Source**: {he_stats.get('source', 'Hurricane Electric')} - {he_stats.get('url', '')}")
+            else:
+                st.warning(f"⚠️ {he_stats['error']}")
+
+        except Exception as e:
+            st.error(f"Error loading Hurricane Electric data: {str(e)}")
+
+    with tab16:
+        st.subheader("📡 RIPE Atlas - Real-World IPv6 Connectivity")
+        try:
+            atlas_stats = data_collector.get_ripe_atlas_stats()
+
+            if 'error' not in atlas_stats:
+                st.write(f"**Description**: {atlas_stats.get('description', 'RIPE Atlas measurements')}")
+                st.write(f"**Measurement Type**: {atlas_stats.get('measurement_type', 'Active probes')}")
+
+                # Key metrics
+                col1, col2, col3, col4 = st.columns(4)
+
+                with col1:
+                    total_probes = atlas_stats.get('total_probes', '12,000+')
+                    st.metric(
+                        "Active Probes",
+                        total_probes,
+                        delta="Global network"
+                    )
+
+                with col2:
+                    dual_stack = atlas_stats.get('dual_stack_percentage', 'N/A')
+                    st.metric(
+                        "Dual-Stack Probes",
+                        dual_stack,
+                        delta="IPv4+IPv6 capable"
+                    )
+
+                with col3:
+                    ipv6_only = atlas_stats.get('ipv6_only_percentage', 'N/A')
+                    st.metric(
+                        "IPv6-Only Probes",
+                        ipv6_only,
+                        delta="Pure IPv6"
+                    )
+
+                with col4:
+                    countries = atlas_stats.get('countries_covered', '178')
+                    st.metric(
+                        "Countries",
+                        countries,
+                        delta="Geographic reach"
+                    )
+
+                # Measurement insights
+                insights = atlas_stats.get('measurement_insights', [])
+                if insights:
+                    st.subheader("📊 Measurement Insights")
+                    for insight in insights:
+                        st.write(f"  • {insight}")
+
+                # Probe distribution
+                probe_dist = atlas_stats.get('probe_distribution', {})
+                if probe_dist:
+                    st.subheader("🌍 Probe Distribution")
+                    for key, value in probe_dist.items():
+                        st.write(f"  • **{key}**: {value}")
+
+                st.caption(f"📄 **Source**: {atlas_stats.get('source', 'RIPE Atlas')} - {atlas_stats.get('url', '')}")
+            else:
+                st.warning(f"⚠️ {atlas_stats['error']}")
+
+        except Exception as e:
+            st.error(f"Error loading RIPE Atlas data: {str(e)}")
+
+    with tab17:
+        st.subheader("🚀 World IPv6 Launch - ISP Deployment Tracking")
+        try:
+            launch_stats = data_collector.get_world_ipv6_launch_stats()
+
+            if 'error' not in launch_stats:
+                st.write(f"**Description**: {launch_stats.get('description', 'World IPv6 Launch tracking')}")
+                st.write(f"**Tracking Since**: {launch_stats.get('tracking_since', '2012')}")
+
+                # Key metrics
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    participating_isps = launch_stats.get('participating_isps', 'N/A')
+                    st.metric(
+                        "Participating ISPs",
+                        participating_isps,
+                        delta="Network operators"
+                    )
+
+                with col2:
+                    deployment_avg = launch_stats.get('average_deployment', 'N/A')
+                    st.metric(
+                        "Average Deployment",
+                        deployment_avg,
+                        delta="ISP IPv6 support"
+                    )
+
+                with col3:
+                    major_isps = launch_stats.get('major_isps_100_percent', 'N/A')
+                    st.metric(
+                        "100% Deployment",
+                        major_isps,
+                        delta="Full IPv6 ISPs"
+                    )
+
+                # Top ISPs
+                top_isps = launch_stats.get('top_isps', [])
+                if top_isps:
+                    st.subheader("🏆 Leading ISPs by IPv6 Deployment")
+                    for isp in top_isps[:10]:
+                        st.write(f"  • {isp}")
+
+                # Historical milestones
+                milestones = launch_stats.get('historical_milestones', [])
+                if milestones:
+                    st.subheader("📅 Historical Milestones")
+                    for milestone in milestones:
+                        st.write(f"  • {milestone}")
+
+                st.caption(f"📄 **Source**: {launch_stats.get('source', 'World IPv6 Launch')} - {launch_stats.get('url', '')}")
+            else:
+                st.warning(f"⚠️ {launch_stats['error']}")
+
+        except Exception as e:
+            st.error(f"Error loading World IPv6 Launch data: {str(e)}")
+
+    with tab18:
+        st.subheader("📊 CIDR Report - Weekly BGP Routing Analysis")
+        try:
+            cidr_stats = data_collector.get_cidr_report_stats()
+
+            if 'error' not in cidr_stats:
+                st.write(f"**Description**: {cidr_stats.get('description', 'CIDR Report BGP analysis')}")
+                st.write(f"**Update Frequency**: {cidr_stats.get('update_frequency', 'Weekly')}")
+
+                # Key metrics
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    ipv6_routes = cidr_stats.get('ipv6_route_count', 'N/A')
+                    st.metric(
+                        "IPv6 Routes",
+                        ipv6_routes,
+                        delta="BGP routing table"
+                    )
+
+                with col2:
+                    weekly_growth = cidr_stats.get('weekly_growth', 'N/A')
+                    st.metric(
+                        "Weekly Growth",
+                        weekly_growth,
+                        delta="New routes"
+                    )
+
+                with col3:
+                    total_asns = cidr_stats.get('total_asns', 'N/A')
+                    st.metric(
+                        "Total ASNs",
+                        total_asns,
+                        delta="Announcing IPv6"
+                    )
+
+                # Routing statistics
+                routing_stats = cidr_stats.get('routing_statistics', {})
+                if routing_stats:
+                    st.subheader("🔀 Routing Statistics")
+                    for key, value in routing_stats.items():
+                        st.write(f"  • **{key.replace('_', ' ').title()}**: {value}")
+
+                # Weekly trends
+                trends = cidr_stats.get('weekly_trends', [])
+                if trends:
+                    st.subheader("📈 Weekly Trends")
+                    for trend in trends:
+                        st.write(f"  • {trend}")
+
+                st.caption(f"📄 **Source**: {cidr_stats.get('source', 'CIDR Report')} - {cidr_stats.get('url', '')}")
+            else:
+                st.warning(f"⚠️ {cidr_stats['error']}")
+
+        except Exception as e:
+            st.error(f"Error loading CIDR Report data: {str(e)}")
+
+    with tab19:
+        st.subheader("🌐 Tranco Top Sites - Website IPv6 DNS Support")
+        try:
+            tranco_stats = data_collector.get_tranco_ipv6_stats()
+
+            if 'error' not in tranco_stats:
+                st.write(f"**Description**: {tranco_stats.get('note', 'Top website IPv6 analysis')}")
+
+                # Key metrics
+                col1, col2, col3 = st.columns(3)
+
+                with col1:
+                    total_checked = tranco_stats.get('total_domains_checked', 0)
+                    st.metric(
+                        "Domains Analyzed",
+                        total_checked,
+                        delta="Top websites"
+                    )
+
+                with col2:
+                    ipv6_enabled = tranco_stats.get('ipv6_enabled_count', 0)
+                    st.metric(
+                        "IPv6 Enabled",
+                        ipv6_enabled,
+                        delta="With AAAA records"
+                    )
+
+                with col3:
+                    ipv6_pct = tranco_stats.get('ipv6_percentage', 0)
+                    st.metric(
+                        "IPv6 Support",
+                        f"{ipv6_pct}%",
+                        delta="DNS availability"
+                    )
+
+                # Domain results
+                domain_results = tranco_stats.get('domain_results', [])
+                if domain_results:
+                    st.subheader("🏆 Sample Top Domains IPv6 Status")
+
+                    # Create DataFrame
+                    import pandas as pd
+                    df = pd.DataFrame(domain_results[:20])  # Show top 20
+                    if not df.empty:
+                        df['IPv6 Status'] = df['ipv6_enabled'].apply(lambda x: '✅ Yes' if x else '❌ No')
+                        display_df = df[['domain', 'IPv6 Status']]
+                        display_df.columns = ['Domain', 'IPv6 Support']
+                        st.dataframe(display_df, use_container_width=True)
+
+                st.caption(f"📄 **Source**: {tranco_stats.get('source', 'Tranco Top Sites')} - {tranco_stats.get('url', '')}")
+            else:
+                st.warning(f"⚠️ {tranco_stats['error']}")
+
+        except Exception as e:
+            st.error(f"Error loading Tranco data: {str(e)}")
+
     # Summary section
     st.subheader("📈 Extended Sources Summary")
     st.markdown("""
     These additional data sources provide:
-    
+
     - **Real-time connectivity testing** (IPv6 Matrix)
-    - **User protocol preferences** (IPv6-test.com) 
+    - **User protocol preferences** (IPv6-test.com)
     - **Regional allocation patterns** (RIPE NCC, LACNIC, APNIC, AFRINIC)
     - **Technology adoption trends** (Internet Society Pulse)
     - **Resource management statistics** (ARIN current & historical)
@@ -3107,10 +3579,20 @@ elif current_view == "Extended Data Sources":
     - **Federal deployment monitoring** (NIST USGv6)
     - **Network enablement tracking** (IPv6 Enabled Statistics)
     - **Security prefix monitoring** (Team Cymru Bogons)
-    
-    Combined with our primary sources, this creates the most comprehensive IPv6 analysis available,
+    - **AS-level topology & infrastructure** (CAIDA Archipelago - 200+ vantage points)
+    - **Global IPv6 backbone statistics** (Hurricane Electric - HE.NET)
+    - **Real-world probe measurements** (RIPE Atlas - 12,000+ probes in 178 countries)
+    - **ISP deployment tracking** (World IPv6 Launch - since 2012)
+    - **Weekly BGP routing analysis** (CIDR Report)
+    - **Top website IPv6 DNS support** (Tranco Top Sites)
+
+    Combined with our primary sources, this creates the **most comprehensive IPv6 analysis available**,
     covering all major Regional Internet Registries (RIRs), specialized measurement platforms,
-    network security data, and real-time deployment tracking across 75,000+ monitored networks.
+    network security data, AS-level topology research from CAIDA's 200+ global vantage points,
+    real-world connectivity from RIPE Atlas's 12,000+ probes, Hurricane Electric's global backbone infrastructure,
+    ISP deployment tracking, weekly BGP routing analysis, and real-time deployment tracking across 75,000+ monitored networks.
+
+    **Total Data Sources**: 19 specialized IPv6 measurement and statistics platforms
     """)
 
 # Country Analysis Page
