@@ -1,7 +1,7 @@
 
 # IPv6 Statistics Dashboard
 
-A high-performance Streamlit web application for visualizing global IPv6 adoption metrics, BGP statistics, and historical trends. Automatically fetches data from 15+ authoritative sources including Google, Facebook, Cloudflare, APNIC, RIPE, ARIN, and more.
+A high-performance Streamlit web application for visualizing global IPv6 adoption metrics, BGP statistics, and historical trends. Automatically fetches data from 20+ authoritative sources including Google, Facebook, Cloudflare, APNIC, RIPE, ARIN, Hurricane Electric, RIPE Atlas, World IPv6 Launch, CIDR Report, and more.
 
 ![Dashboard Preview](img/v6stats-clouddash.png)
 

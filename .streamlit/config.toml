@@ -5,11 +5,11 @@ address = "127.0.0.1"
 port = 8501
 
 [theme]
-base = "light"
-primaryColor = "#007bff"
-backgroundColor = "#eaedf0"
-secondaryBackgroundColor = "#f8f9fa"
-textColor = "#343a40"
+base = "dark"
+primaryColor = "#64ffda"
+backgroundColor = "#18191a"
+secondaryBackgroundColor = "#212529"
+textColor = "#e4e6eb"
 
 [client]
 toolbarMode = "minimal"

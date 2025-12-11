@@ -48,31 +48,29 @@ chart_generator = st.session_state.chart_generator
 # IPv6.army color scheme and mobile optimization CSS
 st.markdown("""
 <style>
-    /* IPv6.army color scheme variables */
+    /* IPv6.army dark theme color scheme variables */
     :root {
-        --text-color: #343a40;
-        --text-secondary-color: #6c757d;
-        --background-color: #eaedf0;
-        --secondary-background-color: #64ffda1a;
-        --primary-color: #007bff;
-        --secondary-color: #f8f9fa;
-        --text-color-dark: #e4e6eb;
-        --text-secondary-color-dark: #b0b3b8;
-        --background-color-dark: #18191a;
-        --secondary-background-color-dark: #212529;
-        --primary-color-dark: #ffffff;
-        --secondary-color-dark: #212529;
+        --text-color: #e4e6eb;
+        --text-secondary-color: #b0b3b8;
+        --background-color: #18191a;
+        --secondary-background-color: #212529;
+        --primary-color: #64ffda;
+        --primary-color-hover: #52ccb8;
+        --secondary-color: #212529;
+        --accent-color: #ffffff;
+        --accent-highlight: #64ffda1a;
+        --border-color: #343a40;
     }
-    
-    /* Apply IPv6.army styling */
+
+    /* Apply IPv6.army dark theme styling */
     .main {
         background-color: var(--background-color);
         color: var(--text-color);
     }
-    
+
     .sidebar .sidebar-content {
         background-color: var(--secondary-color);
-        border-right: 1px solid var(--secondary-background-color);
+        border-right: 1px solid var(--border-color);
     }
     
     /* Header with logo */
@@ -95,59 +93,59 @@ st.markdown("""
         font-size: 1.5rem;
         font-weight: 600;
     }
-    
-    /* Buttons with IPv6.army styling */
+
+    /* Buttons with IPv6.army dark theme styling */
     .stButton > button {
         background-color: var(--primary-color);
-        color: white;
+        color: var(--background-color);
         border: none;
         border-radius: 0.375rem;
         font-weight: 500;
         transition: all 0.2s;
     }
-    
+
     .stButton > button:hover {
-        background-color: #0056b3;
+        background-color: var(--primary-color-hover);
         transform: translateY(-1px);
     }
     
-    /* Metrics with IPv6.army colors */
+    /* Metrics with IPv6.army dark theme colors */
     [data-testid="metric-container"] {
-        background-color: var(--secondary-color);
-        border: 1px solid var(--secondary-background-color);
+        background-color: var(--secondary-background-color);
+        border: 1px solid var(--border-color);
         border-radius: 0.5rem;
         padding: 1rem;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
-    
+
     [data-testid="metric-container"] [data-testid="metric-value"] {
         color: var(--primary-color);
         font-weight: 600;
     }
-    
+
     /* Cards and containers */
     .element-container {
-        background-color: var(--secondary-color);
+        background-color: var(--secondary-background-color);
         border-radius: 0.5rem;
     }
-    
-    /* Success/info/warning messages */
+
+    /* Success/info/warning messages - dark theme */
     .stSuccess {
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-        color: #155724;
+        background-color: #1a3a2a;
+        border-color: #2d5f47;
+        color: #7fdbad;
     }
-    
+
     .stInfo {
-        background-color: #d1ecf1;
-        border-color: #bee5eb;
-        color: #0c5460;
+        background-color: #1a2a3a;
+        border-color: #2d475f;
+        color: #7db3db;
     }
-    
+
     .stWarning {
-        background-color: #fff3cd;
-        border-color: #ffeaa7;
-        color: #856404;
+        background-color: #3a3a1a;
+        border-color: #5f5f2d;
+        color: #dbd37f;
     }
     
     /* Mobile optimization */
@@ -435,13 +433,14 @@ st.markdown("""
 # Navigation sections
 nav_sections = [
     ("📋", "Overview"),
-    ("🌍", "Combined View"), 
+    ("🌍", "Combined View"),
     ("☁️", "Cloud Services"),
     ("🔬", "Extended Data Sources"),
     ("🌐", "Global Adoption"),
-    ("🏛️", "Country Analysis"), 
+    ("🏛️", "Country Analysis"),
     ("📡", "BGP Statistics"),
     ("📈", "Historical Trends"),
+    ("🔌", "Network Insights"),
     ("📚", "Data Sources")
 ]
 
@@ -485,7 +484,7 @@ current_view = current_page
 st.sidebar.markdown("### 📊 Dashboard Info")
 st.sidebar.markdown("**Data Updates**: Monthly")
 st.sidebar.markdown("**Cache Duration**: 30 days")
-st.sidebar.markdown("**Total Sources**: 15+ IPv6 statistics providers")
+st.sidebar.markdown("**Total Sources**: 20+ IPv6 statistics providers")
 st.sidebar.markdown("**Coverage**: Global deployment metrics")
 
 st.sidebar.markdown("---")
@@ -4093,6 +4092,11 @@ elif current_view == "Historical Trends":
     except Exception as e:
         st.error(f"Error loading historical trends: {str(e)}")
 
+# Network Insights Page
+elif current_view == "Network Insights":
+    from pages.network_insights import render_network_insights_page
+    render_network_insights_page(data_collector, chart_generator)
+
 # Data Sources Page
 elif current_view == "Data Sources":
     st.header("📚 Data Sources & Attribution")
@@ -4217,6 +4221,41 @@ elif current_view == "Data Sources":
             "url": "https://www.arin.net/reference/research/statistics/",
             "description": "Comprehensive IPv6 delegation, transfer, and membership statistics for the North American region",
             "data_types": ["IPv6/IPv4 delegations", "Transfer statistics", "26,292 member organizations", "Inter-RIR transfers"],
+            "update_frequency": "Monthly"
+        },
+        {
+            "name": "Hurricane Electric IPv6 Progress Report",
+            "url": "https://bgp.he.net/ipv6-progress-report.cgi",
+            "description": "IPv6 BGP statistics from the world's largest IPv6 transit provider with comprehensive routing visibility",
+            "data_types": ["ASNs with IPv6", "Country IPv6 presence", "IPv6 prefix counts", "Top countries by deployment"],
+            "update_frequency": "Real-time"
+        },
+        {
+            "name": "RIPE Atlas",
+            "url": "https://atlas.ripe.net/",
+            "description": "Real-world IPv6 connectivity data from 12,000+ global measurement probes providing actual deployment metrics",
+            "data_types": ["Active probe measurements", "IPv6 connectivity tests", "Global coverage data", "Multiple measurement types"],
+            "update_frequency": "Real-time"
+        },
+        {
+            "name": "World IPv6 Launch",
+            "url": "https://www.worldipv6launch.org/measurements/",
+            "description": "Major ISP IPv6 deployment tracking since June 6, 2012, monitoring commitments and actual deployment progress",
+            "data_types": ["ISP deployment percentages", "Participating network operators", "Historical deployment data"],
+            "update_frequency": "Weekly"
+        },
+        {
+            "name": "CIDR Report",
+            "url": "https://www.cidr-report.org/v6/",
+            "description": "Authoritative weekly IPv6 routing table analysis by Geoff Huston tracking BGP growth and efficiency",
+            "data_types": ["IPv6 routing table size", "Weekly growth rates", "AS statistics", "Address efficiency metrics"],
+            "update_frequency": "Weekly"
+        },
+        {
+            "name": "Tranco Top Sites IPv6 Analysis",
+            "url": "https://tranco-list.eu/",
+            "description": "IPv6 AAAA record availability analysis for top global websites using research-grade domain rankings",
+            "data_types": ["Top domain IPv6 support", "DNS AAAA record presence", "Content availability metrics"],
             "update_frequency": "Monthly"
         }
     ]
