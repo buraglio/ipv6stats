@@ -45,24 +45,21 @@ optimize_memory()
 data_collector = st.session_state.data_collector
 chart_generator = st.session_state.chart_generator
 
-# IPv6.army color scheme and mobile optimization CSS
+# IPv6.army exact color scheme matching https://www.ipv6.army
 st.markdown("""
 <style>
-    /* IPv6.army dark theme color scheme variables */
+    /* IPv6.army exact color scheme - light mode (default) */
     :root {
-        --text-color: #e4e6eb;
-        --text-secondary-color: #b0b3b8;
-        --background-color: #18191a;
-        --secondary-background-color: #212529;
-        --primary-color: #64ffda;
-        --primary-color-hover: #52ccb8;
-        --secondary-color: #212529;
-        --accent-color: #ffffff;
-        --accent-highlight: #64ffda1a;
-        --border-color: #343a40;
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+        --border-color: rgba(0, 0, 0, 0.1);
     }
 
-    /* Apply IPv6.army dark theme styling */
+    /* Apply IPv6.army styling */
     .main {
         background-color: var(--background-color);
         color: var(--text-color);
@@ -72,7 +69,7 @@ st.markdown("""
         background-color: var(--secondary-color);
         border-right: 1px solid var(--border-color);
     }
-    
+
     /* Header with logo */
     .logo-header {
         display: flex;
@@ -80,13 +77,13 @@ st.markdown("""
         margin-bottom: 1rem;
         padding: 0.5rem;
     }
-    
+
     .logo-header img {
         height: 60px;
         width: auto;
         margin-right: 1rem;
     }
-    
+
     .logo-header h1 {
         margin: 0;
         color: var(--primary-color);
@@ -94,10 +91,10 @@ st.markdown("""
         font-weight: 600;
     }
 
-    /* Buttons with IPv6.army dark theme styling */
+    /* Buttons with IPv6.army styling */
     .stButton > button {
         background-color: var(--primary-color);
-        color: var(--background-color);
+        color: white;
         border: none;
         border-radius: 0.375rem;
         font-weight: 500;
@@ -105,17 +102,17 @@ st.markdown("""
     }
 
     .stButton > button:hover {
-        background-color: var(--primary-color-hover);
+        background-color: #0056b3;
         transform: translateY(-1px);
     }
-    
-    /* Metrics with IPv6.army dark theme colors */
+
+    /* Metrics with IPv6.army colors */
     [data-testid="metric-container"] {
-        background-color: var(--secondary-background-color);
+        background-color: var(--secondary-color);
         border: 1px solid var(--border-color);
         border-radius: 0.5rem;
         padding: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     [data-testid="metric-container"] [data-testid="metric-value"] {
@@ -125,27 +122,27 @@ st.markdown("""
 
     /* Cards and containers */
     .element-container {
-        background-color: var(--secondary-background-color);
+        background-color: var(--secondary-color);
         border-radius: 0.5rem;
     }
 
-    /* Success/info/warning messages - dark theme */
+    /* Success/info/warning messages */
     .stSuccess {
-        background-color: #1a3a2a;
-        border-color: #2d5f47;
-        color: #7fdbad;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
     }
 
     .stInfo {
-        background-color: #1a2a3a;
-        border-color: #2d475f;
-        color: #7db3db;
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+        color: #0c5460;
     }
 
     .stWarning {
-        background-color: #3a3a1a;
-        border-color: #5f5f2d;
-        color: #dbd37f;
+        background-color: #fff3cd;
+        border-color: #ffeaa7;
+        color: #856404;
     }
     
     /* Mobile optimization */
