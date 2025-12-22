@@ -484,16 +484,17 @@ class DataCollector:
 
                 if data.get('success') and 'result' in data:
                     result = data['result']
-                    series = result.get('serie_0', {})
+                    # API structure: result['main']['IPv4'] and result['main']['IPv6']
+                    series = result.get('main', {})
 
-                    # Get the latest data point
+                    # Get the latest data point (values are strings in the API)
                     ipv4_values = series.get('IPv4', [])
                     ipv6_values = series.get('IPv6', [])
 
                     if ipv6_values and ipv4_values:
-                        # Calculate IPv6 percentage from latest data point
-                        latest_ipv4 = ipv4_values[-1] if ipv4_values else 0
-                        latest_ipv6 = ipv6_values[-1] if ipv6_values else 0
+                        # Calculate IPv6 percentage from latest data point (convert strings to float)
+                        latest_ipv4 = float(ipv4_values[-1]) if ipv4_values else 0
+                        latest_ipv6 = float(ipv6_values[-1]) if ipv6_values else 0
                         total = latest_ipv4 + latest_ipv6
 
                         ipv6_percentage = (latest_ipv6 / total * 100) if total > 0 else 0
