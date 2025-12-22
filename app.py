@@ -10,6 +10,7 @@ import json
 from datetime import datetime, timedelta
 import time
 import numpy as np
+from urllib.parse import quote
 
 from data_sources import DataCollector
 from visualization import ChartGenerator
@@ -39,295 +40,347 @@ if 'data_collector' not in st.session_state:
 if 'chart_generator' not in st.session_state:
     st.session_state.chart_generator = get_chart_generator()
 
+# Initialize theme preference (default: dark)
+if 'theme' not in st.session_state:
+    st.session_state.theme = 'dark'
+
 # Optimize memory on app initialization
 optimize_memory()
 
 data_collector = st.session_state.data_collector
 chart_generator = st.session_state.chart_generator
 
-# IPv6.army exact color scheme matching https://www.ipv6.army
-st.markdown("""
-<style>
-    /* Dark theme with light text and orange/yellow accents */
-    :root {
-        --text-color: #e4e6eb;
-        --text-secondary-color: #b0b3b8;
-        --background-color: #18191a;
-        --secondary-background-color: #242526;
-        --primary-color: #ff8c00;
-        --primary-hover: #ffa500;
-        --secondary-color: #242526;
-        --border-color: #3a3b3c;
+# Dynamic theme configuration
+if st.session_state.theme == 'dark':
+    theme_colors = {
+        'text_color': '#e4e6eb',
+        'text_secondary_color': '#b0b3b8',
+        'background_color': '#18191a',
+        'secondary_background_color': '#242526',
+        'primary_color': '#ff8c00',
+        'primary_hover': '#ffa500',
+        'secondary_color': '#242526',
+        'border_color': '#3a3b3c',
+        'menu_gradient': 'linear-gradient(135deg, #ff8c00 0%, #ffa500 100%)',
+        'menu_shadow': 'rgba(255,140,0,0.3)',
+        'hover_bg': '#3a3b3c',
+        'success_bg': '#1e4620',
+        'success_border': '#2d5f2e',
+        'success_text': '#a3d9a5',
+        'info_bg': '#1a3a52',
+        'info_border': '#2b5278',
+        'info_text': '#a3d5f0',
+        'warning_bg': '#4d3800',
+        'warning_border': '#7a5a00',
+        'warning_text': '#ffeaa7'
     }
+else:  # light theme
+    theme_colors = {
+        'text_color': '#1a1a1a',
+        'text_secondary_color': '#666666',
+        'background_color': '#ffffff',
+        'secondary_background_color': '#f5f5f5',
+        'primary_color': '#ff8c00',
+        'primary_hover': '#ffa500',
+        'secondary_color': '#f5f5f5',
+        'border_color': '#e0e0e0',
+        'menu_gradient': 'linear-gradient(135deg, #ff8c00 0%, #ffa500 100%)',
+        'menu_shadow': 'rgba(255,140,0,0.2)',
+        'hover_bg': '#e8e8e8',
+        'success_bg': '#d4edda',
+        'success_border': '#c3e6cb',
+        'success_text': '#155724',
+        'info_bg': '#d1ecf1',
+        'info_border': '#bee5eb',
+        'info_text': '#0c5460',
+        'warning_bg': '#fff3cd',
+        'warning_border': '#ffeaa7',
+        'warning_text': '#856404'
+    }
+
+# Apply theme colors
+st.markdown(f"""
+<style>
+    /* Theme: {st.session_state.theme.upper()} */
+    :root {{
+        --text-color: {theme_colors['text_color']};
+        --text-secondary-color: {theme_colors['text_secondary_color']};
+        --background-color: {theme_colors['background_color']};
+        --secondary-background-color: {theme_colors['secondary_background_color']};
+        --primary-color: {theme_colors['primary_color']};
+        --primary-hover: {theme_colors['primary_hover']};
+        --secondary-color: {theme_colors['secondary_color']};
+        --border-color: {theme_colors['border_color']};
+    }}
 
     /* Apply styling to Streamlit elements */
-    .stApp {
+    .stApp {{
         background-color: var(--background-color) !important;
-    }
+    }}
 
-    .main {
+    .main {{
         background-color: var(--background-color) !important;
         color: var(--text-color) !important;
-    }
+    }}
 
-    section[data-testid="stSidebar"] {
+    section[data-testid="stSidebar"] {{
         background-color: var(--secondary-background-color) !important;
-    }
+    }}
 
-    section[data-testid="stSidebar"] > div {
+    section[data-testid="stSidebar"] > div {{
         background-color: var(--secondary-background-color) !important;
-    }
+    }}
 
     /* Fix dropdown and select elements - dark theme */
-    .stSelectbox > div > div {
+    .stSelectbox > div > div {{
         background-color: var(--secondary-background-color) !important;
         color: var(--text-color) !important;
-    }
+    }}
 
-    .stSelectbox label {
+    .stSelectbox label {{
         color: var(--text-color) !important;
-    }
+    }}
 
     /* Dropdown menu items - dark theme */
-    div[data-baseweb="select"] > div {
+    div[data-baseweb="select"] > div {{
         background-color: var(--secondary-background-color) !important;
         color: var(--text-color) !important;
-    }
+    }}
 
-    ul[role="listbox"] {
+    ul[role="listbox"] {{
         background-color: var(--secondary-background-color) !important;
-    }
+    }}
 
-    li[role="option"] {
+    li[role="option"] {{
         color: var(--text-color) !important;
         background-color: var(--secondary-background-color) !important;
-    }
+    }}
 
-    li[role="option"]:hover {
-        background-color: #3a3b3c !important;
-    }
+    li[role="option"]:hover {{
+        background-color: {theme_colors['hover_bg']} !important;
+    }}
 
     /* Override ALL text colors for readability */
     .stMarkdown, .stMarkdown p, .stMarkdown span, .stMarkdown div,
-    p, span, div, label, input, textarea {
+    p, span, div, label, input, textarea {{
         color: var(--text-color) !important;
-    }
+    }}
 
-    h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6 {{
         color: var(--text-color) !important;
-    }
+    }}
 
     /* Expander headers */
-    .streamlit-expanderHeader {
+    .streamlit-expanderHeader {{
         color: var(--text-color) !important;
         background-color: var(--secondary-background-color) !important;
-    }
+    }}
 
     /* Dataframe text - light on dark */
-    .dataframe {
+    .dataframe {{
         color: var(--text-color) !important;
-    }
+    }}
 
-    .dataframe thead th {
+    .dataframe thead th {{
         background-color: var(--secondary-background-color) !important;
         color: var(--text-color) !important;
-    }
+    }}
 
-    .dataframe tbody td {
+    .dataframe tbody td {{
         background-color: var(--background-color) !important;
         color: var(--text-color) !important;
-    }
-    
+    }}
+
     /* Header with logo */
-    .logo-header {
+    .logo-header {{
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
         padding: 0.5rem;
-    }
-    
-    .logo-header img {
+    }}
+
+    .logo-header img {{
         height: 60px;
         width: auto;
         margin-right: 1rem;
-    }
-    
-    .logo-header h1 {
+    }}
+
+    .logo-header h1 {{
         margin: 0;
         color: var(--primary-color);
         font-size: 1.5rem;
         font-weight: 600;
-    }
-    
+    }}
+
     /* Buttons with IPv6.army styling */
-    .stButton > button {
+    .stButton > button {{
         background-color: var(--primary-color);
         color: white;
         border: none;
         border-radius: 0.375rem;
         font-weight: 500;
         transition: all 0.2s;
-    }
+    }}
     
-    .stButton > button:hover {
-        background-color: #0056b3;
+    .stButton > button:hover {{
+        background-color: {theme_colors['primary_hover']};
         transform: translateY(-1px);
-    }
-    
+    }}
+
     /* Metrics with IPv6.army colors */
-    [data-testid="metric-container"] {
+    [data-testid="metric-container"] {{
         background-color: var(--secondary-color);
         border: 1px solid var(--secondary-background-color);
         border-radius: 0.5rem;
         padding: 1rem;
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    [data-testid="metric-container"] [data-testid="metric-value"] {
+    }}
+
+    [data-testid="metric-container"] [data-testid="metric-value"] {{
         color: var(--primary-color);
         font-weight: 600;
-    }
-    
+    }}
+
     /* Cards and containers */
-    .element-container {
+    .element-container {{
         background-color: var(--secondary-color);
         border-radius: 0.5rem;
-    }
+    }}
     
     /* Success/info/warning messages */
-    .stSuccess {
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-        color: #155724;
-    }
-    
-    .stInfo {
-        background-color: #d1ecf1;
-        border-color: #bee5eb;
-        color: #0c5460;
-    }
-    
-    .stWarning {
-        background-color: #fff3cd;
-        border-color: #ffeaa7;
-        color: #856404;
-    }
-    
+    .stSuccess {{
+        background-color: {theme_colors['success_bg']};
+        border-color: {theme_colors['success_border']};
+        color: {theme_colors['success_text']};
+    }}
+
+    .stInfo {{
+        background-color: {theme_colors['info_bg']};
+        border-color: {theme_colors['info_border']};
+        color: {theme_colors['info_text']};
+    }}
+
+    .stWarning {{
+        background-color: {theme_colors['warning_bg']};
+        border-color: {theme_colors['warning_border']};
+        color: {theme_colors['warning_text']};
+    }}
+
     /* Mobile optimization */
-    @media (max-width: 768px) {
-        .main .block-container {
+    @media (max-width: 768px) {{
+        .main .block-container {{
             padding: 1rem 1rem;
             max-width: 100%;
-        }
-        
-        .logo-header {
+        }}
+
+        .logo-header {{
             flex-direction: column;
             text-align: center;
-        }
-        
-        .logo-header img {
+        }}
+
+        .logo-header img {{
             margin-right: 0;
             margin-bottom: 0.5rem;
-        }
-        
+        }}
+
         /* Make sidebar responsive */
-        .sidebar .sidebar-content {
+        .sidebar .sidebar-content {{
             width: 100%;
-        }
-        
+        }}
+
         /* Optimize metrics for mobile */
-        [data-testid="metric-container"] {
+        [data-testid="metric-container"] {{
             padding: 0.5rem;
             margin: 0.25rem 0;
-        }
-        
+        }}
+
         /* Make charts responsive */
-        .js-plotly-plot {
+        .js-plotly-plot {{
             width: 100% !important;
-        }
-        
+        }}
+
         /* Improve text readability on mobile */
-        .main h1, .main h2, .main h3 {
+        .main h1, .main h2, .main h3 {{
             font-size: 1.2em;
             line-height: 1.3;
-        }
-        
+        }}
+
         /* Stack columns on mobile */
-        .stColumns {
+        .stColumns {{
             flex-direction: column;
-        }
-        
+        }}
+
         /* Make buttons full width on mobile */
-        .stButton > button {
+        .stButton > button {{
             width: 100%;
-        }
-        
+        }}
+
         /* Improve table readability */
-        .dataframe {
+        .dataframe {{
             font-size: 0.8em;
-        }
-    }
-    
+        }}
+    }}
+
     /* Ensure charts are always responsive */
-    .js-plotly-plot, .plotly-graph-div {
+    .js-plotly-plot, .plotly-graph-div {{
         width: 100% !important;
         height: auto !important;
-    }
-    
+    }}
+
     /* Improve spacing for all screen sizes */
-    .metric-container {
+    .metric-container {{
         padding: 0.75rem;
-    }
+    }}
 </style>
 """, unsafe_allow_html=True)
 
 # Scalable top menu bar
-st.markdown("""
+st.markdown(f"""
 <style>
     /* Scalable top menu bar with orange/yellow gradient */
-    .menu-bar {
-        background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
+    .menu-bar {{
+        background: {theme_colors['menu_gradient']};
         padding: 0;
         margin: -1rem -1rem 2rem -1rem;
-        box-shadow: 0 4px 12px rgba(255,140,0,0.3);
+        box-shadow: 0 4px 12px {theme_colors['menu_shadow']};
         position: sticky;
         top: 0;
         z-index: 1000;
-    }
-    
-    .menu-container {
+    }}
+
+    .menu-container {{
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 1rem;
-    }
-    
-    .menu-header {
+    }}
+
+    .menu-header {{
         display: flex;
         align-items: center;
         padding: 1rem 0 0.5rem 0;
         border-bottom: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .menu-logo {
+    }}
+
+    .menu-logo {{
         display: flex;
         align-items: center;
         flex: 1;
-    }
-    
-    .menu-logo img {
+    }}
+
+    .menu-logo img {{
         height: 32px;
         width: auto;
         margin-right: 0.75rem;
-    }
-    
-    .menu-title {
-        color: white;
+    }}
+
+    .menu-title {{
+        color: #2d2d2d;
         font-size: 1.4rem;
         font-weight: 600;
         margin: 0;
-    }
-    
-    .menu-nav {
+    }}
+
+    .menu-nav {{
         display: flex;
         padding: 0.5rem 0;
         gap: 0.25rem;
@@ -336,14 +389,14 @@ st.markdown("""
         -ms-overflow-style: none;
         justify-content: center;
         flex-wrap: wrap;
-    }
-    
-    .menu-nav::-webkit-scrollbar {
+    }}
+
+    .menu-nav::-webkit-scrollbar {{
         display: none;
-    }
-    
-    .menu-item {
-        color: rgba(255,255,255,0.9) !important;
+    }}
+
+    .menu-item {{
+        color: #2d2d2d !important;
         text-decoration: none;
         padding: 0.6rem 1rem;
         border-radius: 0.375rem;
@@ -351,147 +404,147 @@ st.markdown("""
         font-weight: 500;
         white-space: nowrap;
         transition: all 0.2s ease;
-        background: rgba(255,255,255,0.1);
-        margin-right: 0.25rem;
-    }
-    
-    .menu-item:hover {
         background: rgba(255,255,255,0.2);
-        color: white !important;
+        margin-right: 0.25rem;
+    }}
+
+    .menu-item:hover {{
+        background: rgba(255,255,255,0.35);
+        color: #1a1a1a !important;
         text-decoration: none;
         transform: translateY(-1px);
-    }
-    
-    .menu-item.active {
-        background: rgba(255,255,255,0.25);
-        color: white !important;
+    }}
+
+    .menu-item.active {{
+        background: rgba(255,255,255,0.4);
+        color: #1a1a1a !important;
         box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    
-    .menu-utils {
+    }}
+
+    .menu-utils {{
         display: flex;
         gap: 0.5rem;
         padding: 0.5rem 0;
         border-top: 1px solid rgba(255,255,255,0.1);
         justify-content: center;
         flex-wrap: wrap;
-    }
-    
-    .menu-util {
-        color: rgba(255,255,255,0.7) !important;
+    }}
+
+    .menu-util {{
+        color: #3d3d3d !important;
         text-decoration: none;
         padding: 0.25rem 0.75rem;
         border-radius: 0.25rem;
         font-size: 0.75rem;
-        background: rgba(255,255,255,0.05);
-        transition: all 0.2s;
-    }
-    
-    .menu-util:hover {
         background: rgba(255,255,255,0.15);
-        color: white !important;
+        transition: all 0.2s;
+    }}
+
+    .menu-util:hover {{
+        background: rgba(255,255,255,0.3);
+        color: #1a1a1a !important;
         text-decoration: none;
-    }
+    }}
     
     /* Enhanced Responsive Navigation */
-    @media (max-width: 1024px) {
-        .menu-title {
+    @media (max-width: 1024px) {{
+        .menu-title {{
             font-size: 1.2rem;
-        }
-        
-        .menu-item {
+        }}
+
+        .menu-item {{
             font-size: 0.85rem;
             padding: 0.5rem 0.75rem;
             margin-right: 0.2rem;
-        }
-        
-        .menu-nav {
+        }}
+
+        .menu-nav {{
             justify-content: center;
             gap: 0.5rem;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .menu-header {
+        }}
+    }}
+
+    @media (max-width: 768px) {{
+        .menu-header {{
             flex-direction: column;
             text-align: center;
             padding: 0.75rem 0 0.5rem 0;
-        }
-        
-        .menu-logo {
+        }}
+
+        .menu-logo {{
             justify-content: center;
             margin-bottom: 0.5rem;
-        }
-        
-        .menu-title {
+        }}
+
+        .menu-title {{
             font-size: 1.1rem;
-        }
-        
-        .menu-nav {
+        }}
+
+        .menu-nav {{
             justify-content: center;
             padding-bottom: 0.75rem;
             gap: 0.4rem;
-        }
-        
-        .menu-item {
+        }}
+
+        .menu-item {{
             font-size: 0.8rem;
             padding: 0.5rem 0.6rem;
             margin-right: 0;
-        }
-        
-        .menu-utils {
+        }}
+
+        .menu-utils {{
             justify-content: center;
             gap: 0.4rem;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .menu-container {
+        }}
+    }}
+
+    @media (max-width: 480px) {{
+        .menu-container {{
             padding: 0 0.5rem;
-        }
-        
-        .menu-title {
+        }}
+
+        .menu-title {{
             font-size: 1rem;
-        }
-        
-        .menu-logo img {
+        }}
+
+        .menu-logo img {{
             height: 24px;
-        }
-        
-        .menu-nav {
+        }}
+
+        .menu-nav {{
             gap: 0.3rem;
-        }
-        
-        .menu-item {
+        }}
+
+        .menu-item {{
             font-size: 0.75rem;
             padding: 0.4rem 0.5rem;
-        }
-        
-        .menu-util {
+        }}
+
+        .menu-util {{
             font-size: 0.65rem;
             padding: 0.2rem 0.5rem;
-        }
-    }
-    
+        }}
+    }}
+
     /* Very small screens */
-    @media (max-width: 360px) {
-        .menu-title {
+    @media (max-width: 360px) {{
+        .menu-title {{
             font-size: 0.9rem;
-        }
-        
-        .menu-item {
+        }}
+
+        .menu-item {{
             font-size: 0.7rem;
             padding: 0.35rem 0.45rem;
-        }
-        
-        .menu-nav {
+        }}
+
+        .menu-nav {{
             gap: 0.2rem;
-        }
-        
-        .menu-util {
+        }}
+
+        .menu-util {{
             font-size: 0.6rem;
-        }
-    }
+        }}
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -526,13 +579,15 @@ menu_html = """
 
 for icon, section_name in nav_sections:
     active_class = "active" if current_page == section_name else ""
-    menu_html += f'<a href="?page={section_name}" class="menu-item {active_class}" target="_self">{icon} {section_name}</a>'
+    encoded_name = quote(section_name)
+    menu_html += f'<a href="?page={encoded_name}" class="menu-item {active_class}" target="_self">{icon} {section_name}</a>'
 
 menu_html += """
         </div>
         <div class="menu-utils">
             <a href="https://ipv6compatibility.com/" class="menu-util" target="_blank">IPv6 Compatibility Database</a>
             <a href="https://tools.forwardingplane.net" class="menu-util" target="_blank">IPv6 Tools</a>
+            <a href="https://www.ipv6.army" class="menu-util" target="_blank">IPv6 Tests</a>
             <span class="menu-util">Monthly Data Updates</span>
         </div>
     </div>
@@ -545,6 +600,18 @@ st.markdown(menu_html, unsafe_allow_html=True)
 current_view = current_page
 
 # Minimal sidebar with essential info only
+st.sidebar.markdown("### ⚙️ Settings")
+
+# Theme toggle
+current_theme = st.session_state.theme
+theme_label = "🌙 Dark Mode" if current_theme == "dark" else "☀️ Light Mode"
+if st.sidebar.button(f"Switch to {'Light' if current_theme == 'dark' else 'Dark'} Mode", use_container_width=True):
+    st.session_state.theme = 'light' if current_theme == 'dark' else 'dark'
+    st.rerun()
+
+st.sidebar.markdown(f"**Current Theme**: {theme_label}")
+
+st.sidebar.markdown("---")
 st.sidebar.markdown("### 📊 Dashboard Info")
 st.sidebar.markdown("**Data Updates**: Monthly")
 st.sidebar.markdown("**Cache Duration**: 30 days")
@@ -554,9 +621,6 @@ st.sidebar.markdown("**Coverage**: Global deployment metrics")
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 🌐 About")
 st.sidebar.markdown("Comprehensive IPv6 adoption analysis across cloud providers, ISPs, and regional networks worldwide.")
-
-st.sidebar.markdown("---")
-st.sidebar.markdown("🔧 [IPv6 Tools](https://tools.forwardingplane.net)")
 
 # Content area - title removed since it's now in top nav
 st.markdown("*Comprehensive analysis of worldwide IPv6 adoption and BGP routing data with monthly data updates*")
