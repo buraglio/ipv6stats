@@ -16,7 +16,7 @@ def render_network_insights_page(data_collector, chart_generator):
     st.markdown("Real-time data from authoritative IPv6 measurement sources")
 
     # Create tabs for different data sources
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12 = st.tabs([
         "🔌 Hurricane Electric",
         "🔬 RIPE Atlas",
         "🚀 World IPv6 Launch",
@@ -28,6 +28,7 @@ def render_network_insights_page(data_collector, chart_generator):
         "📱 Mobile Carriers",
         "🏛️ Government IPv6",
         "☁️ AWS Coverage",
+        "🔷 Azure Coverage",
     ])
 
     # Tab 1: Hurricane Electric
@@ -748,6 +749,79 @@ def render_network_insights_page(data_collector, chart_generator):
             f"**Updated:** {aws_data.get('last_updated', '')[:10]}"
         )
 
+    # Tab 12: Azure Service IPv6 Coverage
+    with tab12:
+        st.header("Azure Service IPv6 Coverage")
+        st.markdown(
+            "Per-service IPv6 coverage derived from the Microsoft Azure ServiceTags JSON "
+            "(published weekly to the Microsoft Download Center). A service tag is IPv6-enabled "
+            "when any of its address prefix entries use IPv6 CIDR notation."
+        )
+
+        azure_data = data_collector.get_azure_ipv6_coverage()
+        az_services = azure_data.get('services', [])
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                "Total Service Tags",
+                azure_data.get('total_services', 0),
+                help="Distinct Azure service names in the ServiceTags JSON"
+            )
+        with col2:
+            st.metric(
+                "IPv6-Enabled Services",
+                azure_data.get('ipv6_services', 0),
+                help="Services with at least one IPv6 prefix published"
+            )
+        with col3:
+            st.metric(
+                "IPv6 Coverage",
+                f"{azure_data.get('ipv6_coverage_pct', 0)}%",
+                help="% of Azure service tags with IPv6 prefixes"
+            )
+
+        if az_services:
+            df_az = pd.DataFrame(az_services)
+            ipv6_enabled = df_az[df_az['ipv6'] == True]
+            ipv4_only = df_az[df_az['ipv6'] == False]
+
+            fig = px.pie(
+                names=['IPv6-Enabled', 'IPv4-Only'],
+                values=[len(ipv6_enabled), len(ipv4_only)],
+                title='Azure Services: IPv6 vs IPv4-Only',
+                color_discrete_map={'IPv6-Enabled': '#0078d4', 'IPv4-Only': '#ff6600'},
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.subheader("IPv6-Enabled Services")
+                st.dataframe(
+                    ipv6_enabled[['service']].rename(columns={'service': 'Service'}),
+                    use_container_width=True, hide_index=True
+                )
+            with col_b:
+                st.subheader("IPv4-Only Services")
+                st.dataframe(
+                    ipv4_only[['service']].rename(columns={'service': 'Service'}),
+                    use_container_width=True, hide_index=True
+                )
+
+        if azure_data.get('error'):
+            st.warning(f"Data unavailable: {azure_data['error']}")
+        else:
+            publish_date = azure_data.get('publish_date', '')
+            change_number = azure_data.get('change_number', '')
+            if publish_date:
+                st.caption(f"ServiceTags file published: {publish_date} (change #{change_number})")
+            st.caption(azure_data.get('note', ''))
+
+        st.info(
+            f"**Source:** {azure_data.get('source', 'Azure ServiceTags')} | "
+            f"**Updated:** {azure_data.get('last_updated', '')[:10]}"
+        )
+
     # Footer
     st.markdown("---")
     st.markdown("""
@@ -767,6 +841,7 @@ def render_network_insights_page(data_collector, chart_generator):
     - **RIPE STAT (ASN prefixes)**: Live BGP prefix counts for mobile/broadband carrier ASNs
     - **DNS AAAA checks**: Live resolver queries for AAAA records on government domains
     - **AWS IP Ranges**: Official AWS JSON listing IPv4 and IPv6 prefixes by service
+    - **Azure ServiceTags**: Microsoft's weekly IP ranges JSON with per-service IPv4/IPv6 prefixes
 
     Data is cached for 24 hours to balance freshness with source API load.
     """)

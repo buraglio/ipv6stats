@@ -101,6 +101,7 @@ class DataManager:
             'mobile_carrier_stats': self.collector.get_mobile_carrier_ipv6_stats,
             'government_ipv6_stats': self.collector.get_government_ipv6_stats,
             'aws_ipv6_coverage': self.collector.get_aws_ipv6_coverage,
+            'azure_ipv6_coverage': self.collector.get_azure_ipv6_coverage,
         }
 
         if show_progress:
@@ -162,7 +163,8 @@ class DataManager:
             'BGP Statistics': ['bgp_stats', 'rpki_stats'],
             'Extended Data': ['arin_stats', 'ripe_stats', 'lacnic_stats', 'afrinic_stats', 'nist_usgv6'],
             'Network Insights': ['peeringdb_stats', 'rpki_stats', 'euro_ix_stats',
-                                  'mobile_carrier_stats', 'government_ipv6_stats', 'aws_ipv6_coverage'],
+                                  'mobile_carrier_stats', 'government_ipv6_stats',
+                                  'aws_ipv6_coverage', 'azure_ipv6_coverage'],
         }
 
         required_keys = page_requirements.get(page_name, [])

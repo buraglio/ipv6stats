@@ -4818,3 +4818,97 @@ class DataCollector:
                 'error': str(e),
             }
 
+    @st.cache_data(ttl=86400, max_entries=1)
+    def get_azure_ipv6_coverage(_self) -> Dict[str, Any]:
+        """
+        Fetch Azure ServiceTags JSON and compute per-service IPv6 coverage.
+
+        Microsoft publishes a weekly-updated IP ranges file at a date-stamped URL:
+          https://download.microsoft.com/.../ServiceTags_Public_YYYYMMDD.json
+
+        This function probes recent Mondays (Microsoft's typical publish day) to
+        locate the current file without needing to scrape the download page.
+
+        Service tags are grouped by base name (e.g. 'Storage.WestUS' → 'Storage')
+        and a service is counted as IPv6-enabled when any of its tag variants
+        contains at least one IPv6 CIDR prefix (detected by ':' in the address).
+        """
+        from datetime import date as _date, timedelta
+
+        BASE_URL = (
+            "https://download.microsoft.com/download/7/1/d/"
+            "71d86715-5596-4529-9b13-da13a5de5b63/ServiceTags_Public_{date}.json"
+        )
+
+        # Probe recent Mondays — Microsoft typically publishes on Mondays
+        today = _date.today()
+        candidate = today - timedelta(days=today.weekday())  # most recent Monday
+
+        data = None
+        found_url = None
+        found_date = None
+        for _ in range(6):
+            url = BASE_URL.format(date=candidate.strftime('%Y%m%d'))
+            try:
+                r = _self.session.get(url, timeout=20)
+                if r.status_code == 200:
+                    data = r.json()
+                    found_url = url
+                    found_date = candidate.isoformat()
+                    break
+            except Exception:
+                pass
+            candidate -= timedelta(days=7)
+
+        if not data:
+            return {
+                'services': [],
+                'total_services': 0,
+                'ipv6_services': 0,
+                'ipv4_only_services': 0,
+                'ipv6_coverage_pct': 0.0,
+                'last_updated': datetime.now().isoformat(),
+                'source': 'Azure ServiceTags (unavailable)',
+                'url': BASE_URL.format(date='(not found)'),
+                'error': 'Could not locate current Azure ServiceTags JSON (tried 6 recent Mondays)',
+            }
+
+        # Group by base service name, mark IPv4/IPv6 presence
+        service_ipv4: set = set()
+        service_ipv6: set = set()
+
+        for entry in data.get('values', []):
+            base_name = entry.get('name', '').split('.')[0]
+            for prefix in entry.get('properties', {}).get('addressPrefixes', []):
+                if ':' in prefix:
+                    service_ipv6.add(base_name)
+                else:
+                    service_ipv4.add(base_name)
+
+        all_services = sorted(service_ipv4 | service_ipv6)
+        service_rows = [
+            {'service': svc, 'ipv4': svc in service_ipv4, 'ipv6': svc in service_ipv6}
+            for svc in all_services
+        ]
+
+        ipv6_count = sum(1 for row in service_rows if row['ipv6'])
+        total = len(service_rows)
+
+        return {
+            'services': service_rows,
+            'total_services': total,
+            'ipv6_services': ipv6_count,
+            'ipv4_only_services': total - ipv6_count,
+            'ipv6_coverage_pct': round(ipv6_count / total * 100, 1) if total else 0.0,
+            'change_number': data.get('changeNumber', 'unknown'),
+            'publish_date': found_date,
+            'last_updated': datetime.now().isoformat(),
+            'source': 'Azure ServiceTags (Microsoft Download Center)',
+            'url': found_url,
+            'note': (
+                'A service is IPv6-enabled when any of its address prefix entries use IPv6 '
+                'CIDR notation. Regional variants (e.g. Storage.WestUS) are grouped under '
+                'their base service name (Storage).'
+            ),
+        }
+
