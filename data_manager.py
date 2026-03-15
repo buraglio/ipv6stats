@@ -83,16 +83,20 @@ class DataManager:
         data_sources = {
             'google_stats': self.collector.get_google_ipv6_stats,
             'google_country': self.collector.get_google_country_stats,
-            'facebook_stats': self.collector.get_facebook_stats,
-            'cloudflare_stats': self.collector.get_cloudflare_stats,
+            'facebook_stats': self.collector.get_facebook_ipv6_stats,
+            'cloudflare_stats': self.collector.get_cloudflare_radar_stats,
             'apnic_stats': self.collector.get_apnic_stats,
             'cisco_6lab': self.collector.get_cisco_6lab_stats,
-            'nist_usgv6': self.collector.get_nist_usgv6_stats,
+            'nist_usgv6': self.collector.get_nist_usgv6_deployment_stats,
             'bgp_stats': self.collector.get_current_bgp_stats,
-            'arin_stats': self.collector.get_arin_stats,
-            'ripe_stats': self.collector.get_ripe_stats,
+            'arin_stats': self.collector.get_arin_statistics,
+            'ripe_stats': self.collector.get_ripe_ipv6_allocations,
             'lacnic_stats': self.collector.get_lacnic_stats,
             'afrinic_stats': self.collector.get_afrinic_stats,
+            # P2 new sources
+            'peeringdb_stats': self.collector.get_peeringdb_stats,
+            'rpki_stats': self.collector.get_rpki_ipv6_stats,
+            'euro_ix_stats': self.collector.get_euro_ix_stats,
         }
 
         if show_progress:
@@ -151,8 +155,9 @@ class DataManager:
             'Overview': ['google_stats', 'facebook_stats', 'cloudflare_stats', 'bgp_stats'],
             'Global Adoption': ['google_country', 'apnic_stats', 'cisco_6lab'],
             'Cloud Services': ['cloudflare_stats', 'facebook_stats'],
-            'BGP Statistics': ['bgp_stats'],
+            'BGP Statistics': ['bgp_stats', 'rpki_stats'],
             'Extended Data': ['arin_stats', 'ripe_stats', 'lacnic_stats', 'afrinic_stats', 'nist_usgv6'],
+            'Network Insights': ['peeringdb_stats', 'rpki_stats', 'euro_ix_stats'],
         }
 
         required_keys = page_requirements.get(page_name, [])
@@ -224,8 +229,8 @@ class DataManager:
         """
         common_sources = {
             'google_stats': self.collector.get_google_ipv6_stats,
-            'facebook_stats': self.collector.get_facebook_stats,
-            'cloudflare_stats': self.collector.get_cloudflare_stats,
+            'facebook_stats': self.collector.get_facebook_ipv6_stats,
+            'cloudflare_stats': self.collector.get_cloudflare_radar_stats,
         }
 
         for key, loader_fn in common_sources.items():

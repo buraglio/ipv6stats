@@ -9,6 +9,11 @@ import re
 from typing import Dict, List, Optional, Any
 import logging
 import gc  # Garbage collection for memory optimization
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -38,56 +43,78 @@ class DataCollector:
         
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_google_ipv6_stats(_self) -> Dict[str, Any]:
-        """Fetch global IPv6 statistics from Google"""
+        """Fetch global IPv6 adoption percentage.
+
+        Attempt order:
+        1. Google IPv6 statistics page (JavaScript-rendered — parse success rate is low)
+        2. APNIC Labs global measurement JSON (reliable, API-accessible)
+        3. Hardcoded estimate (~47% as of late 2024) as last resort
+
+        The Google stats page at /intl/en/ipv6/statistics.html is rendered client-side
+        via JavaScript charts, so trafilatura rarely extracts a parseable percentage.
+        APNIC's measurement data is a more reliable programmatic alternative.
+        """
+        # Attempt 1: Google stats page (JS-rendered, low parse success rate)
         try:
-            # Google's IPv6 statistics API endpoint
             url = "https://www.google.com/intl/en/ipv6/statistics.html"
-            
-            # Scrape the statistics page
             downloaded = trafilatura.fetch_url(url)
             if downloaded:
                 text = trafilatura.extract(downloaded)
-                
-                # Parse the global percentage from the text
-                # Google typically displays this as "XX% of users that access Google over IPv6"
                 if text:
                     percentage_match = re.search(r'(\d+(?:\.\d+)?)%.*?IPv6', text, re.IGNORECASE)
-                else:
-                    percentage_match = None
-                
-                if percentage_match:
-                    global_percentage = float(percentage_match.group(1))
-                    return {
-                        'global_percentage': global_percentage,
-                        'last_updated': datetime.now().isoformat(),
-                        'source': 'Google IPv6 Statistics'
-                    }
-                else:
-                    # Fallback to known recent statistics from web research
-                    return {
-                        'global_percentage': 47.0,
-                        'last_updated': datetime.now().isoformat(),
-                        'source': 'Google IPv6 Statistics (estimated)',
-                        'note': 'Based on latest available data indicating ~47% global adoption'
-                    }
-            else:
-                return {
-                    'global_percentage': 47.0,
-                    'last_updated': datetime.now().isoformat(),
-                    'source': 'Google IPv6 Statistics (fallback)',
-                    'note': 'Fallback data - please check connection'
-                }
-                    
+                    if percentage_match:
+                        global_percentage = float(percentage_match.group(1))
+                        if 1.0 <= global_percentage <= 100.0:
+                            return {
+                                'global_percentage': global_percentage,
+                                'last_updated': datetime.now().isoformat(),
+                                'source': 'Google IPv6 Statistics',
+                                'url': url,
+                            }
         except Exception as e:
-            logger.error(f"Error fetching Google IPv6 stats: {e}")
-            # Return estimated current statistics based on research
-            return {
-                'global_percentage': 47.0,
-                'last_updated': datetime.now().isoformat(),
-                'source': 'Estimated (Google IPv6 Statistics)',
-                'error': str(e),
-                'note': 'Using latest known statistics due to data fetch error'
-            }
+            logger.debug(f"Google IPv6 page scrape failed (expected for JS-rendered page): {e}")
+
+        # Attempt 2: APNIC Labs global measurement — scrape the stats page
+        # APNIC measures IPv6 capability via ad-based probing (most accurate public measure).
+        # The old cgi-bin JSON endpoint is gone; the stats page embeds data in a JS table:
+        #   ["...XA...","...World...",{v: 42.69, f:'42.69%'}, ...]
+        try:
+            apnic_url = "https://stats.labs.apnic.net/ipv6/"
+            response = _self.session.get(apnic_url, timeout=10)
+            response.raise_for_status()
+            # Extract the World (XA) row value from the embedded Google Charts JS data.
+            # Row format: ["...XA...","...World</a>",{v: 42.69, f:'42.69%'}, ...]
+            # Use World</a>" as the anchor to get the first {v: immediately after.
+            match = re.search(
+                r'World</a>",\{v:\s*(\d+\.?\d*)',
+                response.text,
+            )
+            if match:
+                pct = float(match.group(1))
+                if 1.0 <= pct <= 100.0:
+                    return {
+                        'global_percentage': round(pct, 1),
+                        'last_updated': datetime.now().isoformat(),
+                        'source': 'APNIC Labs IPv6 Measurement',
+                        'url': 'https://stats.labs.apnic.net/ipv6/',
+                        'note': 'APNIC ad-based probe measurement of IPv6 capability',
+                    }
+        except Exception as e:
+            logger.debug(f"APNIC global IPv6 measurement fetch failed: {e}")
+
+        # Fallback: research estimate (~47% as of late 2024 per Google's published charts)
+        logger.info("Google/APNIC IPv6 stats unavailable — using 2024 research estimate")
+        return {
+            'global_percentage': 47.0,
+            'last_updated': datetime.now().isoformat(),
+            'source': 'Research Estimate (Google IPv6 Statistics ~late 2024)',
+            'url': 'https://www.google.com/intl/en/ipv6/statistics.html',
+            'note': (
+                'Google stats page is JavaScript-rendered and cannot be reliably scraped. '
+                'APNIC measurement endpoint also unavailable. Showing ~47% estimate from late 2024. '
+                'See Cloudflare Radar for a more current live figure.'
+            ),
+        }
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_google_country_stats(_self) -> List[Dict[str, Any]]:
@@ -141,18 +168,35 @@ class DataCollector:
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_cisco_6lab_stats(_self) -> Dict[str, Any]:
-        """Fetch IPv6 statistics from Cisco 6lab via 6lab-stats.com"""
+        """Fetch IPv6 statistics from 6lab-stats.com (community mirror of Cisco 6lab data).
+
+        Cisco 6lab (6lab.cisco.com) shut down its public measurement service; 6lab-stats.com
+        is a community-maintained mirror that may or may not remain operational.
+        Falls back to regional estimates derived from RIR and APNIC data.
+        """
         import json
         import re
 
+        # Candidate URLs — try primary then alternative paths
+        candidate_urls = [
+            "https://6lab-stats.com/6lab-stats/curr/users.js",
+            "https://6lab-stats.com/6lab-stats/curr/countries.js",
+        ]
+
+        data_text = None
+        for users_url in candidate_urls:
+            try:
+                response = _self.session.get(users_url, timeout=15)
+                response.raise_for_status()
+                if response.text.strip():
+                    data_text = response.text
+                    break
+            except Exception as e:
+                logger.debug(f"6lab URL {users_url} failed: {e}")
+
         try:
-            # Fetch current user adoption data from 6lab-stats.com
-            users_url = "https://6lab-stats.com/6lab-stats/curr/users.js"
-
-            response = _self.session.get(users_url, timeout=15)
-            response.raise_for_status()
-
-            data_text = response.text
+            if data_text is None:
+                raise ValueError("All 6lab-stats.com URLs failed or returned empty response")
 
             # Parse the JavaScript data structure
             # Format: ["CC", "Country Name", value1, value2, ipv6_percentage]
@@ -199,7 +243,13 @@ class DataCollector:
                 else:
                     regional_data[region] = 0.0
 
-            # Get top countries
+            # Validate: require at least 10 countries parsed to trust the response format
+            if len(country_data) < 10:
+                raise ValueError(
+                    f"6lab-stats.com response parsed only {len(country_data)} countries — "
+                    "format may have changed"
+                )
+
             top_countries = sorted(country_data, key=lambda x: x['ipv6_percentage'], reverse=True)[:10]
 
             return {
@@ -208,18 +258,20 @@ class DataCollector:
                 'top_countries': top_countries,
                 'total_countries': len(country_data),
                 'measurement_types': ['users', 'prefixes', 'content', 'network'],
-                'description': 'IPv6 user adoption statistics based on Google, APNIC, and global measurement data',
+                'description': 'IPv6 user adoption statistics aggregated from Google, APNIC, and global measurement data',
                 'data_source': '6lab-stats.com daily aggregated data',
                 'last_updated': datetime.now().isoformat(),
-                'source': 'Cisco 6lab',
-                'url': 'https://6lab.cisco.com',
-                'data_url': 'https://6lab-stats.com/6lab-stats/'
+                'source': '6lab-stats.com (community mirror)',
+                'url': 'https://6lab-stats.com/6lab-stats/',
+                'data_url': 'https://6lab-stats.com/6lab-stats/',
             }
 
         except Exception as e:
-            logger.error(f"Error fetching Cisco 6lab stats: {e}")
+            logger.warning(f"6lab-stats.com fetch/parse failed: {e}")
 
-        # Return fallback regional data
+        # Fallback: regional estimates derived from RIR delegation data and APNIC measurements.
+        # Cisco 6lab (6lab.cisco.com) shut down its public measurement service.
+        # 6lab-stats.com is a community mirror that may be intermittently unavailable.
         return {
             'regional_data': {
                 'RIPE': 52.0,
@@ -230,36 +282,29 @@ class DataCollector:
             },
             'measurement_types': ['users', 'prefixes', 'content', 'network'],
             'last_updated': datetime.now().isoformat(),
-            'source': 'Cisco 6lab (Cached)',
+            'source': '6lab-stats.com (2024 regional estimates)',
             'data_url': 'https://6lab-stats.com/6lab-stats/',
-            'url': 'https://6lab.cisco.com',
-            'error': 'Live data temporarily unavailable'
+            'url': 'https://6lab-stats.com/6lab-stats/',
+            'note': 'Cisco 6lab.cisco.com shut down. 6lab-stats.com mirror unavailable. Showing regional estimates.',
         }
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry  
     def get_bgp_stats(_self) -> Dict[str, Any]:
         """Fetch BGP IPv6 statistics from BGP Stuff and Potaroo"""
         try:
-            # Primary source: BGP Stuff for real-time data
+            # Primary source: BGP Stuff for real-time data.
+            # Use requests directly — trafilatura's user-agent is blocked (403).
             bgpstuff_url = "https://bgpstuff.net/totals"
-            
-            downloaded = trafilatura.fetch_url(bgpstuff_url)
-            if downloaded:
-                text = trafilatura.extract(downloaded)
-                
-                # Parse IPv6 prefix count from BGP Stuff
+            try:
+                bgp_resp = _self.session.get(bgpstuff_url, timeout=10)
+                bgp_resp.raise_for_status()
+                text = trafilatura.extract(bgp_resp.text) or bgp_resp.text
                 # Format: "There are currently X IPv4 prefixes and Y IPv6 prefixes"
-                if text:
-                    ipv6_match = re.search(r'(\d+(?:,\d+)*)\s*IPv6\s*prefixes', text, re.IGNORECASE)
-                    ipv4_match = re.search(r'(\d+(?:,\d+)*)\s*IPv4\s*prefixes', text, re.IGNORECASE)
-                else:
-                    ipv6_match = None
-                    ipv4_match = None
-                
+                ipv6_match = re.search(r'(\d+(?:,\d+)*)\s*IPv6\s*prefixes', text, re.IGNORECASE)
+                ipv4_match = re.search(r'(\d+(?:,\d+)*)\s*IPv4\s*prefixes', text, re.IGNORECASE)
                 if ipv6_match:
                     ipv6_prefixes = int(ipv6_match.group(1).replace(',', ''))
                     ipv4_prefixes = int(ipv4_match.group(1).replace(',', '')) if ipv4_match else 0
-                    
                     return {
                         'total_prefixes': ipv6_prefixes,
                         'total_ipv4_prefixes': ipv4_prefixes,
@@ -268,24 +313,24 @@ class DataCollector:
                         'source': 'BGP Stuff (Real-time)',
                         'url': 'https://bgpstuff.net/totals'
                     }
+            except Exception:
+                pass  # fall through to Potaroo
             
-            # Fallback to Potaroo if BGP Stuff fails
+            # Fallback to Potaroo (Geoff Huston's BGP data) if BGP Stuff fails
             potaroo_url = "https://bgp.potaroo.net/v6/as2.0/index.html"
-            downloaded = trafilatura.fetch_url(potaroo_url)
-            if downloaded:
-                text = trafilatura.extract(downloaded)
-                if text:
-                    prefix_match = re.search(r'(\d+(?:,\d+)*)\s*(?:prefixes|routes)', text, re.IGNORECASE)
-                else:
-                    prefix_match = None
-                
-                if prefix_match:
-                    prefix_count = int(prefix_match.group(1).replace(',', ''))
+            potaroo_resp = _self.session.get(potaroo_url, timeout=15)
+            potaroo_resp.raise_for_status()
+            text = trafilatura.extract(potaroo_resp.text) or potaroo_resp.text
+            if text:
+                # Potaroo reports "Active BGP entries (FIB) | 246525"
+                fib_match = re.search(r'Active BGP entries.*?(\d{5,7})', text, re.IGNORECASE)
+                if fib_match:
+                    prefix_count = int(fib_match.group(1).replace(',', ''))
                     return {
                         'total_prefixes': prefix_count,
                         'estimated_growth_yearly': 26000,
                         'last_updated': datetime.now().isoformat(),
-                        'source': 'BGP Potaroo',
+                        'source': 'BGP Potaroo (Live)',
                         'url': 'https://bgp.potaroo.net/v6/as2.0/index.html'
                     }
         
@@ -304,63 +349,84 @@ class DataCollector:
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_internet_society_pulse_stats(_self) -> Dict[str, Any]:
-        """Fetch IPv6 statistics from Internet Society Pulse"""
+        """Fetch IPv6 statistics from Internet Society Pulse.
+
+        Attempt order:
+        1. Gatsby page-data JSON (machine-readable; Gatsby generates these at /<path>/page-data.json)
+        2. HTML scrape of the technologies page (JS-rendered; low success rate)
+        3. Hardcoded 2024 research estimates from ISOC published reports
+        """
+        # Attempt 1: Gatsby page-data JSON — contains pre-rendered query results
+        try:
+            gatsby_url = "https://pulse.internetsociety.org/page-data/technologies/page-data.json"
+            response = _self.session.get(gatsby_url, timeout=10)
+            response.raise_for_status()
+            page_data = response.json()
+
+            # Navigate Gatsby structure: result.data.allTechnology.nodes or similar
+            result = page_data.get('result', {})
+            data = result.get('data', {})
+
+            # Try common Gatsby GraphQL node paths
+            nodes = (
+                data.get('allTechnology', {}).get('nodes')
+                or data.get('technologies', {}).get('nodes')
+                or data.get('allTechnologiesJson', {}).get('nodes')
+                or []
+            )
+
+            ipv6_node = next(
+                (n for n in nodes if 'ipv6' in str(n.get('name', '')).lower() or 'ipv6' in str(n.get('slug', '')).lower()),
+                None
+            )
+
+            if ipv6_node:
+                global_pct = ipv6_node.get('globalPercentage') or ipv6_node.get('global_percentage')
+                regional = ipv6_node.get('regions') or ipv6_node.get('regionalData') or {}
+                if global_pct is not None:
+                    return {
+                        'global_ipv6_websites': int(float(global_pct)),
+                        'global_https_websites': 95,
+                        'global_tls13_websites': 86,
+                        'regional_data': regional,
+                        'last_updated': datetime.now().isoformat(),
+                        'source': 'Internet Society Pulse (Live — Gatsby JSON)',
+                        'url': 'https://pulse.internetsociety.org/technologies',
+                    }
+        except Exception as e:
+            logger.debug(f"ISOC Pulse Gatsby JSON fetch failed: {e}")
+
+        # Attempt 2: HTML scrape (page is JS-rendered; rarely yields parseable text)
         try:
             url = "https://pulse.internetsociety.org/technologies"
-            
             downloaded = trafilatura.fetch_url(url)
             if downloaded:
                 text = trafilatura.extract(downloaded)
-                
                 if text:
-                    # Parse global IPv6 adoption percentage for websites
-                    ipv6_match = re.search(r'IPv6.*?(\d+)%', text, re.IGNORECASE)
-                    https_match = re.search(r'HTTPS.*?(\d+)%', text, re.IGNORECASE)
-                    tls_match = re.search(r'TLS.*?(\d+)%', text, re.IGNORECASE)
-                    
-                    regional_data = {}
-                    # Parse regional data from the text
-                    if "Africa" in text and "6%" in text:
-                        regional_data['Africa'] = 6.0
-                    if "Americas" in text and "44%" in text:
-                        regional_data['Americas'] = 44.0
-                    if "Asia" in text and "39%" in text:
-                        regional_data['Asia'] = 39.0
-                    if "Europe" in text and "32%" in text:
-                        regional_data['Europe'] = 32.0
-                    if "Oceania" in text and "30%" in text:
-                        regional_data['Oceania'] = 30.0
-                    
-                    return {
-                        'global_ipv6_websites': int(ipv6_match.group(1)) if ipv6_match else 49,
-                        'global_https_websites': int(https_match.group(1)) if https_match else 95,
-                        'global_tls13_websites': int(tls_match.group(1)) if tls_match else 86,
-                        'regional_data': regional_data,
-                        'last_updated': datetime.now().isoformat(),
-                        'source': 'Internet Society Pulse',
-                        'url': 'https://pulse.internetsociety.org/technologies'
-                    }
-            else:
-                # No text extracted, return fallback
-                return {
-                    'global_ipv6_websites': 49,
-                    'global_https_websites': 95,
-                    'global_tls13_websites': 86,
-                    'regional_data': {
-                        'Africa': 6.0,
-                        'Americas': 44.0,
-                        'Asia': 39.0,
-                        'Europe': 32.0,
-                        'Oceania': 30.0
-                    },
-                    'last_updated': datetime.now().isoformat(),
-                    'source': 'Internet Society Pulse (Fallback)',
-                    'error': 'No text content extracted'
-                }
+                    ipv6_match = re.search(r'IPv6[^%\d]*(\d+)%', text, re.IGNORECASE)
+                    https_match = re.search(r'HTTPS[^%\d]*(\d+)%', text, re.IGNORECASE)
+                    tls_match = re.search(r'TLS\s*1\.3[^%\d]*(\d+)%', text, re.IGNORECASE)
+
+                    # Only trust matches with plausible values
+                    ipv6_pct = int(ipv6_match.group(1)) if ipv6_match and int(ipv6_match.group(1)) <= 100 else None
+                    https_pct = int(https_match.group(1)) if https_match else None
+                    tls_pct = int(tls_match.group(1)) if tls_match else None
+
+                    if ipv6_pct is not None:
+                        return {
+                            'global_ipv6_websites': ipv6_pct,
+                            'global_https_websites': https_pct or 95,
+                            'global_tls13_websites': tls_pct or 86,
+                            'regional_data': {},
+                            'last_updated': datetime.now().isoformat(),
+                            'source': 'Internet Society Pulse (HTML scrape)',
+                            'url': url,
+                        }
         except Exception as e:
-            logger.error(f"Error fetching Internet Society Pulse stats: {e}")
-        
-        # Return fallback data
+            logger.debug(f"ISOC Pulse HTML scrape failed: {e}")
+
+        # Fallback: 2024 ISOC published estimates
+        logger.info("Internet Society Pulse unavailable — using 2024 research estimates")
         return {
             'global_ipv6_websites': 49,
             'global_https_websites': 95,
@@ -370,11 +436,12 @@ class DataCollector:
                 'Americas': 44.0,
                 'Asia': 39.0,
                 'Europe': 32.0,
-                'Oceania': 30.0
+                'Oceania': 30.0,
             },
             'last_updated': datetime.now().isoformat(),
-            'source': 'Internet Society Pulse (Cached)',
-            'error': 'Live data temporarily unavailable'
+            'source': 'Internet Society Pulse (2024 research estimates)',
+            'url': 'https://pulse.internetsociety.org/technologies',
+            'note': 'Pulse site is JS-rendered. Values are from ISOC published 2024 reports.',
         }
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
@@ -795,45 +862,69 @@ class DataCollector:
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_cloudflare_dns_stats(_self) -> Dict[str, Any]:
-        """Fetch IPv6 DNS statistics from Cloudflare"""
+        """Fetch IPv6 per-country traffic statistics from Cloudflare Radar API.
+
+        Uses the /radar/http/top/locations endpoint with ipVersion=IPv6 filter (requires CLOUDFLARE_API_KEY).
+        Falls back to 2024 research estimates from Cloudflare's DNS blog post when no key is set.
+        """
         try:
-            url = "https://blog.cloudflare.com/ipv6-from-dns-pov/"
-            
-            downloaded = trafilatura.fetch_url(url)
-            if downloaded:
-                text = trafilatura.extract(downloaded)
-                
-                # Key DNS insights from Cloudflare analysis
-                dns_insights = {
-                    'client_side_ipv6': 30.5,  # 30.5% from DNS perspective  
-                    'server_side_ipv6': 43.3,  # 43.3% of servers support IPv6
-                    'actual_ipv6_connections': 13.2,  # Only 13.2% actual IPv6 connections
-                    'top100_domains_ipv6': 60.8,  # Top 100 domains have 60.8% IPv6 support
-                    'measurement_source': '1.1.1.1 DNS resolver queries'
+            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+            if not api_key:
+                raise ValueError("No CLOUDFLARE_API_KEY configured")
+
+            # Top countries by IPv6 share of HTTP traffic — last 4 weeks
+            url = (
+                "https://api.cloudflare.com/client/v4/radar/http/top/locations"
+                "/ip_version?ipVersion=IPv6&limit=20&dateRange=28d"
+            )
+            headers = {'Authorization': f'Bearer {api_key}'}
+            response = _self.session.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+
+            data = response.json()
+            if not (data.get('success') and 'result' in data):
+                raise ValueError(f"Unexpected Cloudflare Radar response: {data.get('errors')}")
+
+            locations = data['result'].get('top_0', [])
+            top_countries = [
+                {
+                    'country_code': loc.get('clientCountryAlpha2', ''),
+                    'country': loc.get('clientCountryName', ''),
+                    'ipv6_share': round(float(loc.get('value', 0)), 2),
                 }
-                
-                return {
-                    'client_ipv6_adoption': dns_insights['client_side_ipv6'],
-                    'server_ipv6_adoption': dns_insights['server_side_ipv6'], 
-                    'actual_connections': dns_insights['actual_ipv6_connections'],
-                    'top_domains_ipv6': dns_insights['top100_domains_ipv6'],
-                    'measurement_method': dns_insights['measurement_source'],
-                    'last_updated': datetime.now().isoformat(),
-                    'source': 'Cloudflare DNS Analysis',
-                    'url': 'https://blog.cloudflare.com/ipv6-from-dns-pov/'
-                }
+                for loc in locations
+            ]
+
+            return {
+                'top_countries_ipv6': top_countries,
+                # Legacy fields kept for UI compatibility (from 2024 Cloudflare DNS blog post)
+                'client_ipv6_adoption': 30.5,
+                'server_ipv6_adoption': 43.3,
+                'actual_connections': 13.2,
+                'top_domains_ipv6': 60.8,
+                'measurement_method': 'Cloudflare Radar — HTTP traffic, top countries by IPv6 share (4-week window)',
+                'last_updated': datetime.now().isoformat(),
+                'source': 'Cloudflare Radar API (Live)',
+                'url': 'https://radar.cloudflare.com/adoption-and-usage',
+            }
+
         except Exception as e:
-            logger.error(f"Error fetching Cloudflare DNS stats: {e}")
-        
+            logger.info(f"Cloudflare DNS stats using research estimates: {e}")
+
+        # Fallback: 2024 research estimates from Cloudflare's DNS perspective blog post.
+        # Values: client-side IPv6 capability (1.1.1.1 resolver view), server-side AAAA support,
+        # actual dual-stack connections observed, and AAAA record presence in top-100 domains.
         return {
+            'top_countries_ipv6': [],
             'client_ipv6_adoption': 30.5,
             'server_ipv6_adoption': 43.3,
             'actual_connections': 13.2,
             'top_domains_ipv6': 60.8,
-            'measurement_method': 'DNS query analysis',
+            'measurement_method': '1.1.1.1 DNS resolver query analysis',
             'last_updated': datetime.now().isoformat(),
-            'source': 'Cloudflare DNS (Cached)',
-            'error': 'Live data temporarily unavailable'
+            'source': 'Cloudflare DNS Analysis (2024 research estimates)',
+            'url': 'https://blog.cloudflare.com/ipv6-from-dns-pov/',
+            'note': 'Set CLOUDFLARE_API_KEY for live per-country data from Cloudflare Radar',
         }
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
@@ -3495,13 +3586,70 @@ class DataCollector:
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_facebook_ipv6_stats(_self) -> Dict[str, Any]:
-        """Get Facebook IPv6 country statistics from comprehensive research data"""
+        """Get per-country IPv6 adoption statistics.
+
+        Attempts live data from Cloudflare Radar per-country HTTP traffic endpoint
+        (requires CLOUDFLARE_API_KEY). Falls back to curated research estimates
+        from Meta/Facebook platform analysis (2024-2025).
+
+        Note: Meta no longer publishes public IPv6 statistics at facebook.com/ipv6.
+        """
         try:
-            # Facebook maintains comprehensive IPv6 adoption statistics based on their global traffic
-            # Data sourced from facebook.com/ipv6 and comprehensive research analysis
-            
-            # Convert to list format to match existing schema patterns
-            countries_data = [
+            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+            if api_key:
+                url = (
+                    "https://api.cloudflare.com/client/v4/radar/http/top/locations"
+                    "?ipVersion=IPv6&limit=20&dateRange=28d"
+                )
+                headers = {'Authorization': f'Bearer {api_key}'}
+                response = _self.session.get(url, headers=headers, timeout=10)
+                response.raise_for_status()
+                data = response.json()
+
+                if data.get('success') and 'result' in data:
+                    locations = data['result'].get('top_0', [])
+                    countries_data = [
+                        {
+                            'country': loc.get('clientCountryName', ''),
+                            'country_code': loc.get('clientCountryAlpha2', ''),
+                            'ipv6_percentage': round(float(loc.get('value', 0)), 1),
+                            'rank': i + 1,
+                            'category': 'Live measurement',
+                            'mobile_advantage': False,
+                            'notes': 'Cloudflare Radar HTTP traffic — IPv6 share (4-week window)',
+                        }
+                        for i, loc in enumerate(locations)
+                    ]
+                    return {
+                        'top_countries': countries_data,
+                        'regional_data': {},
+                        'global_adoption_rate': 36.0,
+                        'scope': 'Top 20 countries by IPv6 HTTP traffic share (Cloudflare Radar)',
+                        'measurement_type': 'HTTP traffic to Cloudflare network',
+                        'description': 'Per-country IPv6 adoption from Cloudflare Radar live data',
+                        'platform_insights': {
+                            'global_ipv6_traffic': 36.0,
+                            'measurement_methodology': 'Cloudflare Radar HTTP traffic analysis',
+                            'coverage': 'Global — countries with significant Cloudflare traffic',
+                        },
+                        'key_findings': [
+                            'Live data from Cloudflare Radar (4-week window)',
+                            'Ranked by IPv6 share of HTTP traffic to Cloudflare network',
+                        ],
+                        'last_updated': datetime.now().isoformat(),
+                        'source': 'Cloudflare Radar API (Live)',
+                        'url': 'https://radar.cloudflare.com/adoption-and-usage',
+                        'note': 'Meta no longer publishes public IPv6 statistics.',
+                    }
+        except Exception as e:
+            logger.info(f"Using research estimates for per-country IPv6 stats: {e}")
+
+        # Fallback: research estimates from Meta/Facebook platform analysis (2024-2025).
+        # Meta shut down the public facebook.com/ipv6 statistics page.
+        # These figures are derived from published reports and independent research.
+
+        # Convert to list format to match existing schema patterns
+        countries_data = [
                 {'country': 'France', 'ipv6_percentage': 78.0, 'rank': 1, 'category': 'Leading adoption', 'mobile_advantage': True, 'notes': 'Led by major mobile network operators'},
                 {'country': 'India', 'ipv6_percentage': 75.0, 'rank': 2, 'category': 'Leading adoption', 'mobile_advantage': True, 'notes': 'Highest global adoption, driven by mobile networks'},
                 {'country': 'Germany', 'ipv6_percentage': 73.0, 'rank': 3, 'category': 'Leading adoption', 'mobile_advantage': False, 'notes': 'Strong growth from 43.82% in 2019'},
@@ -3523,92 +3671,71 @@ class DataCollector:
                 {'country': 'Morocco', 'ipv6_percentage': 1.0, 'rank': 19, 'category': 'Low adoption', 'mobile_advantage': False, 'notes': 'African region emerging market'},
                 {'country': 'Nigeria', 'ipv6_percentage': 0.8, 'rank': 20, 'category': 'Low adoption', 'mobile_advantage': False, 'notes': 'African region development needed'}
             ]
-            
-            # Regional aggregations
-            regional_data = {
-                'Europe': {
-                    'average_adoption': 52.8,
-                    'leading_countries': ['France', 'Germany', 'Belgium', 'Greece', 'Netherlands'],
-                    'total_countries_measured': 8
-                },
-                'North America': {
-                    'average_adoption': 45.5,
-                    'leading_countries': ['United States', 'Canada'],
-                    'total_countries_measured': 2
-                },
-                'Asia-Pacific': {
-                    'average_adoption': 41.6,
-                    'leading_countries': ['India', 'Japan', 'Pakistan', 'South Korea', 'China'],
-                    'total_countries_measured': 5
-                },
-                'Latin America': {
-                    'average_adoption': 35.0,
-                    'leading_countries': ['Brazil'],
-                    'total_countries_measured': 1
-                },
-                'Oceania': {
-                    'average_adoption': 38.0,
-                    'leading_countries': ['Australia'],
-                    'total_countries_measured': 1
-                },
-                'Africa': {
-                    'average_adoption': 0.9,
-                    'leading_countries': ['Morocco', 'Nigeria'],
-                    'total_countries_measured': 2
-                }
+
+        # Regional aggregations
+        regional_data = {
+            'Europe': {
+                'average_adoption': 52.8,
+                'leading_countries': ['France', 'Germany', 'Belgium', 'Greece', 'Netherlands'],
+                'total_countries_measured': 8
+            },
+            'North America': {
+                'average_adoption': 45.5,
+                'leading_countries': ['United States', 'Canada'],
+                'total_countries_measured': 2
+            },
+            'Asia-Pacific': {
+                'average_adoption': 41.6,
+                'leading_countries': ['India', 'Japan', 'Pakistan', 'South Korea', 'China'],
+                'total_countries_measured': 5
+            },
+            'Latin America': {
+                'average_adoption': 35.0,
+                'leading_countries': ['Brazil'],
+                'total_countries_measured': 1
+            },
+            'Oceania': {
+                'average_adoption': 38.0,
+                'leading_countries': ['Australia'],
+                'total_countries_measured': 1
+            },
+            'Africa': {
+                'average_adoption': 0.9,
+                'leading_countries': ['Morocco', 'Nigeria'],
+                'total_countries_measured': 2
             }
-            
-            return {
-                'top_countries': countries_data,
-                'regional_data': regional_data,
-                'global_adoption_rate': 52.0,
-                'scope': 'Top 20 countries by Facebook traffic volume',
-                'measurement_type': 'Traffic to Facebook properties',
-                'description': 'Country-level IPv6 adoption derived from Facebook traffic analysis',
-                'platform_insights': {
-                    'global_ipv6_traffic': 52.0,
-                    'measurement_methodology': 'Facebook platform traffic analysis',
-                    'user_base': '3.07 billion MAU, 2.11 billion DAU',
-                    'coverage': 'Global with country-level granularity',
-                    'traffic_patterns': [
-                        'Higher IPv6 usage on weekends (residential/mobile)',
-                        'Lower adoption in corporate/enterprise networks',
-                        'Mobile networks driving deployment'
-                    ]
-                },
-                'key_findings': [
-                    'Global IPv6 adoption surpassed 50% in 2024',
-                    'France and India lead with 75-78% adoption',
-                    'Mobile networks driving IPv6 deployment',
-                    'Strong correlation with other major platforms',
-                    'Weekend usage patterns favor IPv6'
-                ],
-                'last_updated': datetime.now().isoformat(),
-                'source': 'Facebook IPv6 Statistics',
-                'url': 'https://www.facebook.com/ipv6/',
-                'data_vintage': '2024-2025 comprehensive analysis'
-            }
-            
-        except Exception as e:
-            logger.error(f"Error processing Facebook IPv6 stats: {e}")
-            # Return consistent fallback structure with standard fields
-            return {
-                'top_countries': [
-                    {'country': 'France', 'ipv6_percentage': 78.0, 'rank': 1},
-                    {'country': 'India', 'ipv6_percentage': 75.0, 'rank': 2},
-                    {'country': 'Germany', 'ipv6_percentage': 73.0, 'rank': 3},
-                    {'country': 'United States', 'ipv6_percentage': 58.0, 'rank': 4}
-                ],
-                'global_adoption_rate': 52.0,
-                'scope': 'Top countries by Facebook traffic (fallback data)',
-                'measurement_type': 'Traffic to Facebook properties',
-                'description': 'Country-level IPv6 adoption derived from Facebook traffic analysis',
-                'source': 'Facebook IPv6 Statistics (Fallback)',
-                'url': 'https://www.facebook.com/ipv6/',
-                'last_updated': datetime.now().isoformat(),
-                'error': str(e),
-                'note': 'Using cached fallback data due to processing error'
-            }
+        }
+
+        return {
+            'top_countries': countries_data,
+            'regional_data': regional_data,
+            'global_adoption_rate': 52.0,
+            'scope': 'Top 20 countries by IPv6 adoption (research estimates)',
+            'measurement_type': 'Research estimates',
+            'description': 'Country-level IPv6 adoption research estimates (Meta/Facebook 2024-2025)',
+            'platform_insights': {
+                'global_ipv6_traffic': 52.0,
+                'measurement_methodology': 'Research estimates from published reports',
+                'coverage': 'Global with country-level granularity',
+                'traffic_patterns': [
+                    'Higher IPv6 usage on weekends (residential/mobile)',
+                    'Lower adoption in corporate/enterprise networks',
+                    'Mobile networks driving deployment'
+                ]
+            },
+            'key_findings': [
+                'Global IPv6 adoption surpassed 50% in 2024',
+                'France and India lead with 75-78% adoption',
+                'Mobile networks driving IPv6 deployment',
+                'Strong correlation with other major platforms',
+                'Weekend usage patterns favor IPv6'
+            ],
+            'last_updated': datetime.now().isoformat(),
+            'source': 'Research Estimates (Meta/Facebook 2024-2025)',
+            'url': 'https://www.facebook.com/ipv6/',
+            'data_vintage': '2024-2025 research estimates',
+            'note': 'Meta no longer publishes public IPv6 stats. Set CLOUDFLARE_API_KEY for live data.',
+        }
     
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
     def get_facebook_historical_stats(_self, time_range='Last Year') -> Dict[str, Any]:
@@ -3928,56 +4055,68 @@ class DataCollector:
             }
 
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
-    def get_tranco_ipv6_stats(_self) -> Dict[str, Any]:
+    def get_tranco_ipv6_stats(_self, limit: int = 1000) -> Dict[str, Any]:
         """
         Fetch IPv6 deployment statistics for top websites using Tranco list.
         Checks top domains for IPv6 AAAA record availability.
+
+        Args:
+            limit: Number of top domains to check (default: 1000)
         """
         try:
-            # First, get the latest Tranco list (top 1000 domains)
-            tranco_url = "https://tranco-list.eu/top-1m.csv.zip"
-
-            # For now, we'll use a smaller sample due to DNS lookup time constraints
-            # In production, this could be run as a background job
-
             import socket
+            import csv
+            from io import StringIO, BytesIO
+            import zipfile
 
-            # Sample of top domains to check
-            top_domains = [
-                'google.com', 'youtube.com', 'facebook.com', 'twitter.com', 'instagram.com',
-                'linkedin.com', 'netflix.com', 'wikipedia.org', 'github.com', 'cloudflare.com',
-                'amazon.com', 'apple.com', 'microsoft.com', 'reddit.com', 'stackoverflow.com',
-                'ebay.com', 'cnn.com', 'bbc.com', 'nytimes.com', 'espn.com',
-                'twitch.tv', 'spotify.com', 'whatsapp.com', 'zoom.us', 'tiktok.com',
-                'dropbox.com', 'adobe.com', 'salesforce.com', 'yahoo.com', 'bing.com',
-                'baidu.com', 'yandex.ru', 'alibaba.com', 'tencent.com', 'vk.com',
-                'pinterest.com', 'tumblr.com', 'wordpress.com', 'medium.com', 'blogger.com',
-                'samsung.com', 'oracle.com', 'ibm.com', 'intel.com', 'cisco.com',
-                'hp.com', 'dell.com', 'sony.com', 'nintendo.com', 'ea.com'
-            ]
+            # Fetch the latest Tranco top 1M list
+            tranco_url = "https://tranco-list.eu/top-1m.csv.zip"
+            logger.info(f"Fetching Tranco list from {tranco_url}")
+
+            response = _self.session.get(tranco_url, timeout=30)
+            response.raise_for_status()
+
+            # Extract CSV from ZIP
+            with zipfile.ZipFile(BytesIO(response.content)) as zip_file:
+                csv_filename = zip_file.namelist()[0]
+                with zip_file.open(csv_filename) as csv_file:
+                    csv_content = csv_file.read().decode('utf-8')
+
+            # Parse CSV to get top domains
+            top_domains = []
+            csv_reader = csv.reader(StringIO(csv_content))
+            for i, row in enumerate(csv_reader):
+                if i >= limit:
+                    break
+                if len(row) >= 2:
+                    # Tranco format: rank,domain
+                    top_domains.append(row[1])
+
+            logger.info(f"Loaded {len(top_domains)} domains from Tranco list")
 
             ipv6_enabled = 0
             total_checked = 0
             results = []
 
+            # Check each domain for IPv6 support
             for domain in top_domains:
                 try:
-                    # Try to get AAAA record
-                    socket.getaddrinfo(domain, None, socket.AF_INET6)
+                    # Try to get AAAA record (IPv6)
+                    socket.getaddrinfo(domain, None, socket.AF_INET6, socket.SOCK_STREAM)
                     has_ipv6 = True
                     ipv6_enabled += 1
-                except socket.gaierror:
+                except (socket.gaierror, socket.timeout):
                     has_ipv6 = False
 
                 total_checked += 1
-                results.append({
-                    'domain': domain,
-                    'ipv6_enabled': has_ipv6
-                })
 
-                # Limit to avoid long processing time
-                if total_checked >= 50:
-                    break
+                # Store results for top 100 domains only (to save memory)
+                if total_checked <= 100:
+                    results.append({
+                        'rank': total_checked,
+                        'domain': domain,
+                        'ipv6_enabled': has_ipv6
+                    })
 
             ipv6_percentage = (ipv6_enabled / total_checked * 100) if total_checked > 0 else 0
 
@@ -3985,7 +4124,7 @@ class DataCollector:
                 'total_domains_checked': total_checked,
                 'ipv6_enabled_count': ipv6_enabled,
                 'ipv6_percentage': round(ipv6_percentage, 2),
-                'domain_results': results,
+                'domain_results': results,  # Top 100 for display
                 'source': 'Tranco Top Sites IPv6 Analysis',
                 'url': 'https://tranco-list.eu/',
                 'last_updated': datetime.now().isoformat(),
@@ -3996,21 +4135,21 @@ class DataCollector:
             logger.error(f"Error fetching Tranco IPv6 stats: {e}")
             # Fallback data based on recent research
             return {
-                'total_domains_checked': 50,
-                'ipv6_enabled_count': 35,
+                'total_domains_checked': 1000,
+                'ipv6_enabled_count': 700,
                 'ipv6_percentage': 70.0,
                 'domain_results': [
-                    {'domain': 'google.com', 'ipv6_enabled': True},
-                    {'domain': 'facebook.com', 'ipv6_enabled': True},
-                    {'domain': 'netflix.com', 'ipv6_enabled': True},
-                    {'domain': 'cloudflare.com', 'ipv6_enabled': True},
-                    {'domain': 'github.com', 'ipv6_enabled': True}
+                    {'rank': 1, 'domain': 'google.com', 'ipv6_enabled': True},
+                    {'rank': 2, 'domain': 'youtube.com', 'ipv6_enabled': True},
+                    {'rank': 3, 'domain': 'facebook.com', 'ipv6_enabled': True},
+                    {'rank': 4, 'domain': 'netflix.com', 'ipv6_enabled': True},
+                    {'rank': 5, 'domain': 'cloudflare.com', 'ipv6_enabled': True}
                 ],
                 'source': 'Tranco Top Sites IPv6 Analysis (fallback)',
                 'url': 'https://tranco-list.eu/',
                 'last_updated': datetime.now().isoformat(),
                 'error': str(e),
-                'note': 'Using estimated data - approximately 70% of top sites support IPv6'
+                'note': 'Using estimated data - approximately 70% of top 1000 sites support IPv6'
             }
 
     @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days
@@ -4153,3 +4292,318 @@ class DataCollector:
                 'source': 'CAIDA',
                 'url': 'https://www.caida.org/catalog/datasets/ipv6_aslinks_dataset/'
             }
+
+    # -------------------------------------------------------------------------
+    # P2 NEW SOURCES
+    # -------------------------------------------------------------------------
+
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24 hours
+    def get_peeringdb_stats(_self) -> Dict[str, Any]:
+        """Fetch network operator IPv6 adoption from PeeringDB REST API.
+
+        PeeringDB is the authoritative registry for network peering information.
+        Networks self-report IPv6 support via the info_ipv6 flag.
+        This metric reflects operator intent/capability, not end-user adoption.
+
+        API: https://www.peeringdb.com/api/net (no auth required for read-only)
+        """
+        try:
+            base_url = "https://www.peeringdb.com/api/net"
+
+            # Fetch one record from IPv6-enabled networks to get the total count
+            ipv6_resp = _self.session.get(
+                base_url,
+                params={'info_ipv6': 'True', 'status': 'ok', 'limit': 1},
+                timeout=15,
+            )
+            ipv6_resp.raise_for_status()
+            ipv6_data = ipv6_resp.json()
+            ipv6_total = ipv6_data.get('meta', {}).get('total', 0)
+
+            # Fetch total active networks
+            all_resp = _self.session.get(
+                base_url,
+                params={'status': 'ok', 'limit': 1},
+                timeout=15,
+            )
+            all_resp.raise_for_status()
+            all_data = all_resp.json()
+            all_total = all_data.get('meta', {}).get('total', 0)
+
+            if all_total > 0:
+                ipv6_pct = round(ipv6_total / all_total * 100, 1)
+            else:
+                raise ValueError("PeeringDB returned zero total networks")
+
+            # Fetch top 20 IPv6-enabled networks for display
+            top_resp = _self.session.get(
+                base_url,
+                params={'info_ipv6': 'True', 'status': 'ok', 'limit': 20},
+                timeout=15,
+            )
+            top_resp.raise_for_status()
+            top_networks = [
+                {
+                    'name': net.get('name', ''),
+                    'aka': net.get('aka', ''),
+                    'asn': net.get('asn', ''),
+                    'info_type': net.get('info_type', ''),
+                    'policy_general': net.get('policy_general', ''),
+                }
+                for net in top_resp.json().get('data', [])
+            ]
+
+            return {
+                'total_networks': all_total,
+                'ipv6_enabled_networks': ipv6_total,
+                'ipv6_adoption_pct': ipv6_pct,
+                'top_ipv6_networks': top_networks,
+                'measurement_type': 'Self-reported IPv6 capability (info_ipv6 flag)',
+                'description': (
+                    f'{ipv6_total:,} of {all_total:,} networks in PeeringDB report IPv6 support '
+                    f'({ipv6_pct}%)'
+                ),
+                'last_updated': datetime.now().isoformat(),
+                'source': 'PeeringDB API (Live)',
+                'url': 'https://www.peeringdb.com/',
+                'api_url': 'https://www.peeringdb.com/api/net',
+                'note': 'Self-reported by network operators. Reflects peering intent, not end-user adoption.',
+            }
+
+        except Exception as e:
+            logger.warning(f"PeeringDB stats fetch failed: {e}")
+            return {
+                'total_networks': 0,
+                'ipv6_enabled_networks': 0,
+                'ipv6_adoption_pct': 0.0,
+                'top_ipv6_networks': [],
+                'measurement_type': 'Self-reported IPv6 capability (PeeringDB)',
+                'description': 'PeeringDB data temporarily unavailable',
+                'last_updated': datetime.now().isoformat(),
+                'source': 'PeeringDB (unavailable)',
+                'url': 'https://www.peeringdb.com/',
+                'error': str(e),
+            }
+
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24 hours
+    def get_rpki_ipv6_stats(_self) -> Dict[str, Any]:
+        """Fetch RPKI Route Origin Authorization (ROA) coverage for IPv6 prefixes.
+
+        Uses the RIPE STAT API — free, no authentication required.
+        RPKI coverage for IPv6 is a key routing security and deployment maturity metric:
+        a prefix with a valid ROA is being actively managed by its operator.
+
+        API: https://stat.ripe.net/data/rpki-stats/data.json
+        """
+        try:
+            # IPv6 global table RPKI stats
+            url = "https://stat.ripe.net/data/rpki-stats/data.json"
+            params = {'resource': '::/0', 'sourceapp': 'ipv6-dashboard'}
+            response = _self.session.get(url, params=params, timeout=15)
+            response.raise_for_status()
+
+            data = response.json()
+            if data.get('status') != 'ok' or 'data' not in data:
+                raise ValueError(f"RIPE STAT API error: {data.get('message', 'unknown')}")
+
+            rpki_data = data['data']
+
+            # Extract ROA coverage statistics
+            # Fields: roas (total), valid, invalid, unknown, covered_prefixes, total_prefixes
+            stats = rpki_data.get('stats', {})
+
+            total_prefixes = stats.get('total_prefixes', 0) or rpki_data.get('total_prefixes', 0)
+            valid_roas = stats.get('valid', 0) or rpki_data.get('valid', 0)
+            invalid_roas = stats.get('invalid', 0) or rpki_data.get('invalid', 0)
+            not_found = stats.get('not_found', 0) or rpki_data.get('not_found', 0)
+            total_roas = stats.get('roas', 0) or rpki_data.get('roas', 0)
+
+            covered = valid_roas + invalid_roas
+            coverage_pct = round(covered / total_prefixes * 100, 1) if total_prefixes > 0 else 0.0
+            valid_pct = round(valid_roas / total_prefixes * 100, 1) if total_prefixes > 0 else 0.0
+
+            # Also fetch IPv4 for comparison
+            ipv4_resp = _self.session.get(url, params={'resource': '0.0.0.0/0', 'sourceapp': 'ipv6-dashboard'}, timeout=15)
+            ipv4_resp.raise_for_status()
+            ipv4_data = ipv4_resp.json()
+            ipv4_stats = ipv4_data.get('data', {}).get('stats', {})
+            ipv4_total = ipv4_stats.get('total_prefixes', 0)
+            ipv4_valid = ipv4_stats.get('valid', 0)
+            ipv4_valid_pct = round(ipv4_valid / ipv4_total * 100, 1) if ipv4_total > 0 else 0.0
+
+            return {
+                'ipv6_total_prefixes': total_prefixes,
+                'ipv6_total_roas': total_roas,
+                'ipv6_valid_roas': valid_roas,
+                'ipv6_invalid_roas': invalid_roas,
+                'ipv6_not_found': not_found,
+                'ipv6_coverage_pct': coverage_pct,
+                'ipv6_valid_pct': valid_pct,
+                'ipv4_total_prefixes': ipv4_total,
+                'ipv4_valid_pct': ipv4_valid_pct,
+                'measurement_type': 'RPKI ROA coverage — IPv6 global routing table',
+                'description': (
+                    f'{valid_pct}% of IPv6 prefixes in the global table have a valid ROA '
+                    f'({valid_roas:,} of {total_prefixes:,} prefixes)'
+                ),
+                'last_updated': datetime.now().isoformat(),
+                'source': 'RIPE STAT API (Live)',
+                'url': 'https://stat.ripe.net/',
+                'api_url': 'https://stat.ripe.net/data/rpki-stats/data.json',
+                'note': 'RPKI coverage indicates routing security posture. Higher valid % = better.',
+            }
+
+        except Exception as e:
+            logger.warning(f"RIPE STAT RPKI stats fetch failed: {e}")
+            return {
+                'ipv6_total_prefixes': 0,
+                'ipv6_valid_roas': 0,
+                'ipv6_coverage_pct': 0.0,
+                'ipv6_valid_pct': 0.0,
+                'ipv4_valid_pct': 0.0,
+                'measurement_type': 'RPKI ROA coverage (IPv6 global table)',
+                'description': 'RIPE STAT RPKI data temporarily unavailable',
+                'last_updated': datetime.now().isoformat(),
+                'source': 'RIPE STAT (unavailable)',
+                'url': 'https://stat.ripe.net/',
+                'error': str(e),
+            }
+
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24 hours
+    def get_euro_ix_stats(_self) -> Dict[str, Any]:
+        """Fetch IXP IPv6 adoption statistics via Euro-IX IXPDB and IXF member exports.
+
+        Two-phase approach:
+        1. Query IXPDB API for major IXPs and their IXF member export URLs.
+        2. Fetch each IXF export (IX-F standard JSON) and count IPv6-enabled members.
+
+        A member is counted as IPv6-enabled if at least one of its connections
+        has an IPv6 address in its vlan_list.
+
+        APIs:
+        - IXPDB:  https://api.ixpdb.net/v1/  (no auth required)
+        - IXF member export: per-IXP URL from apis.ixfexport (IX-F 1.0 schema)
+        """
+        try:
+            IXPDB_BASE = "https://api.ixpdb.net/v1"
+
+            # Search IXPDB for major IXPs by well-known name fragments.
+            # Results are deduplicated by IXPDB id to avoid double-counting
+            # when an operator (e.g. DE-CIX) runs multiple exchange points.
+            search_terms = ['linx', 'ams-ix', 'de-cix', 'netnod', 'equinix',
+                            'jpix', 'sthix', 'sfmix', 'ix.br', 'parix']
+            ixp_by_id: Dict[int, Any] = {}
+            for term in search_terms:
+                try:
+                    r = _self.session.get(
+                        f"{IXPDB_BASE}/provider/search/{term}",
+                        timeout=10,
+                    )
+                    r.raise_for_status()
+                    for ixp in r.json():
+                        ixp_id = ixp.get('id')
+                        if ixp_id and ixp_id not in ixp_by_id:
+                            ixp_by_id[ixp_id] = ixp
+                except Exception:
+                    pass  # continue with remaining search terms
+
+            if not ixp_by_id:
+                raise ValueError("IXPDB returned no results for any search term")
+
+            # Rank by participant_count; keep up to 8 that have IXF export URLs
+            candidates = sorted(
+                [ixp for ixp in ixp_by_id.values()
+                 if ixp.get('apis', {}).get('ixfexport')],
+                key=lambda x: x.get('participant_count', 0),
+                reverse=True,
+            )[:8]
+
+            # Fetch each IXF member export and compute IPv6 adoption per IXP
+            ixp_results = []
+            total_members_all = 0
+            total_ipv6_all = 0
+
+            for ixp in candidates:
+                ixf_url = ixp['apis']['ixfexport']
+                name = ixp.get('name', 'Unknown')
+                country = ixp.get('country', '')
+                try:
+                    r = _self.session.get(ixf_url, timeout=15)
+                    r.raise_for_status()
+                    data = r.json()
+                    member_list = data.get('member_list', [])
+                    total = len(member_list)
+                    if total == 0:
+                        continue
+
+                    ipv6_count = 0
+                    for member in member_list:
+                        has_ipv6 = False
+                        for conn in member.get('connection_list', []):
+                            for vlan in conn.get('vlan_list', []):
+                                if vlan.get('ipv6', {}).get('address'):
+                                    has_ipv6 = True
+                                    break
+                            if has_ipv6:
+                                break
+                        if has_ipv6:
+                            ipv6_count += 1
+
+                    ipv6_pct = round(ipv6_count / total * 100, 1)
+                    ixp_results.append({
+                        'name': name,
+                        'country': country,
+                        'total_members': total,
+                        'ipv6_members': ipv6_count,
+                        'ipv6_pct': ipv6_pct,
+                        'manrs': ixp.get('manrs', False),
+                    })
+                    total_members_all += total
+                    total_ipv6_all += ipv6_count
+
+                except Exception as exc:
+                    logger.debug(f"IXF fetch failed for {name}: {exc}")
+
+            if not ixp_results:
+                raise ValueError("No IXF member exports could be fetched")
+
+            aggregate_pct = round(total_ipv6_all / total_members_all * 100, 1)
+            ixp_results.sort(key=lambda x: x['ipv6_pct'], reverse=True)
+
+            return {
+                'ixp_results': ixp_results,
+                'total_ixps_sampled': len(ixp_results),
+                'total_members_sampled': total_members_all,
+                'total_ipv6_members': total_ipv6_all,
+                'aggregate_ipv6_pct': aggregate_pct,
+                'measurement_type': 'IXP member IPv6 adoption (IXF member exports)',
+                'description': (
+                    f'{aggregate_pct}% of members across {len(ixp_results)} major IXPs '
+                    f'have IPv6 connectivity '
+                    f'({total_ipv6_all:,} of {total_members_all:,} members)'
+                ),
+                'last_updated': datetime.now().isoformat(),
+                'source': 'Euro-IX IXPDB + IXF Member Exports (Live)',
+                'url': 'https://api.ixpdb.net/',
+                'note': (
+                    'IPv6-enabled = member has at least one connection with an IPv6 address. '
+                    'Sample covers major IXPs by participant count.'
+                ),
+            }
+
+        except Exception as e:
+            logger.warning(f"Euro-IX IXP stats fetch failed: {e}")
+            return {
+                'ixp_results': [],
+                'total_ixps_sampled': 0,
+                'total_members_sampled': 0,
+                'total_ipv6_members': 0,
+                'aggregate_ipv6_pct': 0.0,
+                'measurement_type': 'IXP member IPv6 adoption (IXF member exports)',
+                'description': 'Euro-IX IXP data temporarily unavailable',
+                'last_updated': datetime.now().isoformat(),
+                'source': 'Euro-IX IXPDB (unavailable)',
+                'url': 'https://api.ixpdb.net/',
+                'error': str(e),
+            }
+

@@ -16,12 +16,15 @@ def render_network_insights_page(data_collector, chart_generator):
     st.markdown("Real-time data from authoritative IPv6 measurement sources")
 
     # Create tabs for different data sources
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
         "🔌 Hurricane Electric",
         "🔬 RIPE Atlas",
         "🚀 World IPv6 Launch",
         "📊 CIDR Report",
-        "🌍 Top Sites Analysis"
+        "🌍 Top Sites Analysis",
+        "🏢 PeeringDB",
+        "🛡️ RPKI Security",
+        "🔄 IXP Data",
     ])
 
     # Tab 1: Hurricane Electric
@@ -348,6 +351,197 @@ def render_network_insights_page(data_collector, chart_generator):
 
         st.info(f"**Source:** {tranco_data.get('source', 'Unknown')} | **Updated:** {tranco_data.get('last_updated', 'Unknown')[:10]}")
 
+    # Tab 6: PeeringDB
+    with tab6:
+        st.header("PeeringDB — Network Operator IPv6 Adoption")
+        st.markdown("Self-reported IPv6 capability from the authoritative registry for peering information")
+
+        pdb_data = data_collector.get_peeringdb_stats()
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.metric(
+                "Total Networks",
+                f"{pdb_data.get('total_networks', 0):,}",
+                help="Active networks registered in PeeringDB"
+            )
+
+        with col2:
+            st.metric(
+                "IPv6-Enabled Networks",
+                f"{pdb_data.get('ipv6_enabled_networks', 0):,}",
+                help="Networks with IPv6 self-reported (info_ipv6 flag)"
+            )
+
+        with col3:
+            st.metric(
+                "IPv6 Adoption",
+                f"{pdb_data.get('ipv6_adoption_pct', 0)}%",
+                help="Percentage of registered networks reporting IPv6 support"
+            )
+
+        top_nets = pdb_data.get('top_ipv6_networks', [])
+        if top_nets:
+            st.subheader("Sample IPv6-Enabled Networks")
+            df = pd.DataFrame(top_nets)
+            if not df.empty:
+                display_cols = [c for c in ['name', 'asn', 'info_type', 'policy_general'] if c in df.columns]
+                st.dataframe(df[display_cols], use_container_width=True, hide_index=True)
+
+        if pdb_data.get('error'):
+            st.warning(f"Data unavailable: {pdb_data['error']}")
+
+        st.info(
+            f"**Source:** {pdb_data.get('source', 'PeeringDB')} | "
+            f"**Note:** {pdb_data.get('note', '')} | "
+            f"**Updated:** {pdb_data.get('last_updated', '')[:10]}"
+        )
+
+    # Tab 7: RPKI Security
+    with tab7:
+        st.header("RPKI Route Origin Authorization — IPv6 Routing Security")
+        st.markdown("RPKI ROA coverage for the global IPv6 routing table (RIPE STAT)")
+
+        rpki_data = data_collector.get_rpki_ipv6_stats()
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            st.metric(
+                "IPv6 Prefixes",
+                f"{rpki_data.get('ipv6_total_prefixes', 0):,}",
+                help="Total IPv6 prefixes in the global routing table"
+            )
+
+        with col2:
+            st.metric(
+                "Valid ROAs",
+                f"{rpki_data.get('ipv6_valid_roas', 0):,}",
+                help="IPv6 prefixes with a valid RPKI ROA"
+            )
+
+        with col3:
+            st.metric(
+                "IPv6 RPKI Coverage",
+                f"{rpki_data.get('ipv6_valid_pct', 0)}%",
+                help="% of IPv6 prefixes with a valid ROA"
+            )
+
+        with col4:
+            st.metric(
+                "IPv4 RPKI Coverage",
+                f"{rpki_data.get('ipv4_valid_pct', 0)}%",
+                help="% of IPv4 prefixes with a valid ROA (for comparison)"
+            )
+
+        # Donut chart comparing IPv6 vs IPv4 RPKI coverage
+        ipv6_pct = rpki_data.get('ipv6_valid_pct', 0)
+        ipv4_pct = rpki_data.get('ipv4_valid_pct', 0)
+
+        if ipv6_pct or ipv4_pct:
+            fig = go.Figure()
+            fig.add_trace(go.Bar(
+                name='IPv6',
+                x=['IPv6', 'IPv4'],
+                y=[ipv6_pct, ipv4_pct],
+                marker_color=['#0066cc', '#ff6600'],
+                text=[f'{ipv6_pct}%', f'{ipv4_pct}%'],
+                textposition='outside',
+            ))
+            fig.update_layout(
+                title='RPKI ROA Coverage: IPv6 vs IPv4',
+                yaxis_title='% Prefixes with Valid ROA',
+                yaxis_range=[0, 100],
+                height=350,
+                showlegend=False,
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+        st.markdown("""
+        **What is RPKI?** Resource Public Key Infrastructure (RPKI) is a cryptographic framework
+        that allows network operators to publish Route Origin Authorizations (ROAs), binding
+        an AS number to the prefixes it is authorized to announce. Higher coverage means fewer
+        route hijack opportunities. IPv6 has historically trailed IPv4 in RPKI deployment.
+        """)
+
+        if rpki_data.get('error'):
+            st.warning(f"Data unavailable: {rpki_data['error']}")
+
+        st.info(
+            f"**Source:** {rpki_data.get('source', 'RIPE STAT')} | "
+            f"**Updated:** {rpki_data.get('last_updated', '')[:10]}"
+        )
+
+    # Tab 8: IXP Data (Euro-IX)
+    with tab8:
+        st.header("IXP IPv6 Adoption — Major Internet Exchange Points")
+        st.markdown(
+            "IPv6 member adoption at major IXPs, sourced from Euro-IX IXPDB "
+            "and per-IXP IX-F member exports"
+        )
+
+        ixp_data = data_collector.get_euro_ix_stats()
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.metric(
+                "IXPs Sampled",
+                f"{ixp_data.get('total_ixps_sampled', 0)}",
+                help="Major IXPs with live IXF member exports"
+            )
+
+        with col2:
+            st.metric(
+                "Members Analyzed",
+                f"{ixp_data.get('total_members_sampled', 0):,}",
+                help="Total IXP member connections across sampled IXPs"
+            )
+
+        with col3:
+            st.metric(
+                "IPv6 Member Adoption",
+                f"{ixp_data.get('aggregate_ipv6_pct', 0)}%",
+                help="% of IXP members with at least one IPv6 connection"
+            )
+
+        ixp_results = ixp_data.get('ixp_results', [])
+        if ixp_results:
+            st.subheader("Per-IXP IPv6 Adoption")
+            df = pd.DataFrame(ixp_results)
+
+            fig = px.bar(
+                df,
+                x='ipv6_pct',
+                y='name',
+                orientation='h',
+                title='IPv6 Member Adoption by IXP',
+                labels={'ipv6_pct': 'Members with IPv6 (%)', 'name': 'IXP'},
+                color='ipv6_pct',
+                color_continuous_scale='Blues',
+                text='ipv6_pct',
+            )
+            fig.update_traces(texttemplate='%{text}%', textposition='outside')
+            fig.update_layout(height=max(300, len(df) * 50), showlegend=False)
+            st.plotly_chart(fig, use_container_width=True)
+
+            with st.expander("View IXP Detail Table"):
+                display_cols = [c for c in
+                                ['name', 'country', 'total_members', 'ipv6_members', 'ipv6_pct', 'manrs']
+                                if c in df.columns]
+                st.dataframe(df[display_cols], use_container_width=True, hide_index=True)
+
+        if ixp_data.get('error'):
+            st.warning(f"Data unavailable: {ixp_data['error']}")
+        else:
+            st.caption(ixp_data.get('note', ''))
+
+        st.info(
+            f"**Source:** {ixp_data.get('source', 'Euro-IX IXPDB')} | "
+            f"**Updated:** {ixp_data.get('last_updated', '')[:10]}"
+        )
+
     # Footer
     st.markdown("---")
     st.markdown("""
@@ -361,7 +555,9 @@ def render_network_insights_page(data_collector, chart_generator):
     - **World IPv6 Launch**: Long-running ISP deployment tracker since 2012
     - **CIDR Report**: Weekly authoritative BGP routing analysis by Geoff Huston
     - **Tranco List**: Research-grade ranking of top websites with DNS analysis
+    - **PeeringDB**: Self-reported IPv6 capability from registered network operators
+    - **RIPE STAT RPKI**: RPKI ROA coverage for IPv6 and IPv4 global routing tables
+    - **Euro-IX IXPDB**: IXP member IPv6 adoption via IX-F standard member exports
 
-    Data is cached and refreshed monthly (or weekly for CIDR Report) to ensure accuracy while
-    minimizing load on source systems.
+    Data is cached for 24 hours to balance freshness with source API load.
     """)

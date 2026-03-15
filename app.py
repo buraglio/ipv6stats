@@ -954,14 +954,6 @@ elif current_view == "Overview":
                     asia_pacific = regional_leaders.get('Asia-Pacific', 'Leading region')
                     st.info(f"🌏 **Regional Leaders**: {asia_pacific}")
             
-            # Add NIST USGv6 federal insights
-            nist_data = data_collector.get_nist_usgv6_deployment_stats()
-            if 'error' not in nist_data:
-                mandate = nist_data.get('mandate_status', {})
-                if mandate:
-                    target = mandate.get('target_percentage', '80%')
-                    year = mandate.get('target_date', '2025')
-                    st.warning(f"🏛️ **Federal Mandate**: US government targeting {target} IPv6-only by {year}")
         except:
             pass
     

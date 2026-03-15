@@ -224,6 +224,17 @@ fastReruns = true
 **Optional API Keys:**
 - `CLOUDFLARE_API_KEY`: Set this to enable live data from Cloudflare Radar API. Without it, the dashboard uses estimated data from recent reports. Get a free API key at https://dash.cloudflare.com/
 
+**Using .env file (Recommended):**
+```bash
+# Copy the example file
+cp .env.example .env
+
+# Edit .env and add your API keys
+nano .env
+```
+
+The application will automatically load variables from the `.env` file on startup.
+
 ### Performance Configuration
 
 Edit `performance_config.py` to adjust:
