@@ -4275,9 +4275,77 @@ elif current_view == "BGP Statistics":
         except Exception as e:
             st.warning("Regional RIR data temporarily unavailable")
         
+        # ── Routeviews Multi-Collector View ──────────────────────────────────
+        st.subheader("🌐 Routeviews Multi-Collector BGP View")
+        st.markdown(
+            "Per-collector IPv6 prefix counts and per-RIR IPv6 peer counts from the "
+            "[Routeviews](https://api.routeviews.org/) distributed route-collector network."
+        )
+
+        try:
+            import plotly.express as px
+            import pandas as _pd_bgp
+
+            rv_stats = data_collector.get_routeviews_bgp_stats()
+
+            rv_col1, rv_col2, rv_col3 = st.columns(3)
+            with rv_col1:
+                st.metric(
+                    "Active Collectors",
+                    rv_stats.get('active_collectors', 0),
+                    help="Routeviews route collectors currently operational"
+                )
+            with rv_col2:
+                st.metric(
+                    "RPKI-Enabled Collectors",
+                    rv_stats.get('rpki_collectors', 0),
+                    help="Collectors with RPKI validation enabled"
+                )
+            with rv_col3:
+                st.metric(
+                    "Avg IPv6 Prefix Count",
+                    f"{rv_stats.get('avg_ipv6_prefix_count', 0):,}",
+                    help="Average IPv6 prefix count across all collectors (most recent snapshot)"
+                )
+
+            # Per-RIR IPv6 peer counts
+            rir_peers = rv_stats.get('rir_ipv6_peers', {})
+            if any(rir_peers.values()):
+                rir_df = _pd_bgp.DataFrame([
+                    {'RIR': k.upper().replace('RIPENCC', 'RIPE NCC'), 'IPv6 Peers': v}
+                    for k, v in sorted(rir_peers.items(), key=lambda x: -x[1])
+                ])
+                fig_rir = px.bar(
+                    rir_df, x='RIR', y='IPv6 Peers',
+                    title=f'IPv6 BGP Peers by RIR — Routeviews snapshot {rv_stats.get("rir_snapshot_date", "")}',
+                    color='IPv6 Peers', color_continuous_scale='Blues',
+                    text='IPv6 Peers',
+                )
+                fig_rir.update_traces(textposition='outside')
+                fig_rir.update_layout(height=350, showlegend=False)
+                st.plotly_chart(fig_rir, use_container_width=True)
+
+            # Per-collector table
+            cstats = rv_stats.get('collector_stats', [])
+            if cstats:
+                with st.expander(f"Per-Collector IPv6 Prefix Counts ({len(cstats)} collectors)"):
+                    cdf = _pd_bgp.DataFrame(cstats)
+                    display_cols = [c for c in
+                        ['collector', 'date', 'ipv6_prefix_count', 'ipv4_prefix_count', 'ipv6_peer_count']
+                        if c in cdf.columns]
+                    st.dataframe(cdf[display_cols], use_container_width=True, hide_index=True)
+
+            st.caption(
+                f"**Source:** {rv_stats.get('source', 'Routeviews')} | "
+                f"**Updated:** {rv_stats.get('last_updated', '')[:10]}"
+            )
+
+        except Exception as e:
+            st.warning(f"Routeviews data temporarily unavailable: {e}")
+
         # Data sources
         st.caption("📄 **Sources**: BGP Stuff (https://bgpstuff.net/totals), BGP Potaroo (https://bgp.potaroo.net/v6/as2.0/), CIDR Report (https://www.cidr-report.org/v6/as2.0/)")
-    
+
     except Exception as e:
         st.error(f"Error loading BGP statistics: {str(e)}")
 

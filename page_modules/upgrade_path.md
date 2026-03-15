@@ -13,4 +13,8 @@ P2 — New high-value sources: PeeringDB API, BGP.tools, MANRS Observatory (RPKI
 
 P3 — New angles: Mobile carrier IPv6, ISP-level APNIC per-AS data, top website IPv6 by category, RPKI/ROA coverage for IPv6 prefixes, government sector tracking, updated and refinement for AWS and Azure.
 
+Routeviews per-ASN RPKI enrichment — add RPKI state breakdown to the existing mobile carrier tab. For each ASN, query Routeviews /asn/{asn} to get prefix list with validation states, computing %_valid, %_invalid, %_notfound. Makes the mobile carrier tab significantly richer.
+
+Routeviews /rirtimeseries as BGP enrichment — lightweight call, gives per-RIR IPv6 prefix counts from Routeviews vantage points to cross-reference existing BGP data.
+
 P4 — Quality/reliability: Shorter TTL for BGP, visible fallback indicators in UI, data freshness timestamps, input validation layer

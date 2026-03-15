@@ -4912,3 +4912,194 @@ class DataCollector:
             ),
         }
 
+    @st.cache_data(ttl=86400, max_entries=1)
+    def get_routeviews_carrier_bgp(_self) -> Dict[str, Any]:
+        """
+        Fetch per-carrier BGP prefix visibility from Routeviews /asn/{asn} endpoint.
+
+        Returns IPv4 and IPv6 prefix counts as seen by Routeviews global route collectors,
+        providing an independent second vantage point alongside RIPE STAT data.
+
+        Rate-limited to 1 request/second (Routeviews guest access limit).
+        With 15 carriers this takes ~17 seconds on first load; subsequent loads
+        are served from the 24-hour cache.
+        """
+        CARRIER_ASNS = [
+            {'name': 'T-Mobile USA',        'asn': 21928},
+            {'name': 'Verizon Wireless',     'asn': 22394},
+            {'name': 'AT&T Mobility',        'asn': 20057},
+            {'name': 'Comcast Cable',        'asn': 7922},
+            {'name': 'Reliance Jio',         'asn': 55836},
+            {'name': 'Airtel (India)',        'asn': 9498},
+            {'name': 'Deutsche Telekom',     'asn': 3320},
+            {'name': 'Vodafone Germany',     'asn': 3209},
+            {'name': 'Orange France',        'asn': 3215},
+            {'name': 'BT/EE (UK)',           'asn': 2856},
+            {'name': 'NTT Docomo',           'asn': 9605},
+            {'name': 'SoftBank Japan',       'asn': 17676},
+            {'name': 'Telstra',              'asn': 1221},
+            {'name': 'SK Telecom',           'asn': 9644},
+            {'name': 'KT (Korea Telecom)',   'asn': 4766},
+        ]
+
+        results = []
+        for carrier in CARRIER_ASNS:
+            try:
+                url = f"https://api.routeviews.org/asn/{carrier['asn']}"
+                r = _self.session.get(url, timeout=15)
+                r.raise_for_status()
+                prefixes = r.json() if isinstance(r.json(), list) else []
+                ipv6_count = sum(1 for p in prefixes if ':' in p)
+                ipv4_count = sum(1 for p in prefixes if ':' not in p)
+                results.append({
+                    'name': carrier['name'],
+                    'asn': carrier['asn'],
+                    'ipv6_prefixes': ipv6_count,
+                    'ipv4_prefixes': ipv4_count,
+                    'has_ipv6_bgp': ipv6_count > 0,
+                })
+            except Exception as exc:
+                logger.debug(f"Routeviews ASN fetch failed for AS{carrier['asn']}: {exc}")
+                results.append({
+                    'name': carrier['name'],
+                    'asn': carrier['asn'],
+                    'ipv6_prefixes': 0,
+                    'ipv4_prefixes': 0,
+                    'has_ipv6_bgp': None,
+                    'error': str(exc),
+                })
+            time.sleep(1.1)  # Respect 1 req/sec guest rate limit
+
+        carriers_with_ipv6 = sum(1 for r in results if r.get('has_ipv6_bgp'))
+        return {
+            'carriers': results,
+            'total_carriers': len(results),
+            'carriers_with_ipv6_bgp': carriers_with_ipv6,
+            'total_ipv6_prefixes_seen': sum(r.get('ipv6_prefixes', 0) for r in results),
+            'last_updated': datetime.now().isoformat(),
+            'source': 'Routeviews BGP Route Collectors (/asn endpoint)',
+            'url': 'https://api.routeviews.org/',
+            'note': (
+                'IPv4 and IPv6 prefix counts as observed by Routeviews global route collectors. '
+                'Provides an independent view alongside RIPE STAT data.'
+            ),
+        }
+
+    @st.cache_data(ttl=86400, max_entries=1)
+    def get_routeviews_bgp_stats(_self) -> Dict[str, Any]:
+        """
+        Fetch per-collector IPv6 BGP statistics and per-RIR IPv6 peer counts
+        from Routeviews timeseries APIs.
+
+        Uses the last-page trick to retrieve only the most recent entries from
+        the paginated timeseries (144k+ records going back to 2001).  Groups
+        results by collector and picks each collector's latest snapshot.
+
+        Returns:
+          - Per-collector IPv6 prefix counts (most recent snapshot)
+          - Per-RIR IPv6 peer counts aggregated across all collectors
+          - Summary: active collectors, RPKI-enabled collectors, avg IPv6 prefix count
+        """
+        BASE = "https://api.routeviews.org"
+
+        def fetch_last_page(path):
+            """Fetch the final page of a paginated Routeviews endpoint."""
+            r = _self.session.get(f"{BASE}{path}", timeout=15)
+            r.raise_for_status()
+            data = r.json()
+            count = data.get('count', 0)
+            first = data.get('results', [])
+            page_size = len(first)
+            if count > page_size > 0:
+                last_page = (count + page_size - 1) // page_size
+                r2 = _self.session.get(f"{BASE}{path}?page={last_page}", timeout=15)
+                r2.raise_for_status()
+                return r2.json().get('results', [])
+            return first
+
+        # ── Collector list (57 items, fits on one page) ───────────────────────
+        active_collectors = []
+        rpki_collectors = []
+        try:
+            r = _self.session.get(f"{BASE}/collector/", timeout=15)
+            r.raise_for_status()
+            all_collectors = r.json().get('results', [])
+            active_collectors = [c for c in all_collectors if not c.get('removed')]
+            rpki_collectors = [c for c in active_collectors if c.get('rpki')]
+            time.sleep(1.1)
+        except Exception as e:
+            logger.warning(f"Routeviews collector fetch failed: {e}")
+
+        # ── Timeseries: most recent per-collector IPv6 prefix counts ──────────
+        collector_stats: Dict[str, Any] = {}
+        try:
+            recent_ts = fetch_last_page('/timeseries/')
+            time.sleep(1.1)
+            for entry in recent_ts:
+                cname = entry.get('collector', '')
+                date_str = entry.get('date', '')
+                if cname not in collector_stats or date_str > collector_stats[cname]['date']:
+                    collector_stats[cname] = {
+                        'collector': cname,
+                        'date': date_str[:10],
+                        'ipv6_prefix_count': entry.get('ipv6_prefix_count', 0),
+                        'ipv4_prefix_count': entry.get('ipv4_prefix_count', 0),
+                        'ipv6_peer_count': entry.get('ipv6_peer_count', 0),
+                    }
+        except Exception as e:
+            logger.warning(f"Routeviews timeseries fetch failed: {e}")
+
+        # ── RIR timeseries: most recent per-RIR IPv6 peer counts ─────────────
+        RIRS = ['afrinic', 'arin', 'apnic', 'lacnic', 'ripencc']
+        rir_totals = {rir: 0 for rir in RIRS}
+        rir_snapshot_date = None
+        try:
+            recent_rir = fetch_last_page('/rirtimeseries/')
+            if recent_rir:
+                latest_date = max(e.get('date', '') for e in recent_rir)
+                rir_snapshot_date = latest_date[:10]
+                for entry in recent_rir:
+                    if entry.get('date', '') == latest_date:
+                        for rir in RIRS:
+                            rir_totals[rir] += entry.get(f'{rir}_v6_peer_count', 0)
+        except Exception as e:
+            logger.warning(f"Routeviews rirtimeseries fetch failed: {e}")
+
+        # ── Aggregate ─────────────────────────────────────────────────────────
+        cstats_list = sorted(
+            collector_stats.values(),
+            key=lambda x: x.get('ipv6_prefix_count', 0),
+            reverse=True,
+        )
+        collectors_with_ipv6 = sum(1 for c in cstats_list if c.get('ipv6_prefix_count', 0) > 0)
+        avg_ipv6_pfx = (
+            round(sum(c.get('ipv6_prefix_count', 0) for c in cstats_list) / len(cstats_list))
+            if cstats_list else 0
+        )
+
+        return {
+            'active_collectors': len(active_collectors),
+            'rpki_collectors': len(rpki_collectors),
+            'collector_list': [
+                {
+                    'name': c['name'],
+                    'country': c.get('country', ''),
+                    'rir': c.get('rir_region', ''),
+                    'rpki': bool(c.get('rpki')),
+                }
+                for c in active_collectors
+            ],
+            'collector_stats': cstats_list,
+            'collectors_with_ipv6': collectors_with_ipv6,
+            'avg_ipv6_prefix_count': int(avg_ipv6_pfx),
+            'rir_ipv6_peers': rir_totals,
+            'rir_snapshot_date': rir_snapshot_date,
+            'last_updated': datetime.now().isoformat(),
+            'source': 'Routeviews Timeseries API',
+            'url': 'https://api.routeviews.org/',
+            'note': (
+                'Per-collector IPv6 prefix counts from the most recent Routeviews snapshot. '
+                'Per-RIR IPv6 peer counts summed across all collectors on the latest date.'
+            ),
+        }
+
