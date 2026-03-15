@@ -4607,3 +4607,214 @@ class DataCollector:
                 'error': str(e),
             }
 
+    @st.cache_data(ttl=86400, max_entries=1)
+    def get_mobile_carrier_ipv6_stats(_self) -> Dict[str, Any]:
+        """
+        Check IPv6 prefix announcements for major mobile/broadband carrier ASNs via RIPE STAT.
+
+        Uses the RIPE STAT announced-prefixes API to determine whether each carrier
+        advertises IPv6 prefixes into the global routing table.  IPv6 user-adoption
+        percentages are APNIC/research estimates and are labelled accordingly.
+        """
+        import concurrent.futures
+
+        CARRIERS = [
+            {'name': 'T-Mobile USA',        'asn': 21928, 'country': 'US', 'est_ipv6_pct': 87},
+            {'name': 'Verizon Wireless',     'asn': 22394, 'country': 'US', 'est_ipv6_pct': 73},
+            {'name': 'AT&T Mobility',        'asn': 20057, 'country': 'US', 'est_ipv6_pct': 68},
+            {'name': 'Comcast Cable',        'asn': 7922,  'country': 'US', 'est_ipv6_pct': 67},
+            {'name': 'Reliance Jio',         'asn': 55836, 'country': 'IN', 'est_ipv6_pct': 84},
+            {'name': 'Airtel (India)',        'asn': 9498,  'country': 'IN', 'est_ipv6_pct': 51},
+            {'name': 'Deutsche Telekom',     'asn': 3320,  'country': 'DE', 'est_ipv6_pct': 67},
+            {'name': 'Vodafone Germany',     'asn': 3209,  'country': 'DE', 'est_ipv6_pct': 55},
+            {'name': 'Orange France',        'asn': 3215,  'country': 'FR', 'est_ipv6_pct': 42},
+            {'name': 'BT/EE (UK)',           'asn': 2856,  'country': 'GB', 'est_ipv6_pct': 38},
+            {'name': 'NTT Docomo',           'asn': 9605,  'country': 'JP', 'est_ipv6_pct': 52},
+            {'name': 'SoftBank Japan',       'asn': 17676, 'country': 'JP', 'est_ipv6_pct': 48},
+            {'name': 'Telstra',              'asn': 1221,  'country': 'AU', 'est_ipv6_pct': 39},
+            {'name': 'SK Telecom',           'asn': 9644,  'country': 'KR', 'est_ipv6_pct': 49},
+            {'name': 'KT (Korea Telecom)',   'asn': 4766,  'country': 'KR', 'est_ipv6_pct': 52},
+        ]
+
+        def check_asn(carrier):
+            try:
+                url = (
+                    f"https://stat.ripe.net/data/announced-prefixes/data.json"
+                    f"?resource=AS{carrier['asn']}"
+                )
+                r = _self.session.get(url, timeout=12)
+                r.raise_for_status()
+                prefixes = r.json().get('data', {}).get('prefixes', [])
+                ipv4_count = sum(1 for p in prefixes if ':' not in p.get('prefix', ''))
+                ipv6_count = sum(1 for p in prefixes if ':' in p.get('prefix', ''))
+                return {
+                    **carrier,
+                    'ipv4_prefixes': ipv4_count,
+                    'ipv6_prefixes': ipv6_count,
+                    'has_ipv6': ipv6_count > 0,
+                }
+            except Exception as exc:
+                logger.debug(f"RIPE STAT ASN check failed for AS{carrier['asn']}: {exc}")
+                return {
+                    **carrier,
+                    'ipv4_prefixes': 0,
+                    'ipv6_prefixes': 0,
+                    'has_ipv6': None,
+                    'error': str(exc),
+                }
+
+        results = []
+        try:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+                futures = {executor.submit(check_asn, c): c for c in CARRIERS}
+                for future in concurrent.futures.as_completed(futures, timeout=45):
+                    results.append(future.result())
+        except Exception as e:
+            logger.warning(f"Mobile carrier ASN checks incomplete: {e}")
+
+        results.sort(key=lambda x: x.get('est_ipv6_pct', 0), reverse=True)
+        ipv6_announced = sum(1 for r in results if r.get('has_ipv6'))
+
+        return {
+            'carriers': results,
+            'total_carriers': len(results),
+            'carriers_with_ipv6': ipv6_announced,
+            'adoption_pct': round(ipv6_announced / len(results) * 100, 1) if results else 0,
+            'last_updated': datetime.now().isoformat(),
+            'source': 'RIPE STAT (prefix announcements) + APNIC/research estimates (adoption %)',
+            'url': 'https://stat.ripe.net/',
+            'note': (
+                'IPv6 prefix counts are live from RIPE STAT. '
+                'Adoption percentages (est_ipv6_pct) are APNIC/research estimates.'
+            ),
+        }
+
+    @st.cache_data(ttl=86400, max_entries=1)
+    def get_government_ipv6_stats(_self) -> Dict[str, Any]:
+        """
+        Check IPv6 AAAA record availability for representative government websites.
+
+        Tests a curated set of domains from the US Federal government, European Union,
+        United Kingdom, and Australia.  A domain is counted as IPv6-enabled when
+        getaddrinfo() resolves at least one AAAA address.
+        """
+        import socket
+
+        GOV_DOMAINS = {
+            'US Federal': [
+                'whitehouse.gov', 'nasa.gov', 'cdc.gov', 'irs.gov',
+                'census.gov', 'defense.gov', 'state.gov', 'treasury.gov',
+                'dhs.gov', 'fbi.gov', 'nih.gov', 'noaa.gov',
+            ],
+            'European Union': [
+                'europa.eu', 'ec.europa.eu', 'europarl.europa.eu',
+                'consilium.europa.eu', 'curia.europa.eu', 'eeas.europa.eu',
+            ],
+            'United Kingdom': [
+                'gov.uk', 'nhs.uk', 'hmrc.gov.uk', 'police.uk',
+                'parliament.uk', 'judiciary.gov.uk',
+            ],
+            'Australia': [
+                'australia.gov.au', 'ato.gov.au', 'aph.gov.au',
+                'abs.gov.au', 'austrade.gov.au', 'defence.gov.au',
+            ],
+        }
+
+        def check_domain(domain):
+            try:
+                socket.getaddrinfo(domain, None, socket.AF_INET6)
+                return True
+            except Exception:
+                return False
+
+        category_results = {}
+        for region, domains in GOV_DOMAINS.items():
+            checked = []
+            for domain in domains:
+                checked.append({'domain': domain, 'ipv6': check_domain(domain)})
+            ipv6_count = sum(1 for d in checked if d['ipv6'])
+            category_results[region] = {
+                'domains': checked,
+                'total': len(checked),
+                'ipv6_count': ipv6_count,
+                'pct': round(ipv6_count / len(checked) * 100, 1) if checked else 0.0,
+            }
+
+        total_domains = sum(v['total'] for v in category_results.values())
+        total_ipv6 = sum(v['ipv6_count'] for v in category_results.values())
+
+        return {
+            'categories': category_results,
+            'total_domains': total_domains,
+            'total_ipv6': total_ipv6,
+            'overall_pct': round(total_ipv6 / total_domains * 100, 1) if total_domains else 0.0,
+            'last_updated': datetime.now().isoformat(),
+            'source': 'Live DNS AAAA record check',
+            'note': (
+                'Tests for IPv6 AAAA record presence on representative government domains. '
+                'Positive result = at least one AAAA address returned by DNS.'
+            ),
+        }
+
+    @st.cache_data(ttl=86400, max_entries=1)
+    def get_aws_ipv6_coverage(_self) -> Dict[str, Any]:
+        """
+        Fetch the AWS IP ranges JSON and compute per-service IPv6 coverage.
+
+        AWS publishes https://ip-ranges.amazonaws.com/ip-ranges.json which contains
+        both IPv4 (prefixes[]) and IPv6 (ipv6_prefixes[]) prefix entries, each tagged
+        with a 'service' field.  This function computes the number and percentage of
+        AWS services that have at least one IPv6 prefix.
+        """
+        url = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+        try:
+            r = _self.session.get(url, timeout=15)
+            r.raise_for_status()
+            data = r.json()
+
+            ipv4_services = set(p['service'] for p in data.get('prefixes', []))
+            ipv6_services = set(p['service'] for p in data.get('ipv6_prefixes', []))
+            all_services = sorted(ipv4_services | ipv6_services)
+
+            service_rows = [
+                {
+                    'service': svc,
+                    'ipv4': svc in ipv4_services,
+                    'ipv6': svc in ipv6_services,
+                }
+                for svc in all_services
+            ]
+
+            ipv6_count = sum(1 for row in service_rows if row['ipv6'])
+            total = len(service_rows)
+
+            return {
+                'services': service_rows,
+                'total_services': total,
+                'ipv6_services': ipv6_count,
+                'ipv4_only_services': total - ipv6_count,
+                'ipv6_coverage_pct': round(ipv6_count / total * 100, 1) if total else 0.0,
+                'synctoken': data.get('syncToken', 'unknown'),
+                'create_date': data.get('createDate', 'unknown'),
+                'last_updated': datetime.now().isoformat(),
+                'source': 'AWS IP Ranges (ip-ranges.amazonaws.com)',
+                'url': url,
+                'note': (
+                    'A service is counted as IPv6-enabled when at least one prefix entry '
+                    'appears in the ipv6_prefixes array of the AWS IP ranges JSON.'
+                ),
+            }
+        except Exception as e:
+            logger.error(f"AWS IP ranges fetch failed: {e}")
+            return {
+                'services': [],
+                'total_services': 0,
+                'ipv6_services': 0,
+                'ipv4_only_services': 0,
+                'ipv6_coverage_pct': 0.0,
+                'last_updated': datetime.now().isoformat(),
+                'source': 'AWS IP Ranges (unavailable)',
+                'url': url,
+                'error': str(e),
+            }
+

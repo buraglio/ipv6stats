@@ -97,6 +97,10 @@ class DataManager:
             'peeringdb_stats': self.collector.get_peeringdb_stats,
             'rpki_stats': self.collector.get_rpki_ipv6_stats,
             'euro_ix_stats': self.collector.get_euro_ix_stats,
+            # P3 new sources
+            'mobile_carrier_stats': self.collector.get_mobile_carrier_ipv6_stats,
+            'government_ipv6_stats': self.collector.get_government_ipv6_stats,
+            'aws_ipv6_coverage': self.collector.get_aws_ipv6_coverage,
         }
 
         if show_progress:
@@ -157,7 +161,8 @@ class DataManager:
             'Cloud Services': ['cloudflare_stats', 'facebook_stats'],
             'BGP Statistics': ['bgp_stats', 'rpki_stats'],
             'Extended Data': ['arin_stats', 'ripe_stats', 'lacnic_stats', 'afrinic_stats', 'nist_usgv6'],
-            'Network Insights': ['peeringdb_stats', 'rpki_stats', 'euro_ix_stats'],
+            'Network Insights': ['peeringdb_stats', 'rpki_stats', 'euro_ix_stats',
+                                  'mobile_carrier_stats', 'government_ipv6_stats', 'aws_ipv6_coverage'],
         }
 
         required_keys = page_requirements.get(page_name, [])

@@ -16,7 +16,7 @@ def render_network_insights_page(data_collector, chart_generator):
     st.markdown("Real-time data from authoritative IPv6 measurement sources")
 
     # Create tabs for different data sources
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11 = st.tabs([
         "🔌 Hurricane Electric",
         "🔬 RIPE Atlas",
         "🚀 World IPv6 Launch",
@@ -25,6 +25,9 @@ def render_network_insights_page(data_collector, chart_generator):
         "🏢 PeeringDB",
         "🛡️ RPKI Security",
         "🔄 IXP Data",
+        "📱 Mobile Carriers",
+        "🏛️ Government IPv6",
+        "☁️ AWS Coverage",
     ])
 
     # Tab 1: Hurricane Electric
@@ -542,6 +545,209 @@ def render_network_insights_page(data_collector, chart_generator):
             f"**Updated:** {ixp_data.get('last_updated', '')[:10]}"
         )
 
+    # Tab 9: Mobile Carriers
+    with tab9:
+        st.header("Mobile & Broadband Carrier IPv6 Deployment")
+        st.markdown(
+            "IPv6 prefix announcements (RIPE STAT live) and estimated user adoption "
+            "percentages (APNIC/research) for major global carriers."
+        )
+
+        carrier_data = data_collector.get_mobile_carrier_ipv6_stats()
+        carriers = carrier_data.get('carriers', [])
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                "Carriers Checked",
+                carrier_data.get('total_carriers', 0),
+                help="Number of carrier ASNs queried via RIPE STAT"
+            )
+        with col2:
+            st.metric(
+                "Announcing IPv6",
+                carrier_data.get('carriers_with_ipv6', 0),
+                help="Carriers with at least one IPv6 prefix in BGP"
+            )
+        with col3:
+            st.metric(
+                "IPv6 Prefix Rate",
+                f"{carrier_data.get('adoption_pct', 0)}%",
+                help="% of checked carriers advertising IPv6 prefixes"
+            )
+
+        if carriers:
+            df_c = pd.DataFrame(carriers)
+
+            # Bar chart of estimated adoption %
+            fig = px.bar(
+                df_c.sort_values('est_ipv6_pct', ascending=True),
+                x='est_ipv6_pct',
+                y='name',
+                orientation='h',
+                title='Estimated IPv6 User Adoption by Carrier',
+                labels={'est_ipv6_pct': 'IPv6 Adoption % (estimate)', 'name': 'Carrier'},
+                color='est_ipv6_pct',
+                color_continuous_scale='Blues',
+                text='est_ipv6_pct',
+            )
+            fig.update_traces(texttemplate='%{text}%', textposition='outside')
+            fig.update_layout(height=max(300, len(df_c) * 40), showlegend=False)
+            st.plotly_chart(fig, use_container_width=True)
+
+            with st.expander("View Carrier Detail Table"):
+                display_cols = [c for c in
+                    ['name', 'country', 'asn', 'est_ipv6_pct', 'ipv6_prefixes', 'ipv4_prefixes', 'has_ipv6']
+                    if c in df_c.columns]
+                st.dataframe(df_c[display_cols], use_container_width=True, hide_index=True)
+
+        if carrier_data.get('error'):
+            st.warning(f"Data partially unavailable: {carrier_data['error']}")
+
+        st.caption(carrier_data.get('note', ''))
+        st.info(
+            f"**Source:** {carrier_data.get('source', 'RIPE STAT')} | "
+            f"**Updated:** {carrier_data.get('last_updated', '')[:10]}"
+        )
+
+    # Tab 10: Government IPv6
+    with tab10:
+        st.header("Government Website IPv6 Adoption")
+        st.markdown(
+            "Live DNS AAAA record check for representative government domains across "
+            "the US, EU, UK, and Australia."
+        )
+
+        gov_data = data_collector.get_government_ipv6_stats()
+        categories = gov_data.get('categories', {})
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                "Domains Checked",
+                gov_data.get('total_domains', 0),
+                help="Total government domains tested for IPv6 AAAA records"
+            )
+        with col2:
+            st.metric(
+                "IPv6 Enabled",
+                gov_data.get('total_ipv6', 0),
+                help="Domains with at least one AAAA DNS record"
+            )
+        with col3:
+            st.metric(
+                "Overall IPv6 Rate",
+                f"{gov_data.get('overall_pct', 0)}%",
+                help="% of tested government domains with IPv6"
+            )
+
+        # Per-region bar chart
+        if categories:
+            region_df = pd.DataFrame([
+                {'Region': region, 'IPv6 %': v['pct'], 'IPv6': v['ipv6_count'], 'Total': v['total']}
+                for region, v in categories.items()
+            ])
+            fig = px.bar(
+                region_df,
+                x='Region',
+                y='IPv6 %',
+                title='Government Domain IPv6 Adoption by Region',
+                labels={'IPv6 %': 'Domains with IPv6 (%)'},
+                color='IPv6 %',
+                color_continuous_scale='Greens',
+                text='IPv6 %',
+            )
+            fig.update_traces(texttemplate='%{text}%', textposition='outside')
+            fig.update_layout(yaxis_range=[0, 105], height=350, showlegend=False)
+            st.plotly_chart(fig, use_container_width=True)
+
+            # Per-region domain tables
+            for region, v in categories.items():
+                with st.expander(f"{region} — {v['ipv6_count']}/{v['total']} domains IPv6 ({v['pct']}%)"):
+                    domain_df = pd.DataFrame(v['domains'])
+                    domain_df['ipv6'] = domain_df['ipv6'].map({True: '✅ Yes', False: '❌ No'})
+                    domain_df.columns = ['Domain', 'IPv6 Enabled']
+                    st.dataframe(domain_df, use_container_width=True, hide_index=True)
+
+        st.caption(gov_data.get('note', ''))
+        st.info(
+            f"**Source:** {gov_data.get('source', 'DNS AAAA check')} | "
+            f"**Updated:** {gov_data.get('last_updated', '')[:10]}"
+        )
+
+    # Tab 11: AWS Service IPv6 Coverage
+    with tab11:
+        st.header("AWS Service IPv6 Coverage")
+        st.markdown(
+            "Per-service IPv6 prefix coverage derived from the AWS IP ranges JSON "
+            "(ip-ranges.amazonaws.com). A service is IPv6-enabled when AWS publishes "
+            "at least one IPv6 prefix for it."
+        )
+
+        aws_data = data_collector.get_aws_ipv6_coverage()
+        services = aws_data.get('services', [])
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(
+                "Total Services",
+                aws_data.get('total_services', 0),
+                help="Distinct AWS service names in ip-ranges.json"
+            )
+        with col2:
+            st.metric(
+                "IPv6-Enabled Services",
+                aws_data.get('ipv6_services', 0),
+                help="Services with at least one IPv6 prefix published"
+            )
+        with col3:
+            st.metric(
+                "IPv6 Coverage",
+                f"{aws_data.get('ipv6_coverage_pct', 0)}%",
+                help="% of AWS services with IPv6 prefixes"
+            )
+
+        if services:
+            df_aws = pd.DataFrame(services)
+            ipv6_enabled = df_aws[df_aws['ipv6'] == True]
+            ipv4_only = df_aws[df_aws['ipv6'] == False]
+
+            # Pie chart
+            fig = px.pie(
+                names=['IPv6-Enabled', 'IPv4-Only'],
+                values=[len(ipv6_enabled), len(ipv4_only)],
+                title='AWS Services: IPv6 vs IPv4-Only',
+                color_discrete_map={'IPv6-Enabled': '#0066cc', 'IPv4-Only': '#ff6600'},
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+            col_a, col_b = st.columns(2)
+            with col_a:
+                st.subheader("IPv6-Enabled Services")
+                st.dataframe(
+                    ipv6_enabled[['service']].rename(columns={'service': 'Service'}),
+                    use_container_width=True, hide_index=True
+                )
+            with col_b:
+                st.subheader("IPv4-Only Services")
+                st.dataframe(
+                    ipv4_only[['service']].rename(columns={'service': 'Service'}),
+                    use_container_width=True, hide_index=True
+                )
+
+        if aws_data.get('error'):
+            st.warning(f"Data unavailable: {aws_data['error']}")
+        else:
+            st.caption(aws_data.get('note', ''))
+            create_date = aws_data.get('create_date', '')
+            if create_date:
+                st.caption(f"AWS IP ranges published: {create_date}")
+
+        st.info(
+            f"**Source:** {aws_data.get('source', 'AWS IP Ranges')} | "
+            f"**Updated:** {aws_data.get('last_updated', '')[:10]}"
+        )
+
     # Footer
     st.markdown("---")
     st.markdown("""
@@ -558,6 +764,9 @@ def render_network_insights_page(data_collector, chart_generator):
     - **PeeringDB**: Self-reported IPv6 capability from registered network operators
     - **RIPE STAT RPKI**: RPKI ROA coverage for IPv6 and IPv4 global routing tables
     - **Euro-IX IXPDB**: IXP member IPv6 adoption via IX-F standard member exports
+    - **RIPE STAT (ASN prefixes)**: Live BGP prefix counts for mobile/broadband carrier ASNs
+    - **DNS AAAA checks**: Live resolver queries for AAAA records on government domains
+    - **AWS IP Ranges**: Official AWS JSON listing IPv4 and IPv6 prefixes by service
 
     Data is cached for 24 hours to balance freshness with source API load.
     """)
