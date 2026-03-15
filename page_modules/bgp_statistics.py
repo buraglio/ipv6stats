@@ -6,7 +6,7 @@ import pandas as pd
 from typing import Dict, Any
 import plotly.graph_objects as go
 import plotly.express as px
-from components import render_metric_row, render_data_freshness
+from components import render_metric_row, render_data_freshness, render_fallback_indicator
 
 
 def render(data: Dict[str, Any]):
@@ -51,6 +51,7 @@ def render(data: Dict[str, Any]):
         }
     ]
 
+    render_fallback_indicator(bgp_stats)
     render_metric_row(metrics)
     render_data_freshness(bgp_stats.get('last_updated', ''))
 

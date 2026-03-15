@@ -253,6 +253,43 @@ def render_data_freshness(last_updated: str, ttl_days: int = 30):
         pass
 
 
+_FALLBACK_KEYWORDS = ('estimate', 'fallback', 'unavailable', 'research')
+
+
+def render_fallback_indicator(data: Dict[str, Any]) -> None:
+    """
+    Display a visible warning banner when a data dict indicates that a live
+    source failed and estimated / cached / research data is being shown.
+
+    Checks the 'source', 'note', and 'error' fields of *data* for any of the
+    sentinel keywords: estimate, fallback, unavailable, research.
+
+    Args:
+        data: Data dictionary returned by a data_sources get_*() method.
+    """
+    source = str(data.get('source', '')).lower()
+    note   = str(data.get('note',   '')).lower()
+    error  = data.get('error')
+
+    is_fallback = (
+        data.get('fallback', False)
+        or any(kw in source for kw in _FALLBACK_KEYWORDS)
+        or any(kw in note for kw in _FALLBACK_KEYWORDS)
+        or bool(error)
+    )
+
+    if not is_fallback:
+        return
+
+    # Prefer the human-readable note, else fall back to source string
+    detail = data.get('note') or data.get('source') or ''
+    # Strip leading boilerplate if already in the note
+    if error and not data.get('note'):
+        detail = f"Live data temporarily unavailable ({type(error).__name__ if not isinstance(error, str) else error})."
+
+    st.warning(f"**Estimated data** — {detail}")
+
+
 def render_comparison_metrics(current: float, previous: float, label: str, format_str: str = "%.1f%%"):
     """
     Render comparison metrics with delta
