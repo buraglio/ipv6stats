@@ -23,6 +23,7 @@ def render(data: Dict[str, Any]):
     facebook_stats = data.get('facebook_stats', {})
     cloudflare_stats = data.get('cloudflare_stats', {})
     bgp_stats = data.get('bgp_stats', {})
+    isoc_stats = data.get('isoc_pulse_stats', {})
 
     kpis = [
         {
@@ -56,6 +57,193 @@ def render(data: Dict[str, Any]):
     render_kpi_header(kpis)
     if cloudflare_stats:
         render_fallback_indicator(cloudflare_stats)
+
+    # Multi-source consensus display
+    st.markdown("---")
+    st.markdown("#### 📡 Global IPv6 Adoption — Multi-Source View")
+
+    consensus_entries = []
+    if google_stats:
+        consensus_entries.append({
+            'label': 'Google / APNIC',
+            'value': google_stats.get('global_percentage', 0),
+            'display': f"{google_stats.get('global_percentage', 0):.1f}%",
+            'help': 'User IPv6 capability measured via ad-based dual-stack probing (APNIC) '
+                    'and Google traffic data',
+            'fallback': google_stats.get('fallback', False),
+        })
+    if isoc_stats:
+        consensus_entries.append({
+            'label': 'ISOC Pulse',
+            'value': float(isoc_stats.get('global_ipv6_websites', 0)),
+            'display': f"{isoc_stats.get('global_ipv6_websites', 0):.0f}%",
+            'help': 'Percentage of top global websites with IPv6 (AAAA DNS records) '
+                    'as measured by Internet Society Pulse',
+            'fallback': isoc_stats.get('fallback', False),
+        })
+    if cloudflare_stats:
+        consensus_entries.append({
+            'label': 'Cloudflare Radar',
+            'value': cloudflare_stats.get('ipv6_percentage', 0),
+            'display': f"{cloudflare_stats.get('ipv6_percentage', 0):.1f}%",
+            'help': 'Share of HTTP traffic reaching Cloudflare\'s network over IPv6 '
+                    '(52-week window)',
+            'fallback': cloudflare_stats.get('fallback', False),
+        })
+
+    live_values = [e['value'] for e in consensus_entries if not e['fallback'] and e['value'] > 0]
+    consensus_pct = sum(live_values) / len(live_values) if live_values else None
+
+    num_cols = len(consensus_entries) + (1 if consensus_pct is not None else 0)
+    cols = st.columns(num_cols)
+    for i, entry in enumerate(consensus_entries):
+        with cols[i]:
+            suffix = " ⚠️" if entry['fallback'] else ""
+            st.metric(entry['label'] + suffix, entry['display'], help=entry['help'])
+
+    if consensus_pct is not None:
+        with cols[len(consensus_entries)]:
+            st.metric(
+                "Consensus Average",
+                f"{consensus_pct:.1f}%",
+                help=f"Simple average of {len(live_values)} live source(s). "
+                     "Each source measures a different dimension (user capability, "
+                     "website deployment, traffic share) — treat as a directional "
+                     "indicator, not a single authoritative figure.",
+            )
+
+    if any(e['fallback'] for e in consensus_entries):
+        st.caption("⚠️ Sources marked with ⚠️ are using estimated data. "
+                   "Estimated sources are excluded from the consensus average.")
+
+    # Methodology explanation
+    with st.expander("ℹ️ How are these percentages calculated?", expanded=False):
+        st.markdown("""
+### IPv6 Adoption Percentage — Methodology
+
+Each statistic shown here uses a different measurement methodology and captures a
+different dimension of IPv6 deployment. Understanding those differences is essential
+for interpreting the numbers correctly.
+
+---
+
+#### 🌍 Google / APNIC — User IPv6 Capability
+
+**What it measures:** The fraction of internet-connected users whose devices and
+networks are *capable* of reaching IPv6 destinations.
+
+**How it's collected (in priority order):**
+
+1. **Google IPv6 Statistics page** (`google.com/intl/en/ipv6/statistics.html`) —
+   Google counts the percentage of requests to its services that arrive over IPv6.
+   The page is rendered client-side via JavaScript, so automated parsing succeeds
+   only occasionally.
+
+2. **APNIC Labs IPv6 Measurement** (`stats.labs.apnic.net/ipv6/`) —
+   APNIC embeds tiny dual-stack probes in online advertisements served globally.
+   When a browser loads the ad it attempts to fetch a resource over both IPv6 and
+   IPv4; only a successful IPv6 fetch is counted. The World (XA) aggregate row is
+   a population-weighted global average. This is the most methodologically rigorous
+   public dataset for *user-level* adoption.
+
+3. **Research estimate (~47%, late 2024)** — Used only when both live sources are
+   unreachable. Labeled as a fallback with a warning indicator.
+
+**Formula:** `IPv6-capable users ÷ total users, expressed as a percentage`
+
+---
+
+#### 🌐 Internet Society Pulse — Website IPv6 Deployment
+
+**What it measures:** The percentage of top global websites that have an IPv6
+address (AAAA DNS record) and are therefore reachable over IPv6. This is the
+*server-side* complement to user-capability metrics.
+
+**How it's collected (in priority order):**
+
+1. **ISOC Pulse Gatsby JSON** — The Pulse site pre-renders data into a
+   machine-readable JSON file (`/page-data/technologies/page-data.json`). The
+   dashboard parses the IPv6 node's `globalPercentage` field.
+
+2. **ISOC Pulse HTML scrape** — Falls back to scraping the rendered technologies
+   page for an IPv6 percentage string if the JSON is unavailable.
+
+3. **2024 ISOC research estimate (~49%)** — Used when both live sources fail.
+   Labeled as a fallback.
+
+**Formula:** `websites with AAAA record ÷ top websites surveyed, expressed as a percentage`
+
+> This metric is *not* the same as user adoption. A website can have IPv6 enabled
+> while the majority of its users still connect over IPv4, and vice versa.
+
+---
+
+#### ☁️ Cloudflare Radar — IPv6 Traffic Share
+
+**What it measures:** The share of all HTTP traffic reaching Cloudflare's global
+network that is carried over IPv6.
+
+**How it's collected (in priority order):**
+
+1. **Cloudflare Radar API** — With a valid `CLOUDFLARE_API_KEY`, the endpoint
+   `/radar/http/timeseries_groups/ip_version?dateRange=52w` returns weekly
+   time-series values split by IP version. The dashboard reads the most recent
+   data point.
+
+2. **Cloudflare Radar report estimate (~36%, Oct 2025)** — Used when no API key
+   is configured. Labeled as a fallback.
+
+**Formula:** `latest IPv6 traffic ÷ (latest IPv4 traffic + latest IPv6 traffic), expressed as a percentage`
+
+> Cloudflare data reflects *traffic volume* across Cloudflare's CDN customer base,
+> not unique users. It is biased toward web properties using Cloudflare and tends
+> to run a few points higher than general user-capability measurements.
+
+---
+
+#### 📡 Consensus Average
+
+The consensus average is a simple mean of whichever sources returned **live** data
+in the current refresh cycle. Estimated (fallback) values are excluded.
+
+Because each source measures a different thing — user capability, website
+deployment, and traffic share — the consensus is best read as a **directional
+indicator** of the overall IPv6 ecosystem, not as a single authoritative adoption
+figure. When sources disagree significantly, consult the individual panels and
+their source notes for context.
+
+---
+
+#### 📊 IPv6 BGP Prefixes
+
+**What it measures:** The number of distinct IPv6 network prefixes announced into
+the global BGP routing table — a proxy for how many networks have *deployed* IPv6
+at the infrastructure level.
+
+**How it's collected:** The dashboard queries routing table aggregators (BGP Stuff,
+Potaroo/Geoff Huston) for current IPv4 and IPv6 prefix counts. Results are cached
+for 24 hours since the routing table changes daily.
+
+**Interpretation:** More prefixes = more network operators have enabled IPv6.
+This metric does *not* reflect end-user adoption, only operator deployment.
+
+---
+
+#### ⚠️ A note on comparing these numbers
+
+| Source | Measures | Typical range |
+|---|---|---|
+| Google / APNIC | User IPv6 capability | 35–55% globally |
+| ISOC Pulse | Website IPv6 deployment | 45–55% of top sites |
+| Cloudflare Radar | CDN traffic share over IPv6 | 30–45% globally |
+| BGP IPv6 prefixes | Operator deployment | ~230,000 prefixes |
+| Country rankings | Per-country user or traffic share | 10–85% by country |
+
+These metrics are *complementary*, not interchangeable. A country can have high
+operator deployment (many BGP prefixes) but low user adoption if ISPs have not yet
+migrated customer premises equipment, or high traffic share but low website coverage
+if major CDN-hosted properties have enabled IPv6 while smaller sites have not.
+        """)
 
     # Quick Stats Grid
     col1, col2 = st.columns(2)

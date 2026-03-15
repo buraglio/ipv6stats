@@ -85,6 +85,7 @@ class DataManager:
             'google_country': self.collector.get_google_country_stats,
             'facebook_stats': self.collector.get_facebook_ipv6_stats,
             'cloudflare_stats': self.collector.get_cloudflare_radar_stats,
+            'isoc_pulse_stats': self.collector.get_internet_society_pulse_stats,
             'apnic_stats': self.collector.get_apnic_stats,
             'cisco_6lab': self.collector.get_cisco_6lab_stats,
             'nist_usgv6': self.collector.get_nist_usgv6_deployment_stats,
@@ -160,7 +161,7 @@ class DataManager:
         """
         # Define page-specific data requirements
         page_requirements = {
-            'Overview': ['google_stats', 'facebook_stats', 'cloudflare_stats', 'bgp_stats'],
+            'Overview': ['google_stats', 'facebook_stats', 'cloudflare_stats', 'bgp_stats', 'isoc_pulse_stats'],
             'Global Adoption': ['google_country', 'apnic_stats', 'cisco_6lab'],
             'Cloud Services': ['cloudflare_stats', 'facebook_stats'],
             'BGP Statistics': ['bgp_stats', 'rpki_stats'],
@@ -243,6 +244,7 @@ class DataManager:
             'google_stats': self.collector.get_google_ipv6_stats,
             'facebook_stats': self.collector.get_facebook_ipv6_stats,
             'cloudflare_stats': self.collector.get_cloudflare_radar_stats,
+            'isoc_pulse_stats': self.collector.get_internet_society_pulse_stats,
         }
 
         for key, loader_fn in common_sources.items():
