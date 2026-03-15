@@ -3,7 +3,7 @@ Overview Page - Dashboard Summary with Key Metrics
 """
 import streamlit as st
 from typing import Dict, Any
-from components import render_metric_row, render_kpi_header, render_data_freshness
+from components import render_metric_row, render_kpi_header, render_data_freshness, render_fallback_indicator
 from data_manager import get_data
 import plotly.graph_objects as go
 
@@ -54,6 +54,8 @@ def render(data: Dict[str, Any]):
     ]
 
     render_kpi_header(kpis)
+    if cloudflare_stats:
+        render_fallback_indicator(cloudflare_stats)
 
     # Quick Stats Grid
     col1, col2 = st.columns(2)
@@ -61,6 +63,7 @@ def render(data: Dict[str, Any]):
     with col1:
         st.markdown("#### 📈 Google Statistics")
         if google_stats:
+            render_fallback_indicator(google_stats)
             render_data_freshness(google_stats.get('last_updated', ''))
             st.metric(
                 "Global IPv6 Users",
@@ -75,6 +78,7 @@ def render(data: Dict[str, Any]):
     with col2:
         st.markdown("#### 📘 Facebook Statistics")
         if facebook_stats:
+            render_fallback_indicator(facebook_stats)
             render_data_freshness(facebook_stats.get('last_updated', ''))
             st.metric(
                 "Facebook IPv6 Users",

@@ -106,6 +106,7 @@ class DataCollector:
         logger.info("Google/APNIC IPv6 stats unavailable — using 2024 research estimate")
         return {
             'global_percentage': 47.0,
+            'fallback': True,
             'last_updated': datetime.now().isoformat(),
             'source': 'Research Estimate (Google IPv6 Statistics ~late 2024)',
             'url': 'https://www.google.com/intl/en/ipv6/statistics.html',
@@ -281,6 +282,7 @@ class DataCollector:
                 'LACNIC': 38.0
             },
             'measurement_types': ['users', 'prefixes', 'content', 'network'],
+            'fallback': True,
             'last_updated': datetime.now().isoformat(),
             'source': '6lab-stats.com (2024 regional estimates)',
             'data_url': 'https://6lab-stats.com/6lab-stats/',
@@ -288,7 +290,7 @@ class DataCollector:
             'note': 'Cisco 6lab.cisco.com shut down. 6lab-stats.com mirror unavailable. Showing regional estimates.',
         }
     
-    @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry  
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — BGP tables change daily
     def get_bgp_stats(_self) -> Dict[str, Any]:
         """Fetch BGP IPv6 statistics from BGP Stuff and Potaroo"""
         try:
@@ -342,6 +344,7 @@ class DataCollector:
             'total_prefixes': 228748,  # Latest from BGP Stuff
             'total_ipv4_prefixes': 1014404,
             'estimated_growth_yearly': 26000,
+            'fallback': True,
             'last_updated': datetime.now().isoformat(),
             'source': 'Cached (BGP Stuff)',
             'error': 'Live data temporarily unavailable'
@@ -429,6 +432,7 @@ class DataCollector:
         logger.info("Internet Society Pulse unavailable — using 2024 research estimates")
         return {
             'global_ipv6_websites': 49,
+            'fallback': True,
             'global_https_websites': 95,
             'global_tls13_websites': 86,
             'regional_data': {
@@ -596,6 +600,7 @@ class DataCollector:
             return {
                 'ipv6_percentage': 36.0,
                 'global_ipv6_percentage': 36.0,
+                'fallback': True,
                 'ipv4_percentage': 64.0,
                 'description': 'IPv6 traffic analysis (based on recent Cloudflare Radar reports)',
                 'measurement_type': 'HTTP request traffic to Cloudflare network',
@@ -917,6 +922,7 @@ class DataCollector:
         return {
             'top_countries_ipv6': [],
             'client_ipv6_adoption': 30.5,
+            'fallback': True,
             'server_ipv6_adoption': 43.3,
             'actual_connections': 13.2,
             'top_domains_ipv6': 60.8,
@@ -1874,7 +1880,7 @@ class DataCollector:
                 'error': f'Error fetching ARIN data: {str(e)}'
             }
     
-    @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 1 hour
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — ASN/BGP data changes daily
     def query_asn_ipv6_info(_self, asn_or_name: str) -> Dict[str, Any]:
         """Query ASN/ISP IPv6 availability information from RIR whois databases"""
         try:
@@ -2283,7 +2289,7 @@ class DataCollector:
     
 
     
-    @st.cache_data(ttl=2592000, max_entries=1)
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — BGP tables change daily
     def get_current_bgp_stats(_self) -> Dict[str, Any]:
         """Get current BGP table statistics"""
         base_stats = _self.get_bgp_stats()
@@ -2300,7 +2306,7 @@ class DataCollector:
             'source': base_stats.get('source', 'Unknown')
         }
     
-    @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — BGP tables change daily
     def get_bgp_historical_data(_self) -> List[Dict[str, Any]]:
         """Generate BGP historical data based on known growth patterns"""
         # Based on research: ~26K growth per year, current ~185K
@@ -2324,7 +2330,7 @@ class DataCollector:
         
         return historical_data
     
-    @st.cache_data(ttl=2592000, max_entries=1)
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — BGP tables change daily
     def get_prefix_size_distribution(_self) -> Dict[str, float]:
         """Get IPv6 prefix size distribution based on research"""
         # Based on research: /48s are 46% of prefixes, with /32, /44, /40 making up 75% total
@@ -2338,7 +2344,7 @@ class DataCollector:
             'Other': 16.0
         }
     
-    @st.cache_data(ttl=2592000, max_entries=1)
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — BGP tables change daily
     def get_top_asns_by_prefixes(_self) -> List[Dict[str, Any]]:
         """Get top ASNs by IPv6 prefix count"""
         return [
@@ -3730,6 +3736,7 @@ class DataCollector:
                 'Strong correlation with other major platforms',
                 'Weekend usage patterns favor IPv6'
             ],
+            'fallback': True,
             'last_updated': datetime.now().isoformat(),
             'source': 'Research Estimates (Meta/Facebook 2024-2025)',
             'url': 'https://www.facebook.com/ipv6/',
@@ -3777,7 +3784,7 @@ class DataCollector:
                 'error': str(e)
             }
 
-    @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days (monthly), single entry
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — BGP tables change daily
     def get_hurricane_electric_stats(_self) -> Dict[str, Any]:
         """
         Fetch IPv6 BGP statistics from Hurricane Electric (HE.NET).
@@ -3899,6 +3906,7 @@ class DataCollector:
             # Fallback data
             return {
                 'total_probes': 12000,
+                'fallback': True,
                 'active_ipv6_measurements': 5000,
                 'ipv6_capable_probes_percentage': 85.0,
                 'measurement_types': ['ping', 'traceroute', 'DNS', 'HTTP'],
@@ -4043,6 +4051,7 @@ class DataCollector:
             # Fallback data
             return {
                 'ipv6_routes': 185000,
+                'fallback': True,
                 'ipv6_asns': 26000,
                 'weekly_growth': 450,
                 'report_type': 'Weekly BGP Analysis',
@@ -4136,6 +4145,7 @@ class DataCollector:
             # Fallback data based on recent research
             return {
                 'total_domains_checked': 1000,
+                'fallback': True,
                 'ipv6_enabled_count': 700,
                 'ipv6_percentage': 70.0,
                 'domain_results': [
@@ -4152,7 +4162,7 @@ class DataCollector:
                 'note': 'Using estimated data - approximately 70% of top 1000 sites support IPv6'
             }
 
-    @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — AS topology changes daily
     def get_caida_ipv6_topology_stats(_self) -> Dict[str, Any]:
         """Get IPv6 topology and AS-level statistics from CAIDA Archipelago (Ark) measurements"""
         try:
@@ -4219,7 +4229,7 @@ class DataCollector:
                 'url': 'https://www.caida.org/projects/ark/'
             }
 
-    @st.cache_data(ttl=2592000, max_entries=1)  # Cache for 30 days
+    @st.cache_data(ttl=86400, max_entries=1)  # Cache for 24h — AS relationships change daily
     def get_caida_ipv6_as_relationships(_self) -> Dict[str, Any]:
         """Get IPv6 AS relationship data from CAIDA"""
         try:

@@ -8,6 +8,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
+from components import render_fallback_indicator
 
 def render_network_insights_page(data_collector, chart_generator):
     """Render the Network Insights page with new data sources"""
@@ -88,6 +89,7 @@ def render_network_insights_page(data_collector, chart_generator):
         st.markdown("Live connectivity data from 12,000+ global measurement probes")
 
         atlas_data = data_collector.get_ripe_atlas_stats()
+        render_fallback_indicator(atlas_data)
 
         col1, col2, col3 = st.columns(3)
 
@@ -203,6 +205,7 @@ def render_network_insights_page(data_collector, chart_generator):
         st.markdown("Authoritative IPv6 routing table analysis by Geoff Huston")
 
         cidr_data = data_collector.get_cidr_report_stats()
+        render_fallback_indicator(cidr_data)
 
         col1, col2, col3 = st.columns(3)
 
@@ -272,6 +275,7 @@ def render_network_insights_page(data_collector, chart_generator):
         st.markdown("IPv6 AAAA record availability for top global websites")
 
         tranco_data = data_collector.get_tranco_ipv6_stats()
+        render_fallback_indicator(tranco_data)
 
         col1, col2, col3 = st.columns(3)
 
@@ -361,6 +365,7 @@ def render_network_insights_page(data_collector, chart_generator):
         st.markdown("Self-reported IPv6 capability from the authoritative registry for peering information")
 
         pdb_data = data_collector.get_peeringdb_stats()
+        render_fallback_indicator(pdb_data)
 
         col1, col2, col3 = st.columns(3)
 
@@ -408,6 +413,7 @@ def render_network_insights_page(data_collector, chart_generator):
         st.markdown("RPKI ROA coverage for the global IPv6 routing table (RIPE STAT)")
 
         rpki_data = data_collector.get_rpki_ipv6_stats()
+        render_fallback_indicator(rpki_data)
 
         col1, col2, col3, col4 = st.columns(4)
 
@@ -486,6 +492,7 @@ def render_network_insights_page(data_collector, chart_generator):
         )
 
         ixp_data = data_collector.get_euro_ix_stats()
+        render_fallback_indicator(ixp_data)
 
         col1, col2, col3 = st.columns(3)
 
@@ -555,6 +562,7 @@ def render_network_insights_page(data_collector, chart_generator):
         )
 
         carrier_data = data_collector.get_mobile_carrier_ipv6_stats()
+        render_fallback_indicator(carrier_data)
         carriers = carrier_data.get('carriers', [])
 
         col1, col2, col3 = st.columns(3)
@@ -689,6 +697,7 @@ def render_network_insights_page(data_collector, chart_generator):
         )
 
         gov_data = data_collector.get_government_ipv6_stats()
+        render_fallback_indicator(gov_data)
         categories = gov_data.get('categories', {})
 
         col1, col2, col3 = st.columns(3)

@@ -16,6 +16,7 @@ from data_sources import DataCollector
 from visualization import ChartGenerator
 from utils import format_number, get_country_coordinates, get_all_country_coordinates, cache_data
 from performance_config import optimize_memory, clear_old_cache, UI_OPTIMIZATION
+from components import render_fallback_indicator
 
 # Page configuration optimized for mobile
 st.set_page_config(
@@ -901,7 +902,14 @@ elif current_view == "Overview":
     
     except Exception as e:
         st.error(f"Error loading overview metrics: {str(e)}")
-    
+
+    # Fallback indicators for key overview sources
+    try:
+        render_fallback_indicator(data_collector.get_google_ipv6_stats())
+        render_fallback_indicator(data_collector.get_bgp_stats())
+    except Exception:
+        pass
+
     # Current trends section with new data sources
     st.subheader("🔍 Current Trends")
     
@@ -1250,7 +1258,8 @@ elif current_view == "Global Adoption":
             
             try:
                 dns_stats = data_collector.get_cloudflare_dns_stats()
-                
+                render_fallback_indicator(dns_stats)
+
                 # DNS analysis metrics
                 col1, col2, col3, col4 = st.columns(4)
                 
@@ -4186,6 +4195,8 @@ elif current_view == "BGP Statistics":
                 delta="IPv6 as % of IPv4 table"
             )
         
+        render_fallback_indicator(bgp_current)
+
         # BGP growth chart
         st.subheader("📊 IPv6 BGP Table Growth")
         bgp_historical = data_collector.get_bgp_historical_data()

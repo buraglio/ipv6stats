@@ -4,7 +4,7 @@ Including NAT-free egress and prefix delegation capabilities
 """
 import streamlit as st
 from typing import Dict, Any
-from components import render_metric_row
+from components import render_metric_row, render_fallback_indicator
 from cloud_data import CLOUD_PROVIDERS, get_provider_summary
 
 
@@ -42,6 +42,7 @@ def render(data: Dict[str, Any]):
         st.markdown("---")
         st.markdown("### Real-Time Statistics")
         st.markdown("#### Cloudflare Network Traffic")
+        render_fallback_indicator(cloudflare_stats)
         metrics = [
             {"label": "IPv6 Traffic", "value": f"{cloudflare_stats.get('ipv6_percentage', 0):.1f}%"},
             {"label": "IPv4 Traffic", "value": f"{cloudflare_stats.get('ipv4_percentage', 0):.1f}%"},
