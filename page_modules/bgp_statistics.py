@@ -2,8 +2,10 @@
 BGP Statistics Page - IPv6 routing table analysis
 """
 import streamlit as st
+import pandas as pd
 from typing import Dict, Any
 import plotly.graph_objects as go
+import plotly.express as px
 from components import render_metric_row, render_data_freshness
 
 

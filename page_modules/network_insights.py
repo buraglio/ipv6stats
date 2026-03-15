@@ -611,6 +611,75 @@ def render_network_insights_page(data_collector, chart_generator):
             f"**Updated:** {carrier_data.get('last_updated', '')[:10]}"
         )
 
+        # Routeviews enrichment: BGP prefix visibility per carrier
+        st.markdown("---")
+        st.subheader("🌐 Routeviews BGP Prefix Visibility")
+        st.markdown(
+            "IPv4 and IPv6 prefix counts as observed by "
+            "[Routeviews](https://api.routeviews.org/) global route collectors — "
+            "an independent vantage point alongside RIPE STAT data above."
+        )
+
+        rv_carrier = data_collector.get_routeviews_carrier_bgp()
+        rv_carriers = rv_carrier.get('carriers', [])
+
+        if rv_carriers:
+            rvc_col1, rvc_col2 = st.columns(2)
+            with rvc_col1:
+                st.metric(
+                    "Carriers with IPv6 BGP",
+                    f"{rv_carrier.get('carriers_with_ipv6_bgp', 0)} / {rv_carrier.get('total_carriers', 0)}",
+                    help="Carriers advertising at least one IPv6 prefix into Routeviews collectors"
+                )
+            with rvc_col2:
+                st.metric(
+                    "Total IPv6 Prefixes Observed",
+                    f"{rv_carrier.get('total_ipv6_prefixes_seen', 0):,}",
+                    help="Sum of all IPv6 prefixes across all carrier ASNs"
+                )
+
+            rv_df = pd.DataFrame(rv_carriers)
+            fig_rv = go.Figure()
+            fig_rv.add_trace(go.Bar(
+                name='IPv6',
+                x=rv_df['name'],
+                y=rv_df['ipv6_prefixes'],
+                marker_color='#0066cc',
+                text=rv_df['ipv6_prefixes'],
+                textposition='outside',
+            ))
+            fig_rv.add_trace(go.Bar(
+                name='IPv4',
+                x=rv_df['name'],
+                y=rv_df['ipv4_prefixes'],
+                marker_color='#aaaaaa',
+                text=rv_df['ipv4_prefixes'],
+                textposition='outside',
+            ))
+            fig_rv.update_layout(
+                title='Carrier BGP Prefix Counts (Routeviews View)',
+                barmode='group',
+                xaxis_tickangle=-30,
+                yaxis_title='Prefix Count',
+                height=420,
+                legend=dict(orientation='h', yanchor='bottom', y=1.02),
+            )
+            st.plotly_chart(fig_rv, use_container_width=True)
+
+            with st.expander("View Routeviews Carrier Detail Table"):
+                rv_display = [c for c in
+                    ['name', 'asn', 'ipv6_prefixes', 'ipv4_prefixes', 'has_ipv6_bgp']
+                    if c in rv_df.columns]
+                st.dataframe(rv_df[rv_display], use_container_width=True, hide_index=True)
+        else:
+            st.info("Routeviews carrier BGP data unavailable.")
+
+        st.caption(rv_carrier.get('note', ''))
+        st.info(
+            f"**Source:** {rv_carrier.get('source', 'Routeviews')} | "
+            f"**Updated:** {rv_carrier.get('last_updated', '')[:10]}"
+        )
+
     # Tab 10: Government IPv6
     with tab10:
         st.header("Government Website IPv6 Adoption")
