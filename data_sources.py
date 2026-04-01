@@ -401,8 +401,9 @@ class DataCollector:
             logger.debug(f"ISOC Pulse Gatsby JSON fetch failed: {e}")
 
         # Attempt 2: HTML scrape (page is JS-rendered; rarely yields parseable text)
+        # Use the canonical URL directly to avoid the /technologies → /en/technologies/ redirect.
         try:
-            url = "https://pulse.internetsociety.org/technologies"
+            url = "https://pulse.internetsociety.org/en/technologies/"
             downloaded = trafilatura.fetch_url(url)
             if downloaded:
                 text = trafilatura.extract(downloaded)
@@ -563,33 +564,38 @@ class DataCollector:
 
                 if data.get('success') and 'result' in data:
                     result = data['result']
-                    # Without name=, IPv4/IPv6 arrays are at the top level of result.
-                    # Guard against the old named-aggregation shape just in case.
-                    series = result if 'IPv4' in result else result.get('main', result)
+                    # Cloudflare Radar timeseries_groups response shape:
+                    #   result.serie_0.{timestamps, IPv4, IPv6}
+                    # IPv4/IPv6 arrays are already percentage values summing to 100.
+                    # Also handle legacy named-aggregation shapes (main/top-level) defensively.
+                    series = (
+                        result.get('serie_0')
+                        or result.get('main')
+                        or (result if 'IPv4' in result else None)
+                    )
 
-                    ipv4_values = series.get('IPv4', [])
-                    ipv6_values = series.get('IPv6', [])
+                    if series:
+                        ipv4_values = series.get('IPv4', [])
+                        ipv6_values = series.get('IPv6', [])
 
-                    if ipv6_values and ipv4_values:
-                        latest_ipv4 = float(ipv4_values[-1])
-                        latest_ipv6 = float(ipv6_values[-1])
-                        total = latest_ipv4 + latest_ipv6
+                        if ipv6_values and ipv4_values:
+                            # Values are already percentages from the timeseries_groups endpoint
+                            latest_ipv6 = float(ipv6_values[-1])
+                            latest_ipv4 = float(ipv4_values[-1])
 
-                        ipv6_percentage = (latest_ipv6 / total * 100) if total > 0 else 0
-
-                        return {
-                            'ipv6_percentage': round(ipv6_percentage, 2),
-                            'global_ipv6_percentage': round(ipv6_percentage, 2),
-                            'ipv4_percentage': round((latest_ipv4 / total * 100) if total > 0 else 0, 2),
-                            'measurement_type': 'HTTP request traffic to Cloudflare network',
-                            'time_period': '52 weeks (1 year)',
-                            'description': 'IPv6 vs IPv4 traffic analysis from Cloudflare Radar API',
-                            'data_points': len(ipv6_values),
-                            'last_updated': datetime.now().isoformat(),
-                            'source': 'Cloudflare Radar API (Live)',
-                            'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
-                            'api_endpoint': url
-                        }
+                            return {
+                                'ipv6_percentage': round(latest_ipv6, 2),
+                                'global_ipv6_percentage': round(latest_ipv6, 2),
+                                'ipv4_percentage': round(latest_ipv4, 2),
+                                'measurement_type': 'HTTP request traffic to Cloudflare network',
+                                'time_period': '52 weeks (1 year)',
+                                'description': 'IPv6 vs IPv4 traffic analysis from Cloudflare Radar API',
+                                'data_points': len(ipv6_values),
+                                'last_updated': datetime.now().isoformat(),
+                                'source': 'Cloudflare Radar API (Live)',
+                                'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
+                                'api_endpoint': url
+                            }
 
                 logger.warning(
                     f"Cloudflare Radar API returned unexpected structure: {str(data)[:300]}"
