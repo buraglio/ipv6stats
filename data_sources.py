@@ -542,31 +542,37 @@ class DataCollector:
             api_key = os.environ.get('CLOUDFLARE_API_KEY')
 
             if api_key:
-                # Cloudflare Radar API endpoint for IPv6 vs IPv4 timeseries
-                url = "https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w"
+                # Cloudflare Radar API — IPv6 vs IPv4 timeseries (52-week window).
+                # Do NOT include name= here: that parameter labels a named aggregation
+                # and nests results under result[name] instead of result directly,
+                # which causes 400 Bad Request on some API versions.
+                url = "https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?dateRange=52w"
 
                 headers = {
                     'Authorization': f'Bearer {api_key}'
                 }
 
                 response = _self.session.get(url, headers=headers, timeout=10)
+                if not response.ok:
+                    logger.warning(
+                        f"Cloudflare Radar API returned {response.status_code}: {response.text[:300]}"
+                    )
                 response.raise_for_status()
 
                 data = response.json()
 
                 if data.get('success') and 'result' in data:
                     result = data['result']
-                    # API structure: result['main']['IPv4'] and result['main']['IPv6']
-                    series = result.get('main', {})
+                    # Without name=, IPv4/IPv6 arrays are at the top level of result.
+                    # Guard against the old named-aggregation shape just in case.
+                    series = result if 'IPv4' in result else result.get('main', result)
 
-                    # Get the latest data point (values are strings in the API)
                     ipv4_values = series.get('IPv4', [])
                     ipv6_values = series.get('IPv6', [])
 
                     if ipv6_values and ipv4_values:
-                        # Calculate IPv6 percentage from latest data point (convert strings to float)
-                        latest_ipv4 = float(ipv4_values[-1]) if ipv4_values else 0
-                        latest_ipv6 = float(ipv6_values[-1]) if ipv6_values else 0
+                        latest_ipv4 = float(ipv4_values[-1])
+                        latest_ipv6 = float(ipv6_values[-1])
                         total = latest_ipv4 + latest_ipv6
 
                         ipv6_percentage = (latest_ipv6 / total * 100) if total > 0 else 0
@@ -585,8 +591,9 @@ class DataCollector:
                             'api_endpoint': url
                         }
 
-                # Fallback if API structure is unexpected
-                logger.warning("Cloudflare Radar API returned unexpected structure")
+                logger.warning(
+                    f"Cloudflare Radar API returned unexpected structure: {str(data)[:300]}"
+                )
                 raise ValueError("Unexpected API response structure")
             else:
                 # No API key, use fallback
@@ -616,7 +623,7 @@ class DataCollector:
                 'last_updated': datetime.now().isoformat(),
                 'source': 'Cloudflare Radar (estimated)',
                 'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
-                'api_endpoint': 'https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w'
+                'api_endpoint': 'https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?dateRange=52w'
             }
 
     # Alias for compatibility
