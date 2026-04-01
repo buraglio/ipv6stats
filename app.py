@@ -626,6 +626,38 @@ st.sidebar.markdown("Comprehensive IPv6 adoption analysis across cloud providers
 # Content area - title removed since it's now in top nav
 st.markdown("*Comprehensive analysis of worldwide IPv6 adoption and BGP routing data with monthly data updates*")
 
+
+def render_consensus_metric(consensus: dict):
+    """Render the Global IPv6 Adoption consensus metric consistently.
+
+    Displays the multi-source average when live data is available.
+    Fallback sources are excluded from the average and trigger a disclaimer.
+    """
+    val = consensus.get('consensus')
+    any_fallback = consensus.get('any_fallback', False)
+    all_fallback = consensus.get('all_fallback', False)
+    live_count = consensus.get('live_count', 0)
+    total_count = consensus.get('total_count', 0)
+
+    if val is not None:
+        if all_fallback:
+            delta = "⚠️ All sources estimated"
+        elif any_fallback:
+            delta = f"⚠️ {live_count}/{total_count} live sources"
+        else:
+            delta = f"{live_count}/{total_count} live sources"
+        st.metric("Global IPv6 Adoption (Consensus)", f"{val:.1f}%", delta=delta)
+    else:
+        st.metric("Global IPv6 Adoption (Consensus)", "N/A", delta="No live sources")
+
+    if any_fallback:
+        unavailable = [s['label'] for s in consensus.get('sources', []) if s['fallback']]
+        st.caption(
+            f"⚠️ Data source updates currently unavailable for: {', '.join(unavailable)}. "
+            "Using last fetched state — excluded from consensus average."
+        )
+
+
 # Combined View Page (standalone)
 if current_view == "Combined View":
     st.header("🌍 Combined IPv6 Statistics View")
@@ -637,13 +669,15 @@ if current_view == "Combined View":
     st.subheader("🌐 Global IPv6 Statistics Summary")
     
     col1, col2, col3, col4 = st.columns(4)
-    
+
+    _cv_consensus = data_collector.get_global_ipv6_consensus()
+
     with col1:
-        st.metric("Global IPv6 Adoption", "47.0%", delta="Google users")
-    
+        render_consensus_metric(_cv_consensus)
+
     with col2:
         st.metric("IPv6 Websites", "49%", delta="Top 1000 sites")
-    
+
     with col3:
         st.metric("BGP IPv6 Prefixes", "228,789", delta="Routing table")
     
@@ -665,44 +699,41 @@ if current_view == "Combined View":
     
     # Google IPv6 Global Statistics
     with st.expander("🌐 Google IPv6 Global Statistics", expanded=True):
-        try:
-            google_stats = data_collector.get_google_ipv6_stats()
-            
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                st.metric(
-                    "Live Global IPv6 Adoption", 
-                    f"{google_stats.get('global_percentage', 47)}%",
-                    delta="Google user traffic"
-                )
-            
-            with col2:
-                st.info(f"Source: {google_stats.get('source', 'Google IPv6 Statistics')}")
-            
-            st.caption("Google measures the percentage of users that access Google over IPv6")
-            
-        except Exception as e:
-            st.warning(f"Google data error: {str(e)}")
-            # Show fallback data
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Global IPv6 Adoption", "47%", delta="Latest known data")
-            with col2:
-                st.info("Source: Google IPv6 Statistics (fallback)")
-    
-    # Internet Society Pulse - Website IPv6 Support  
+        google_stats = data_collector.get_google_ipv6_stats()
+        _g_pct = google_stats.get('global_percentage')
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.metric(
+                "Google / APNIC IPv6 Adoption",
+                f"{_g_pct:.1f}%" if _g_pct is not None else "N/A",
+                delta="User IPv6 capability"
+            )
+
+        with col2:
+            st.info(f"Source: {google_stats.get('source', 'Google/APNIC')}")
+
+        if google_stats.get('fallback'):
+            st.caption(
+                "⚠️ Data source updates currently unavailable. "
+                "Using last fetched state — excluded from consensus average."
+            )
+        else:
+            st.caption("Google / APNIC measures the percentage of users with IPv6 capability.")
+
+    # Internet Society Pulse - Website IPv6 Support
     with st.expander("🌐 Internet Society Pulse - Website IPv6 Support", expanded=True):
         try:
             pulse_stats = data_collector.get_internet_society_pulse_stats()
-            
+
             if pulse_stats:
                 # Create metrics for website support
                 col1, col2, col3 = st.columns(3)
-                
+
                 with col1:
                     st.metric(
-                        "IPv6 Websites", 
+                        "IPv6 Websites",
                         f"{pulse_stats.get('global_ipv6_websites', 49)}%",
                         delta="Top 1000 sites globally"
                     )
@@ -839,16 +870,9 @@ elif current_view == "Overview":
     col1, col2, col3, col4 = st.columns(4)
     
     try:
-        # Fetch Google IPv6 statistics
-        google_stats = data_collector.get_google_ipv6_stats()
-        
         with col1:
-            st.metric(
-                "Global IPv6 Adoption", 
-                f"{google_stats.get('global_percentage', 'N/A')}%",
-                delta="+2.1% from last month"
-            )
-        
+            render_consensus_metric(data_collector.get_global_ipv6_consensus())
+
         # Fetch BGP statistics
         bgp_stats = data_collector.get_bgp_stats()
         
@@ -1095,14 +1119,14 @@ elif current_view == "Global Adoption":
                 
         elif source == "Combined View":
             st.success("📊 Displaying comprehensive IPv6 statistics from multiple sources")
-            
+
             # Always display summary metrics first
             st.subheader("🌐 Global IPv6 Statistics Summary")
-            
+
             col1, col2, col3, col4 = st.columns(4)
-            
+
             with col1:
-                st.metric("Global IPv6 Adoption", "47.0%", delta="Google users")
+                render_consensus_metric(data_collector.get_global_ipv6_consensus())
             
             with col2:
                 st.metric("IPv6 Websites", "49%", delta="Top 1000 sites")
@@ -1118,31 +1142,28 @@ elif current_view == "Global Adoption":
             
             # Google IPv6 Global Statistics
             with st.expander("🌐 Google IPv6 Global Statistics", expanded=True):
-                try:
-                    google_stats = data_collector.get_google_ipv6_stats()
-                    
-                    col1, col2 = st.columns(2)
-                    
-                    with col1:
-                        st.metric(
-                            "Live Global IPv6 Adoption", 
-                            f"{google_stats.get('global_percentage', 47)}%",
-                            delta="Google user traffic"
-                        )
-                    
-                    with col2:
-                        st.info(f"Source: {google_stats.get('source', 'Google IPv6 Statistics')}")
-                    
-                    st.caption("Google measures the percentage of users that access Google over IPv6")
-                    
-                except Exception as e:
-                    st.warning(f"Google data error: {str(e)}")
-                    # Show fallback data
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        st.metric("Global IPv6 Adoption", "47%", delta="Latest known data")
-                    with col2:
-                        st.info("Source: Google IPv6 Statistics (fallback)")
+                google_stats = data_collector.get_google_ipv6_stats()
+                _g_pct = google_stats.get('global_percentage')
+
+                col1, col2 = st.columns(2)
+
+                with col1:
+                    st.metric(
+                        "Google / APNIC IPv6 Adoption",
+                        f"{_g_pct:.1f}%" if _g_pct is not None else "N/A",
+                        delta="User IPv6 capability"
+                    )
+
+                with col2:
+                    st.info(f"Source: {google_stats.get('source', 'Google/APNIC')}")
+
+                if google_stats.get('fallback'):
+                    st.caption(
+                        "⚠️ Data source updates currently unavailable. "
+                        "Using last fetched state — excluded from consensus average."
+                    )
+                else:
+                    st.caption("Google / APNIC measures the percentage of users with IPv6 capability.")
             
             # Internet Society Pulse - Website IPv6 Support  
             with st.expander("🌐 Internet Society Pulse - Website IPv6 Support", expanded=True):
