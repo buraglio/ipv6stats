@@ -617,6 +617,61 @@ class DataCollector:
         """Alias for get_cloudflare_radar_stats for compatibility"""
         return _self.get_cloudflare_radar_stats()
 
+    @st.cache_data(ttl=86400, max_entries=1)  # 24h cache
+    def get_global_ipv6_consensus(_self) -> Dict[str, Any]:
+        """Compute a multi-source consensus for global IPv6 adoption (Option B).
+
+        Sources:
+        - Google / APNIC  : % of users with IPv6 capability
+        - Cloudflare Radar: % of HTTP traffic over IPv6
+        - ISOC Pulse      : % of top websites with IPv6 (server-side deployment)
+
+        Only live (non-fallback) values contribute to the average.
+        Fallback sources are included in the returned metadata so callers can
+        display appropriate disclaimers.
+        """
+        google = _self.get_google_ipv6_stats()
+        cloudflare = _self.get_cloudflare_radar_stats()
+        isoc = _self.get_internet_society_pulse_stats()
+
+        sources = [
+            {
+                'label': 'Google / APNIC',
+                'value': google.get('global_percentage'),
+                'fallback': google.get('fallback', False),
+                'measurement': 'User IPv6 capability',
+                'source_name': google.get('source', 'Google/APNIC'),
+            },
+            {
+                'label': 'Cloudflare Radar',
+                'value': cloudflare.get('ipv6_percentage'),
+                'fallback': cloudflare.get('fallback', False),
+                'measurement': 'HTTP traffic share',
+                'source_name': cloudflare.get('source', 'Cloudflare Radar'),
+            },
+            {
+                'label': 'ISOC Pulse',
+                'value': float(isoc.get('global_ipv6_websites', 0)) or None,
+                'fallback': isoc.get('fallback', False),
+                'measurement': 'Website IPv6 deployment',
+                'source_name': isoc.get('source', 'ISOC Pulse'),
+            },
+        ]
+
+        # Only live, non-None values count toward the average
+        live = [s for s in sources if not s['fallback'] and s['value']]
+        consensus = round(sum(s['value'] for s in live) / len(live), 1) if live else None
+
+        return {
+            'consensus': consensus,
+            'sources': sources,
+            'live_count': len(live),
+            'total_count': len(sources),
+            'any_fallback': any(s['fallback'] for s in sources),
+            'all_fallback': len(live) == 0,
+            'last_updated': datetime.now().isoformat(),
+        }
+
     def get_country_code_from_name(_self, country_name: str) -> str:
         """
         Convert country name to ISO 3166-1 alpha-2 country code
