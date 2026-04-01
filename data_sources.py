@@ -401,8 +401,9 @@ class DataCollector:
             logger.debug(f"ISOC Pulse Gatsby JSON fetch failed: {e}")
 
         # Attempt 2: HTML scrape (page is JS-rendered; rarely yields parseable text)
+        # Use the canonical URL directly to avoid the /technologies → /en/technologies/ redirect.
         try:
-            url = "https://pulse.internetsociety.org/technologies"
+            url = "https://pulse.internetsociety.org/en/technologies/"
             downloaded = trafilatura.fetch_url(url)
             if downloaded:
                 text = trafilatura.extract(downloaded)
@@ -542,51 +543,63 @@ class DataCollector:
             api_key = os.environ.get('CLOUDFLARE_API_KEY')
 
             if api_key:
-                # Cloudflare Radar API endpoint for IPv6 vs IPv4 timeseries
-                url = "https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w"
+                # Cloudflare Radar API — IPv6 vs IPv4 timeseries (52-week window).
+                # Do NOT include name= here: that parameter labels a named aggregation
+                # and nests results under result[name] instead of result directly,
+                # which causes 400 Bad Request on some API versions.
+                url = "https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?dateRange=52w"
 
                 headers = {
                     'Authorization': f'Bearer {api_key}'
                 }
 
                 response = _self.session.get(url, headers=headers, timeout=10)
+                if not response.ok:
+                    logger.warning(
+                        f"Cloudflare Radar API returned {response.status_code}: {response.text[:300]}"
+                    )
                 response.raise_for_status()
 
                 data = response.json()
 
                 if data.get('success') and 'result' in data:
                     result = data['result']
-                    # API structure: result['main']['IPv4'] and result['main']['IPv6']
-                    series = result.get('main', {})
+                    # Cloudflare Radar timeseries_groups response shape:
+                    #   result.serie_0.{timestamps, IPv4, IPv6}
+                    # IPv4/IPv6 arrays are already percentage values summing to 100.
+                    # Also handle legacy named-aggregation shapes (main/top-level) defensively.
+                    series = (
+                        result.get('serie_0')
+                        or result.get('main')
+                        or (result if 'IPv4' in result else None)
+                    )
 
-                    # Get the latest data point (values are strings in the API)
-                    ipv4_values = series.get('IPv4', [])
-                    ipv6_values = series.get('IPv6', [])
+                    if series:
+                        ipv4_values = series.get('IPv4', [])
+                        ipv6_values = series.get('IPv6', [])
 
-                    if ipv6_values and ipv4_values:
-                        # Calculate IPv6 percentage from latest data point (convert strings to float)
-                        latest_ipv4 = float(ipv4_values[-1]) if ipv4_values else 0
-                        latest_ipv6 = float(ipv6_values[-1]) if ipv6_values else 0
-                        total = latest_ipv4 + latest_ipv6
+                        if ipv6_values and ipv4_values:
+                            # Values are already percentages from the timeseries_groups endpoint
+                            latest_ipv6 = float(ipv6_values[-1])
+                            latest_ipv4 = float(ipv4_values[-1])
 
-                        ipv6_percentage = (latest_ipv6 / total * 100) if total > 0 else 0
+                            return {
+                                'ipv6_percentage': round(latest_ipv6, 2),
+                                'global_ipv6_percentage': round(latest_ipv6, 2),
+                                'ipv4_percentage': round(latest_ipv4, 2),
+                                'measurement_type': 'HTTP request traffic to Cloudflare network',
+                                'time_period': '52 weeks (1 year)',
+                                'description': 'IPv6 vs IPv4 traffic analysis from Cloudflare Radar API',
+                                'data_points': len(ipv6_values),
+                                'last_updated': datetime.now().isoformat(),
+                                'source': 'Cloudflare Radar API (Live)',
+                                'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
+                                'api_endpoint': url
+                            }
 
-                        return {
-                            'ipv6_percentage': round(ipv6_percentage, 2),
-                            'global_ipv6_percentage': round(ipv6_percentage, 2),
-                            'ipv4_percentage': round((latest_ipv4 / total * 100) if total > 0 else 0, 2),
-                            'measurement_type': 'HTTP request traffic to Cloudflare network',
-                            'time_period': '52 weeks (1 year)',
-                            'description': 'IPv6 vs IPv4 traffic analysis from Cloudflare Radar API',
-                            'data_points': len(ipv6_values),
-                            'last_updated': datetime.now().isoformat(),
-                            'source': 'Cloudflare Radar API (Live)',
-                            'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
-                            'api_endpoint': url
-                        }
-
-                # Fallback if API structure is unexpected
-                logger.warning("Cloudflare Radar API returned unexpected structure")
+                logger.warning(
+                    f"Cloudflare Radar API returned unexpected structure: {str(data)[:300]}"
+                )
                 raise ValueError("Unexpected API response structure")
             else:
                 # No API key, use fallback
@@ -616,7 +629,7 @@ class DataCollector:
                 'last_updated': datetime.now().isoformat(),
                 'source': 'Cloudflare Radar (estimated)',
                 'url': 'https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics',
-                'api_endpoint': 'https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?name=main&dateRange=52w'
+                'api_endpoint': 'https://api.cloudflare.com/client/v4/radar/http/timeseries_groups/ip_version?dateRange=52w'
             }
 
     # Alias for compatibility
