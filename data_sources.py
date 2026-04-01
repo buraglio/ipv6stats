@@ -12,8 +12,11 @@ import gc  # Garbage collection for memory optimization
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from .env file.
+# override=True ensures .env always takes precedence over any pre-existing
+# system environment variables (e.g. stale values from shell profiles or
+# systemd units on a second host).
+load_dotenv(override=True)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -540,7 +543,7 @@ class DataCollector:
 
         try:
             # Check for API key in environment
-            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+            api_key = (os.environ.get('CLOUDFLARE_API_KEY') or '').strip()
 
             if api_key:
                 # Cloudflare Radar API — IPv6 vs IPv4 timeseries (52-week window).
@@ -742,7 +745,7 @@ class DataCollector:
         import os
 
         try:
-            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+            api_key = (os.environ.get('CLOUDFLARE_API_KEY') or '').strip()
 
             if api_key and country_code:
                 # Cloudflare Radar API endpoint for country-specific IPv6 data
@@ -950,7 +953,7 @@ class DataCollector:
         Falls back to 2024 research estimates from Cloudflare's DNS blog post when no key is set.
         """
         try:
-            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+            api_key = (os.environ.get('CLOUDFLARE_API_KEY') or '').strip()
             if not api_key:
                 raise ValueError("No CLOUDFLARE_API_KEY configured")
 
@@ -3678,7 +3681,7 @@ class DataCollector:
         Note: Meta no longer publishes public IPv6 statistics at facebook.com/ipv6.
         """
         try:
-            api_key = os.environ.get('CLOUDFLARE_API_KEY')
+            api_key = (os.environ.get('CLOUDFLARE_API_KEY') or '').strip()
             if api_key:
                 url = (
                     "https://api.cloudflare.com/client/v4/radar/http/top/locations"
