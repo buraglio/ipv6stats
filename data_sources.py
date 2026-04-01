@@ -360,8 +360,9 @@ class DataCollector:
         3. Hardcoded 2024 research estimates from ISOC published reports
         """
         # Attempt 1: Gatsby page-data JSON — contains pre-rendered query results
+        # Note: /technologies redirects to /en/technologies/ — use the canonical path directly.
         try:
-            gatsby_url = "https://pulse.internetsociety.org/page-data/technologies/page-data.json"
+            gatsby_url = "https://pulse.internetsociety.org/page-data/en/technologies/page-data.json"
             response = _self.session.get(gatsby_url, timeout=10)
             response.raise_for_status()
             page_data = response.json()
@@ -593,7 +594,13 @@ class DataCollector:
                 raise ValueError("No API key configured")
 
         except Exception as e:
-            logger.info(f"Using Cloudflare fallback data: {e}")
+            if os.environ.get('CLOUDFLARE_API_KEY'):
+                logger.warning(
+                    f"CLOUDFLARE_API_KEY is set but Cloudflare Radar API request failed: {e}. "
+                    "Check that the key is valid and has Radar read permissions. Using estimated fallback."
+                )
+            else:
+                logger.info(f"Using Cloudflare fallback data (no API key configured): {e}")
 
             # Fallback data based on recent Cloudflare Radar reports
             # Source: https://radar.cloudflare.com/adoption-and-usage#traffic-characteristics (viewed October 2025)
@@ -617,7 +624,6 @@ class DataCollector:
         """Alias for get_cloudflare_radar_stats for compatibility"""
         return _self.get_cloudflare_radar_stats()
 
-    @st.cache_data(ttl=86400, max_entries=1)  # 24h cache
     def get_global_ipv6_consensus(_self) -> Dict[str, Any]:
         """Compute a multi-source consensus for global IPv6 adoption (Option B).
 
@@ -629,6 +635,9 @@ class DataCollector:
         Only live (non-fallback) values contribute to the average.
         Fallback sources are included in the returned metadata so callers can
         display appropriate disclaimers.
+
+        Note: no @st.cache_data here — each inner method is already individually
+        cached, so adding a second layer would cause Streamlit nested-cache errors.
         """
         google = _self.get_google_ipv6_stats()
         cloudflare = _self.get_cloudflare_radar_stats()
@@ -3703,7 +3712,13 @@ class DataCollector:
                         'note': 'Meta no longer publishes public IPv6 statistics.',
                     }
         except Exception as e:
-            logger.info(f"Using research estimates for per-country IPv6 stats: {e}")
+            if os.environ.get('CLOUDFLARE_API_KEY'):
+                logger.warning(
+                    f"CLOUDFLARE_API_KEY is set but Cloudflare Radar per-country request failed: {e}. "
+                    "Using research estimate fallback."
+                )
+            else:
+                logger.info(f"Using research estimates for per-country IPv6 stats (no API key): {e}")
 
         # Fallback: research estimates from Meta/Facebook platform analysis (2024-2025).
         # Meta shut down the public facebook.com/ipv6 statistics page.
