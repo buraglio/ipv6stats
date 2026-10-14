@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% from "macros.html" import provenance, unavailable, reference, freshness_table %}
+{% macro status_label(s) %}{{ {"ipv6": "IPv6", "ipv4_only": "IPv4 only", "unknown": "unknown"}[s] }}{% endmacro %}
+{% macro prefixes(r) %}{% if r %}{{ r.ipv6_prefixes | format_value("int") }} IPv6 / {{ r.ipv4_prefixes | format_value("int") }} IPv4{% else %}—{% endif %}{% endmacro %}
+{% block content %}
+<h1>Cloud Services</h1>
+<p>Measured columns are refreshed automatically: whether each provider's own hostnames (website, console, API, docs, storage, status page) publish IPv6 addresses, and how many IPv4 and IPv6 prefixes each provider publishes. The support columns come from a curated reference that shows when it was last reviewed.</p>
+
+<h2>Provider comparison</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>Provider</th><th>Own hostnames with IPv6</th><th>Published prefixes</th><th>IPv6 support</th><th>IPv6-only</th><th>Reviewed</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr><td><a href="#{{ r.key }}">{{ r.name }}</a></td>
+      <td>{% if r.endpoints %}{{ r.endpoints.with_ipv6 }} of {{ r.endpoints.checked }}{% else %}—{% endif %}</td>
+      <td>{{ prefixes(r.ranges) }}</td>
+      <td>{{ r.reference.get("overall_support", "—") }}</td>
+      <td>{{ r.reference.get("ipv6_only_support", "—") }}</td>
+      <td>{{ r.reference.last_reviewed }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{% if endpoints %}{{ provenance(endpoints) }}{% else %}{{ unavailable() }}{% endif %}
+{% if ranges %}{{ provenance(ranges) }}{% endif %}
+<p class="provenance">Hostname checks show whether IPv6 addresses are published (AAAA records), not end-to-end reachability. Prefix counts don't compare address space: one IPv6 prefix covers far more addresses than one IPv4 prefix.</p>
+
+<h2>AWS services</h2>
+{% if aws %}
+<p>Of {{ aws.value.total }} services AWS lists: {{ aws.value.counts.dual_stack.yes }} of {{ aws.value.total }} services support dual-stack ({{ aws.value.counts.dual_stack.partial }} partly), {{ aws.value.counts.ipv6_only.yes }} support IPv6-only ({{ aws.value.counts.ipv6_only.partial }} partly), and {{ aws.value.counts.public_endpoints.yes }} have public endpoints reachable over IPv6.</p>
+<details class="source"><summary>All AWS services</summary>
+<div class="table-wrap"><table>
+  <thead><tr><th>Service</th><th>Dual-stack</th><th>IPv6-only</th><th>Public endpoints</th><th>Private endpoints</th></tr></thead>
+  <tbody>
+  {% for s in aws.value.services %}
+    <tr><td>{{ s.name }}</td><td>{{ s.dual_stack or "—" }}</td><td>{{ s.ipv6_only or "—" }}</td><td>{{ s.public_endpoints or "—" }}</td><td>{{ s.private_endpoints or "—" }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+</details>
+{{ provenance(aws) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Providers</h2>
+{% for r in rows %}
+<details class="source" id="{{ r.key }}">
+  <summary>{{ r.name }}</summary>
+  <h3>Measured</h3>
+  {% if r.endpoints %}
+  <ul>{% for h in r.endpoints.hosts %}<li>{{ h.role }}: <code>{{ h.host }}</code> — {{ status_label(h.status) }}</li>{% endfor %}</ul>
+  {% else %}<p class="missing">— source unavailable</p>{% endif %}
+  {% if r.ranges %}<p>Published prefixes: {{ prefixes(r.ranges) }}{% if r.ranges.services_with_ipv6 is defined %}; {{ r.ranges.services_with_ipv6 }} of {{ r.ranges.services }} services have IPv6 ranges{% endif %}.</p>{% endif %}
+  {% call reference(reviewed=r.reference.last_reviewed) %}
+    {% set ref = r.reference %}
+    <dl>
+      {% if ref.get("overall_support") %}<dt>IPv6 support</dt><dd>{{ ref.overall_support }}</dd>{% endif %}
+      {% if ref.get("ipv6_only_support") %}<dt>IPv6-only</dt><dd>{{ ref.ipv6_only_support }}</dd>{% endif %}
+      {% if ref.get("cost_impact") %}<dt>Cost</dt><dd>{{ ref.cost_impact }}</dd>{% endif %}
+      {% if ref.get("outlook") %}<dt>Outlook</dt><dd>{{ ref.outlook }}</dd>{% endif %}
+    </dl>
+    {% if ref.limitations %}<p><strong>Limitations</strong></p><ul>{% for x in ref.limitations %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+    {% if ref.recent_progress %}<p><strong>Recent progress</strong></p><ul>{% for x in ref.recent_progress %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+    {% if ref.special_features %}<p><strong>Notable</strong></p><ul>{% for x in ref.special_features %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+    {% if ref.service %}
+    <div class="table-wrap"><table>
+      <thead><tr><th>Service</th><th>Dual-stack</th><th>IPv6-only</th><th>NAT-free IPv6 egress</th><th>Prefix delegation</th></tr></thead>
+      <tbody>{% for s in ref.service %}<tr><td>{{ s.name }}</td><td>{{ s.dual_stack }}</td><td>{{ s.ipv6_only }}</td><td>{{ s.nat_free_egress }}</td><td>{{ s.prefix_delegation }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {% endif %}
+    {% if ref.notes %}<ul>{% for x in ref.notes %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+    {% if ref.get("documentation") %}<p><a href="{{ ref.documentation }}">Provider documentation</a></p>{% endif %}
+  {% endcall %}
+</details>
+{% endfor %}
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

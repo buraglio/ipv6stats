@@ -19,7 +19,7 @@ from plotly.offline import get_plotlyjs
 from web import reference
 from web.data import Data
 from web.format import date_only, format_value, provenance_text
-from web.pages import country, country_analysis, global_adoption, overview
+from web.pages import cloud_services, country, country_analysis, global_adoption, overview
 
 HERE = Path(__file__).parent
 TEMPLATES = HERE / "templates"
@@ -38,6 +38,7 @@ PAGES = (
     Page("overview", "Overview", overview.context),
     Page("global-adoption", "Global Adoption", global_adoption.context),
     Page("country-analysis", "Country Analysis", country_analysis.context),
+    Page("cloud-services", "Cloud Services", cloud_services.context),
 )
 
 # Old Streamlit ?page= names -> new paths. Later plans add the remaining pages;
@@ -47,6 +48,7 @@ LEGACY_PAGES = {
     "Combined View": "overview/",
     "Global Adoption": "global-adoption/",
     "Country Analysis": "country-analysis/",
+    "Cloud Services": "cloud-services/",
 }
 
 
