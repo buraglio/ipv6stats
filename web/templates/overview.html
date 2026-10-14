@@ -8,7 +8,7 @@
   {{ metric("Cloudflare HTTP requests over IPv6", cf_ipv6, "pct") }}
   {{ metric("IPv6 BGP prefixes", bgp_current, "int",
             note=(bgp_year.value | format_value("signed_int")) ~ " in the past year" if bgp_year else None) }}
-  {{ metric("Top 1000 sites with IPv6 (AAAA)", sites, "pct") }}
+  {{ metric(sites_label, sites, "pct") }}
   {{ metric("Economies ≥ " ~ above_threshold ~ "% IPv6-capable", above, "int",
             note="of " ~ considered.value ~ " economies with at least " ~ min_samples_label ~ " APNIC samples" if considered else None) }}
 </section>

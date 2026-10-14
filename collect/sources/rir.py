@@ -21,7 +21,7 @@ def parse_delegations(text: str, registry: str, url: str) -> dict:
         if (len(parts) < 7 or parts[0] != registry or parts[2] != "ipv6"
                 or parts[1] == "*" or parts[6] not in COUNTED):
             continue
-        blocks = 2.0 ** (UNIT - int(parts[4]))
+        blocks = 2 ** (UNIT - int(parts[4]))  # int base; a negative power gives a float
         per_country[parts[1]] = per_country.get(parts[1], 0.0) + blocks
         total += blocks
     if file_date is None or not per_country:

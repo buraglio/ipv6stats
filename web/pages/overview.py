@@ -1,4 +1,5 @@
 """Overview page: the old Overview and Combined View merged, built only from collected data."""
+from collect.sources import tranco as tranco_source
 from web import charts, derive
 from web.data import Data
 
@@ -23,6 +24,7 @@ def context(data: Data) -> dict:
         "bgp_chart": charts.line_chart(
             data.datum("bgp_v6_table", lambda p: p["daily"]),
             x="date", y="prefixes", title="IPv6 BGP table size", y_title="Prefixes"),
+        "sites_label": f"Top {tranco_source.TOP_N:,} sites with IPv6 (AAAA)",
         "sites": data.datum("tranco_aaaa", lambda p: p["percentage"]),
         "tranco": data.datum("tranco_aaaa", lambda p: p),
         "apnic_world": data.datum("apnic", lambda p: p["world"]),
