@@ -68,6 +68,26 @@ streamlit run app.py
 
 The dashboard will be available at `http://localhost:8501`
 
+## Static site (GitHub Pages)
+
+The site is being moved from the Streamlit server to a static site on GitHub Pages
+(design: `docs/superpowers/specs/2026-10-14-static-site-migration-design.md`).
+
+- `collect/`: data sources. `uv run python -m collect.run --data-dir data` fetches the
+  sources that are due and writes `data/<source>.json` plus `data/manifest.json`.
+  `--force` re-fetches everything; `--only <source>` fetches one.
+- `web/`: page generation. `uv run python -m web.build --data-dir data --out dist`
+  renders the site from that JSON, with no network access.
+- `.github/workflows/publish.yml` runs both daily at 00:00 UTC, saves the data on the
+  `data` branch, and deploys to Pages. If more than a quarter of the sources that were
+  due fail, nothing is published and GitHub emails the failure.
+- Secrets: `CLOUDFLARE_API_KEY` (required for the Cloudflare source),
+  `ISOC_PULSE_API_KEY` (optional; the ISOC Pulse source is off without it).
+- Tests: `uv run pytest`.
+
+Every number on the site must come from collected data; a test fails if a
+statistic is typed into the code or templates.
+
 ## Performance Optimizations
 
 This dashboard includes comprehensive performance optimizations:

@@ -1,0 +1,82 @@
+name: Collect data and publish site
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # daily, 00:00 UTC (GitHub may start it a few minutes late)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Re-fetch every source, ignoring re-fetch intervals"
+        type: boolean
+        default: false
+  push:
+    branches: [static-site]   # until merged to main, a push is the only way to run it (see Step 7)
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: uv sync --frozen
+
+      - name: Test
+        run: uv run pytest -q
+
+      - name: Check out data branch into data/
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin data > /dev/null; then
+            git fetch --depth=1 origin data
+            git worktree add -B data data origin/data
+          else
+            git worktree add --orphan -b data data
+          fi
+
+      - name: Collect
+        id: collect
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          ISOC_PULSE_API_KEY: ${{ secrets.ISOC_PULSE_API_KEY }}
+        run: uv run python -m collect.run --data-dir data ${{ inputs.force && '--force' || '' }}
+
+      - name: Save data (also after a failed collect, to keep the error record)
+        if: ${{ !cancelled() && steps.collect.outcome != 'skipped' }}
+        working-directory: data
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No data changes"
+          else
+            git commit -m "data: $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin HEAD:data
+          fi
+
+      - name: Build site
+        run: uv run python -m web.build --data-dir data --out dist
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
