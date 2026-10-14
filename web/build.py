@@ -102,7 +102,8 @@ def build(data_dir: Path, out_dir: Path, now: datetime) -> list[str]:
     for slug, page_context in country.pages(data):
         context = {**common, "current": "country-analysis", **page_context}
         _write(out_dir / "country" / slug / "index.html", country_template.render(context, base="../../"))
-    return check_reference_dates(TEMPLATES, now) + reference.stale_reviews(reference.load_cloud_providers(), now)
+    return (check_reference_dates(TEMPLATES, now) + reference.stale_reviews(reference.load_cloud_providers(), now)
+            + reference.list_reviews(now))
 
 
 def main(argv: list[str] | None = None) -> int:
