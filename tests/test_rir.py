@@ -45,3 +45,44 @@ def test_isoc_is_opt_in():
 def test_isoc_with_key_reports_missing_client():
     with pytest.raises(NotImplementedError, match="ISOC Pulse API client"):
         SOURCES["isoc_pulse"].fetch(make_ctx(env={"ISOC_PULSE_API_KEY": "k"}))
+
+
+RIPE_SAMPLE = """2|ripencc|1791928799|167536|19700101|20261013|+0200
+ripencc|*|ipv6|*|26850|summary
+ripencc|NL|ipv6|2001:600::|29|19990826|allocated
+ripencc|DE|ipv6|2001:608::|32|20030812|allocated
+ripencc|DE|ipv6|2001:609::|48||assigned
+"""
+
+
+def test_file_date_comes_from_end_date_not_serial():
+    # RIPE's serial is a Unix timestamp; reading it as YYYYMMDD gave "1791-92-87".
+    assert rir.parse_delegations(RIPE_SAMPLE, "ripencc", rir.URLS["ripencc"])["file_date"] == "2026-10-13"
+
+
+def test_by_country_and_history():
+    parsed = rir.parse_delegations(RIPE_SAMPLE, "ripencc", rir.URLS["ripencc"])
+    assert parsed["by_country"] == {"DE": 1.0, "NL": 8.0}  # DE: /32 + /48 rounds to 1.0
+    # The undated /48 counts in the totals but not in the dated history.
+    assert parsed["history"] == [{"year": 1999, "blocks_32": 8.0}, {"year": 2003, "blocks_32": 9.0}]
+
+
+def test_arin_extended_format():
+    text = ("2.3|arin|1791982821510|204020|19700101|20261014|-0400\n"
+            "arin|US|ipv6|2001:400::|32|19990803|allocated|04f048163e37eef48d891498545eefc0\n"
+            "arin||ipv6|2001:4:113::|48||available|\n")
+    parsed = rir.parse_delegations(text, "arin", rir.URLS["arin"])
+    assert parsed["file_date"] == "2026-10-14"
+    assert parsed["by_country"] == {"US": 1.0}
+
+
+def test_rejects_bad_end_date():
+    text = "2|ripencc|1|1|19700101|garbage|+0200\nripencc|DE|ipv6|2001:608::|32|20030812|allocated\n"
+    with pytest.raises(ValueError, match="format changed"):
+        rir.parse_delegations(text, "ripencc", rir.URLS["ripencc"])
+
+
+def test_all_five_registered():
+    for key in ("afrinic_delegations", "apnic_delegations", "arin_delegations",
+                "lacnic_delegations", "ripe_delegations"):
+        assert key in SOURCES
