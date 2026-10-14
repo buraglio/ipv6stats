@@ -1,0 +1,5 @@
+{
+ "ipv4_prefixes": 21,
+ "ipv6_prefixes": 3,
+ "url": "https://api.fastly.com/public-ip-list"
+}

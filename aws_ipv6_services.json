@@ -1,0 +1,1365 @@
+{
+ "counts": {
+  "dual_stack": {
+   "no": 62,
+   "partial": 3,
+   "yes": 126
+  },
+  "ipv6_only": {
+   "no": 153,
+   "partial": 3,
+   "yes": 35
+  },
+  "private_endpoints": {
+   "no": 24,
+   "partial": 1,
+   "yes": 150
+  },
+  "public_endpoints": {
+   "no": 9,
+   "partial": 1,
+   "yes": 181
+  }
+ },
+ "services": [
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Amplify",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon API Gateway",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS App Mesh",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS App Runner",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS AppConfig",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Application Auto Scaling",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Application Discovery Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Application Recovery Controller (ARC)",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon WorkSpaces Applications",
+   "private_endpoints": "no",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "partial",
+   "ipv6_only": "no",
+   "name": "AWS AppSync2",
+   "private_endpoints": "yes",
+   "public_endpoints": "partial"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Athena",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Audit Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Aurora",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Aurora DSQL",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Auto Scaling",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS B2B Data Interchange",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Backup",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Batch",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Bedrock",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Billing and Cost Management Data Exports",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Billing and Cost Management Pricing Calculator",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Billing Conductor",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Budgets",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Braket",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Certificate Manager",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Chime SDK",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Comprehend",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Clean Rooms",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Clean Rooms ML",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Cloud9",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Cloud Control API",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "CloudFormation",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon CloudFront",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS CloudHSM",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS CloudTrail",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon CloudWatch",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon CloudWatch Application Insights",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon CloudWatch Internet Monitor",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon CloudWatch Logs",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon CloudWatch Observability Access Manager",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon CloudWatch Synthetics",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Cloud Map",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Cloud WAN",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS CodeArtifact",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Connect Customer Customer Profiles",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS CodeBuild",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS CodeCommit",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS CodeDeploy",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Compute Optimizer",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Comprehend Medical",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon CodeGuru Profiler",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Cognito",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Config",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Control Tower",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Cost Explorer",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Cost Optimization Hub",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Data Exchange",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Data Firehose",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Data Lifecycle Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Database Migration Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS DataSync",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon DataZone",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Deadline Cloud",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Detective",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Direct Connect",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Directory Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon EBS direct APIs",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon EC2",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "EC2 Image Builder",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon ECR",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon ECS",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon EFS",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "partial",
+   "ipv6_only": "partial",
+   "name": "Amazon EKS",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon EMR",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Elastic Beanstalk",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Elastic Disaster Recovery",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "partial",
+   "ipv6_only": "partial",
+   "name": "Elastic Load Balancing",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon ElastiCache",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Elemental MediaConvert",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Elemental MediaConnect",
+   "private_endpoints": "partial",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS End User Messaging Social",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Entity Resolution",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon EventBridge",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Fargate",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon FSx",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon GameLift Streams",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Global Accelerator",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Glue",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Glue DataBrew",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Managed Grafana 3",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Ground Station 4",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon GuardDuty",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS HealthImaging",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS HealthLake",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS HealthOmics",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Identity and Access Management (IAM)",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IAM Access Analyzer",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IAM Identity Center",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS IAM Roles Anywhere",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Inspector",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Interactive Video Service (IVS) 5",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT Core",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT Device Defender",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT Device Management",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT FleetWise",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT Greengrass",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT SiteWise",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT TwinMaker",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS IoT Wireless",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Kendra",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "partial",
+   "name": "AWS Key Management Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Keyspaces",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Keyspaces CDC streams",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Kinesis Data Streams",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Lake Formation",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Lambda",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Launch Wizard",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS License Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Lightsail",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Location Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon MQ",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon MWAA",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Macie",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Mainframe Modernization",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Managed Grafana",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Managed Service for Prometheus",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Migration Hub Orchestrator",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Network Firewall",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Network Manager",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon OpenSearch Service",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Organizations",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Outposts",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Personalize",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Pinpoint",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Polly",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Price List",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Private Certificate Authority",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Private CA Connector for Active Directory",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Private CA Connector for SCEP",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS PrivateLink",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Q Business",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon RDS",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon RDS Data API",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon RDS Performance Insights",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Redshift",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Rekognition",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Recycle Bin",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS re:Post Private",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Resource Access Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Resource Explorer",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Resource Groups",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Resource Groups Tagging API",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Route\u00c2 53",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon S3",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon S3 on Outposts",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon SageMaker",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Secrets Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Security Hub",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Security Lake",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Security Token Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Service Catalog",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Shield",
+   "private_endpoints": "yes",
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Simple Email Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Simple Notification Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Simple Queue Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Simple Workflow Service",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Site-to-Site VPN",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Snow Family",
+   "private_endpoints": null,
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Step Functions",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS Storage Gateway",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Systems Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Systems Manager Incident Manager",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Systems Manager for SAP",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Textract",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon Timestream",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Transcribe",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Transfer Family 6",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Transit Gateway",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon Translate",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Trusted Advisor",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS User Notifications",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon Verified Permissions",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "VMware Cloud on AWS",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "Amazon VPC",
+   "private_endpoints": "no",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon VPC Lattice",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "yes",
+   "name": "AWS WAF",
+   "private_endpoints": null,
+   "public_endpoints": "no"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS WAFV2",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "AWS Well-Architected Tool",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "no",
+   "ipv6_only": "no",
+   "name": "Amazon WorkMail",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "Amazon WorkSpaces",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS X-Ray",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  }
+ ],
+ "total": 191,
+ "url": "https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html"
+}

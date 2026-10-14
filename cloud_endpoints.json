@@ -1,0 +1,785 @@
+{
+ "providers": [
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "aws.amazon.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "console.aws.amazon.com",
+     "role": "console",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "ec2.us-east-1.amazonaws.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "docs.aws.amazon.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "s3.us-east-1.amazonaws.com",
+     "role": "storage",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "health.aws.amazon.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "aws",
+   "name": "AWS",
+   "with_ipv6": 2
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "azure.microsoft.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "portal.azure.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "management.azure.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "learn.microsoft.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "azureopendatastorage.blob.core.windows.net",
+     "role": "storage",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "azure.status.microsoft",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "azure",
+   "name": "Microsoft Azure",
+   "with_ipv6": 4
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "cloud.google.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "console.cloud.google.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "compute.googleapis.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.cloud.google.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "storage.googleapis.com",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.cloud.google.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "gcp",
+   "name": "Google Cloud Platform",
+   "with_ipv6": 6
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.oracle.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "cloud.oracle.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "iaas.us-ashburn-1.oraclecloud.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "docs.oracle.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "objectstorage.us-ashburn-1.oraclecloud.com",
+     "role": "storage",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "ocistatus.oraclecloud.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "oracle",
+   "name": "Oracle Cloud",
+   "with_ipv6": 4
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.digitalocean.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "cloud.digitalocean.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.digitalocean.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.digitalocean.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "nyc3.digitaloceanspaces.com",
+     "role": "storage",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "status.digitalocean.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "digitalocean",
+   "name": "DigitalOcean",
+   "with_ipv6": 5
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.vultr.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "my.vultr.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.vultr.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.vultr.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "ewr1.vultrobjects.com",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.vultr.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "vultr",
+   "name": "Vultr",
+   "with_ipv6": 6
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.linode.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "cloud.linode.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.linode.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "techdocs.akamai.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "us-east-1.linodeobjects.com",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.linode.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "linode",
+   "name": "Linode (Akamai)",
+   "with_ipv6": 5
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.cloudflare.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "dash.cloudflare.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.cloudflare.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "developers.cloudflare.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "r2.cloudflarestorage.com",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "www.cloudflarestatus.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "cloudflare",
+   "name": "Cloudflare",
+   "with_ipv6": 6
+  },
+  {
+   "checked": 3,
+   "hosts": [
+    {
+     "host": "www.mythic-beasts.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.mythic-beasts.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.mythic-beasts.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "mythic-beasts",
+   "name": "Mythic Beasts",
+   "with_ipv6": 3
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.hetzner.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "console.hetzner.cloud",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.hetzner.cloud",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.hetzner.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "fsn1.your-objectstorage.com",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.hetzner.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "hetzner",
+   "name": "Hetzner",
+   "with_ipv6": 6
+  },
+  {
+   "checked": 5,
+   "hosts": [
+    {
+     "host": "www.scaleway.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "console.scaleway.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.scaleway.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "s3.fr-par.scw.cloud",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.scaleway.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "scaleway",
+   "name": "Scaleway",
+   "with_ipv6": 3
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.ovhcloud.com",
+     "role": "website",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "www.ovh.com",
+     "role": "console",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "eu.api.ovh.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "help.ovhcloud.com",
+     "role": "docs",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "s3.gra.io.cloud.ovh.net",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "public-cloud.status-ovhcloud.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "ovhcloud",
+   "name": "OVHcloud",
+   "with_ipv6": 1
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "contabo.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "my.contabo.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.contabo.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.contabo.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "eu2.contabostorage.com",
+     "role": "storage",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "contabo-status.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "contabo",
+   "name": "Contabo",
+   "with_ipv6": 5
+  },
+  {
+   "checked": 6,
+   "hosts": [
+    {
+     "host": "www.ionos.com",
+     "role": "website",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "my.ionos.com",
+     "role": "console",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "api.ionos.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.ionos.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "s3.eu-central-1.ionoscloud.com",
+     "role": "storage",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "status.ionos.cloud",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "ionos",
+   "name": "IONOS",
+   "with_ipv6": 2
+  },
+  {
+   "checked": 4,
+   "hosts": [
+    {
+     "host": "upcloud.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "hub.upcloud.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.upcloud.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "status.upcloud.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "upcloud",
+   "name": "UpCloud",
+   "with_ipv6": 2
+  },
+  {
+   "checked": 5,
+   "hosts": [
+    {
+     "host": "www.binarylane.com.au",
+     "role": "website",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "home.binarylane.com.au",
+     "role": "console",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "api.binarylane.com.au",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "support.binarylane.com.au",
+     "role": "docs",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "status.binarylane.com.au",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "binarylane",
+   "name": "BinaryLane",
+   "with_ipv6": 0
+  },
+  {
+   "checked": 4,
+   "hosts": [
+    {
+     "host": "www.kamatera.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "console.kamatera.com",
+     "role": "console",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "cloudcli.cloudwm.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "status.kamatera.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "kamatera",
+   "name": "Kamatera",
+   "with_ipv6": 2
+  },
+  {
+   "checked": 5,
+   "hosts": [
+    {
+     "host": "www.hostinger.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "hpanel.hostinger.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "developers.hostinger.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "support.hostinger.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "statuspage.hostinger.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "hostinger",
+   "name": "Hostinger",
+   "with_ipv6": 5
+  },
+  {
+   "checked": 5,
+   "hosts": [
+    {
+     "host": "www.fastly.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "manage.fastly.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.fastly.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "docs.fastly.com",
+     "role": "docs",
+     "status": "ipv6"
+    },
+    {
+     "host": "www.fastlystatus.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "fastly",
+   "name": "Fastly",
+   "with_ipv6": 4
+  },
+  {
+   "checked": 5,
+   "hosts": [
+    {
+     "host": "www.backblaze.com",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "secure.backblaze.com",
+     "role": "console",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.backblazeb2.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "s3.us-west-004.backblazeb2.com",
+     "role": "storage",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.backblaze.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "backblaze",
+   "name": "Backblaze",
+   "with_ipv6": 3
+  },
+  {
+   "checked": 3,
+   "hosts": [
+    {
+     "host": "railway.com",
+     "role": "website",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "backboard.railway.com",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "docs.railway.com",
+     "role": "docs",
+     "status": "unknown"
+    },
+    {
+     "host": "status.railway.com",
+     "role": "status",
+     "status": "ipv6"
+    }
+   ],
+   "key": "railway",
+   "name": "Railway",
+   "with_ipv6": 2
+  },
+  {
+   "checked": 4,
+   "hosts": [
+    {
+     "host": "render.com",
+     "role": "website",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "dashboard.render.com",
+     "role": "console",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "api.render.com",
+     "role": "api",
+     "status": "ipv4_only"
+    },
+    {
+     "host": "status.render.com",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "render",
+   "name": "Render",
+   "with_ipv6": 0
+  },
+  {
+   "checked": 3,
+   "hosts": [
+    {
+     "host": "fly.io",
+     "role": "website",
+     "status": "ipv6"
+    },
+    {
+     "host": "api.machines.dev",
+     "role": "api",
+     "status": "ipv6"
+    },
+    {
+     "host": "status.flyio.net",
+     "role": "status",
+     "status": "ipv4_only"
+    }
+   ],
+   "key": "fly-io",
+   "name": "Fly.io",
+   "with_ipv6": 2
+  }
+ ],
+ "total": 119,
+ "unknown": 1
+}
