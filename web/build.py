@@ -105,6 +105,8 @@ def build(data_dir: Path, out_dir: Path, now: datetime) -> list[str]:
     for slug, page_context in country.pages(data):
         context = {**common, "current": "country-analysis", **page_context}
         _write(out_dir / "country" / slug / "index.html", country_template.render(context, base="../../"))
+    not_found = env.get_template("404.html")
+    _write(out_dir / "404.html", not_found.render({**common, "page_title": "Page not found", "current": ""}, base="/"))
     return (check_reference_dates(TEMPLATES, now) + reference.stale_reviews(reference.load_cloud_providers(), now)
             + reference.list_reviews(now))
 
