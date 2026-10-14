@@ -1,0 +1,2141 @@
+{
+ "agencies": [
+  {
+   "dns": {
+    "none": 1,
+    "operational": 120
+   },
+   "domains": 121,
+   "mail": {
+    "none": 29,
+    "not_applicable": 65,
+    "operational": 27
+   },
+   "name": "Department of Health and Human Services",
+   "web": {
+    "in_progress": 1,
+    "none": 38,
+    "not_applicable": 19,
+    "operational": 63
+   }
+  },
+  {
+   "dns": {
+    "none": 2,
+    "operational": 88
+   },
+   "domains": 90,
+   "mail": {
+    "none": 7,
+    "not_applicable": 68,
+    "operational": 15
+   },
+   "name": "General Services Administration",
+   "web": {
+    "in_progress": 7,
+    "none": 22,
+    "not_applicable": 19,
+    "operational": 42
+   }
+  },
+  {
+   "dns": {
+    "operational": 87
+   },
+   "domains": 87,
+   "mail": {
+    "none": 2,
+    "not_applicable": 57,
+    "operational": 28
+   },
+   "name": "Department of the Treasury",
+   "web": {
+    "in_progress": 16,
+    "none": 6,
+    "not_applicable": 13,
+    "operational": 52
+   }
+  },
+  {
+   "dns": {
+    "none": 6,
+    "operational": 63
+   },
+   "domains": 69,
+   "mail": {
+    "none": 4,
+    "not_applicable": 57,
+    "operational": 8
+   },
+   "name": "Executive Office of the President",
+   "web": {
+    "none": 2,
+    "not_applicable": 17,
+    "operational": 50
+   }
+  },
+  {
+   "dns": {
+    "operational": 64
+   },
+   "domains": 64,
+   "mail": {
+    "none": 2,
+    "not_applicable": 39,
+    "operational": 23
+   },
+   "name": "Department of Commerce",
+   "web": {
+    "in_progress": 1,
+    "none": 15,
+    "not_applicable": 10,
+    "operational": 38
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 63
+   },
+   "domains": 64,
+   "mail": {
+    "none": 2,
+    "not_applicable": 35,
+    "operational": 27
+   },
+   "name": "Department of the Interior",
+   "web": {
+    "in_progress": 7,
+    "none": 23,
+    "not_applicable": 7,
+    "operational": 27
+   }
+  },
+  {
+   "dns": {
+    "operational": 62
+   },
+   "domains": 62,
+   "mail": {
+    "none": 12,
+    "not_applicable": 27,
+    "operational": 23
+   },
+   "name": "Department of Justice",
+   "web": {
+    "none": 8,
+    "not_applicable": 9,
+    "operational": 45
+   }
+  },
+  {
+   "dns": {
+    "none": 2,
+    "operational": 58
+   },
+   "domains": 60,
+   "mail": {
+    "in_progress": 4,
+    "none": 17,
+    "not_applicable": 14,
+    "operational": 25
+   },
+   "name": "Department of Energy",
+   "web": {
+    "in_progress": 1,
+    "none": 22,
+    "not_applicable": 14,
+    "operational": 23
+   }
+  },
+  {
+   "dns": {
+    "none": 19,
+    "operational": 22
+   },
+   "domains": 41,
+   "mail": {
+    "in_progress": 2,
+    "none": 17,
+    "not_applicable": 15,
+    "operational": 7
+   },
+   "name": "Department of Defense",
+   "web": {
+    "in_progress": 2,
+    "none": 8,
+    "not_applicable": 11,
+    "operational": 20
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 40
+   },
+   "domains": 41,
+   "mail": {
+    "in_progress": 1,
+    "none": 11,
+    "not_applicable": 28,
+    "operational": 1
+   },
+   "name": "Department of Homeland Security",
+   "web": {
+    "none": 2,
+    "not_applicable": 3,
+    "operational": 36
+   }
+  },
+  {
+   "dns": {
+    "operational": 34
+   },
+   "domains": 34,
+   "mail": {
+    "none": 6,
+    "not_applicable": 27,
+    "operational": 1
+   },
+   "name": "Library of Congress",
+   "web": {
+    "none": 5,
+    "not_applicable": 4,
+    "operational": 25
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 31
+   },
+   "domains": 32,
+   "mail": {
+    "none": 19,
+    "not_applicable": 12,
+    "operational": 1
+   },
+   "name": "National Archives and Records Administration",
+   "web": {
+    "none": 5,
+    "operational": 27
+   }
+  },
+  {
+   "dns": {
+    "none": 3,
+    "operational": 27
+   },
+   "domains": 30,
+   "mail": {
+    "none": 5,
+    "not_applicable": 16,
+    "operational": 9
+   },
+   "name": "Department of Agriculture",
+   "web": {
+    "none": 19,
+    "not_applicable": 4,
+    "operational": 7
+   }
+  },
+  {
+   "dns": {
+    "none": 5,
+    "operational": 25
+   },
+   "domains": 30,
+   "mail": {
+    "not_applicable": 23,
+    "operational": 7
+   },
+   "name": "Department of State",
+   "web": {
+    "none": 7,
+    "not_applicable": 12,
+    "operational": 11
+   }
+  },
+  {
+   "dns": {
+    "operational": 29
+   },
+   "domains": 29,
+   "mail": {
+    "none": 5,
+    "not_applicable": 24
+   },
+   "name": "United States House of Representatives",
+   "web": {
+    "none": 5,
+    "not_applicable": 5,
+    "operational": 19
+   }
+  },
+  {
+   "dns": {
+    "in_progress": 1,
+    "none": 1,
+    "operational": 26
+   },
+   "domains": 28,
+   "mail": {
+    "none": 1,
+    "not_applicable": 17,
+    "operational": 10
+   },
+   "name": "Department of Labor",
+   "web": {
+    "none": 11,
+    "not_applicable": 4,
+    "operational": 13
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 21
+   },
+   "domains": 22,
+   "mail": {
+    "none": 4,
+    "not_applicable": 13,
+    "operational": 5
+   },
+   "name": "Office of Personnel Management",
+   "web": {
+    "none": 2,
+    "not_applicable": 8,
+    "operational": 12
+   }
+  },
+  {
+   "dns": {
+    "none": 2,
+    "operational": 19
+   },
+   "domains": 21,
+   "mail": {
+    "none": 11,
+    "not_applicable": 9,
+    "operational": 1
+   },
+   "name": ".gov Administration",
+   "web": {
+    "not_applicable": 18,
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 18
+   },
+   "domains": 19,
+   "mail": {
+    "none": 2,
+    "not_applicable": 14,
+    "operational": 3
+   },
+   "name": "Department of Transportation",
+   "web": {
+    "none": 1,
+    "not_applicable": 2,
+    "operational": 16
+   }
+  },
+  {
+   "dns": {
+    "none": 4,
+    "operational": 12
+   },
+   "domains": 16,
+   "mail": {
+    "none": 2,
+    "not_applicable": 13,
+    "operational": 1
+   },
+   "name": "Government Publishing Office",
+   "web": {
+    "none": 4,
+    "not_applicable": 1,
+    "operational": 11
+   }
+  },
+  {
+   "dns": {
+    "none": 3,
+    "operational": 12
+   },
+   "domains": 15,
+   "mail": {
+    "none": 5,
+    "not_applicable": 6,
+    "operational": 4
+   },
+   "name": "Office of the Director of National Intelligence",
+   "web": {
+    "none": 3,
+    "not_applicable": 3,
+    "operational": 9
+   }
+  },
+  {
+   "dns": {
+    "none": 6,
+    "operational": 8
+   },
+   "domains": 14,
+   "mail": {
+    "none": 8,
+    "not_applicable": 6
+   },
+   "name": "Architect of the Capitol",
+   "web": {
+    "none": 5,
+    "not_applicable": 5,
+    "operational": 4
+   }
+  },
+  {
+   "dns": {
+    "operational": 14
+   },
+   "domains": 14,
+   "mail": {
+    "none": 1,
+    "not_applicable": 8,
+    "operational": 5
+   },
+   "name": "Federal Trade Commission",
+   "web": {
+    "none": 6,
+    "operational": 8
+   }
+  },
+  {
+   "dns": {
+    "none": 2,
+    "operational": 11
+   },
+   "domains": 13,
+   "mail": {
+    "none": 4,
+    "not_applicable": 8,
+    "operational": 1
+   },
+   "name": "Administrative Office of the United States Courts",
+   "web": {
+    "none": 2,
+    "not_applicable": 3,
+    "operational": 8
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 12
+   },
+   "domains": 13,
+   "mail": {
+    "none": 6,
+    "not_applicable": 7
+   },
+   "name": "Board of Governors of the Federal Reserve",
+   "web": {
+    "none": 1,
+    "not_applicable": 5,
+    "operational": 7
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 12
+   },
+   "domains": 13,
+   "mail": {
+    "not_applicable": 9,
+    "operational": 4
+   },
+   "name": "Environmental Protection Agency",
+   "web": {
+    "in_progress": 1,
+    "none": 1,
+    "not_applicable": 3,
+    "operational": 8
+   }
+  },
+  {
+   "dns": {
+    "in_progress": 1,
+    "operational": 11
+   },
+   "domains": 12,
+   "mail": {
+    "none": 1,
+    "not_applicable": 3,
+    "operational": 8
+   },
+   "name": "Corporation for National and Community Service",
+   "web": {
+    "none": 1,
+    "not_applicable": 9,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 10
+   },
+   "domains": 11,
+   "mail": {
+    "none": 1,
+    "not_applicable": 8,
+    "operational": 2
+   },
+   "name": "Department of Education",
+   "web": {
+    "none": 4,
+    "not_applicable": 1,
+    "operational": 6
+   }
+  },
+  {
+   "dns": {
+    "operational": 10
+   },
+   "domains": 10,
+   "mail": {
+    "not_applicable": 9,
+    "operational": 1
+   },
+   "name": "Consumer Product Safety Commission",
+   "web": {
+    "operational": 10
+   }
+  },
+  {
+   "dns": {
+    "in_progress": 6,
+    "none": 3,
+    "operational": 1
+   },
+   "domains": 10,
+   "mail": {
+    "none": 2,
+    "not_applicable": 7,
+    "operational": 1
+   },
+   "name": "United States Postal Service",
+   "web": {
+    "none": 2,
+    "not_applicable": 6,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 9
+   },
+   "domains": 9,
+   "mail": {
+    "not_applicable": 6,
+    "operational": 3
+   },
+   "name": "Consumer Financial Protection Bureau",
+   "web": {
+    "none": 1,
+    "operational": 8
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 7
+   },
+   "domains": 8,
+   "mail": {
+    "none": 5,
+    "not_applicable": 2,
+    "operational": 1
+   },
+   "name": "Central Intelligence Agency",
+   "web": {
+    "none": 1,
+    "not_applicable": 5,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 8
+   },
+   "domains": 8,
+   "mail": {
+    "not_applicable": 4,
+    "operational": 4
+   },
+   "name": "Department of Housing and Urban Development",
+   "web": {
+    "none": 2,
+    "operational": 6
+   }
+  },
+  {
+   "dns": {
+    "operational": 8
+   },
+   "domains": 8,
+   "mail": {
+    "none": 3,
+    "not_applicable": 5
+   },
+   "name": "Supreme Court of the United States",
+   "web": {
+    "not_applicable": 5,
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "in_progress": 1,
+    "operational": 6
+   },
+   "domains": 7,
+   "mail": {
+    "in_progress": 1,
+    "none": 2,
+    "not_applicable": 3,
+    "operational": 1
+   },
+   "name": "Government Accountability Office",
+   "web": {
+    "none": 3,
+    "not_applicable": 4
+   }
+  },
+  {
+   "dns": {
+    "operational": 6
+   },
+   "domains": 6,
+   "mail": {
+    "operational": 6
+   },
+   "name": "United States Agency for Global Media",
+   "web": {
+    "not_applicable": 1,
+    "operational": 5
+   }
+  },
+  {
+   "dns": {
+    "operational": 5
+   },
+   "domains": 5,
+   "mail": {
+    "not_applicable": 4,
+    "operational": 1
+   },
+   "name": "Department of Veterans Affairs",
+   "web": {
+    "none": 1,
+    "operational": 4
+   }
+  },
+  {
+   "dns": {
+    "operational": 5
+   },
+   "domains": 5,
+   "mail": {
+    "none": 3,
+    "not_applicable": 2
+   },
+   "name": "Federal Deposit Insurance Corporation",
+   "web": {
+    "none": 3,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 5
+   },
+   "domains": 5,
+   "mail": {
+    "none": 3,
+    "operational": 2
+   },
+   "name": "Federal Retirement Thrift Investment Board",
+   "web": {
+    "none": 1,
+    "not_applicable": 3,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "none": 5
+   },
+   "domains": 5,
+   "mail": {
+    "not_applicable": 3,
+    "operational": 2
+   },
+   "name": "Small Business Administration",
+   "web": {
+    "none": 2,
+    "not_applicable": 1,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 4
+   },
+   "domains": 5,
+   "mail": {
+    "not_applicable": 4,
+    "operational": 1
+   },
+   "name": "United States International Development Finance Corporation",
+   "web": {
+    "none": 4,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "not_applicable": 3,
+    "operational": 1
+   },
+   "name": "Commodity Futures Trading Commission",
+   "web": {
+    "not_applicable": 1,
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "not_applicable": 3,
+    "operational": 1
+   },
+   "name": "Council of the Inspectors General on Integrity and Efficiency",
+   "web": {
+    "not_applicable": 1,
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "not_applicable": 3,
+    "operational": 1
+   },
+   "name": "Election Assistance Commission",
+   "web": {
+    "none": 2,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "not_applicable": 3,
+    "operational": 1
+   },
+   "name": "Federal Communications Commission",
+   "web": {
+    "operational": 4
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "not_applicable": 3,
+    "operational": 1
+   },
+   "name": "National Aeronautics and Space Administration",
+   "web": {
+    "none": 1,
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "none": 2,
+    "not_applicable": 2
+   },
+   "name": "National Science Foundation",
+   "web": {
+    "operational": 4
+   }
+  },
+  {
+   "dns": {
+    "operational": 4
+   },
+   "domains": 4,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 3
+   },
+   "name": "Presidio Trust",
+   "web": {
+    "none": 2,
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 3
+   },
+   "domains": 3,
+   "mail": {
+    "none": 2,
+    "not_applicable": 1
+   },
+   "name": "Court Services and Offender Supervision Agency for the District of Columbia",
+   "web": {
+    "none": 3
+   }
+  },
+  {
+   "dns": {
+    "none": 2,
+    "operational": 1
+   },
+   "domains": 3,
+   "mail": {
+    "none": 1,
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Federal Housing Finance Agency",
+   "web": {
+    "none": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 3
+   },
+   "domains": 3,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 2
+   },
+   "name": "Institute of Museum and Library Services",
+   "web": {
+    "none": 2,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 3
+   },
+   "domains": 3,
+   "mail": {
+    "none": 2,
+    "operational": 1
+   },
+   "name": "Peace Corps",
+   "web": {
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 3
+   },
+   "domains": 3,
+   "mail": {
+    "not_applicable": 2,
+    "operational": 1
+   },
+   "name": "Social Security Administration",
+   "web": {
+    "operational": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 3
+   },
+   "domains": 3,
+   "mail": {
+    "not_applicable": 2,
+    "operational": 1
+   },
+   "name": "U.S. Semiquincentennial Commission",
+   "web": {
+    "none": 3
+   }
+  },
+  {
+   "dns": {
+    "operational": 3
+   },
+   "domains": 3,
+   "mail": {
+    "not_applicable": 3
+   },
+   "name": "United States Senate",
+   "web": {
+    "not_applicable": 2,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Advisory Council on Historic Preservation",
+   "web": {
+    "none": 1,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Barry Goldwater Scholarship and Excellence in Education Foundation",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "none": 2
+   },
+   "domains": 2,
+   "mail": {
+    "none": 1,
+    "not_applicable": 1
+   },
+   "name": "Capitol Police",
+   "web": {
+    "not_applicable": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Chemical Safety and Hazard Investigation Board",
+   "web": {
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "none": 2
+   },
+   "name": "Congressional Budget Office",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 1
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Federal Mediation and Conciliation Service",
+   "web": {
+    "none": 1,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "Federal Permitting Improvement Council",
+   "web": {
+    "in_progress": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "International Trade Commission",
+   "web": {
+    "not_applicable": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "none": 1,
+    "operational": 1
+   },
+   "name": "Millennium Challenge Corporation",
+   "web": {
+    "not_applicable": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "Morris K. Udall and Stewart L. Udall Foundation",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "National Credit Union Administration",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "National Endowment for the Arts",
+   "web": {
+    "none": 1,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "National Endowment for the Humanities",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "none": 1,
+    "not_applicable": 1
+   },
+   "name": "Nuclear Regulatory Commission",
+   "web": {
+    "none": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "none": 2
+   },
+   "name": "Office of Congressional Workplace Rights",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 1
+   },
+   "domains": 2,
+   "mail": {
+    "none": 1,
+    "operational": 1
+   },
+   "name": "Office of Government Ethics",
+   "web": {
+    "none": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Office of Special Counsel",
+   "web": {
+    "not_applicable": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "in_progress": 1,
+    "none": 1
+   },
+   "name": "Open World Leadership Center",
+   "web": {
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "Securities and Exchange Commission",
+   "web": {
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "Smithsonian Institution",
+   "web": {
+    "none": 1,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 1
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "Tennessee Valley Authority",
+   "web": {
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "none": 1,
+    "not_applicable": 1
+   },
+   "name": "U.S. Commission on Civil Rights",
+   "web": {
+    "operational": 2
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 1
+   },
+   "domains": 2,
+   "mail": {
+    "none": 1,
+    "operational": 1
+   },
+   "name": "U.S. Interagency Council on Homelessness",
+   "web": {
+    "none": 2
+   }
+  },
+  {
+   "dns": {
+    "operational": 2
+   },
+   "domains": 2,
+   "mail": {
+    "not_applicable": 1,
+    "operational": 1
+   },
+   "name": "United States AbilityOne Commission",
+   "web": {
+    "none": 1,
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "none": 1,
+    "operational": 1
+   },
+   "domains": 2,
+   "mail": {
+    "operational": 2
+   },
+   "name": "United States African Development Foundation",
+   "web": {
+    "none": 1,
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Access Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Adams Memorial Commission",
+   "web": {
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Administrative Conference of the United States",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "American Battle Monuments Commission",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Appalachian Regional Commission",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Appraisal Subcommittee of the Federal Financial Institutions Examination Council",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Arctic Research Commission",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Armed Forces Retirement Home",
+   "web": {
+    "in_progress": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Civil Rights Cold Case Records Review Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Defense Nuclear Facilities Safety Board",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Delta Regional Authority",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "none": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Denali Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Equal Employment Opportunity Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Export-Import Bank of the United States",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "none": 1
+   },
+   "name": "Farm Credit Administration",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "none": 1
+   },
+   "name": "Farm Credit System Insurance Corporation",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Federal Election Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Federal Energy Regulatory Commission",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Federal Judicial Center",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Federal Labor Relations Authority",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Federal Maritime Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Federal Mine Safety and Health Review Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Gulf Coast Ecosystem Restoration Council",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Harry S Truman Scholarship Foundation",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Inter-American Foundation",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "James Madison Memorial Fellowship Foundation",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Japan-United States Friendship Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "John F. Kennedy Center for the Performing Arts",
+   "web": {
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Legal Services Corporation",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Marine Mammal Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Medicaid and CHIP Payment and Access Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Medicare Payment Advisory Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Merit Systems Protection Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Capital Planning Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Council on Disability",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Gallery of Art",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "none": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Labor Relations Board",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Mediation Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Railroad Passenger Corporation",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "National Transportation Safety Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Northern Border Regional Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Occupational Safety and Health Review Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "none": 1
+   },
+   "name": "Pension Benefit Guaranty Corporation",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Postal Regulatory Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Privacy and Civil Liberties Oversight Board",
+   "web": {
+    "in_progress": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Public Buildings Reform Board",
+   "web": {
+    "in_progress": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Railroad Retirement Board",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Selective Service System",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Social Security Advisory Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Southeast Crescent Regional Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "none": 1
+   },
+   "name": "Southwest Border Regional Commission",
+   "web": {
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "State Justice Institute",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Stennis Center for Public Service",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Surface Transportation Board",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "Trade And Development Agency",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "not_applicable": 1
+   },
+   "name": "U.S. Capitol Police",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "U.S. Commission for the Preservation of Americas Heritage Abroad",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "U.S. Commission of Fine Arts",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "none": 1
+   },
+   "name": "U.S. Commission on International Religious Freedom",
+   "web": {
+    "operational": 1
+   }
+  },
+  {
+   "dns": {
+    "none": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "U.S. Nuclear Waste Technical Review Board",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "U.S.-China Economic and Security Review Commission",
+   "web": {
+    "in_progress": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "United States Holocaust Memorial Museum",
+   "web": {
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "United States Institute of Peace",
+   "web": {
+    "not_applicable": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "United States Sentencing Commission",
+   "web": {
+    "none": 1
+   }
+  },
+  {
+   "dns": {
+    "operational": 1
+   },
+   "domains": 1,
+   "mail": {
+    "operational": 1
+   },
+   "name": "United States Tax Court",
+   "web": {
+    "none": 1
+   }
+  }
+ ],
+ "domains": 1320,
+ "totals": {
+  "dns": {
+   "in_progress": 9,
+   "none": 86,
+   "operational": 1225
+  },
+  "mail": {
+   "in_progress": 9,
+   "none": 225,
+   "not_applicable": 718,
+   "operational": 368
+  },
+  "web": {
+   "in_progress": 41,
+   "none": 318,
+   "not_applicable": 254,
+   "operational": 707
+  }
+ },
+ "url": "https://usgv6-deploymon.nist.gov/"
+}

@@ -1,15 +1,41 @@
 {
   "afrinic_delegations": {
     "error": null,
-    "last_attempt": "2026-10-14T18:35:41+00:00",
-    "last_success": "2026-10-14T18:35:41+00:00",
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 2,
     "status": "ok",
     "ttl_seconds": 2592000
   },
   "apnic": {
     "error": null,
-    "last_attempt": "2026-10-14T18:35:41+00:00",
-    "last_success": "2026-10-14T18:35:41+00:00",
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 2,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "apnic_delegations": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 2,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "apnic_economy_detail": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "arin_delegations": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 2,
     "status": "ok",
     "ttl_seconds": 2592000
   },
@@ -19,6 +45,14 @@
     "last_success": "2026-10-14T18:35:41+00:00",
     "status": "ok",
     "ttl_seconds": 86400
+  },
+  "cisco_6lab": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
   },
   "cloudflare_ip_version": {
     "error": null,
@@ -34,8 +68,25 @@
   },
   "lacnic_delegations": {
     "error": null,
-    "last_attempt": "2026-10-14T18:35:41+00:00",
-    "last_success": "2026-10-14T18:35:41+00:00",
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 2,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "nist_usgv6": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "ripe_delegations": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 2,
     "status": "ok",
     "ttl_seconds": 2592000
   },
@@ -43,6 +94,14 @@
     "error": null,
     "last_attempt": "2026-10-14T18:35:41+00:00",
     "last_success": "2026-10-14T18:35:41+00:00",
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "vyncke": {
+    "error": null,
+    "last_attempt": "2026-10-14T19:40:41+00:00",
+    "last_success": "2026-10-14T19:40:41+00:00",
+    "schema": 1,
     "status": "ok",
     "ttl_seconds": 2592000
   }

@@ -1,0 +1,1030 @@
+{
+ "countries": [
+  {
+   "code": "AD",
+   "ipv6_users_pct": 0.0,
+   "name": "Andorra"
+  },
+  {
+   "code": "AE",
+   "ipv6_users_pct": 30.7,
+   "name": "United Arab Emirates"
+  },
+  {
+   "code": "AF",
+   "ipv6_users_pct": 0.0,
+   "name": "Afghanistan"
+  },
+  {
+   "code": "AG",
+   "ipv6_users_pct": 0.0,
+   "name": "Antigua and Barbuda"
+  },
+  {
+   "code": "AL",
+   "ipv6_users_pct": 0.0,
+   "name": "Albania"
+  },
+  {
+   "code": "AM",
+   "ipv6_users_pct": 6.9,
+   "name": "Armenia"
+  },
+  {
+   "code": "AO",
+   "ipv6_users_pct": 0.0,
+   "name": "Angola"
+  },
+  {
+   "code": "AR",
+   "ipv6_users_pct": 9.2,
+   "name": "Argentina"
+  },
+  {
+   "code": "AT",
+   "ipv6_users_pct": 12.9,
+   "name": "Austria"
+  },
+  {
+   "code": "AU",
+   "ipv6_users_pct": 25.7,
+   "name": "Australia"
+  },
+  {
+   "code": "AW",
+   "ipv6_users_pct": 0.0,
+   "name": "Aruba"
+  },
+  {
+   "code": "AX",
+   "ipv6_users_pct": 27.7,
+   "name": "Aland Islands"
+  },
+  {
+   "code": "AZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Azerbaijan"
+  },
+  {
+   "code": "BA",
+   "ipv6_users_pct": 4.4,
+   "name": "Bosnia and Herzegovina"
+  },
+  {
+   "code": "BB",
+   "ipv6_users_pct": 0.0,
+   "name": "Barbados"
+  },
+  {
+   "code": "BD",
+   "ipv6_users_pct": 0.0,
+   "name": "Bangladesh"
+  },
+  {
+   "code": "BE",
+   "ipv6_users_pct": 58.6,
+   "name": "Belgium"
+  },
+  {
+   "code": "BF",
+   "ipv6_users_pct": 0.0,
+   "name": "Burkina Faso"
+  },
+  {
+   "code": "BG",
+   "ipv6_users_pct": 1.7,
+   "name": "Bulgaria"
+  },
+  {
+   "code": "BH",
+   "ipv6_users_pct": 0.0,
+   "name": "Bahrain"
+  },
+  {
+   "code": "BI",
+   "ipv6_users_pct": 0.0,
+   "name": "Burundi"
+  },
+  {
+   "code": "BJ",
+   "ipv6_users_pct": 0.0,
+   "name": "Benin"
+  },
+  {
+   "code": "BL",
+   "ipv6_users_pct": 58.3,
+   "name": "Saint Barth\u00e9lemy"
+  },
+  {
+   "code": "BM",
+   "ipv6_users_pct": 0.0,
+   "name": "Bermuda"
+  },
+  {
+   "code": "BN",
+   "ipv6_users_pct": 0.0,
+   "name": "Brunei"
+  },
+  {
+   "code": "BO",
+   "ipv6_users_pct": 11.6,
+   "name": "Bolivia"
+  },
+  {
+   "code": "BQ",
+   "ipv6_users_pct": 0.0,
+   "name": "Bonaire, Sint Eustatius and Saba"
+  },
+  {
+   "code": "BR",
+   "ipv6_users_pct": 32.8,
+   "name": "Brazil"
+  },
+  {
+   "code": "BS",
+   "ipv6_users_pct": 0.0,
+   "name": "Bahamas"
+  },
+  {
+   "code": "BT",
+   "ipv6_users_pct": 7.9,
+   "name": "Bhutan"
+  },
+  {
+   "code": "BW",
+   "ipv6_users_pct": 0.0,
+   "name": "Botswana"
+  },
+  {
+   "code": "BY",
+   "ipv6_users_pct": 3.8,
+   "name": "Belarus"
+  },
+  {
+   "code": "BZ",
+   "ipv6_users_pct": 2.2,
+   "name": "Belize"
+  },
+  {
+   "code": "CA",
+   "ipv6_users_pct": 27.4,
+   "name": "Canada"
+  },
+  {
+   "code": "CD",
+   "ipv6_users_pct": 0.0,
+   "name": "Congo (Democratic Republic)"
+  },
+  {
+   "code": "CG",
+   "ipv6_users_pct": 4.6,
+   "name": "Congo (Brazzaville)"
+  },
+  {
+   "code": "CH",
+   "ipv6_users_pct": 39.4,
+   "name": "Switzerland"
+  },
+  {
+   "code": "CI",
+   "ipv6_users_pct": 0.0,
+   "name": "Cote d'Ivoire"
+  },
+  {
+   "code": "CL",
+   "ipv6_users_pct": 0.1,
+   "name": "Chile"
+  },
+  {
+   "code": "CM",
+   "ipv6_users_pct": 0.0,
+   "name": "Cameroon"
+  },
+  {
+   "code": "CN",
+   "ipv6_users_pct": 15.4,
+   "name": "China"
+  },
+  {
+   "code": "CO",
+   "ipv6_users_pct": 4.1,
+   "name": "Colombia"
+  },
+  {
+   "code": "CR",
+   "ipv6_users_pct": 0.1,
+   "name": "Costa Rica"
+  },
+  {
+   "code": "CU",
+   "ipv6_users_pct": 0.0,
+   "name": "Cuba"
+  },
+  {
+   "code": "CV",
+   "ipv6_users_pct": 0.0,
+   "name": "Cape Verde"
+  },
+  {
+   "code": "CW",
+   "ipv6_users_pct": 0.0,
+   "name": "Curacao"
+  },
+  {
+   "code": "CY",
+   "ipv6_users_pct": 0.1,
+   "name": "Cyprus"
+  },
+  {
+   "code": "CZ",
+   "ipv6_users_pct": 12.9,
+   "name": "Czech Republic"
+  },
+  {
+   "code": "DE",
+   "ipv6_users_pct": 47.4,
+   "name": "Germany"
+  },
+  {
+   "code": "DJ",
+   "ipv6_users_pct": 0.0,
+   "name": "Djibouti"
+  },
+  {
+   "code": "DK",
+   "ipv6_users_pct": 5.0,
+   "name": "Denmark"
+  },
+  {
+   "code": "DM",
+   "ipv6_users_pct": 0.0,
+   "name": "Dominica"
+  },
+  {
+   "code": "DO",
+   "ipv6_users_pct": 1.4,
+   "name": "Dominican Republic"
+  },
+  {
+   "code": "DZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Algeria"
+  },
+  {
+   "code": "EC",
+   "ipv6_users_pct": 7.7,
+   "name": "Ecuador"
+  },
+  {
+   "code": "EE",
+   "ipv6_users_pct": 26.1,
+   "name": "Estonia"
+  },
+  {
+   "code": "EG",
+   "ipv6_users_pct": 10.9,
+   "name": "Egypt"
+  },
+  {
+   "code": "ES",
+   "ipv6_users_pct": 3.6,
+   "name": "Spain"
+  },
+  {
+   "code": "ET",
+   "ipv6_users_pct": 0.0,
+   "name": "Ethiopia"
+  },
+  {
+   "code": "EU",
+   "ipv6_users_pct": 0.3,
+   "name": "European Union"
+  },
+  {
+   "code": "FI",
+   "ipv6_users_pct": 36.1,
+   "name": "Finland"
+  },
+  {
+   "code": "FJ",
+   "ipv6_users_pct": 0.3,
+   "name": "Fiji"
+  },
+  {
+   "code": "FO",
+   "ipv6_users_pct": 6.8,
+   "name": "Faroe Islands"
+  },
+  {
+   "code": "FR",
+   "ipv6_users_pct": 39.0,
+   "name": "France"
+  },
+  {
+   "code": "GA",
+   "ipv6_users_pct": 15.5,
+   "name": "Gabon"
+  },
+  {
+   "code": "GB",
+   "ipv6_users_pct": 33.8,
+   "name": "United Kingdom"
+  },
+  {
+   "code": "GD",
+   "ipv6_users_pct": 0.0,
+   "name": "Grenada"
+  },
+  {
+   "code": "GE",
+   "ipv6_users_pct": 0.0,
+   "name": "Georgia"
+  },
+  {
+   "code": "GF",
+   "ipv6_users_pct": 28.9,
+   "name": "French Guiana"
+  },
+  {
+   "code": "GH",
+   "ipv6_users_pct": 0.0,
+   "name": "Ghana"
+  },
+  {
+   "code": "GL",
+   "ipv6_users_pct": 0.0,
+   "name": "Greenland"
+  },
+  {
+   "code": "GM",
+   "ipv6_users_pct": 0.0,
+   "name": "Gambia"
+  },
+  {
+   "code": "GN",
+   "ipv6_users_pct": 0.0,
+   "name": "Guinea"
+  },
+  {
+   "code": "GP",
+   "ipv6_users_pct": 25.6,
+   "name": "Guadeloupe"
+  },
+  {
+   "code": "GR",
+   "ipv6_users_pct": 47.7,
+   "name": "Greece"
+  },
+  {
+   "code": "GT",
+   "ipv6_users_pct": 11.6,
+   "name": "Guatemala"
+  },
+  {
+   "code": "GU",
+   "ipv6_users_pct": 0.0,
+   "name": "Guam"
+  },
+  {
+   "code": "GY",
+   "ipv6_users_pct": 0.0,
+   "name": "Guyana (Republic of)"
+  },
+  {
+   "code": "HK",
+   "ipv6_users_pct": 1.0,
+   "name": "Hong Kong"
+  },
+  {
+   "code": "HN",
+   "ipv6_users_pct": 0.0,
+   "name": "Honduras"
+  },
+  {
+   "code": "HR",
+   "ipv6_users_pct": 0.0,
+   "name": "Croatia"
+  },
+  {
+   "code": "HT",
+   "ipv6_users_pct": 0.0,
+   "name": "Haiti"
+  },
+  {
+   "code": "HU",
+   "ipv6_users_pct": 26.7,
+   "name": "Hungary"
+  },
+  {
+   "code": "ID",
+   "ipv6_users_pct": 0.2,
+   "name": "Indonesia"
+  },
+  {
+   "code": "IE",
+   "ipv6_users_pct": 22.0,
+   "name": "Ireland"
+  },
+  {
+   "code": "IL",
+   "ipv6_users_pct": 9.8,
+   "name": "Israel"
+  },
+  {
+   "code": "IM",
+   "ipv6_users_pct": 0.1,
+   "name": "Isle of Man"
+  },
+  {
+   "code": "IN",
+   "ipv6_users_pct": 61.4,
+   "name": "India"
+  },
+  {
+   "code": "IQ",
+   "ipv6_users_pct": 0.0,
+   "name": "Iraq"
+  },
+  {
+   "code": "IR",
+   "ipv6_users_pct": 0.0,
+   "name": "Iran"
+  },
+  {
+   "code": "IS",
+   "ipv6_users_pct": 4.4,
+   "name": "Iceland"
+  },
+  {
+   "code": "IT",
+   "ipv6_users_pct": 4.2,
+   "name": "Italy"
+  },
+  {
+   "code": "JM",
+   "ipv6_users_pct": 0.0,
+   "name": "Jamaica"
+  },
+  {
+   "code": "JO",
+   "ipv6_users_pct": 1.1,
+   "name": "Jordan"
+  },
+  {
+   "code": "JP",
+   "ipv6_users_pct": 37.2,
+   "name": "Japan"
+  },
+  {
+   "code": "KE",
+   "ipv6_users_pct": 15.9,
+   "name": "Kenya"
+  },
+  {
+   "code": "KG",
+   "ipv6_users_pct": 0.0,
+   "name": "Kyrgyzstan"
+  },
+  {
+   "code": "KH",
+   "ipv6_users_pct": 0.0,
+   "name": "Cambodia"
+  },
+  {
+   "code": "KN",
+   "ipv6_users_pct": 0.0,
+   "name": "Saint Kitts and Nevis"
+  },
+  {
+   "code": "KR",
+   "ipv6_users_pct": 13.4,
+   "name": "South Korea"
+  },
+  {
+   "code": "KW",
+   "ipv6_users_pct": 0.2,
+   "name": "Kuwait"
+  },
+  {
+   "code": "KY",
+   "ipv6_users_pct": 0.0,
+   "name": "Cayman Islands"
+  },
+  {
+   "code": "KZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Kazakhstan"
+  },
+  {
+   "code": "LA",
+   "ipv6_users_pct": 0.0,
+   "name": "Laos"
+  },
+  {
+   "code": "LB",
+   "ipv6_users_pct": 1.2,
+   "name": "Lebanon"
+  },
+  {
+   "code": "LC",
+   "ipv6_users_pct": 0.0,
+   "name": "Saint Lucia"
+  },
+  {
+   "code": "LI",
+   "ipv6_users_pct": 1.9,
+   "name": "Liechtenstein"
+  },
+  {
+   "code": "LK",
+   "ipv6_users_pct": 26.6,
+   "name": "Sri Lanka"
+  },
+  {
+   "code": "LR",
+   "ipv6_users_pct": 0.0,
+   "name": "Liberia"
+  },
+  {
+   "code": "LS",
+   "ipv6_users_pct": 0.0,
+   "name": "Lesotho"
+  },
+  {
+   "code": "LT",
+   "ipv6_users_pct": 0.1,
+   "name": "Lithuania"
+  },
+  {
+   "code": "LU",
+   "ipv6_users_pct": 36.1,
+   "name": "Luxembourg"
+  },
+  {
+   "code": "LV",
+   "ipv6_users_pct": 6.5,
+   "name": "Latvia"
+  },
+  {
+   "code": "LY",
+   "ipv6_users_pct": 0.0,
+   "name": "Libya"
+  },
+  {
+   "code": "MA",
+   "ipv6_users_pct": 0.0,
+   "name": "Morocco"
+  },
+  {
+   "code": "MC",
+   "ipv6_users_pct": 0.2,
+   "name": "Monaco"
+  },
+  {
+   "code": "MD",
+   "ipv6_users_pct": 6.5,
+   "name": "Moldova"
+  },
+  {
+   "code": "ME",
+   "ipv6_users_pct": 0.0,
+   "name": "Montenegro"
+  },
+  {
+   "code": "MF",
+   "ipv6_users_pct": 36.7,
+   "name": "Saint Martin"
+  },
+  {
+   "code": "MG",
+   "ipv6_users_pct": 0.0,
+   "name": "Madagascar"
+  },
+  {
+   "code": "MK",
+   "ipv6_users_pct": 0.0,
+   "name": "Macedonia"
+  },
+  {
+   "code": "ML",
+   "ipv6_users_pct": 0.0,
+   "name": "Mali"
+  },
+  {
+   "code": "MM",
+   "ipv6_users_pct": 10.5,
+   "name": "Myanmar (Burma)"
+  },
+  {
+   "code": "MN",
+   "ipv6_users_pct": 0.0,
+   "name": "Mongolia"
+  },
+  {
+   "code": "MO",
+   "ipv6_users_pct": 14.5,
+   "name": "Macau"
+  },
+  {
+   "code": "MQ",
+   "ipv6_users_pct": 23.5,
+   "name": "Martinique"
+  },
+  {
+   "code": "MR",
+   "ipv6_users_pct": 0.0,
+   "name": "Mauritania"
+  },
+  {
+   "code": "MU",
+   "ipv6_users_pct": 0.0,
+   "name": "Mauritius"
+  },
+  {
+   "code": "MV",
+   "ipv6_users_pct": 2.7,
+   "name": "Maldives"
+  },
+  {
+   "code": "MW",
+   "ipv6_users_pct": 0.0,
+   "name": "Malawi"
+  },
+  {
+   "code": "MX",
+   "ipv6_users_pct": 33.5,
+   "name": "Mexico"
+  },
+  {
+   "code": "MY",
+   "ipv6_users_pct": 48.1,
+   "name": "Malaysia"
+  },
+  {
+   "code": "MZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Mozambique"
+  },
+  {
+   "code": "NA",
+   "ipv6_users_pct": 0.0,
+   "name": "Namibia"
+  },
+  {
+   "code": "NE",
+   "ipv6_users_pct": 0.0,
+   "name": "Niger"
+  },
+  {
+   "code": "NG",
+   "ipv6_users_pct": 0.0,
+   "name": "Nigeria"
+  },
+  {
+   "code": "NI",
+   "ipv6_users_pct": 0.2,
+   "name": "Nicaragua"
+  },
+  {
+   "code": "NL",
+   "ipv6_users_pct": 26.2,
+   "name": "Netherlands"
+  },
+  {
+   "code": "NO",
+   "ipv6_users_pct": 23.4,
+   "name": "Norway"
+  },
+  {
+   "code": "NP",
+   "ipv6_users_pct": 7.1,
+   "name": "Nepal"
+  },
+  {
+   "code": "NZ",
+   "ipv6_users_pct": 22.9,
+   "name": "New Zealand"
+  },
+  {
+   "code": "OM",
+   "ipv6_users_pct": 8.2,
+   "name": "Oman"
+  },
+  {
+   "code": "PA",
+   "ipv6_users_pct": 0.2,
+   "name": "Panama"
+  },
+  {
+   "code": "PE",
+   "ipv6_users_pct": 20.3,
+   "name": "Peru"
+  },
+  {
+   "code": "PG",
+   "ipv6_users_pct": 0.0,
+   "name": "Papua New Guinea"
+  },
+  {
+   "code": "PH",
+   "ipv6_users_pct": 3.4,
+   "name": "Philippines"
+  },
+  {
+   "code": "PK",
+   "ipv6_users_pct": 0.0,
+   "name": "Pakistan"
+  },
+  {
+   "code": "PL",
+   "ipv6_users_pct": 12.9,
+   "name": "Poland"
+  },
+  {
+   "code": "PR",
+   "ipv6_users_pct": 9.2,
+   "name": "Puerto Rico"
+  },
+  {
+   "code": "PS",
+   "ipv6_users_pct": 0.0,
+   "name": "Palestinian territories"
+  },
+  {
+   "code": "PT",
+   "ipv6_users_pct": 33.2,
+   "name": "Portugal"
+  },
+  {
+   "code": "PY",
+   "ipv6_users_pct": 3.2,
+   "name": "Paraguay"
+  },
+  {
+   "code": "QA",
+   "ipv6_users_pct": 0.0,
+   "name": "Qatar"
+  },
+  {
+   "code": "RE",
+   "ipv6_users_pct": 21.9,
+   "name": "Reunion"
+  },
+  {
+   "code": "RO",
+   "ipv6_users_pct": 17.3,
+   "name": "Romania"
+  },
+  {
+   "code": "RS",
+   "ipv6_users_pct": 0.0,
+   "name": "Serbia"
+  },
+  {
+   "code": "RU",
+   "ipv6_users_pct": 7.7,
+   "name": "Russia"
+  },
+  {
+   "code": "RW",
+   "ipv6_users_pct": 0.0,
+   "name": "Rwanda"
+  },
+  {
+   "code": "SA",
+   "ipv6_users_pct": 14.1,
+   "name": "Saudi Arabia"
+  },
+  {
+   "code": "SB",
+   "ipv6_users_pct": 0.0,
+   "name": "Solomon Islands"
+  },
+  {
+   "code": "SC",
+   "ipv6_users_pct": 0.1,
+   "name": "Seychelles"
+  },
+  {
+   "code": "SD",
+   "ipv6_users_pct": 0.0,
+   "name": "Sudan"
+  },
+  {
+   "code": "SE",
+   "ipv6_users_pct": 9.3,
+   "name": "Sweden"
+  },
+  {
+   "code": "SG",
+   "ipv6_users_pct": 14.8,
+   "name": "Singapore"
+  },
+  {
+   "code": "SI",
+   "ipv6_users_pct": 11.9,
+   "name": "Slovenia"
+  },
+  {
+   "code": "SK",
+   "ipv6_users_pct": 4.7,
+   "name": "Slovakia"
+  },
+  {
+   "code": "SL",
+   "ipv6_users_pct": 0.0,
+   "name": "Sierra Leone"
+  },
+  {
+   "code": "SM",
+   "ipv6_users_pct": 0.0,
+   "name": "San Marino"
+  },
+  {
+   "code": "SN",
+   "ipv6_users_pct": 0.0,
+   "name": "Senegal"
+  },
+  {
+   "code": "SO",
+   "ipv6_users_pct": 0.0,
+   "name": "Somalia"
+  },
+  {
+   "code": "SR",
+   "ipv6_users_pct": 0.9,
+   "name": "Suriname"
+  },
+  {
+   "code": "SS",
+   "ipv6_users_pct": 0.0,
+   "name": "South Sudan"
+  },
+  {
+   "code": "SV",
+   "ipv6_users_pct": 0.0,
+   "name": "El Salvador"
+  },
+  {
+   "code": "SX",
+   "ipv6_users_pct": 0.4,
+   "name": "Sint Maarten"
+  },
+  {
+   "code": "SY",
+   "ipv6_users_pct": 0.0,
+   "name": "Syria"
+  },
+  {
+   "code": "SZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Swaziland"
+  },
+  {
+   "code": "TC",
+   "ipv6_users_pct": 0.0,
+   "name": "Turks and Caicos Islands"
+  },
+  {
+   "code": "TD",
+   "ipv6_users_pct": 0.0,
+   "name": "Chad"
+  },
+  {
+   "code": "TG",
+   "ipv6_users_pct": 8.5,
+   "name": "Togo"
+  },
+  {
+   "code": "TH",
+   "ipv6_users_pct": 30.0,
+   "name": "Thailand"
+  },
+  {
+   "code": "TJ",
+   "ipv6_users_pct": 0.0,
+   "name": "Tajikistan"
+  },
+  {
+   "code": "TL",
+   "ipv6_users_pct": 0.0,
+   "name": "Timor-Leste"
+  },
+  {
+   "code": "TN",
+   "ipv6_users_pct": 0.0,
+   "name": "Tunisia"
+  },
+  {
+   "code": "TO",
+   "ipv6_users_pct": 1.1,
+   "name": "Tonga"
+  },
+  {
+   "code": "TR",
+   "ipv6_users_pct": 0.0,
+   "name": "Turkey"
+  },
+  {
+   "code": "TT",
+   "ipv6_users_pct": 22.7,
+   "name": "Trinidad and Tobago"
+  },
+  {
+   "code": "TW",
+   "ipv6_users_pct": 43.8,
+   "name": "Taiwan"
+  },
+  {
+   "code": "TZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Tanzania"
+  },
+  {
+   "code": "UA",
+   "ipv6_users_pct": 0.2,
+   "name": "Ukraine"
+  },
+  {
+   "code": "UG",
+   "ipv6_users_pct": 0.1,
+   "name": "Uganda"
+  },
+  {
+   "code": "US",
+   "ipv6_users_pct": 57.2,
+   "name": "United States of America"
+  },
+  {
+   "code": "UY",
+   "ipv6_users_pct": 33.4,
+   "name": "Uruguay"
+  },
+  {
+   "code": "UZ",
+   "ipv6_users_pct": 0.0,
+   "name": "Uzbekistan"
+  },
+  {
+   "code": "VA",
+   "ipv6_users_pct": 0.4,
+   "name": "Vatican City"
+  },
+  {
+   "code": "VC",
+   "ipv6_users_pct": 0.0,
+   "name": "Saint Vincent and the Grenadines"
+  },
+  {
+   "code": "VE",
+   "ipv6_users_pct": 0.0,
+   "name": "Venezuela"
+  },
+  {
+   "code": "VG",
+   "ipv6_users_pct": 0.1,
+   "name": "British Virgin Islands"
+  },
+  {
+   "code": "VI",
+   "ipv6_users_pct": 0.9,
+   "name": "U.S. Virgin Islands"
+  },
+  {
+   "code": "VN",
+   "ipv6_users_pct": 40.6,
+   "name": "Vietnam"
+  },
+  {
+   "code": "VU",
+   "ipv6_users_pct": 0.0,
+   "name": "Vanuatu"
+  },
+  {
+   "code": "YE",
+   "ipv6_users_pct": 0.0,
+   "name": "Yemen"
+  },
+  {
+   "code": "YT",
+   "ipv6_users_pct": 69.0,
+   "name": "Mayotte"
+  },
+  {
+   "code": "ZA",
+   "ipv6_users_pct": 0.2,
+   "name": "South Africa"
+  },
+  {
+   "code": "ZM",
+   "ipv6_users_pct": 0.0,
+   "name": "Zambia"
+  },
+  {
+   "code": "ZW",
+   "ipv6_users_pct": 9.7,
+   "name": "Zimbabwe"
+  }
+ ],
+ "url": "https://6lab-stats.com/"
+}

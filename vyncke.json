@@ -1,0 +1,2725 @@
+{
+ "dns": [
+  {
+   "code": "DK",
+   "green_pct": 98.0,
+   "name": "Denmark",
+   "sites": 50,
+   "weighted_pct": 90.83
+  },
+  {
+   "code": "DE",
+   "green_pct": 98.0,
+   "name": "Germany",
+   "sites": 50,
+   "weighted_pct": 91.75
+  },
+  {
+   "code": "FI",
+   "green_pct": 96.0,
+   "name": "Finland",
+   "sites": 50,
+   "weighted_pct": 90.85
+  },
+  {
+   "code": "GG",
+   "green_pct": 96.0,
+   "name": "Guernsey",
+   "sites": 50,
+   "weighted_pct": 90.36
+  },
+  {
+   "code": "AU",
+   "green_pct": 96.0,
+   "name": "Australia",
+   "sites": 50,
+   "weighted_pct": 90.24
+  },
+  {
+   "code": "NO",
+   "green_pct": 94.0,
+   "name": "Norway",
+   "sites": 50,
+   "weighted_pct": 90.63
+  },
+  {
+   "code": "NL",
+   "green_pct": 94.0,
+   "name": "Netherlands",
+   "sites": 50,
+   "weighted_pct": 89.47
+  },
+  {
+   "code": "NZ",
+   "green_pct": 94.0,
+   "name": "New Zealand",
+   "sites": 50,
+   "weighted_pct": 86.99
+  },
+  {
+   "code": "LT",
+   "green_pct": 94.0,
+   "name": "Lithuania",
+   "sites": 50,
+   "weighted_pct": 90.61
+  },
+  {
+   "code": "JP",
+   "green_pct": 94.0,
+   "name": "Japan",
+   "sites": 50,
+   "weighted_pct": 64.82
+  },
+  {
+   "code": "IE",
+   "green_pct": 92.0,
+   "name": "Ireland",
+   "sites": 50,
+   "weighted_pct": 86.45
+  },
+  {
+   "code": "CZ",
+   "green_pct": 92.0,
+   "name": "Czech Republic",
+   "sites": 50,
+   "weighted_pct": 79.43
+  },
+  {
+   "code": "SE",
+   "green_pct": 92.0,
+   "name": "Sweden",
+   "sites": 50,
+   "weighted_pct": 86.37
+  },
+  {
+   "code": "US",
+   "green_pct": 92.0,
+   "name": "United States of America",
+   "sites": 50,
+   "weighted_pct": 84.85
+  },
+  {
+   "code": "AT",
+   "green_pct": 90.0,
+   "name": "Austria",
+   "sites": 50,
+   "weighted_pct": 85.65
+  },
+  {
+   "code": "DO",
+   "green_pct": 90.0,
+   "name": "Dominican Republic",
+   "sites": 50,
+   "weighted_pct": 82.19
+  },
+  {
+   "code": "AI",
+   "green_pct": 90.0,
+   "name": "Anguilla",
+   "sites": 50,
+   "weighted_pct": 54.92
+  },
+  {
+   "code": "LU",
+   "green_pct": 90.0,
+   "name": "Luxembourg",
+   "sites": 50,
+   "weighted_pct": 85.59
+  },
+  {
+   "code": "ES",
+   "green_pct": 88.0,
+   "name": "Spain",
+   "sites": 50,
+   "weighted_pct": 87.77
+  },
+  {
+   "code": "SG",
+   "green_pct": 88.0,
+   "name": "Singapore",
+   "sites": 50,
+   "weighted_pct": 87.66
+  },
+  {
+   "code": "GB",
+   "green_pct": 88.0,
+   "name": "United-Kingdom",
+   "sites": 50,
+   "weighted_pct": 87.5
+  },
+  {
+   "code": "RO",
+   "green_pct": 88.0,
+   "name": "Romania",
+   "sites": 50,
+   "weighted_pct": 62.23
+  },
+  {
+   "code": "EE",
+   "green_pct": 86.0,
+   "name": "Estonia",
+   "sites": 50,
+   "weighted_pct": 83.13
+  },
+  {
+   "code": "UA",
+   "green_pct": 86.0,
+   "name": "Ukraine",
+   "sites": 50,
+   "weighted_pct": 83.58
+  },
+  {
+   "code": "SH",
+   "green_pct": 86.0,
+   "name": "Saint Helena",
+   "sites": 50,
+   "weighted_pct": 82.16
+  },
+  {
+   "code": "LK",
+   "green_pct": 84.0,
+   "name": "Sri Lanka",
+   "sites": 50,
+   "weighted_pct": 85.65
+  },
+  {
+   "code": "CH",
+   "green_pct": 84.0,
+   "name": "Switzerland",
+   "sites": 50,
+   "weighted_pct": 77.26
+  },
+  {
+   "code": "MU",
+   "green_pct": 84.0,
+   "name": "Mauritius",
+   "sites": 50,
+   "weighted_pct": 72.03
+  },
+  {
+   "code": "ZA",
+   "green_pct": 84.0,
+   "name": "South Africa",
+   "sites": 50,
+   "weighted_pct": 67.16
+  },
+  {
+   "code": "GR",
+   "green_pct": 84.0,
+   "name": "Greece",
+   "sites": 50,
+   "weighted_pct": 85.43
+  },
+  {
+   "code": "FR",
+   "green_pct": 84.0,
+   "name": "France",
+   "sites": 50,
+   "weighted_pct": 80.68
+  },
+  {
+   "code": "MS",
+   "green_pct": 82.0,
+   "name": "Montserrat",
+   "sites": 50,
+   "weighted_pct": 81.09
+  },
+  {
+   "code": "CL",
+   "green_pct": 82.0,
+   "name": "Chile",
+   "sites": 50,
+   "weighted_pct": 82.86
+  },
+  {
+   "code": "VN",
+   "green_pct": 82.0,
+   "name": "Vietnam",
+   "sites": 50,
+   "weighted_pct": 79.06
+  },
+  {
+   "code": "BR",
+   "green_pct": 80.0,
+   "name": "Brazil",
+   "sites": 50,
+   "weighted_pct": 59.83
+  },
+  {
+   "code": "CO",
+   "green_pct": 80.0,
+   "name": "Colombia",
+   "sites": 50,
+   "weighted_pct": 81.6
+  },
+  {
+   "code": "GT",
+   "green_pct": 78.0,
+   "name": "Guatemala",
+   "sites": 50,
+   "weighted_pct": 79.69
+  },
+  {
+   "code": "IL",
+   "green_pct": 78.0,
+   "name": "Israel",
+   "sites": 50,
+   "weighted_pct": 83.06
+  },
+  {
+   "code": "BA",
+   "green_pct": 78.0,
+   "name": "Bosnia and Herzegovina",
+   "sites": 50,
+   "weighted_pct": 82.09
+  },
+  {
+   "code": "HK",
+   "green_pct": 78.0,
+   "name": "Hong Kong",
+   "sites": 50,
+   "weighted_pct": 66.21
+  },
+  {
+   "code": "CA",
+   "green_pct": 78.0,
+   "name": "Canada",
+   "sites": 50,
+   "weighted_pct": 86.43
+  },
+  {
+   "code": "LV",
+   "green_pct": 76.0,
+   "name": "Latvia",
+   "sites": 50,
+   "weighted_pct": 50.6
+  },
+  {
+   "code": "MX",
+   "green_pct": 76.0,
+   "name": "Mexico",
+   "sites": 50,
+   "weighted_pct": 55.81
+  },
+  {
+   "code": "NG",
+   "green_pct": 76.0,
+   "name": "Nigeria",
+   "sites": 50,
+   "weighted_pct": 79.6
+  },
+  {
+   "code": "IN",
+   "green_pct": 76.0,
+   "name": "India",
+   "sites": 50,
+   "weighted_pct": 82.44
+  },
+  {
+   "code": "TW",
+   "green_pct": 76.0,
+   "name": "Taiwan",
+   "sites": 50,
+   "weighted_pct": 81.0
+  },
+  {
+   "code": "AG",
+   "green_pct": 76.0,
+   "name": "Antigua and Barbuda",
+   "sites": 50,
+   "weighted_pct": 80.61
+  },
+  {
+   "code": "SK",
+   "green_pct": 76.0,
+   "name": "Slovakia",
+   "sites": 50,
+   "weighted_pct": 77.93
+  },
+  {
+   "code": "BZ",
+   "green_pct": 76.0,
+   "name": "Belize",
+   "sites": 50,
+   "weighted_pct": 70.3
+  },
+  {
+   "code": "SI",
+   "green_pct": 74.0,
+   "name": "Slovenia",
+   "sites": 50,
+   "weighted_pct": 79.71
+  },
+  {
+   "code": "IT",
+   "green_pct": 74.0,
+   "name": "Italy",
+   "sites": 50,
+   "weighted_pct": 73.84
+  },
+  {
+   "code": "HR",
+   "green_pct": 74.0,
+   "name": "Croatia",
+   "sites": 50,
+   "weighted_pct": 77.76
+  },
+  {
+   "code": "BG",
+   "green_pct": 74.0,
+   "name": "Bulgaria",
+   "sites": 50,
+   "weighted_pct": 74.63
+  },
+  {
+   "code": "SV",
+   "green_pct": 74.0,
+   "name": "El Salvador",
+   "sites": 50,
+   "weighted_pct": 72.61
+  },
+  {
+   "code": "SO",
+   "green_pct": 74.0,
+   "name": "Somalia",
+   "sites": 50,
+   "weighted_pct": 79.1
+  },
+  {
+   "code": "ME",
+   "green_pct": 72.0,
+   "name": "Montenegro",
+   "sites": 50,
+   "weighted_pct": 67.52
+  },
+  {
+   "code": "LY",
+   "green_pct": 72.0,
+   "name": "Libya",
+   "sites": 50,
+   "weighted_pct": 78.51
+  },
+  {
+   "code": "AM",
+   "green_pct": 72.0,
+   "name": "Armenia",
+   "sites": 50,
+   "weighted_pct": 73.09
+  },
+  {
+   "code": "LI",
+   "green_pct": 72.0,
+   "name": "Liechtenstein",
+   "sites": 50,
+   "weighted_pct": 75.01
+  },
+  {
+   "code": "PL",
+   "green_pct": 72.0,
+   "name": "Poland",
+   "sites": 50,
+   "weighted_pct": 66.87
+  },
+  {
+   "code": "MY",
+   "green_pct": 72.0,
+   "name": "Malaysia",
+   "sites": 50,
+   "weighted_pct": 78.84
+  },
+  {
+   "code": "CY",
+   "green_pct": 72.0,
+   "name": "Cyprus",
+   "sites": 50,
+   "weighted_pct": 55.4
+  },
+  {
+   "code": "MD",
+   "green_pct": 70.0,
+   "name": "Moldova",
+   "sites": 50,
+   "weighted_pct": 81.78
+  },
+  {
+   "code": "IS",
+   "green_pct": 70.0,
+   "name": "Iceland",
+   "sites": 50,
+   "weighted_pct": 79.71
+  },
+  {
+   "code": "VC",
+   "green_pct": 70.0,
+   "name": "Saint Vincent and the Grenadines",
+   "sites": 50,
+   "weighted_pct": 40.56
+  },
+  {
+   "code": "BH",
+   "green_pct": 70.0,
+   "name": "Bahrain",
+   "sites": 50,
+   "weighted_pct": 56.4
+  },
+  {
+   "code": "PK",
+   "green_pct": 70.0,
+   "name": "Pakistan",
+   "sites": 50,
+   "weighted_pct": 80.05
+  },
+  {
+   "code": "TH",
+   "green_pct": 70.0,
+   "name": "Thailand",
+   "sites": 50,
+   "weighted_pct": 79.57
+  },
+  {
+   "code": "PT",
+   "green_pct": 70.0,
+   "name": "Portugal",
+   "sites": 50,
+   "weighted_pct": 38.45
+  },
+  {
+   "code": "AL",
+   "green_pct": 70.0,
+   "name": "Albania",
+   "sites": 50,
+   "weighted_pct": 47.46
+  },
+  {
+   "code": "BY",
+   "green_pct": 70.0,
+   "name": "Belarus",
+   "sites": 50,
+   "weighted_pct": 77.79
+  },
+  {
+   "code": "IQ",
+   "green_pct": 68.0,
+   "name": "Iraq",
+   "sites": 50,
+   "weighted_pct": 71.36
+  },
+  {
+   "code": "PA",
+   "green_pct": 68.0,
+   "name": "Panama",
+   "sites": 50,
+   "weighted_pct": 70.67
+  },
+  {
+   "code": "AZ",
+   "green_pct": 68.0,
+   "name": "Azerbaijan",
+   "sites": 50,
+   "weighted_pct": 78.78
+  },
+  {
+   "code": "CN",
+   "green_pct": 68.0,
+   "name": "China",
+   "sites": 50,
+   "weighted_pct": 68.2
+  },
+  {
+   "code": "PH",
+   "green_pct": 68.0,
+   "name": "Philippines",
+   "sites": 50,
+   "weighted_pct": 75.43
+  },
+  {
+   "code": "WS",
+   "green_pct": 68.0,
+   "name": "Samoa",
+   "sites": 50,
+   "weighted_pct": 46.24
+  },
+  {
+   "code": "JO",
+   "green_pct": 68.0,
+   "name": "Jordan",
+   "sites": 50,
+   "weighted_pct": 65.27
+  },
+  {
+   "code": "PY",
+   "green_pct": 68.0,
+   "name": "Paraguay",
+   "sites": 50,
+   "weighted_pct": 44.19
+  },
+  {
+   "code": "CR",
+   "green_pct": 66.0,
+   "name": "Costa Rica",
+   "sites": 50,
+   "weighted_pct": 62.27
+  },
+  {
+   "code": "ID",
+   "green_pct": 66.0,
+   "name": "Indonesia",
+   "sites": 50,
+   "weighted_pct": 75.13
+  },
+  {
+   "code": "HN",
+   "green_pct": 66.0,
+   "name": "Honduras",
+   "sites": 50,
+   "weighted_pct": 69.96
+  },
+  {
+   "code": "PS",
+   "green_pct": 64.0,
+   "name": "Palestinian Territory",
+   "sites": 50,
+   "weighted_pct": 39.65
+  },
+  {
+   "code": "TZ",
+   "green_pct": 64.0,
+   "name": "Tanzania",
+   "sites": 50,
+   "weighted_pct": 45.15
+  },
+  {
+   "code": "LA",
+   "green_pct": 64.0,
+   "name": "Laos",
+   "sites": 50,
+   "weighted_pct": 76.25
+  },
+  {
+   "code": "HU",
+   "green_pct": 64.0,
+   "name": "Hungary",
+   "sites": 50,
+   "weighted_pct": 75.63
+  },
+  {
+   "code": "GE",
+   "green_pct": 64.0,
+   "name": "Georgia",
+   "sites": 50,
+   "weighted_pct": 59.68
+  },
+  {
+   "code": "EC",
+   "green_pct": 64.0,
+   "name": "Ecuador",
+   "sites": 50,
+   "weighted_pct": 60.7
+  },
+  {
+   "code": "RE",
+   "green_pct": 62.0,
+   "name": "Reunion",
+   "sites": 50,
+   "weighted_pct": 69.51
+  },
+  {
+   "code": "SC",
+   "green_pct": 62.0,
+   "name": "Seychelles",
+   "sites": 50,
+   "weighted_pct": 65.59
+  },
+  {
+   "code": "PE",
+   "green_pct": 62.0,
+   "name": "Peru",
+   "sites": 50,
+   "weighted_pct": 70.24
+  },
+  {
+   "code": "RS",
+   "green_pct": 62.0,
+   "name": "Serbia",
+   "sites": 50,
+   "weighted_pct": 62.09
+  },
+  {
+   "code": "TR",
+   "green_pct": 58.0,
+   "name": "Turkey",
+   "sites": 50,
+   "weighted_pct": 66.26
+  },
+  {
+   "code": "UY",
+   "green_pct": 58.0,
+   "name": "Uruguay",
+   "sites": 50,
+   "weighted_pct": 67.6
+  },
+  {
+   "code": "ZW",
+   "green_pct": 56.0,
+   "name": "Zimbabwe",
+   "sites": 50,
+   "weighted_pct": 58.49
+  },
+  {
+   "code": "UG",
+   "green_pct": 56.0,
+   "name": "Uganda",
+   "sites": 50,
+   "weighted_pct": 58.71
+  },
+  {
+   "code": "MK",
+   "green_pct": 56.0,
+   "name": "Macedonia",
+   "sites": 50,
+   "weighted_pct": 69.73
+  },
+  {
+   "code": "TO",
+   "green_pct": 54.0,
+   "name": "Tonga",
+   "sites": 50,
+   "weighted_pct": 46.96
+  },
+  {
+   "code": "KE",
+   "green_pct": 54.0,
+   "name": "Kenya",
+   "sites": 50,
+   "weighted_pct": 64.73
+  },
+  {
+   "code": "AR",
+   "green_pct": 52.0,
+   "name": "Argentina",
+   "sites": 50,
+   "weighted_pct": 70.99
+  },
+  {
+   "code": "KW",
+   "green_pct": 50.0,
+   "name": "Kuwait",
+   "sites": 50,
+   "weighted_pct": 53.25
+  },
+  {
+   "code": "KZ",
+   "green_pct": 50.0,
+   "name": "Kazakhstan",
+   "sites": 50,
+   "weighted_pct": 54.87
+  },
+  {
+   "code": "SA",
+   "green_pct": 50.0,
+   "name": "Saudi Arabia",
+   "sites": 50,
+   "weighted_pct": 56.55
+  },
+  {
+   "code": "AE",
+   "green_pct": 50.0,
+   "name": "United Arab Emirates",
+   "sites": 50,
+   "weighted_pct": 61.41
+  },
+  {
+   "code": "TN",
+   "green_pct": 48.0,
+   "name": "Tunisia",
+   "sites": 50,
+   "weighted_pct": 55.16
+  },
+  {
+   "code": "MM",
+   "green_pct": 48.0,
+   "name": "Myanmar (Burma)",
+   "sites": 50,
+   "weighted_pct": 57.68
+  },
+  {
+   "code": "BD",
+   "green_pct": 48.0,
+   "name": "Bangladesh",
+   "sites": 50,
+   "weighted_pct": 57.68
+  },
+  {
+   "code": "MN",
+   "green_pct": 46.0,
+   "name": "Mongolia",
+   "sites": 50,
+   "weighted_pct": 30.04
+  },
+  {
+   "code": "MA",
+   "green_pct": 46.0,
+   "name": "Morocco",
+   "sites": 50,
+   "weighted_pct": 64.47
+  },
+  {
+   "code": "LB",
+   "green_pct": 46.0,
+   "name": "Lebanon",
+   "sites": 50,
+   "weighted_pct": 58.7
+  },
+  {
+   "code": "NP",
+   "green_pct": 44.0,
+   "name": "Nepal",
+   "sites": 50,
+   "weighted_pct": 68.02
+  },
+  {
+   "code": "EG",
+   "green_pct": 44.0,
+   "name": "Egypt",
+   "sites": 50,
+   "weighted_pct": 63.97
+  },
+  {
+   "code": "GH",
+   "green_pct": 42.0,
+   "name": "Ghana",
+   "sites": 50,
+   "weighted_pct": 61.5
+  },
+  {
+   "code": "QA",
+   "green_pct": 42.0,
+   "name": "Qatar",
+   "sites": 50,
+   "weighted_pct": 32.06
+  },
+  {
+   "code": "KG",
+   "green_pct": 42.0,
+   "name": "Kyrgyzstan",
+   "sites": 50,
+   "weighted_pct": 31.23
+  },
+  {
+   "code": "CI",
+   "green_pct": 42.0,
+   "name": "Cote d'Ivoire",
+   "sites": 50,
+   "weighted_pct": 63.64
+  },
+  {
+   "code": "BO",
+   "green_pct": 42.0,
+   "name": "Bolivia",
+   "sites": 50,
+   "weighted_pct": 55.88
+  },
+  {
+   "code": "CM",
+   "green_pct": 40.0,
+   "name": "Cameroon",
+   "sites": 50,
+   "weighted_pct": 56.94
+  },
+  {
+   "code": "UZ",
+   "green_pct": 38.0,
+   "name": "Uzbekistan",
+   "sites": 50,
+   "weighted_pct": 22.51
+  },
+  {
+   "code": "KR",
+   "green_pct": 38.0,
+   "name": "South Korea",
+   "sites": 50,
+   "weighted_pct": 29.53
+  },
+  {
+   "code": "OM",
+   "green_pct": 34.0,
+   "name": "Oman",
+   "sites": 50,
+   "weighted_pct": 23.43
+  },
+  {
+   "code": "VE",
+   "green_pct": 32.0,
+   "name": "Venezuela",
+   "sites": 50,
+   "weighted_pct": 32.28
+  },
+  {
+   "code": "RW",
+   "green_pct": 20.0,
+   "name": "Rwanda",
+   "sites": 50,
+   "weighted_pct": 9.7
+  },
+  {
+   "code": "ML",
+   "green_pct": 16.0,
+   "name": "Mali",
+   "sites": 50,
+   "weighted_pct": 11.6
+  },
+  {
+   "code": "TK",
+   "green_pct": 14.0,
+   "name": "Tokelau",
+   "sites": 50,
+   "weighted_pct": 3.91
+  },
+  {
+   "code": "IR",
+   "green_pct": 10.0,
+   "name": "Iran",
+   "sites": 50,
+   "weighted_pct": 10.25
+  },
+  {
+   "code": "GA",
+   "green_pct": 10.0,
+   "name": "Gabon",
+   "sites": 50,
+   "weighted_pct": 29.01
+  },
+  {
+   "code": "DZ",
+   "green_pct": 8.0,
+   "name": "Algeria",
+   "sites": 50,
+   "weighted_pct": 26.24
+  },
+  {
+   "code": "CF",
+   "green_pct": 4.0,
+   "name": "Central African Republic",
+   "sites": 50,
+   "weighted_pct": 1.34
+  },
+  {
+   "code": "GQ",
+   "green_pct": 2.0,
+   "name": "Equatorial Guinea",
+   "sites": 50,
+   "weighted_pct": 0.79
+  }
+ ],
+ "email": [
+  {
+   "code": "AI",
+   "green_pct": 78.0,
+   "name": "Anguilla",
+   "sites": 50,
+   "weighted_pct": 45.9
+  },
+  {
+   "code": "NL",
+   "green_pct": 72.0,
+   "name": "Netherlands",
+   "sites": 50,
+   "weighted_pct": 54.64
+  },
+  {
+   "code": "GH",
+   "green_pct": 72.0,
+   "name": "Ghana",
+   "sites": 50,
+   "weighted_pct": 78.55
+  },
+  {
+   "code": "FI",
+   "green_pct": 70.0,
+   "name": "Finland",
+   "sites": 50,
+   "weighted_pct": 78.26
+  },
+  {
+   "code": "NO",
+   "green_pct": 70.0,
+   "name": "Norway",
+   "sites": 50,
+   "weighted_pct": 56.72
+  },
+  {
+   "code": "SV",
+   "green_pct": 68.0,
+   "name": "El Salvador",
+   "sites": 50,
+   "weighted_pct": 74.19
+  },
+  {
+   "code": "CZ",
+   "green_pct": 68.0,
+   "name": "Czech Republic",
+   "sites": 50,
+   "weighted_pct": 66.65
+  },
+  {
+   "code": "IT",
+   "green_pct": 66.0,
+   "name": "Italy",
+   "sites": 50,
+   "weighted_pct": 43.86
+  },
+  {
+   "code": "VN",
+   "green_pct": 66.0,
+   "name": "Vietnam",
+   "sites": 50,
+   "weighted_pct": 73.94
+  },
+  {
+   "code": "LT",
+   "green_pct": 66.0,
+   "name": "Lithuania",
+   "sites": 50,
+   "weighted_pct": 76.79
+  },
+  {
+   "code": "SK",
+   "green_pct": 66.0,
+   "name": "Slovakia",
+   "sites": 50,
+   "weighted_pct": 59.63
+  },
+  {
+   "code": "LY",
+   "green_pct": 64.0,
+   "name": "Libya",
+   "sites": 50,
+   "weighted_pct": 65.96
+  },
+  {
+   "code": "GR",
+   "green_pct": 64.0,
+   "name": "Greece",
+   "sites": 50,
+   "weighted_pct": 77.83
+  },
+  {
+   "code": "IE",
+   "green_pct": 64.0,
+   "name": "Ireland",
+   "sites": 50,
+   "weighted_pct": 57.14
+  },
+  {
+   "code": "DO",
+   "green_pct": 62.0,
+   "name": "Dominican Republic",
+   "sites": 50,
+   "weighted_pct": 73.06
+  },
+  {
+   "code": "HN",
+   "green_pct": 62.0,
+   "name": "Honduras",
+   "sites": 50,
+   "weighted_pct": 53.02
+  },
+  {
+   "code": "DK",
+   "green_pct": 62.0,
+   "name": "Denmark",
+   "sites": 50,
+   "weighted_pct": 67.2
+  },
+  {
+   "code": "BH",
+   "green_pct": 60.0,
+   "name": "Bahrain",
+   "sites": 50,
+   "weighted_pct": 40.29
+  },
+  {
+   "code": "ES",
+   "green_pct": 60.0,
+   "name": "Spain",
+   "sites": 50,
+   "weighted_pct": 62.67
+  },
+  {
+   "code": "GG",
+   "green_pct": 58.0,
+   "name": "Guernsey",
+   "sites": 50,
+   "weighted_pct": 76.55
+  },
+  {
+   "code": "CH",
+   "green_pct": 56.0,
+   "name": "Switzerland",
+   "sites": 50,
+   "weighted_pct": 58.12
+  },
+  {
+   "code": "CL",
+   "green_pct": 56.0,
+   "name": "Chile",
+   "sites": 50,
+   "weighted_pct": 32.36
+  },
+  {
+   "code": "PT",
+   "green_pct": 56.0,
+   "name": "Portugal",
+   "sites": 50,
+   "weighted_pct": 56.31
+  },
+  {
+   "code": "PL",
+   "green_pct": 56.0,
+   "name": "Poland",
+   "sites": 50,
+   "weighted_pct": 25.28
+  },
+  {
+   "code": "EE",
+   "green_pct": 56.0,
+   "name": "Estonia",
+   "sites": 50,
+   "weighted_pct": 64.63
+  },
+  {
+   "code": "MY",
+   "green_pct": 56.0,
+   "name": "Malaysia",
+   "sites": 50,
+   "weighted_pct": 53.13
+  },
+  {
+   "code": "PE",
+   "green_pct": 54.0,
+   "name": "Peru",
+   "sites": 50,
+   "weighted_pct": 54.87
+  },
+  {
+   "code": "NG",
+   "green_pct": 54.0,
+   "name": "Nigeria",
+   "sites": 50,
+   "weighted_pct": 59.7
+  },
+  {
+   "code": "PH",
+   "green_pct": 54.0,
+   "name": "Philippines",
+   "sites": 50,
+   "weighted_pct": 37.49
+  },
+  {
+   "code": "BR",
+   "green_pct": 54.0,
+   "name": "Brazil",
+   "sites": 50,
+   "weighted_pct": 31.9
+  },
+  {
+   "code": "SI",
+   "green_pct": 52.0,
+   "name": "Slovenia",
+   "sites": 50,
+   "weighted_pct": 27.03
+  },
+  {
+   "code": "HU",
+   "green_pct": 52.0,
+   "name": "Hungary",
+   "sites": 50,
+   "weighted_pct": 72.22
+  },
+  {
+   "code": "EC",
+   "green_pct": 52.0,
+   "name": "Ecuador",
+   "sites": 50,
+   "weighted_pct": 51.52
+  },
+  {
+   "code": "IQ",
+   "green_pct": 52.0,
+   "name": "Iraq",
+   "sites": 50,
+   "weighted_pct": 55.52
+  },
+  {
+   "code": "US",
+   "green_pct": 52.0,
+   "name": "United States of America",
+   "sites": 50,
+   "weighted_pct": 69.89
+  },
+  {
+   "code": "SE",
+   "green_pct": 50.0,
+   "name": "Sweden",
+   "sites": 50,
+   "weighted_pct": 33.85
+  },
+  {
+   "code": "ZW",
+   "green_pct": 50.0,
+   "name": "Zimbabwe",
+   "sites": 50,
+   "weighted_pct": 37.93
+  },
+  {
+   "code": "ID",
+   "green_pct": 48.0,
+   "name": "Indonesia",
+   "sites": 50,
+   "weighted_pct": 35.28
+  },
+  {
+   "code": "LV",
+   "green_pct": 48.0,
+   "name": "Latvia",
+   "sites": 50,
+   "weighted_pct": 31.76
+  },
+  {
+   "code": "KE",
+   "green_pct": 48.0,
+   "name": "Kenya",
+   "sites": 50,
+   "weighted_pct": 57.1
+  },
+  {
+   "code": "KW",
+   "green_pct": 48.0,
+   "name": "Kuwait",
+   "sites": 50,
+   "weighted_pct": 45.58
+  },
+  {
+   "code": "UA",
+   "green_pct": 48.0,
+   "name": "Ukraine",
+   "sites": 50,
+   "weighted_pct": 61.47
+  },
+  {
+   "code": "VC",
+   "green_pct": 46.0,
+   "name": "Saint Vincent and the Grenadines",
+   "sites": 50,
+   "weighted_pct": 16.61
+  },
+  {
+   "code": "RO",
+   "green_pct": 46.0,
+   "name": "Romania",
+   "sites": 50,
+   "weighted_pct": 36.2
+  },
+  {
+   "code": "DE",
+   "green_pct": 46.0,
+   "name": "Germany",
+   "sites": 50,
+   "weighted_pct": 60.4
+  },
+  {
+   "code": "TH",
+   "green_pct": 46.0,
+   "name": "Thailand",
+   "sites": 50,
+   "weighted_pct": 55.94
+  },
+  {
+   "code": "CY",
+   "green_pct": 46.0,
+   "name": "Cyprus",
+   "sites": 50,
+   "weighted_pct": 39.75
+  },
+  {
+   "code": "PA",
+   "green_pct": 46.0,
+   "name": "Panama",
+   "sites": 50,
+   "weighted_pct": 64.97
+  },
+  {
+   "code": "MX",
+   "green_pct": 46.0,
+   "name": "Mexico",
+   "sites": 50,
+   "weighted_pct": 34.99
+  },
+  {
+   "code": "MU",
+   "green_pct": 46.0,
+   "name": "Mauritius",
+   "sites": 50,
+   "weighted_pct": 34.38
+  },
+  {
+   "code": "GT",
+   "green_pct": 44.0,
+   "name": "Guatemala",
+   "sites": 50,
+   "weighted_pct": 54.9
+  },
+  {
+   "code": "AM",
+   "green_pct": 44.0,
+   "name": "Armenia",
+   "sites": 50,
+   "weighted_pct": 49.79
+  },
+  {
+   "code": "IL",
+   "green_pct": 44.0,
+   "name": "Israel",
+   "sites": 50,
+   "weighted_pct": 58.68
+  },
+  {
+   "code": "HR",
+   "green_pct": 44.0,
+   "name": "Croatia",
+   "sites": 50,
+   "weighted_pct": 43.18
+  },
+  {
+   "code": "RS",
+   "green_pct": 44.0,
+   "name": "Serbia",
+   "sites": 50,
+   "weighted_pct": 30.44
+  },
+  {
+   "code": "AR",
+   "green_pct": 44.0,
+   "name": "Argentina",
+   "sites": 50,
+   "weighted_pct": 64.01
+  },
+  {
+   "code": "BG",
+   "green_pct": 44.0,
+   "name": "Bulgaria",
+   "sites": 50,
+   "weighted_pct": 49.25
+  },
+  {
+   "code": "PS",
+   "green_pct": 42.0,
+   "name": "Palestinian Territory",
+   "sites": 50,
+   "weighted_pct": 17.92
+  },
+  {
+   "code": "AL",
+   "green_pct": 42.0,
+   "name": "Albania",
+   "sites": 50,
+   "weighted_pct": 25.97
+  },
+  {
+   "code": "AZ",
+   "green_pct": 42.0,
+   "name": "Azerbaijan",
+   "sites": 50,
+   "weighted_pct": 44.56
+  },
+  {
+   "code": "CI",
+   "green_pct": 42.0,
+   "name": "Cote d'Ivoire",
+   "sites": 50,
+   "weighted_pct": 26.38
+  },
+  {
+   "code": "CA",
+   "green_pct": 42.0,
+   "name": "Canada",
+   "sites": 50,
+   "weighted_pct": 39.38
+  },
+  {
+   "code": "GB",
+   "green_pct": 42.0,
+   "name": "United-Kingdom",
+   "sites": 50,
+   "weighted_pct": 49.45
+  },
+  {
+   "code": "EG",
+   "green_pct": 42.0,
+   "name": "Egypt",
+   "sites": 50,
+   "weighted_pct": 56.92
+  },
+  {
+   "code": "PK",
+   "green_pct": 40.0,
+   "name": "Pakistan",
+   "sites": 50,
+   "weighted_pct": 50.85
+  },
+  {
+   "code": "TR",
+   "green_pct": 40.0,
+   "name": "Turkey",
+   "sites": 50,
+   "weighted_pct": 59.48
+  },
+  {
+   "code": "BA",
+   "green_pct": 40.0,
+   "name": "Bosnia and Herzegovina",
+   "sites": 50,
+   "weighted_pct": 49.89
+  },
+  {
+   "code": "BY",
+   "green_pct": 40.0,
+   "name": "Belarus",
+   "sites": 50,
+   "weighted_pct": 60.78
+  },
+  {
+   "code": "ZA",
+   "green_pct": 40.0,
+   "name": "South Africa",
+   "sites": 50,
+   "weighted_pct": 46.3
+  },
+  {
+   "code": "OM",
+   "green_pct": 40.0,
+   "name": "Oman",
+   "sites": 50,
+   "weighted_pct": 41.42
+  },
+  {
+   "code": "TW",
+   "green_pct": 40.0,
+   "name": "Taiwan",
+   "sites": 50,
+   "weighted_pct": 64.06
+  },
+  {
+   "code": "NZ",
+   "green_pct": 38.0,
+   "name": "New Zealand",
+   "sites": 50,
+   "weighted_pct": 32.4
+  },
+  {
+   "code": "GE",
+   "green_pct": 38.0,
+   "name": "Georgia",
+   "sites": 50,
+   "weighted_pct": 28.85
+  },
+  {
+   "code": "UG",
+   "green_pct": 38.0,
+   "name": "Uganda",
+   "sites": 50,
+   "weighted_pct": 43.33
+  },
+  {
+   "code": "JO",
+   "green_pct": 38.0,
+   "name": "Jordan",
+   "sites": 50,
+   "weighted_pct": 56.25
+  },
+  {
+   "code": "LK",
+   "green_pct": 38.0,
+   "name": "Sri Lanka",
+   "sites": 50,
+   "weighted_pct": 50.07
+  },
+  {
+   "code": "LB",
+   "green_pct": 38.0,
+   "name": "Lebanon",
+   "sites": 50,
+   "weighted_pct": 56.87
+  },
+  {
+   "code": "QA",
+   "green_pct": 36.0,
+   "name": "Qatar",
+   "sites": 50,
+   "weighted_pct": 32.97
+  },
+  {
+   "code": "SG",
+   "green_pct": 36.0,
+   "name": "Singapore",
+   "sites": 50,
+   "weighted_pct": 48.42
+  },
+  {
+   "code": "CO",
+   "green_pct": 36.0,
+   "name": "Colombia",
+   "sites": 50,
+   "weighted_pct": 33.96
+  },
+  {
+   "code": "JP",
+   "green_pct": 36.0,
+   "name": "Japan",
+   "sites": 50,
+   "weighted_pct": 28.05
+  },
+  {
+   "code": "FR",
+   "green_pct": 36.0,
+   "name": "France",
+   "sites": 50,
+   "weighted_pct": 53.24
+  },
+  {
+   "code": "MN",
+   "green_pct": 36.0,
+   "name": "Mongolia",
+   "sites": 50,
+   "weighted_pct": 23.75
+  },
+  {
+   "code": "HK",
+   "green_pct": 36.0,
+   "name": "Hong Kong",
+   "sites": 50,
+   "weighted_pct": 55.07
+  },
+  {
+   "code": "TN",
+   "green_pct": 34.0,
+   "name": "Tunisia",
+   "sites": 50,
+   "weighted_pct": 46.88
+  },
+  {
+   "code": "BO",
+   "green_pct": 34.0,
+   "name": "Bolivia",
+   "sites": 50,
+   "weighted_pct": 42.99
+  },
+  {
+   "code": "SH",
+   "green_pct": 34.0,
+   "name": "Saint Helena",
+   "sites": 50,
+   "weighted_pct": 48.02
+  },
+  {
+   "code": "CR",
+   "green_pct": 34.0,
+   "name": "Costa Rica",
+   "sites": 50,
+   "weighted_pct": 19.49
+  },
+  {
+   "code": "PY",
+   "green_pct": 34.0,
+   "name": "Paraguay",
+   "sites": 50,
+   "weighted_pct": 35.11
+  },
+  {
+   "code": "AU",
+   "green_pct": 34.0,
+   "name": "Australia",
+   "sites": 50,
+   "weighted_pct": 25.02
+  },
+  {
+   "code": "MM",
+   "green_pct": 34.0,
+   "name": "Myanmar (Burma)",
+   "sites": 50,
+   "weighted_pct": 17.36
+  },
+  {
+   "code": "UY",
+   "green_pct": 32.0,
+   "name": "Uruguay",
+   "sites": 50,
+   "weighted_pct": 52.22
+  },
+  {
+   "code": "SO",
+   "green_pct": 32.0,
+   "name": "Somalia",
+   "sites": 50,
+   "weighted_pct": 18.63
+  },
+  {
+   "code": "KZ",
+   "green_pct": 32.0,
+   "name": "Kazakhstan",
+   "sites": 50,
+   "weighted_pct": 53.69
+  },
+  {
+   "code": "BD",
+   "green_pct": 32.0,
+   "name": "Bangladesh",
+   "sites": 50,
+   "weighted_pct": 34.96
+  },
+  {
+   "code": "LU",
+   "green_pct": 30.0,
+   "name": "Luxembourg",
+   "sites": 50,
+   "weighted_pct": 42.88
+  },
+  {
+   "code": "NP",
+   "green_pct": 30.0,
+   "name": "Nepal",
+   "sites": 50,
+   "weighted_pct": 24.67
+  },
+  {
+   "code": "MD",
+   "green_pct": 30.0,
+   "name": "Moldova",
+   "sites": 50,
+   "weighted_pct": 24.62
+  },
+  {
+   "code": "AG",
+   "green_pct": 30.0,
+   "name": "Antigua and Barbuda",
+   "sites": 50,
+   "weighted_pct": 13.3
+  },
+  {
+   "code": "MS",
+   "green_pct": 30.0,
+   "name": "Montserrat",
+   "sites": 50,
+   "weighted_pct": 13.81
+  },
+  {
+   "code": "SC",
+   "green_pct": 30.0,
+   "name": "Seychelles",
+   "sites": 50,
+   "weighted_pct": 49.25
+  },
+  {
+   "code": "DZ",
+   "green_pct": 28.0,
+   "name": "Algeria",
+   "sites": 50,
+   "weighted_pct": 34.14
+  },
+  {
+   "code": "IN",
+   "green_pct": 28.0,
+   "name": "India",
+   "sites": 50,
+   "weighted_pct": 23.82
+  },
+  {
+   "code": "KR",
+   "green_pct": 28.0,
+   "name": "South Korea",
+   "sites": 50,
+   "weighted_pct": 16.72
+  },
+  {
+   "code": "VE",
+   "green_pct": 26.0,
+   "name": "Venezuela",
+   "sites": 50,
+   "weighted_pct": 25.54
+  },
+  {
+   "code": "TZ",
+   "green_pct": 26.0,
+   "name": "Tanzania",
+   "sites": 50,
+   "weighted_pct": 16.61
+  },
+  {
+   "code": "IS",
+   "green_pct": 26.0,
+   "name": "Iceland",
+   "sites": 50,
+   "weighted_pct": 21.33
+  },
+  {
+   "code": "AT",
+   "green_pct": 26.0,
+   "name": "Austria",
+   "sites": 50,
+   "weighted_pct": 29.97
+  },
+  {
+   "code": "RE",
+   "green_pct": 26.0,
+   "name": "Reunion",
+   "sites": 50,
+   "weighted_pct": 30.51
+  },
+  {
+   "code": "MA",
+   "green_pct": 24.0,
+   "name": "Morocco",
+   "sites": 50,
+   "weighted_pct": 28.16
+  },
+  {
+   "code": "UZ",
+   "green_pct": 24.0,
+   "name": "Uzbekistan",
+   "sites": 50,
+   "weighted_pct": 26.26
+  },
+  {
+   "code": "MK",
+   "green_pct": 24.0,
+   "name": "Macedonia",
+   "sites": 50,
+   "weighted_pct": 40.29
+  },
+  {
+   "code": "AE",
+   "green_pct": 22.0,
+   "name": "United Arab Emirates",
+   "sites": 50,
+   "weighted_pct": 15.66
+  },
+  {
+   "code": "ME",
+   "green_pct": 22.0,
+   "name": "Montenegro",
+   "sites": 50,
+   "weighted_pct": 13.69
+  },
+  {
+   "code": "KG",
+   "green_pct": 20.0,
+   "name": "Kyrgyzstan",
+   "sites": 50,
+   "weighted_pct": 8.26
+  },
+  {
+   "code": "RW",
+   "green_pct": 20.0,
+   "name": "Rwanda",
+   "sites": 50,
+   "weighted_pct": 14.83
+  },
+  {
+   "code": "WS",
+   "green_pct": 20.0,
+   "name": "Samoa",
+   "sites": 50,
+   "weighted_pct": 15.23
+  },
+  {
+   "code": "SA",
+   "green_pct": 16.0,
+   "name": "Saudi Arabia",
+   "sites": 50,
+   "weighted_pct": 35.32
+  },
+  {
+   "code": "LI",
+   "green_pct": 16.0,
+   "name": "Liechtenstein",
+   "sites": 50,
+   "weighted_pct": 6.16
+  },
+  {
+   "code": "CM",
+   "green_pct": 16.0,
+   "name": "Cameroon",
+   "sites": 50,
+   "weighted_pct": 45.99
+  },
+  {
+   "code": "TO",
+   "green_pct": 12.0,
+   "name": "Tonga",
+   "sites": 50,
+   "weighted_pct": 5.14
+  },
+  {
+   "code": "LA",
+   "green_pct": 10.0,
+   "name": "Laos",
+   "sites": 50,
+   "weighted_pct": 14.74
+  },
+  {
+   "code": "CN",
+   "green_pct": 8.0,
+   "name": "China",
+   "sites": 50,
+   "weighted_pct": 18.97
+  },
+  {
+   "code": "BZ",
+   "green_pct": 8.0,
+   "name": "Belize",
+   "sites": 50,
+   "weighted_pct": 7.21
+  },
+  {
+   "code": "ML",
+   "green_pct": 6.0,
+   "name": "Mali",
+   "sites": 50,
+   "weighted_pct": 3.22
+  },
+  {
+   "code": "TK",
+   "green_pct": 4.0,
+   "name": "Tokelau",
+   "sites": 50,
+   "weighted_pct": 1.45
+  },
+  {
+   "code": "GA",
+   "green_pct": 2.0,
+   "name": "Gabon",
+   "sites": 50,
+   "weighted_pct": 1.53
+  },
+  {
+   "code": "IR",
+   "green_pct": 2.0,
+   "name": "Iran",
+   "sites": 50,
+   "weighted_pct": 1.61
+  }
+ ],
+ "url": "https://www.vyncke.org/ipv6status/",
+ "web": [
+  {
+   "code": "NO",
+   "green_pct": 68.0,
+   "name": "Norway",
+   "sites": 50,
+   "weighted_pct": 55.54
+  },
+  {
+   "code": "GR",
+   "green_pct": 64.0,
+   "name": "Greece",
+   "sites": 50,
+   "weighted_pct": 78.71
+  },
+  {
+   "code": "NL",
+   "green_pct": 62.0,
+   "name": "Netherlands",
+   "sites": 50,
+   "weighted_pct": 40.15
+  },
+  {
+   "code": "NG",
+   "green_pct": 60.0,
+   "name": "Nigeria",
+   "sites": 50,
+   "weighted_pct": 69.12
+  },
+  {
+   "code": "SE",
+   "green_pct": 60.0,
+   "name": "Sweden",
+   "sites": 50,
+   "weighted_pct": 68.49
+  },
+  {
+   "code": "DE",
+   "green_pct": 58.0,
+   "name": "Germany",
+   "sites": 50,
+   "weighted_pct": 71.71
+  },
+  {
+   "code": "AI",
+   "green_pct": 58.0,
+   "name": "Anguilla",
+   "sites": 50,
+   "weighted_pct": 41.28
+  },
+  {
+   "code": "DO",
+   "green_pct": 56.0,
+   "name": "Dominican Republic",
+   "sites": 50,
+   "weighted_pct": 71.26
+  },
+  {
+   "code": "GG",
+   "green_pct": 56.0,
+   "name": "Guernsey",
+   "sites": 50,
+   "weighted_pct": 43.15
+  },
+  {
+   "code": "AZ",
+   "green_pct": 56.0,
+   "name": "Azerbaijan",
+   "sites": 50,
+   "weighted_pct": 65.84
+  },
+  {
+   "code": "TH",
+   "green_pct": 54.0,
+   "name": "Thailand",
+   "sites": 50,
+   "weighted_pct": 50.76
+  },
+  {
+   "code": "LT",
+   "green_pct": 54.0,
+   "name": "Lithuania",
+   "sites": 50,
+   "weighted_pct": 40.05
+  },
+  {
+   "code": "CZ",
+   "green_pct": 54.0,
+   "name": "Czech Republic",
+   "sites": 50,
+   "weighted_pct": 60.15
+  },
+  {
+   "code": "CH",
+   "green_pct": 54.0,
+   "name": "Switzerland",
+   "sites": 50,
+   "weighted_pct": 37.94
+  },
+  {
+   "code": "ZA",
+   "green_pct": 54.0,
+   "name": "South Africa",
+   "sites": 50,
+   "weighted_pct": 48.35
+  },
+  {
+   "code": "IN",
+   "green_pct": 52.0,
+   "name": "India",
+   "sites": 50,
+   "weighted_pct": 63.26
+  },
+  {
+   "code": "LK",
+   "green_pct": 52.0,
+   "name": "Sri Lanka",
+   "sites": 50,
+   "weighted_pct": 52.45
+  },
+  {
+   "code": "PS",
+   "green_pct": 50.0,
+   "name": "Palestinian Territory",
+   "sites": 50,
+   "weighted_pct": 34.54
+  },
+  {
+   "code": "US",
+   "green_pct": 50.0,
+   "name": "United States of America",
+   "sites": 50,
+   "weighted_pct": 70.51
+  },
+  {
+   "code": "CY",
+   "green_pct": 50.0,
+   "name": "Cyprus",
+   "sites": 50,
+   "weighted_pct": 41.49
+  },
+  {
+   "code": "BA",
+   "green_pct": 50.0,
+   "name": "Bosnia and Herzegovina",
+   "sites": 50,
+   "weighted_pct": 43.77
+  },
+  {
+   "code": "ME",
+   "green_pct": 48.0,
+   "name": "Montenegro",
+   "sites": 50,
+   "weighted_pct": 64.05
+  },
+  {
+   "code": "RO",
+   "green_pct": 48.0,
+   "name": "Romania",
+   "sites": 50,
+   "weighted_pct": 32.11
+  },
+  {
+   "code": "BR",
+   "green_pct": 48.0,
+   "name": "Brazil",
+   "sites": 50,
+   "weighted_pct": 51.26
+  },
+  {
+   "code": "AL",
+   "green_pct": 48.0,
+   "name": "Albania",
+   "sites": 50,
+   "weighted_pct": 27.47
+  },
+  {
+   "code": "IQ",
+   "green_pct": 48.0,
+   "name": "Iraq",
+   "sites": 50,
+   "weighted_pct": 62.88
+  },
+  {
+   "code": "SO",
+   "green_pct": 46.0,
+   "name": "Somalia",
+   "sites": 50,
+   "weighted_pct": 56.37
+  },
+  {
+   "code": "GT",
+   "green_pct": 46.0,
+   "name": "Guatemala",
+   "sites": 50,
+   "weighted_pct": 50.17
+  },
+  {
+   "code": "FI",
+   "green_pct": 46.0,
+   "name": "Finland",
+   "sites": 50,
+   "weighted_pct": 65.29
+  },
+  {
+   "code": "NZ",
+   "green_pct": 46.0,
+   "name": "New Zealand",
+   "sites": 50,
+   "weighted_pct": 51.7
+  },
+  {
+   "code": "AM",
+   "green_pct": 46.0,
+   "name": "Armenia",
+   "sites": 50,
+   "weighted_pct": 55.94
+  },
+  {
+   "code": "CO",
+   "green_pct": 46.0,
+   "name": "Colombia",
+   "sites": 50,
+   "weighted_pct": 36.06
+  },
+  {
+   "code": "AU",
+   "green_pct": 46.0,
+   "name": "Australia",
+   "sites": 50,
+   "weighted_pct": 37.93
+  },
+  {
+   "code": "FR",
+   "green_pct": 44.0,
+   "name": "France",
+   "sites": 50,
+   "weighted_pct": 57.62
+  },
+  {
+   "code": "SG",
+   "green_pct": 44.0,
+   "name": "Singapore",
+   "sites": 50,
+   "weighted_pct": 41.57
+  },
+  {
+   "code": "AT",
+   "green_pct": 44.0,
+   "name": "Austria",
+   "sites": 50,
+   "weighted_pct": 63.86
+  },
+  {
+   "code": "SK",
+   "green_pct": 44.0,
+   "name": "Slovakia",
+   "sites": 50,
+   "weighted_pct": 56.76
+  },
+  {
+   "code": "MU",
+   "green_pct": 44.0,
+   "name": "Mauritius",
+   "sites": 50,
+   "weighted_pct": 24.46
+  },
+  {
+   "code": "IS",
+   "green_pct": 44.0,
+   "name": "Iceland",
+   "sites": 50,
+   "weighted_pct": 54.93
+  },
+  {
+   "code": "PH",
+   "green_pct": 44.0,
+   "name": "Philippines",
+   "sites": 50,
+   "weighted_pct": 49.62
+  },
+  {
+   "code": "PK",
+   "green_pct": 44.0,
+   "name": "Pakistan",
+   "sites": 50,
+   "weighted_pct": 54.63
+  },
+  {
+   "code": "UA",
+   "green_pct": 44.0,
+   "name": "Ukraine",
+   "sites": 50,
+   "weighted_pct": 56.01
+  },
+  {
+   "code": "CN",
+   "green_pct": 42.0,
+   "name": "China",
+   "sites": 50,
+   "weighted_pct": 30.7
+  },
+  {
+   "code": "EE",
+   "green_pct": 42.0,
+   "name": "Estonia",
+   "sites": 50,
+   "weighted_pct": 24.27
+  },
+  {
+   "code": "KE",
+   "green_pct": 42.0,
+   "name": "Kenya",
+   "sites": 50,
+   "weighted_pct": 46.79
+  },
+  {
+   "code": "IT",
+   "green_pct": 42.0,
+   "name": "Italy",
+   "sites": 50,
+   "weighted_pct": 53.29
+  },
+  {
+   "code": "MK",
+   "green_pct": 42.0,
+   "name": "Macedonia",
+   "sites": 50,
+   "weighted_pct": 57.58
+  },
+  {
+   "code": "IE",
+   "green_pct": 42.0,
+   "name": "Ireland",
+   "sites": 50,
+   "weighted_pct": 36.19
+  },
+  {
+   "code": "HR",
+   "green_pct": 40.0,
+   "name": "Croatia",
+   "sites": 50,
+   "weighted_pct": 28.55
+  },
+  {
+   "code": "IL",
+   "green_pct": 40.0,
+   "name": "Israel",
+   "sites": 50,
+   "weighted_pct": 33.64
+  },
+  {
+   "code": "SV",
+   "green_pct": 40.0,
+   "name": "El Salvador",
+   "sites": 50,
+   "weighted_pct": 56.03
+  },
+  {
+   "code": "PA",
+   "green_pct": 40.0,
+   "name": "Panama",
+   "sites": 50,
+   "weighted_pct": 48.87
+  },
+  {
+   "code": "LY",
+   "green_pct": 40.0,
+   "name": "Libya",
+   "sites": 50,
+   "weighted_pct": 28.74
+  },
+  {
+   "code": "VC",
+   "green_pct": 40.0,
+   "name": "Saint Vincent and the Grenadines",
+   "sites": 50,
+   "weighted_pct": 24.76
+  },
+  {
+   "code": "SH",
+   "green_pct": 40.0,
+   "name": "Saint Helena",
+   "sites": 50,
+   "weighted_pct": 55.52
+  },
+  {
+   "code": "MM",
+   "green_pct": 40.0,
+   "name": "Myanmar (Burma)",
+   "sites": 50,
+   "weighted_pct": 28.34
+  },
+  {
+   "code": "HU",
+   "green_pct": 40.0,
+   "name": "Hungary",
+   "sites": 50,
+   "weighted_pct": 70.73
+  },
+  {
+   "code": "MY",
+   "green_pct": 38.0,
+   "name": "Malaysia",
+   "sites": 50,
+   "weighted_pct": 31.21
+  },
+  {
+   "code": "DK",
+   "green_pct": 38.0,
+   "name": "Denmark",
+   "sites": 50,
+   "weighted_pct": 55.45
+  },
+  {
+   "code": "WS",
+   "green_pct": 38.0,
+   "name": "Samoa",
+   "sites": 50,
+   "weighted_pct": 27.84
+  },
+  {
+   "code": "MA",
+   "green_pct": 38.0,
+   "name": "Morocco",
+   "sites": 50,
+   "weighted_pct": 64.25
+  },
+  {
+   "code": "ZW",
+   "green_pct": 38.0,
+   "name": "Zimbabwe",
+   "sites": 50,
+   "weighted_pct": 50.05
+  },
+  {
+   "code": "PE",
+   "green_pct": 38.0,
+   "name": "Peru",
+   "sites": 50,
+   "weighted_pct": 52.12
+  },
+  {
+   "code": "AR",
+   "green_pct": 38.0,
+   "name": "Argentina",
+   "sites": 50,
+   "weighted_pct": 38.46
+  },
+  {
+   "code": "BG",
+   "green_pct": 38.0,
+   "name": "Bulgaria",
+   "sites": 50,
+   "weighted_pct": 51.39
+  },
+  {
+   "code": "SI",
+   "green_pct": 38.0,
+   "name": "Slovenia",
+   "sites": 50,
+   "weighted_pct": 34.0
+  },
+  {
+   "code": "HN",
+   "green_pct": 38.0,
+   "name": "Honduras",
+   "sites": 50,
+   "weighted_pct": 18.23
+  },
+  {
+   "code": "UY",
+   "green_pct": 36.0,
+   "name": "Uruguay",
+   "sites": 50,
+   "weighted_pct": 34.27
+  },
+  {
+   "code": "PY",
+   "green_pct": 36.0,
+   "name": "Paraguay",
+   "sites": 50,
+   "weighted_pct": 30.0
+  },
+  {
+   "code": "PT",
+   "green_pct": 36.0,
+   "name": "Portugal",
+   "sites": 50,
+   "weighted_pct": 23.37
+  },
+  {
+   "code": "UG",
+   "green_pct": 34.0,
+   "name": "Uganda",
+   "sites": 50,
+   "weighted_pct": 46.49
+  },
+  {
+   "code": "ES",
+   "green_pct": 34.0,
+   "name": "Spain",
+   "sites": 50,
+   "weighted_pct": 32.95
+  },
+  {
+   "code": "LV",
+   "green_pct": 34.0,
+   "name": "Latvia",
+   "sites": 50,
+   "weighted_pct": 20.07
+  },
+  {
+   "code": "KW",
+   "green_pct": 34.0,
+   "name": "Kuwait",
+   "sites": 50,
+   "weighted_pct": 38.11
+  },
+  {
+   "code": "GB",
+   "green_pct": 34.0,
+   "name": "United-Kingdom",
+   "sites": 50,
+   "weighted_pct": 66.14
+  },
+  {
+   "code": "RS",
+   "green_pct": 34.0,
+   "name": "Serbia",
+   "sites": 50,
+   "weighted_pct": 24.68
+  },
+  {
+   "code": "TN",
+   "green_pct": 32.0,
+   "name": "Tunisia",
+   "sites": 50,
+   "weighted_pct": 41.41
+  },
+  {
+   "code": "MX",
+   "green_pct": 32.0,
+   "name": "Mexico",
+   "sites": 50,
+   "weighted_pct": 36.32
+  },
+  {
+   "code": "CA",
+   "green_pct": 32.0,
+   "name": "Canada",
+   "sites": 50,
+   "weighted_pct": 53.06
+  },
+  {
+   "code": "AE",
+   "green_pct": 32.0,
+   "name": "United Arab Emirates",
+   "sites": 50,
+   "weighted_pct": 40.77
+  },
+  {
+   "code": "LA",
+   "green_pct": 32.0,
+   "name": "Laos",
+   "sites": 50,
+   "weighted_pct": 55.28
+  },
+  {
+   "code": "LB",
+   "green_pct": 32.0,
+   "name": "Lebanon",
+   "sites": 50,
+   "weighted_pct": 47.18
+  },
+  {
+   "code": "ID",
+   "green_pct": 32.0,
+   "name": "Indonesia",
+   "sites": 50,
+   "weighted_pct": 44.01
+  },
+  {
+   "code": "CR",
+   "green_pct": 32.0,
+   "name": "Costa Rica",
+   "sites": 50,
+   "weighted_pct": 47.46
+  },
+  {
+   "code": "MD",
+   "green_pct": 32.0,
+   "name": "Moldova",
+   "sites": 50,
+   "weighted_pct": 47.65
+  },
+  {
+   "code": "TO",
+   "green_pct": 32.0,
+   "name": "Tonga",
+   "sites": 50,
+   "weighted_pct": 27.22
+  },
+  {
+   "code": "LI",
+   "green_pct": 32.0,
+   "name": "Liechtenstein",
+   "sites": 50,
+   "weighted_pct": 15.99
+  },
+  {
+   "code": "TR",
+   "green_pct": 30.0,
+   "name": "Turkey",
+   "sites": 50,
+   "weighted_pct": 52.39
+  },
+  {
+   "code": "RE",
+   "green_pct": 30.0,
+   "name": "Reunion",
+   "sites": 50,
+   "weighted_pct": 22.63
+  },
+  {
+   "code": "SA",
+   "green_pct": 30.0,
+   "name": "Saudi Arabia",
+   "sites": 50,
+   "weighted_pct": 43.93
+  },
+  {
+   "code": "CL",
+   "green_pct": 30.0,
+   "name": "Chile",
+   "sites": 50,
+   "weighted_pct": 17.33
+  },
+  {
+   "code": "BZ",
+   "green_pct": 30.0,
+   "name": "Belize",
+   "sites": 50,
+   "weighted_pct": 23.89
+  },
+  {
+   "code": "EG",
+   "green_pct": 28.0,
+   "name": "Egypt",
+   "sites": 50,
+   "weighted_pct": 55.93
+  },
+  {
+   "code": "CI",
+   "green_pct": 28.0,
+   "name": "Cote d'Ivoire",
+   "sites": 50,
+   "weighted_pct": 51.51
+  },
+  {
+   "code": "JO",
+   "green_pct": 28.0,
+   "name": "Jordan",
+   "sites": 50,
+   "weighted_pct": 39.98
+  },
+  {
+   "code": "BD",
+   "green_pct": 28.0,
+   "name": "Bangladesh",
+   "sites": 50,
+   "weighted_pct": 26.6
+  },
+  {
+   "code": "QA",
+   "green_pct": 28.0,
+   "name": "Qatar",
+   "sites": 50,
+   "weighted_pct": 23.99
+  },
+  {
+   "code": "LU",
+   "green_pct": 28.0,
+   "name": "Luxembourg",
+   "sites": 50,
+   "weighted_pct": 47.52
+  },
+  {
+   "code": "AG",
+   "green_pct": 28.0,
+   "name": "Antigua and Barbuda",
+   "sites": 50,
+   "weighted_pct": 19.44
+  },
+  {
+   "code": "BO",
+   "green_pct": 28.0,
+   "name": "Bolivia",
+   "sites": 50,
+   "weighted_pct": 51.38
+  },
+  {
+   "code": "TW",
+   "green_pct": 26.0,
+   "name": "Taiwan",
+   "sites": 50,
+   "weighted_pct": 35.59
+  },
+  {
+   "code": "SC",
+   "green_pct": 26.0,
+   "name": "Seychelles",
+   "sites": 50,
+   "weighted_pct": 20.53
+  },
+  {
+   "code": "VN",
+   "green_pct": 26.0,
+   "name": "Vietnam",
+   "sites": 50,
+   "weighted_pct": 25.85
+  },
+  {
+   "code": "CM",
+   "green_pct": 24.0,
+   "name": "Cameroon",
+   "sites": 50,
+   "weighted_pct": 41.58
+  },
+  {
+   "code": "GE",
+   "green_pct": 24.0,
+   "name": "Georgia",
+   "sites": 50,
+   "weighted_pct": 37.19
+  },
+  {
+   "code": "TZ",
+   "green_pct": 24.0,
+   "name": "Tanzania",
+   "sites": 50,
+   "weighted_pct": 11.46
+  },
+  {
+   "code": "MN",
+   "green_pct": 24.0,
+   "name": "Mongolia",
+   "sites": 50,
+   "weighted_pct": 9.57
+  },
+  {
+   "code": "KG",
+   "green_pct": 22.0,
+   "name": "Kyrgyzstan",
+   "sites": 50,
+   "weighted_pct": 10.72
+  },
+  {
+   "code": "MS",
+   "green_pct": 22.0,
+   "name": "Montserrat",
+   "sites": 50,
+   "weighted_pct": 12.72
+  },
+  {
+   "code": "NP",
+   "green_pct": 22.0,
+   "name": "Nepal",
+   "sites": 50,
+   "weighted_pct": 12.59
+  },
+  {
+   "code": "BH",
+   "green_pct": 22.0,
+   "name": "Bahrain",
+   "sites": 50,
+   "weighted_pct": 15.79
+  },
+  {
+   "code": "GH",
+   "green_pct": 22.0,
+   "name": "Ghana",
+   "sites": 50,
+   "weighted_pct": 46.65
+  },
+  {
+   "code": "PL",
+   "green_pct": 20.0,
+   "name": "Poland",
+   "sites": 50,
+   "weighted_pct": 10.71
+  },
+  {
+   "code": "EC",
+   "green_pct": 20.0,
+   "name": "Ecuador",
+   "sites": 50,
+   "weighted_pct": 30.31
+  },
+  {
+   "code": "RW",
+   "green_pct": 20.0,
+   "name": "Rwanda",
+   "sites": 50,
+   "weighted_pct": 9.17
+  },
+  {
+   "code": "HK",
+   "green_pct": 20.0,
+   "name": "Hong Kong",
+   "sites": 50,
+   "weighted_pct": 39.42
+  },
+  {
+   "code": "JP",
+   "green_pct": 18.0,
+   "name": "Japan",
+   "sites": 50,
+   "weighted_pct": 19.74
+  },
+  {
+   "code": "OM",
+   "green_pct": 16.0,
+   "name": "Oman",
+   "sites": 50,
+   "weighted_pct": 10.55
+  },
+  {
+   "code": "KZ",
+   "green_pct": 16.0,
+   "name": "Kazakhstan",
+   "sites": 50,
+   "weighted_pct": 40.09
+  },
+  {
+   "code": "UZ",
+   "green_pct": 14.0,
+   "name": "Uzbekistan",
+   "sites": 50,
+   "weighted_pct": 9.79
+  },
+  {
+   "code": "BY",
+   "green_pct": 12.0,
+   "name": "Belarus",
+   "sites": 50,
+   "weighted_pct": 27.9
+  },
+  {
+   "code": "VE",
+   "green_pct": 10.0,
+   "name": "Venezuela",
+   "sites": 50,
+   "weighted_pct": 11.69
+  },
+  {
+   "code": "GA",
+   "green_pct": 8.0,
+   "name": "Gabon",
+   "sites": 50,
+   "weighted_pct": 27.09
+  },
+  {
+   "code": "ML",
+   "green_pct": 6.0,
+   "name": "Mali",
+   "sites": 50,
+   "weighted_pct": 2.37
+  },
+  {
+   "code": "KR",
+   "green_pct": 6.0,
+   "name": "South Korea",
+   "sites": 50,
+   "weighted_pct": 5.15
+  },
+  {
+   "code": "TK",
+   "green_pct": 6.0,
+   "name": "Tokelau",
+   "sites": 50,
+   "weighted_pct": 2.03
+  },
+  {
+   "code": "CF",
+   "green_pct": 4.0,
+   "name": "Central African Republic",
+   "sites": 50,
+   "weighted_pct": 1.34
+  },
+  {
+   "code": "DZ",
+   "green_pct": 4.0,
+   "name": "Algeria",
+   "sites": 50,
+   "weighted_pct": 24.97
+  },
+  {
+   "code": "GQ",
+   "green_pct": 2.0,
+   "name": "Equatorial Guinea",
+   "sites": 50,
+   "weighted_pct": 0.79
+  },
+  {
+   "code": "IR",
+   "green_pct": 2.0,
+   "name": "Iran",
+   "sites": 50,
+   "weighted_pct": 0.42
+  }
+ ]
+}

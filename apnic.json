@@ -1240,55 +1240,6 @@
    "samples": 896445
   },
   {
-   "capable": 48.61,
-   "code": "QM",
-   "name": "Northern Europe",
-   "preferred": 47.3,
-   "samples": 22638066
-  },
-  {
-   "capable": 18.68,
-   "code": "QN",
-   "name": "Southern Europe",
-   "preferred": 17.84,
-   "samples": 24881610
-  },
-  {
-   "capable": 71.93,
-   "code": "QO",
-   "name": "Western Europe",
-   "preferred": 70.57,
-   "samples": 37288892
-  },
-  {
-   "capable": 44.87,
-   "code": "QP",
-   "name": "Australia and New Zealand",
-   "preferred": 41.67,
-   "samples": 6351776
-  },
-  {
-   "capable": 27.11,
-   "code": "QQ",
-   "name": "Melanesia",
-   "preferred": 25.21,
-   "samples": 586918
-  },
-  {
-   "capable": 16.95,
-   "code": "QR",
-   "name": "Micronesia",
-   "preferred": 16.63,
-   "samples": 65056
-  },
-  {
-   "capable": 18.13,
-   "code": "QS",
-   "name": "Polynesia",
-   "preferred": 16.44,
-   "samples": 100037
-  },
-  {
    "capable": 36.99,
    "code": "RE",
    "name": "Reunion",
@@ -1674,111 +1625,6 @@
    "samples": 34588
   },
   {
-   "capable": 4.78,
-   "code": "XH",
-   "name": "Eastern Africa",
-   "preferred": 4.7,
-   "samples": 26154853
-  },
-  {
-   "capable": 8.21,
-   "code": "XI",
-   "name": "Middle Africa",
-   "preferred": 7.92,
-   "samples": 7754529
-  },
-  {
-   "capable": 6.08,
-   "code": "XJ",
-   "name": "Northern Africa",
-   "preferred": 5.95,
-   "samples": 32344118
-  },
-  {
-   "capable": 4.06,
-   "code": "XK",
-   "name": "Southern Africa",
-   "preferred": 3.94,
-   "samples": 9200631
-  },
-  {
-   "capable": 8.66,
-   "code": "XL",
-   "name": "Western Africa",
-   "preferred": 8.17,
-   "samples": 31230223
-  },
-  {
-   "capable": 24.92,
-   "code": "XN",
-   "name": "Caribbean",
-   "preferred": 24.19,
-   "samples": 5407850
-  },
-  {
-   "capable": 52.67,
-   "code": "XO",
-   "name": "Central America",
-   "preferred": 52.1,
-   "samples": 26660578
-  },
-  {
-   "capable": 44.57,
-   "code": "XP",
-   "name": "South America",
-   "preferred": 43.4,
-   "samples": 74017851
-  },
-  {
-   "capable": 59.7,
-   "code": "XQ",
-   "name": "Northern America",
-   "preferred": 57.71,
-   "samples": 65674864
-  },
-  {
-   "capable": 15.25,
-   "code": "XR",
-   "name": "Central Asia",
-   "preferred": 13.94,
-   "samples": 10486915
-  },
-  {
-   "capable": 49.88,
-   "code": "XS",
-   "name": "Eastern Asia",
-   "preferred": 42.67,
-   "samples": 223627186
-  },
-  {
-   "capable": 65.81,
-   "code": "XT",
-   "name": "Southern Asia",
-   "preferred": 63.77,
-   "samples": 181359377
-  },
-  {
-   "capable": 36.9,
-   "code": "XU",
-   "name": "South-Eastern Asia",
-   "preferred": 35.99,
-   "samples": 85014815
-  },
-  {
-   "capable": 25.93,
-   "code": "XV",
-   "name": "Western Asia",
-   "preferred": 25.15,
-   "samples": 51837272
-  },
-  {
-   "capable": 14.29,
-   "code": "XW",
-   "name": "Eastern Europe",
-   "preferred": 13.21,
-   "samples": 49647377
-  },
-  {
    "capable": 9.38,
    "code": "YE",
    "name": "Yemen",
@@ -1856,6 +1702,162 @@
    "name": "Unclassified",
    "preferred": 1.72,
    "samples": 16151
+  }
+ ],
+ "subregions": [
+  {
+   "capable": 71.93,
+   "code": "QO",
+   "name": "Western Europe",
+   "preferred": 70.57,
+   "samples": 37288892
+  },
+  {
+   "capable": 65.81,
+   "code": "XT",
+   "name": "Southern Asia",
+   "preferred": 63.77,
+   "samples": 181359377
+  },
+  {
+   "capable": 59.7,
+   "code": "XQ",
+   "name": "Northern America",
+   "preferred": 57.71,
+   "samples": 65674864
+  },
+  {
+   "capable": 52.67,
+   "code": "XO",
+   "name": "Central America",
+   "preferred": 52.1,
+   "samples": 26660578
+  },
+  {
+   "capable": 49.88,
+   "code": "XS",
+   "name": "Eastern Asia",
+   "preferred": 42.67,
+   "samples": 223627186
+  },
+  {
+   "capable": 48.61,
+   "code": "QM",
+   "name": "Northern Europe",
+   "preferred": 47.3,
+   "samples": 22638066
+  },
+  {
+   "capable": 44.87,
+   "code": "QP",
+   "name": "Australia and New Zealand",
+   "preferred": 41.67,
+   "samples": 6351776
+  },
+  {
+   "capable": 44.57,
+   "code": "XP",
+   "name": "South America",
+   "preferred": 43.4,
+   "samples": 74017851
+  },
+  {
+   "capable": 36.9,
+   "code": "XU",
+   "name": "South-Eastern Asia",
+   "preferred": 35.99,
+   "samples": 85014815
+  },
+  {
+   "capable": 27.11,
+   "code": "QQ",
+   "name": "Melanesia",
+   "preferred": 25.21,
+   "samples": 586918
+  },
+  {
+   "capable": 25.93,
+   "code": "XV",
+   "name": "Western Asia",
+   "preferred": 25.15,
+   "samples": 51837272
+  },
+  {
+   "capable": 24.92,
+   "code": "XN",
+   "name": "Caribbean",
+   "preferred": 24.19,
+   "samples": 5407850
+  },
+  {
+   "capable": 18.68,
+   "code": "QN",
+   "name": "Southern Europe",
+   "preferred": 17.84,
+   "samples": 24881610
+  },
+  {
+   "capable": 18.13,
+   "code": "QS",
+   "name": "Polynesia",
+   "preferred": 16.44,
+   "samples": 100037
+  },
+  {
+   "capable": 16.95,
+   "code": "QR",
+   "name": "Micronesia",
+   "preferred": 16.63,
+   "samples": 65056
+  },
+  {
+   "capable": 15.25,
+   "code": "XR",
+   "name": "Central Asia",
+   "preferred": 13.94,
+   "samples": 10486915
+  },
+  {
+   "capable": 14.29,
+   "code": "XW",
+   "name": "Eastern Europe",
+   "preferred": 13.21,
+   "samples": 49647377
+  },
+  {
+   "capable": 8.66,
+   "code": "XL",
+   "name": "Western Africa",
+   "preferred": 8.17,
+   "samples": 31230223
+  },
+  {
+   "capable": 8.21,
+   "code": "XI",
+   "name": "Middle Africa",
+   "preferred": 7.92,
+   "samples": 7754529
+  },
+  {
+   "capable": 6.08,
+   "code": "XJ",
+   "name": "Northern Africa",
+   "preferred": 5.95,
+   "samples": 32344118
+  },
+  {
+   "capable": 4.78,
+   "code": "XH",
+   "name": "Eastern Africa",
+   "preferred": 4.7,
+   "samples": 26154853
+  },
+  {
+   "capable": 4.06,
+   "code": "XK",
+   "name": "Southern Africa",
+   "preferred": 3.94,
+   "samples": 9200631
   }
  ],
  "url": "https://stats.labs.apnic.net/ipv6/",
