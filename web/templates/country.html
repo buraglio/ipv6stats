@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% from "macros.html" import metric, provenance, unavailable, reference %}
+{% block content %}
+<p><a href="{{ base }}country-analysis/">← Country Analysis</a></p>
+<h1>{{ page_title }}</h1>
+
+<section class="metric-row" aria-label="Headline numbers">
+  {{ metric("Users able to use IPv6 (APNIC)", capable, "pct") }}
+  {{ metric("Users preferring IPv6 (APNIC)", preferred, "pct") }}
+  {{ metric("APNIC measurement samples", samples, "int") }}
+  {{ metric("IPv6 users (Cisco 6lab)", sixlab, "pct") }}
+  {% if allocation %}
+  <div class="metric">
+    <div class="metric-label">IPv6 allocated (/32 equivalents)</div>
+    <div class="metric-value">{{ allocation.value.blocks_32 | format_value("int") }}</div>
+    <div class="metric-note">{{ allocation.value.registries | join(", ") }}</div>
+    {{ provenance(allocation) }}
+  </div>
+  {% else %}
+  <div class="metric"><div class="metric-label">IPv6 allocated (/32 equivalents)</div><div class="metric-value missing">—</div></div>
+  {% endif %}
+</section>
+
+<h2>Top websites on IPv6</h2>
+{% if websites %}
+<p>Share of the country's top websites fully reachable over IPv6: web {{ websites.value.web | format_value("pct") if websites.value.web is not none else "—" }}, email {{ websites.value.email | format_value("pct") if websites.value.email is not none else "—" }}, DNS {{ websites.value.dns | format_value("pct") if websites.value.dns is not none else "—" }}.</p>
+{{ provenance(websites) }}
+{% else %}<p class="missing">—</p>{% endif %}
+
+<h2>History</h2>
+{% if history_chart %}
+<div class="chart">{{ history_chart }}</div>
+{{ provenance(detail) }}
+{% elif detail_missing %}
+<p class="missing">History for this economy could not be fetched from APNIC this month.</p>
+{% else %}
+<p class="missing">History is collected for the {{ top_economies }} economies with the most APNIC samples.</p>
+{% endif %}
+
+{% if networks %}
+<h2>Largest networks</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>Network</th><th>IPv6-capable</th><th>Prefers IPv6</th><th>Samples</th></tr></thead>
+  <tbody>
+  {% for n in networks.value %}
+    <tr><td>AS{{ n.asn }} {{ n.name }}</td><td>{{ n.capable | format_value("pct") }}</td><td>{{ n.preferred | format_value("pct") }}</td><td>{{ n.samples | format_value("int") }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{{ provenance(networks) }}
+{% endif %}
+
+{% if nist %}
+<h2>Federal government (NIST USGv6)</h2>
+<p>NIST tests {{ nist.value.domains | format_value("int") }} federal .gov domains for IPv6 on their DNS, mail and web services.</p>
+<section class="metric-row">
+  {{ metric("Domains with IPv6 web", nist_web, "int") }}
+  {{ metric("Domains with IPv6 mail", nist_mail, "int") }}
+  {{ metric("Domains with IPv6 DNS", nist_dns, "int") }}
+</section>
+<div class="table-wrap"><table>
+  <thead><tr><th>Agency</th><th>Domains</th><th>IPv6 web</th><th>IPv6 mail</th><th>IPv6 DNS</th></tr></thead>
+  <tbody>
+  {% for a in nist_agencies.value %}
+    <tr><td>{{ a.name }}</td><td>{{ a.domains }}</td><td>{{ a.web.get("operational", 0) }}</td><td>{{ a.mail.get("operational", 0) }}</td><td>{{ a.dns.get("operational", 0) }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{{ provenance(nist) }}
+{% call reference(reviewed="2026-10-14") %}
+<p>OMB memorandum M-21-07 (November 2020) directs federal agencies to have at least 20% of IP-enabled assets on federal networks operating IPv6-only by the end of FY2023, 50% by the end of FY2024 and 80% by the end of FY2025.</p>
+{% endcall %}
+{% endif %}
+{% endblock %}
