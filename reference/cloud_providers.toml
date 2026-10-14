@@ -1,0 +1,503 @@
+# Curated IPv6 support of cloud providers, shown on the Cloud Services page as reference
+# material. Edit by hand and set last_reviewed to the date you checked an entry against
+# the provider's documentation. No statistics here: anything measurable is collected by
+# collect/sources/. Keys must match collect/sources/cloud_endpoints.py.
+
+[[provider]]
+key = "aws"
+name = "AWS"
+last_reviewed = "2025-10-04"
+documentation = "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ipv6.html"
+overall_support = "Dual-stack (IPv4 + IPv6)"
+ipv6_only_support = "Limited (Nitro instances only)"
+cost_impact = "$3.60/month per public IPv4 address"
+outlook = "IPv6-only networks possible by end 2025"
+limitations = ["Cannot disable IPv4 in VPCs", "Service dependencies block IPv6-only deployments", "API Gateway, ECR, ECS, ElastiCache IPv4-only"]
+recent_progress = ["Amazon ECR IPv6 support (2025)", "AWS Organizations IPv6 endpoints", "EC2 Public DNS IPv6 records", "DNS64/NAT64 for IPv4 connectivity"]
+
+[[provider.service]]
+name = "EC2"
+dual_stack = "Yes"
+ipv6_only = "Yes"
+nat_free_egress = "Egress-only Internet Gateway"
+prefix_delegation = "/56 to VPC, /64 per subnet"
+
+[[provider.service]]
+name = "ECS/EKS"
+dual_stack = "Yes"
+ipv6_only = "Yes"
+nat_free_egress = "Direct IPv6 routing"
+prefix_delegation = "CNI plugin"
+
+[[provider.service]]
+name = "Lambda"
+dual_stack = "Yes"
+ipv6_only = "No"
+nat_free_egress = "VPC configuration"
+prefix_delegation = "No"
+
+[[provider.service]]
+name = "S3"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["All regions support IPv6 for S3 access"]
+
+[[provider.service]]
+name = "CloudFront"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Automatic IPv6 support for all distributions"]
+
+[[provider.service]]
+name = "RDS"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Database instances support IPv6 connectivity"]
+
+[[provider]]
+key = "azure"
+name = "Microsoft Azure"
+last_reviewed = "2025-10-04"
+documentation = "https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/ipv6-overview"
+overall_support = "Dual-stack (IPv4 + IPv6)"
+ipv6_only_support = "Not supported"
+cost_impact = "IPv6 addresses free (unlike IPv4)"
+outlook = "Dual-stack environment focus"
+limitations = ["Mandatory dual-stack - no IPv6-only deployments", "Container services lack IPv6 support", "VPN Gateways incompatible with IPv6", "Azure Firewall no IPv6 support", "No NAT64 support available"]
+recent_progress = ["App Service IPv6 inbound support (Premium tier)", "Outbound IPv6 support Q1 2025", "Free IPv6 public addresses"]
+
+[[provider.service]]
+name = "Virtual Machines"
+dual_stack = "Yes"
+ipv6_only = "Yes"
+nat_free_egress = "Public IPv6 addresses"
+prefix_delegation = "/64 per subnet, /48 per VNet"
+
+[[provider.service]]
+name = "AKS"
+dual_stack = "Yes"
+ipv6_only = "No"
+nat_free_egress = "Pod IPv6 addresses"
+prefix_delegation = "Azure CNI"
+
+[[provider.service]]
+name = "Load Balancer"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Standard Load Balancer supports IPv6 frontend"]
+
+[[provider.service]]
+name = "App Service"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Web apps can bind to IPv6 addresses"]
+
+[[provider.service]]
+name = "Storage"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Blob, File, Queue storage support IPv6"]
+
+[[provider]]
+key = "gcp"
+name = "Google Cloud Platform"
+last_reviewed = "2025-10-04"
+documentation = "https://cloud.google.com/vpc/docs/ipv6"
+overall_support = "Dual-stack (Premium Tier)"
+ipv6_only_support = "Limited preview (Debian/Ubuntu only)"
+cost_impact = "No additional IPv6 costs"
+outlook = "Dual-stack focus, limited IPv6-only"
+limitations = ["IPv6 only in Premium Tier", "IPv6-only instances: Debian/Ubuntu only", "Private services no IPv6 access", "Cloud DNS no IPv6 forwarding", "Regional LBs lack IPv6 frontends"]
+recent_progress = ["IPv6-only instance preview", "Global/GUA and Unique Local addresses", "Load balancer IPv6 termination"]
+
+[[provider.service]]
+name = "Compute Engine"
+dual_stack = "Yes"
+ipv6_only = "Yes"
+nat_free_egress = "Direct IPv6 routing"
+prefix_delegation = "/64 per subnet"
+
+[[provider.service]]
+name = "GKE"
+dual_stack = "Yes"
+ipv6_only = "No"
+nat_free_egress = "Native IPv6 routing"
+prefix_delegation = "Kubernetes CNI"
+
+[[provider.service]]
+name = "Cloud Load Balancing"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Global and regional load balancers support IPv6"]
+
+[[provider.service]]
+name = "Cloud Functions"
+dual_stack = "Yes"
+ipv6_only = "No"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["VPC connector required for IPv6"]
+
+[[provider.service]]
+name = "Cloud Storage"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["All storage buckets accessible via IPv6"]
+
+[[provider]]
+key = "oracle"
+name = "Oracle Cloud"
+last_reviewed = "2025-10-04"
+documentation = "https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/ipv6.htm"
+overall_support = "Dual-stack (all regions)"
+ipv6_only_support = "Not supported"
+cost_impact = "IPv6 included in Free Tier (2 VCNs)"
+outlook = "Comprehensive dual-stack support"
+limitations = ["Load balancers no IPv6 backend communication", "IPv6 addresses must be set at LB creation", "IPv6 listeners only on regional subnets"]
+recent_progress = ["Database services IPv6 support (Feb 2025)", "General availability all regions", "FastConnect/VPN IPv6 connectivity"]
+
+[[provider.service]]
+name = "Compute"
+dual_stack = "Yes"
+ipv6_only = "Yes"
+nat_free_egress = "Internet Gateway IPv6"
+prefix_delegation = "/56 to VCN, /64 per subnet"
+
+[[provider.service]]
+name = "OKE"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Kubernetes clusters support dual-stack"]
+
+[[provider.service]]
+name = "Load Balancers"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Flexible load balancers support IPv6"]
+
+[[provider]]
+key = "digitalocean"
+name = "DigitalOcean"
+last_reviewed = "2025-10-04"
+documentation = "https://docs.digitalocean.com/products/networking/ipv6/"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included free"
+outlook = "Mature IPv6 implementation"
+limitations = ["None significant"]
+recent_progress = ["Reserved IPv6 addresses (2025)", "Load Balancer IPv6 support", "Network Load Balancer IPv6"]
+
+[[provider.service]]
+name = "Droplets"
+dual_stack = "Yes"
+ipv6_only = "No"
+nat_free_egress = "Public IPv6 addresses"
+prefix_delegation = "No"
+
+[[provider.service]]
+name = "Kubernetes"
+dual_stack = "No"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["IPv4 only for DOKS clusters currently"]
+
+[[provider.service]]
+name = "Load Balancers"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Support IPv6 forwarding to droplets"]
+
+[[provider.service]]
+name = "Spaces"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Object storage accessible via IPv6"]
+
+[[provider]]
+key = "vultr"
+name = "Vultr"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available ($2.50/month)"
+cost_impact = "IPv6-only instances cheaper"
+outlook = "Leading IPv6-only adoption"
+limitations = ["None significant"]
+recent_progress = ["IPv6-only pricing optimization", "30+ locations IPv6 ready"]
+
+[[provider]]
+key = "linode"
+name = "Linode (Akamai)"
+last_reviewed = "2025-10-04"
+documentation = "https://www.linode.com/docs/guides/linux-static-ip-configuration/"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included"
+outlook = "Stable mature support"
+limitations = ["None significant"]
+recent_progress = ["Akamai integration benefits", "Enterprise-grade IPv6 backing"]
+
+[[provider.service]]
+name = "Compute Instances"
+dual_stack = "Yes"
+ipv6_only = "Yes"
+nat_free_egress = "Public IPv6 addresses"
+prefix_delegation = "/64 or /56 pools per instance"
+
+[[provider.service]]
+name = "LKE"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Kubernetes clusters support IPv6"]
+
+[[provider.service]]
+name = "NodeBalancers"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Load balancers support IPv6 frontend"]
+
+[[provider.service]]
+name = "Object Storage"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["S3-compatible storage accessible via IPv6"]
+
+[[provider]]
+key = "cloudflare"
+name = "Cloudflare"
+last_reviewed = "2025-10-04"
+documentation = "https://developers.cloudflare.com/fundamentals/concepts/ipv6/"
+ipv6_only_support = "Gateway service"
+cost_impact = "IPv6 included, Spectrum for TCP"
+outlook = "Moving to IPv6 mandatory"
+limitations = ["Workers outbound IPv6 unclear", "Non-HTTP services need Spectrum", "Complete IPv6 blocking difficult"]
+recent_progress = ["IPv6 Always-On policy (2024-2025)", "Mandatory IPv6 for new domains", "IPv6 Gateway for legacy systems"]
+notes = ["Pioneer in IPv6 adoption, free IPv6 for all plans"]
+
+[[provider.service]]
+name = "CDN"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Automatic IPv6 support for all zones"]
+
+[[provider.service]]
+name = "Workers"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Edge computing with IPv6 support"]
+
+[[provider.service]]
+name = "R2 Storage"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Object storage accessible via IPv6"]
+
+[[provider.service]]
+name = "Load Balancing"
+dual_stack = "Yes"
+ipv6_only = "None"
+nat_free_egress = "No"
+prefix_delegation = "No"
+notes = ["Global load balancing supports IPv6"]
+
+[[provider]]
+key = "mythic-beasts"
+name = "Mythic Beasts"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support (native)"
+ipv6_only_support = "IPv6-only VPS available"
+cost_impact = "IPv6 included free, IPv6-only options cheaper"
+outlook = "IPv6 pioneer since early adoption"
+limitations = ["None significant"]
+recent_progress = ["IPv6-only hosting pioneer in UK", "IPv6 health check tool development", "IPv4-to-IPv6 proxy service", "Full /64 IPv6 blocks per server"]
+special_features = ["IPv6 health check testing tool", "Automatic IPv6 configuration", "IPv4-to-IPv6 proxy for legacy clients", "UK-based IPv6 specialist"]
+
+[[provider]]
+key = "hetzner"
+name = "Hetzner"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included free"
+outlook = "Mature implementation"
+limitations = ["None significant"]
+recent_progress = ["IPv6-only instances in all regions", "Cloud Load Balancers IPv6 support", "Kubernetes IPv6 dual-stack"]
+
+[[provider]]
+key = "scaleway"
+name = "Scaleway"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included free"
+outlook = "Complete IPv6 ecosystem"
+limitations = ["None significant"]
+recent_progress = ["IPv6-only instances pricing optimization", "All services IPv6 compatible", "European IPv6 leader"]
+
+[[provider]]
+key = "ovhcloud"
+name = "OVHcloud"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included free"
+outlook = "Comprehensive IPv6 rollout"
+limitations = ["Some legacy services dual-stack only"]
+recent_progress = ["Kubernetes IPv6 support", "Public Cloud IPv6-only instances", "Object Storage IPv6 access"]
+
+[[provider]]
+key = "contabo"
+name = "Contabo"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Limited availability"
+cost_impact = "IPv6 included free"
+outlook = "Growing IPv6 adoption"
+limitations = ["IPv6-only not all regions"]
+recent_progress = ["Expanding IPv6-only to more locations", "Cloud VPS IPv6 standard"]
+
+[[provider]]
+key = "ionos"
+name = "IONOS"
+last_reviewed = "2025-10-04"
+overall_support = "Dual-stack support"
+ipv6_only_support = "Not available"
+cost_impact = "IPv6 included where available"
+outlook = "Gradual IPv6 expansion"
+limitations = ["No IPv6-only instances", "Some services lack IPv6"]
+recent_progress = ["Cloud Server IPv6 support", "Load Balancer IPv6 frontend"]
+
+[[provider]]
+key = "upcloud"
+name = "UpCloud"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included free"
+outlook = "Complete IPv6 infrastructure"
+limitations = ["None significant"]
+recent_progress = ["IPv6-only instances all regions", "Load Balancers IPv6 support", "Private networking IPv6"]
+
+[[provider]]
+key = "binarylane"
+name = "BinaryLane"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included free"
+outlook = "Regional IPv6 leader"
+limitations = ["None significant"]
+recent_progress = ["Australia/NZ IPv6 specialist", "All services IPv6 ready"]
+
+[[provider]]
+key = "kamatera"
+name = "Kamatera"
+last_reviewed = "2025-10-04"
+overall_support = "IPv6 support available"
+ipv6_only_support = "Limited"
+cost_impact = "IPv6 included where available"
+outlook = "Progressive IPv6 adoption"
+limitations = ["Not all services IPv6 ready", "Limited IPv6-only options"]
+recent_progress = ["Expanding IPv6 to more services", "Global datacenter IPv6 rollout"]
+
+[[provider]]
+key = "hostinger"
+name = "Hostinger"
+last_reviewed = "2025-10-04"
+overall_support = "Limited IPv6 support"
+ipv6_only_support = "Not available"
+cost_impact = "IPv6 included where available"
+outlook = "Behind in IPv6 adoption"
+limitations = ["Shared hosting lacks IPv6", "VPS IPv6 limited regions", "Cloud hosting IPv6 incomplete"]
+recent_progress = ["VPS IPv6 expansion to more regions", "Working on shared hosting IPv6"]
+
+[[provider]]
+key = "fastly"
+name = "Fastly"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 CDN support"
+ipv6_only_support = "Gateway service"
+cost_impact = "IPv6 included in CDN"
+outlook = "Leading edge IPv6 support"
+limitations = ["Edge compute IPv6 limitations", "Some origin protection IPv4 only"]
+recent_progress = ["Compute@Edge IPv6 improvements", "Origin shield IPv6 support", "WAF IPv6 enhancement"]
+
+[[provider]]
+key = "backblaze"
+name = "Backblaze"
+last_reviewed = "2025-10-04"
+overall_support = "IPv6 support available"
+ipv6_only_support = "Not available"
+cost_impact = "IPv6 included where available"
+outlook = "Gradual IPv6 implementation"
+limitations = ["B2 Cloud Storage IPv4 primary", "Computer Backup IPv4 only"]
+recent_progress = ["B2 IPv6 API access", "CDN IPv6 delivery support"]
+
+[[provider]]
+key = "railway"
+name = "Railway"
+last_reviewed = "2025-10-04"
+overall_support = "IPv6 support limited"
+ipv6_only_support = "Not available"
+cost_impact = "IPv6 planned for inclusion"
+outlook = "IPv6 support in development"
+limitations = ["Application hosting IPv4 primary", "Database IPv6 limitations", "Deploy process IPv4 focused"]
+recent_progress = ["Working on IPv6 support", "Container networking improvements"]
+
+[[provider]]
+key = "render"
+name = "Render"
+last_reviewed = "2025-10-04"
+overall_support = "IPv6 support available"
+ipv6_only_support = "Not available"
+cost_impact = "IPv6 included where available"
+outlook = "Progressive IPv6 rollout"
+limitations = ["Static sites IPv6 ready", "Web services IPv6 limited", "Databases IPv4 primary"]
+recent_progress = ["Static site IPv6 improvements", "Working on service IPv6"]
+
+[[provider]]
+key = "fly-io"
+name = "Fly.io"
+last_reviewed = "2025-10-04"
+overall_support = "Full IPv6 support"
+ipv6_only_support = "Available"
+cost_impact = "IPv6 included, IPv6-only cheaper"
+outlook = "IPv6-first architecture"
+limitations = ["None significant"]
+recent_progress = ["IPv6-only deployments available", "Global anycast IPv6", "Edge application IPv6"]
