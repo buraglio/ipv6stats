@@ -14,6 +14,8 @@ def format_value(value, fmt: str) -> str:
         return f"{value:.1f}%"
     if fmt == "pct_points":
         return f"{value:+.1f} points"
+    if fmt == "decimal":
+        return f"{value:,.2f}"
     if fmt == "text":
         return str(value)
     raise ValueError(f"unknown format: {fmt}")

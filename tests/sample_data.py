@@ -155,6 +155,26 @@ PAYLOADS = {
         "current": 37751, "current_at": "2026-10-14T00:00:00+00:00",
         "url": "https://bgp.potaroo.net/v6/as2.0/index.html",
     },
+    "bgp_v6_summary": {
+        "stats": {"fib_entries": 258530, "rib_entries": 1002824, "unique_ases": 37751, "origin_only_ases": 31235,
+                  "transit_only_ases": 379, "average_prefix_length": 42.9949, "average_as_path_length": 4.9156},
+        "prefix_lengths": [{"length": 32, "prefixes": 30000, "share": 11.6}, {"length": 44, "prefixes": 25091, "share": 9.71},
+                           {"length": 48, "prefixes": 121568, "share": 47.02}],
+        "url": "https://bgp.potaroo.net/v6/as2.0/index.html",
+    },
+    "cidr_report_aggregation": {
+        "date": "2026-10-14",
+        "table": {"now": 258420, "aggregated": 127591, "gain": 130829, "gain_pct": 50.6},
+        "ases": [{"asn": 9808, "now": 7194, "aggregated": 1160, "gain": 6034, "gain_pct": 83.9,
+                  "name": "CHINAMOBILE-CN - China Mobile Communications Group Co., Ltd."},
+                 {"asn": 7552, "now": 4044, "aggregated": 27, "gain": 4017, "gain_pct": 99.3, "name": None}],
+        "url": "https://www.cidr-report.org/v6/as2.0/",
+    },
+    "routeviews_collectors": {
+        "collectors": [{"name": "route-views.wide", "country": "JP", "rir_region": "APNIC", "date": "2026-10-14",
+                        "ipv6_prefixes": 255106, "ipv6_peers": 5, "ipv4_prefixes": 1087315}],
+        "active": 57, "snapshot_date": "2026-10-14", "url": "https://www.routeviews.org/",
+    },
     "nist_usgv6": {
         "domains": 4,
         "totals": {"web": {"operational": 2, "none": 1, "not_applicable": 1},
