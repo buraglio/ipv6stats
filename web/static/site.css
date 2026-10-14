@@ -51,3 +51,6 @@ th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--bord
 .chart-map { min-height: 460px; }
 .country-index { columns: 3 200px; padding-left: 20px; margin: 0; }
 .country-index li { break-inside: avoid; }
+/* Grid cells must be allowed to shrink below their content, or Plotly's initial width overflows. */
+.grid-2 > *, .metric-row > * { min-width: 0; }
+.chart { width: 100%; overflow: hidden; }
