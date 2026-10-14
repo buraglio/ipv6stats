@@ -3,9 +3,9 @@
 A static site of global IPv6 adoption, routing and deployment data, rebuilt every day from
 the sources it collects: https://stats.ipv6.army
 
-Every number on the site comes from a collected source and shows where it came from and how
-fresh it is. Nothing is estimated or typed in; the only hand-maintained content is a few
-reference lists, which show their review dates.
+Every measured number on the site comes from a collected source and shows where it came from
+and how fresh it is. Nothing is estimated. Hand-maintained content (the reference lists and a few
+"Reference" boxes, such as historical milestones and policy targets) shows when it was last reviewed.
 
 ## How it works
 
