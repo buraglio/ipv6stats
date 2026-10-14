@@ -150,6 +150,11 @@ PAYLOADS = {
                       "url": "https://ip-ranges.amazonaws.com/ip-ranges.json"},
     "ip_ranges_oracle": {"ipv4_prefixes": 900, "ipv6_prefixes": 0,
                          "url": "https://docs.oracle.com/en-us/iaas/tools/public_ip_ranges.json"},
+    "bgp_v6_ases": {
+        "daily": [{"date": "2025-10-14", "ases": 35000}, {"date": "2026-10-14", "ases": 37751}],
+        "current": 37751, "current_at": "2026-10-14T00:00:00+00:00",
+        "url": "https://bgp.potaroo.net/v6/as2.0/index.html",
+    },
     "nist_usgv6": {
         "domains": 4,
         "totals": {"web": {"operational": 2, "none": 1, "not_applicable": 1},

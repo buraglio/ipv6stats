@@ -32,13 +32,18 @@ def bgp_current(data: Data) -> Datum | None:
     return data.datum("bgp_v6_table", lambda p: p["current"])
 
 
-def bgp_change(data: Data, days: int) -> Datum | None:
+def series_change(data: Data, key: str, field: str, days: int) -> Datum | None:
+    """Change in a daily series over `days`, or None when history doesn't reach back that far."""
     def pick(p):
         cutoff = date.fromisoformat(p["daily"][-1]["date"]) - timedelta(days=days)
         earlier = [d for d in p["daily"] if date.fromisoformat(d["date"]) <= cutoff]
-        return p["current"] - earlier[-1]["prefixes"] if earlier else None
+        return p["current"] - earlier[-1][field] if earlier else None
 
-    return data.datum("bgp_v6_table", pick)
+    return data.datum(key, pick)
+
+
+def bgp_change(data: Data, days: int) -> Datum | None:
+    return series_change(data, "bgp_v6_table", "prefixes", days)
 
 
 def _ranked(p: dict) -> list[dict]:

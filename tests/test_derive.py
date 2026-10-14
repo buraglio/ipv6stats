@@ -98,3 +98,9 @@ def test_field_extracts_from_a_dict_datum(tmp_path):
     assert field(row, "capable").value == 61.9
     assert field(row, "missing_key") is None
     assert field(None, "capable") is None
+
+
+def test_series_change_on_ases(tmp_path):
+    d = data(tmp_path)
+    assert derive.series_change(d, "bgp_v6_ases", "ases", 365).value == 2751   # 37751 - 35000
+    assert derive.series_change(d, "bgp_v6_ases", "ases", 4000) is None

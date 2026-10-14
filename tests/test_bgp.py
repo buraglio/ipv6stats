@@ -56,3 +56,14 @@ def test_rejects_file_that_stopped_updating():
     assert bgp.parse(SAMPLE, min_days=1, now=fresh)["current"] == 258600
     with pytest.raises(ValueError, match="stopped updating"):
         bgp.parse(SAMPLE, min_days=1, now=datetime(2026, 10, 20, tzinfo=timezone.utc))
+
+
+def test_parse_named_field():
+    parsed = bgp.parse(SAMPLE, min_days=1, field="ases")
+    assert parsed["daily"][-1] == {"date": "2026-10-15", "ases": 258600}
+
+
+def test_as_history_source():
+    ctx = make_ctx(routes={bgp.AS_URL: FakeResponse(text=FIXTURE.read_text())})
+    payload = SOURCES["bgp_v6_ases"].fetch(ctx)
+    assert "ases" in payload["daily"][-1] and SOURCES["bgp_v6_ases"].ttl_seconds == DAY
