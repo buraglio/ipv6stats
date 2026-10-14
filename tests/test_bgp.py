@@ -45,3 +45,14 @@ def test_registered_daily():
 def test_fetch():
     ctx = make_ctx(routes={bgp.URL: FakeResponse(text=FIXTURE.read_text())})
     assert SOURCES["bgp_v6_table"].fetch(ctx)["current"] > 0
+
+
+def test_rejects_file_that_stopped_updating():
+    # Potaroo still answers 200 but the newest sample is days old: keep the last good
+    # data (which then goes stale on the site) instead of re-stamping old numbers as new.
+    from datetime import datetime, timezone
+
+    fresh = datetime(2026, 10, 16, tzinfo=timezone.utc)
+    assert bgp.parse(SAMPLE, min_days=1, now=fresh)["current"] == 258600
+    with pytest.raises(ValueError, match="stopped updating"):
+        bgp.parse(SAMPLE, min_days=1, now=datetime(2026, 10, 20, tzinfo=timezone.utc))
