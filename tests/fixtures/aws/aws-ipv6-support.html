@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>AWS services that support IPv6 - Amazon Virtual Private Cloud</title><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="assets_root" content="/assets" /><meta name="target_state" content="aws-ipv6-support" /><meta name="default_state" content="aws-ipv6-support" /><link rel="icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="shortcut icon" type="image/ico" href="/assets/images/favicon.ico" /><link rel="canonical" href="https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html" /><meta name="description" content="Computers use IPv4 and IPv6 to communicate. AWS services support dual-stack and IPv6-only configurations. Some offer IPv6 access using private endpoints." /><meta name="deployment_region" content="IAD" /><meta name="product" content="Amazon Virtual Private Cloud" /><meta name="guide" content="User Guide" /><meta name="abstract" content="Use Amazon VPC to launch AWS resources into a virtual network that is a logically isolated section of the AWS cloud. Use Amazon VPC to launch AWS resources into a virtual network that is a logically isolated section of the AWS cloud." /><meta name="guide-locale" content="en_us" /><meta name="tocs" content="toc-contents.json" /><link rel="canonical" href="https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html" /><link rel="alternate" href="https://docs.aws.amazon.com/id_id/vpc/latest/userguide/aws-ipv6-support.html" hreflang="id-id" /><link rel="alternate" href="https://docs.aws.amazon.com/id_id/vpc/latest/userguide/aws-ipv6-support.html" hreflang="id" /><link rel="alternate" href="https://docs.aws.amazon.com/de_de/vpc/latest/userguide/aws-ipv6-support.html" hreflang="de-de" /><link rel="alternate" href="https://docs.aws.amazon.com/de_de/vpc/latest/userguide/aws-ipv6-support.html" hreflang="de" /><link rel="alternate" href="https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html" hreflang="en-us" /><link rel="alternate" href="https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html" hreflang="en" /><link rel="alternate" href="https://docs.aws.amazon.com/es_es/vpc/latest/userguide/aws-ipv6-support.html" hreflang="es-es" /><link rel="alternate" href="https://docs.aws.amazon.com/es_es/vpc/latest/userguide/aws-ipv6-support.html" hreflang="es" /><link rel="alternate" href="https://docs.aws.amazon.com/fr_fr/vpc/latest/userguide/aws-ipv6-support.html" hreflang="fr-fr" /><link rel="alternate" href="https://docs.aws.amazon.com/fr_fr/vpc/latest/userguide/aws-ipv6-support.html" hreflang="fr" /><link rel="alternate" href="https://docs.aws.amazon.com/it_it/vpc/latest/userguide/aws-ipv6-support.html" hreflang="it-it" /><link rel="alternate" href="https://docs.aws.amazon.com/it_it/vpc/latest/userguide/aws-ipv6-support.html" hreflang="it" /><link rel="alternate" href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/aws-ipv6-support.html" hreflang="ja-jp" /><link rel="alternate" href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/aws-ipv6-support.html" hreflang="ja" /><link rel="alternate" href="https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/aws-ipv6-support.html" hreflang="ko-kr" /><link rel="alternate" href="https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/aws-ipv6-support.html" hreflang="ko" /><link rel="alternate" href="https://docs.aws.amazon.com/pt_br/vpc/latest/userguide/aws-ipv6-support.html" hreflang="pt-br" /><link rel="alternate" href="https://docs.aws.amazon.com/pt_br/vpc/latest/userguide/aws-ipv6-support.html" hreflang="pt" /><link rel="alternate" href="https://docs.aws.amazon.com/zh_cn/vpc/latest/userguide/aws-ipv6-support.html" hreflang="zh-cn" /><link rel="alternate" href="https://docs.aws.amazon.com/zh_tw/vpc/latest/userguide/aws-ipv6-support.html" hreflang="zh-tw" /><link rel="alternate" href="https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html" hreflang="x-default" /><meta name="feedback-item" content="VPC" /><meta name="this_doc_product" content="Amazon Virtual Private Cloud" /><meta name="this_doc_guide" content="User Guide" /><head xmlns="http://www.w3.org/1999/xhtml"> <script defer="" src="/assets/r/awsdocs-doc-page.2.0.0.js"></script><link href="/assets/r/awsdocs-doc-page.2.0.0.css" rel="stylesheet"/></head>
+<script defer="" id="awsc-panorama-bundle" type="text/javascript" src="https://prod.pa.cdn.uis.awsstatic.com/panorama-nav-init.js" data-config="{'appEntity':'aws-documentation','region':'us-east-1','service':'vpc'}"></script><meta id="panorama-serviceSubSection" value="User Guide" /><meta id="panorama-serviceConsolePage" value="AWS services that support IPv6" /></head><body class="awsdocs awsui"><div class="awsdocs-container"><p><a href="aws-ipv6-support.md">View a markdown version of this page</a></p><awsdocs-header></awsdocs-header><awsui-app-layout id="app-layout" class="awsui-util-no-gutters" ng-controller="ContentController as $ctrl" header-selector="awsdocs-header" navigation-hide="false" navigation-width="$ctrl.navWidth" navigation-open="$ctrl.navOpen" navigation-change="$ctrl.onNavChange($event)" tools-hide="$ctrl.hideTools" tools-width="$ctrl.toolsWidth" tools-open="$ctrl.toolsOpen" tools-change="$ctrl.onToolsChange($event)"><div id="guide-toc" dom-region="navigation"><awsdocs-toc></awsdocs-toc></div><div id="main-column" dom-region="content" tabindex="-1"><awsdocs-view class="awsdocs-view"><div id="awsdocs-content"><head><title>AWS services that support IPv6 - Amazon Virtual Private Cloud</title><meta name="pdf" content="/pdfs/vpc/latest/userguide/vpc-ug.pdf#aws-ipv6-support" /><meta name="rss" content="amazon-vpc-release-notes.rss" /><meta name="forums" content="https://repost.aws/tags/TATGuEiYydTVCPMhSnXFN6gA" /><meta name="feedback" content="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=VPC&amp;topic_url=https://docs.aws.amazon.com/en_us/vpc/latest/userguide/aws-ipv6-support.html" /><meta name="feedback-yes" content="feedbackyes.html?topic_url=https://docs.aws.amazon.com/en_us/vpc/latest/userguide/aws-ipv6-support.html" /><meta name="feedback-no" content="feedbackno.html?topic_url=https://docs.aws.amazon.com/en_us/vpc/latest/userguide/aws-ipv6-support.html" /><meta name="keywords" content="VPC,Amazon VPC,network,route table,internet gateway,subnet,NAT,IPv6" /><link rel="alternate" type="text/markdown" href="aws-ipv6-support.md" title="Markdown version" /><script type="application/ld+json">
+{
+    "@context" : "https://schema.org",
+    "@type" : "BreadcrumbList",
+    "itemListElement" : [
+      {
+        "@type" : "ListItem",
+        "position" : 1,
+        "name" : "AWS",
+        "item" : "https://aws.amazon.com"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 2,
+        "name" : "Amazon VPC",
+        "item" : "https://docs.aws.amazon.com/vpc/index.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 3,
+        "name" : "User Guide",
+        "item" : "https://docs.aws.amazon.com/vpc/latest/userguide"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 4,
+        "name" : "IP addressing for your VPCs and subnets",
+        "item" : "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html"
+      },
+      {
+        "@type" : "ListItem",
+        "position" : 5,
+        "name" : "AWS services that support IPv6",
+        "item" : "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html"
+      }
+    ]
+}
+</script></head><body><div id="main"><div style="display: none"><a href="/pdfs/vpc/latest/userguide/vpc-ug.pdf#aws-ipv6-support" target="_blank" rel="noopener noreferrer" title="Open PDF"></a></div><div id="breadcrumbs" class="breadcrumb"><a href="/index.html">Documentation</a><a href="/vpc/index.html">Amazon VPC</a><a href="what-is-amazon-vpc.html">User Guide</a></div><div id="page-toc-src"><a href="#ipv6-service-support">Services that support IPv6</a><a href="#ipv6-support">Additional IPv6 support</a><a href="#ipv6-learn-more">Learn more</a></div><div id="main-content" class="awsui-util-container"><div id="main-col-body"><awsdocs-language-banner data-service="$ctrl.pageService"></awsdocs-language-banner><h1 class="topictitle" id="aws-ipv6-support">AWS services that support IPv6</h1><div class="awsdocs-page-header-container"><awsdocs-page-header></awsdocs-page-header><awsdocs-filter-selector id="awsdocs-filter-selector"></awsdocs-filter-selector></div><p>Computers and smart devices use IP addresses to communicate with each other over the
+        internet and other networks. As the internet continues to grow, so does the need for IP
+        addresses. The most common format for IP addresses is IPv4. The new format for IP addresses
+        is IPv6, which provides a larger address space than IPv4.</p><p>AWS services support for IPv6 includes support for dual stack configuration (IPv4 and
+        IPv6) or IPv6 only configurations. For example, a virtual private cloud (VPC) is a logically
+        isolated section of the AWS Cloud where you can launch AWS resources. Within a VPC, you
+        can create subnets that are IPv4 only, dual stack, or IPv6 only.</p><p>AWS services support access through public endpoints. Some AWS services also support
+        access using private endpoints powered by AWS PrivateLink. AWS services can support IPv6
+        through their private endpoints even if they do not support IPv6 through their public
+        endpoints. Endpoints that support IPv6 can respond to DNS queries with AAAA records.</p>
+        <h2 id="ipv6-service-support">Services that support IPv6</h2>
+        <p>The following table lists the AWS services that provide dual stack support, IPv6
+            only support, and endpoints that support IPv6. We will update this table as we release
+            additional support for IPv6. For the specifics about how a service supports IPv6, refer
+            to the documentation for the service.</p>
+        <div class="table-container"><div class="table-contents disable-scroll"><table id="w175aac11c35b9b5"><thead>
+                    <tr>
+                        <th>Service name</th>
+                        <th>Dual stack support</th>
+                        <th>IPv6 only support</th>
+                        <th>Public endpoints support IPv6</th>
+                        <th>Private endpoints support IPv6 <sup>1</sup></th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <td tabindex="-1">AWS Amplify</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon API Gateway</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS App Mesh</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS App Runner</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS AppConfig</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/appconfig/latest/userguide/setting-up-IPv6.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Application Auto Scaling</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Application Discovery Service</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Application Recovery Controller (ARC)</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon WorkSpaces Applications</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS AppSync<sup>2</sup></td>
+                        <td tabindex="-1">Partial</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Partial</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Athena</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2023/05/amazon-athena-ipv6-endpoints-inbound-connections/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Audit Manager</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Aurora</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.IP_addressing">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Aurora DSQL</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Auto Scaling</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS B2B Data Interchange</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Backup</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/general/latest/gr/bk.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/backup-network.html#backup-privatelink">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Batch</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/batch/latest/userguide/vpc-interface-endpoints.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Bedrock</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Billing and Cost Management Data Exports</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Billing and Cost Management Pricing Calculator</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Billing Conductor</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Budgets</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Braket</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Certificate Manager</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Chime SDK</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Comprehend</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Clean Rooms</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Clean Rooms ML</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Cloud9</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/cloud9/latest/user-guide/vpc-settings.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Cloud Control API</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">CloudFormation</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CloudFront</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-enable-ipv6.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-enable-ipv6.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/general/latest/gr/cf_region.html">Yes</a></td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS CloudHSM</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/ip-access.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/cloudhsm/latest/userguide/cloudhsm-vpc-endpoint.html">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS CloudTrail</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CloudWatch</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CloudWatch Application Insights</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CloudWatch Internet Monitor</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CloudWatch Logs</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CloudWatch Observability Access Manager</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td tabindex="-1">Amazon CloudWatch Synthetics</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2025/01/amazon-cloudwatch-synthetics-ipv6-support/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Cloud Map</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/cloud-map/latest/dg/registering-instances.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Cloud WAN</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS CodeArtifact</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Connect Customer Customer Profiles</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS CodeBuild</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS CodeCommit</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS CodeDeploy</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Compute Optimizer</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Comprehend Medical</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon CodeGuru Profiler</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Cognito</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Config</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Control Tower</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Cost Explorer</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Cost Optimization Hub</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Data Exchange</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Data Firehose</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Data Lifecycle Manager</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Database Migration Service</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.IPAddressing.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS DataSync</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#ipv6-support">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon DataZone</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Deadline Cloud</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/deadline-cloud/latest/userguide/vpc-interface-endpoints.html">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Detective</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/general/latest/gr/detective.html">Yes</a></td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Direct Connect</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Directory Service</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon EBS direct APIs</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon EC2</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#ipv6-addressing">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">EC2 Image Builder</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon ECR</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2025/05/amazon-ecr-support-ipv6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon ECS</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon EFS</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/efs/latest/ug/manage-fs-access-create-delete-mount-targets.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2025/06/amazon-efs-internet-protocol-version-6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon EKS</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/eks/latest/userguide/network-reqs.html#network-requirements-ip-table">Partial</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/eks/latest/userguide/network-reqs.html#network-requirements-ip-table">Partial</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon EMR</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Elastic Beanstalk</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environments-cfg-elbv2-ipv6-dualstack.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/vpc-vpce.html#vpc-vpce.ipv6">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/vpc-vpce.html#vpc-vpce.ipv6">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Elastic Disaster Recovery</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Elastic Load Balancing</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#ip-address-types">Partial</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#ip-address-types">Partial</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon ElastiCache</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/network-type.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Elemental MediaConvert</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Elemental MediaConnect</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Partial</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS End User Messaging Social</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Entity Resolution</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon EventBridge</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Fargate</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon FSx</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/general/latest/gr/fsxn.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/fsx-vpc-endpoints.html">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon GameLift Streams</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/general/latest/gr/gameliftstreams.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Global Accelerator</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2022/07/aws-global-accelerator-announces-ipv6-support/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Glue</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Glue DataBrew</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Managed Grafana <sup>3</sup></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Ground Station <sup>4</sup></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon GuardDuty</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS HealthImaging</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS HealthLake</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS HealthOmics</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Identity and Access Management (IAM)</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_dual-stack_endpoint_support.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IAM Access Analyzer</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2025/03/iam-access-analyzer-supports-ipv6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IAM Identity Center</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IAM Roles Anywhere</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Inspector</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Interactive Video Service (IVS) <sup>5</sup></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT Core</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/iot/latest/developerguide/protocols.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT Device Defender</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT Device Management</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT FleetWise</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/fleetwise-ipv6-access.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT Greengrass</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT SiteWise</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT TwinMaker</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS IoT Wireless</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/iot-wireless/latest/developerguide/vpc-interface-endpoints.html">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Kendra</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Key Management Service</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/kms/latest/developerguide/ipv6-kms.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/kms/latest/developerguide/ipv6-kms.html">Partial</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Keyspaces</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/ipv6-support.html">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Keyspaces CDC streams</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Kinesis Data Streams</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Lake Formation</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Lambda</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html#configuration-vpc-ipv6">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2021/12/aws-lambda-ipv6-endpoints-inbound-connections/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Launch Wizard</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS License Manager</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Lightsail</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2021/01/amazon-lightsail-supports-ipv6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2024/01/ipv6-instance-bundles-amazon-lightsail/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-lightsail-api-endpoints-connectivity-ipv6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Location Service</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon MQ</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon MWAA</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Macie</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Mainframe Modernization</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Managed Grafana</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Managed Service for Prometheus</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Migration Hub Orchestrator</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Network Firewall</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2023/01/aws-network-firewall-ipv6-support/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2023/04/aws-network-firewall-ipv6-only-subnets/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Network Manager</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon OpenSearch Service</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2023/10/amazon-opensearch-service-ipv6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Organizations</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Outposts</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Personalize</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Pinpoint</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Polly</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Price List</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Private Certificate Authority</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Private CA Connector for Active Directory</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Private CA Connector for SCEP</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS PrivateLink</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Q Business</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon RDS</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.IP_addressing">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon RDS Data API</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon RDS Performance Insights</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Redshift</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Rekognition</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Recycle Bin</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS re:Post Private</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Resource Access Manager</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Resource Explorer</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Resource Groups</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Resource Groups Tagging API</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Route 53</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon S3</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ipv6-access.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/ipv6-access.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon S3 on Outposts</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon SageMaker</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Secrets Manager</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/asm_access.html#endpoints">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Security Hub</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Security Lake</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2025/04/amazon-security-lake-internet-protocol-version-6/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/general/latest/gr/securitylake.html">Yes</a></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/security-lake/latest/userguide/security-vpc-endpoints.html">Yes</a></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Security Token Service</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Service Catalog</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Shield</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Simple Email Service</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Simple Notification Service</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Simple Queue Service</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Simple Workflow Service</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Site-to-Site VPN</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/vpn/latest/s2svpn/ipv4-ipv6.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Snow Family</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Step Functions</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Storage Gateway</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Systems Manager</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Systems Manager Incident Manager</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Systems Manager for SAP</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Textract</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Timestream</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Transcribe</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Transfer Family <sup>6</sup></td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/transfer/latest/userguide/ipv6-support.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Transit Gateway</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Translate</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Trusted Advisor</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS User Notifications</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon Verified Permissions</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">VMware Cloud on AWS</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon VPC</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html#vpc-ip-addressing">Yes</a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/ec2/latest/devguide/ec2-endpoints.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon VPC Lattice</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS WAF</td>
+                        <td tabindex="-1"><a href="https://aws.amazon.com/about-aws/whats-new/2016/10/ipv6-support-for-cloudfront-waf-and-s3-transfer-acceleration/" rel="noopener noreferrer" target="_blank"><span>Yes</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a></td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1"></td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS WAFV2</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS Well-Architected Tool</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon WorkMail</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">Amazon WorkSpaces</td>
+                        <td tabindex="-1"><a href="https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html">Yes</a></td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                    <tr>
+                        <td tabindex="-1">AWS X-Ray</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">No</td>
+                        <td tabindex="-1">Yes</td>
+                        <td tabindex="-1">Yes</td>
+                    </tr>
+                </table></div></div>
+        <p><sup>1</sup> An empty cell indicates that the service does not <a href="https://docs.aws.amazon.com/vpc/latest/privatelink/aws-services-privatelink-support.html">integrate with
+                AWS PrivateLink</a>.</p>
+        <p><sup>2</sup> This entry represents IPv6 support for AWS AppSync
+            GraphlQL and Event API configuration operations, through the <a href="https://docs.aws.amazon.com/appsync/latest/APIReference/API_Operations.html">AWS AppSync SDK API</a>.
+            IPv6 is not supported for client connections to customer managed AWS AppSync GraphQL and
+            Event APIs.</p>
+        <p><sup>3</sup> This entry represents IPv6 support for Grafana <em>workspace management</em> operations, such as updating
+            workspaces and workspace permissions. There is no IPv6 support for general Grafana
+            workspace operations, such as creating and editing dashboards or querying data
+            sources.</p>
+        <p><sup>4</sup> This entry represents IPv6 support for AWS Ground Station
+                <em>control plane</em> operations, such as calling the
+                <a href="https://docs.aws.amazon.com/ground-station/latest/APIReference/API_Operations.html">AWS Ground Station API</a>.
+            IPv6 is not supported by the AWS Ground Station <em>data plane</em>, so
+            make sure the resources you are delivering data to (such as Amazon EC2 instances) are
+            accessible over IPv4.</p>
+        <p><sup>5</sup> This entry represents IPv6 support for Amazon IVS <em>control plane</em>
+       operations, such as calling an <a href="https://docs.aws.amazon.com/general/latest/gr/ivs.html">IVS endpoint</a>.</p>
+        <p><sup>6</sup> For more details on IPv6 support in AWS Transfer Family, visit <a href="https://docs.aws.amazon.com/transfer/latest/userguide/ipv6-support.html#ipv6-limitations">IPv6 limitations</a>.</p>
+     
+        <h2 id="ipv6-support">Additional IPv6 support</h2>
+        <div class="itemizedlist">
+            <h6>Compute</h6>
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>Amazon EC2 supports launching instances based on the Nitro System into IPv6-only
+                    subnets.</p>
+            </li><li class="listitem">
+                <p>Amazon EC2 provides IPv6 endpoints for Instance Metadata Service (IMDS) and Amazon
+                    Time Sync Service.</p>
+            </li></ul></div>
+        <div class="itemizedlist">
+            <h6>Game Development</h6>
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>Amazon GameLift Streams supports streaming over IPv6 on the Microsoft Windows Server 2022 Base runtime.</p>
+            </li></ul></div>
+        <div class="itemizedlist">
+            <h6>Networking and Content Delivery</h6>
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>Amazon VPC supports creating IPv6-only subnets.</p>
+            </li><li class="listitem">
+                <p>Amazon VPC helps IPv6 AWS resources communicate with IPv4 resources by supporting
+                    DNS64 on your subnets and NAT64 on your NAT gateways.</p>
+            </li></ul></div>
+        <div class="itemizedlist">
+            <h6>Security, Identity, and Compliance</h6>
+             
+             
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>Amazon Detective supports IPv6 addresses in its network-related findings and entity
+                    profiles.</p>
+            </li><li class="listitem">
+                <p>AWS Identity and Access Management (IAM) supports IPv6 addresses in IAM identity-based
+                    policies.</p>
+            </li><li class="listitem">
+                <p>Amazon Macie supports IPv6 addresses in personally identifiable information
+                    (PII).</p>
+            </li><li class="listitem">
+                <p>Amazon Security Lake supports IPv6 addresses across all operations on log sources and
+                    subscribers.</p>
+            </li></ul></div>
+        <div class="itemizedlist">
+            <h6>Management and Governance</h6>
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p>AWS CloudTrail records include source IPv6 information.</p>
+            </li><li class="listitem">
+                <p>AWS CLI v2 supports download over IPv6 connections for IPv6-only clients.</p>
+            </li></ul></div>
+     
+        <h2 id="ipv6-learn-more">Learn more</h2>
+        <div class="itemizedlist">
+             
+             
+        <ul class="itemizedlist"><li class="listitem">
+                <p><a href="https://docs.aws.amazon.com/whitepapers/latest/ipv6-on-aws/IPv6-on-AWS.html">IPv6 on
+                    AWS</a></p>
+            </li><li class="listitem">
+                <p><a href="https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/IPv6-reference-architectures-for-AWS-and-hybrid-networks-ra.pdf" rel="noopener noreferrer" target="_blank"><span>Dual Stack and IPv6-only Amazon VPC Reference Architectures</span><awsui-icon class="awsdocs-link-icon" name="external"></awsui-icon></a> (PDF)</p>
+            </li></ul></div>
+    <awsdocs-copyright class="copyright-print"></awsdocs-copyright><awsdocs-thumb-feedback right-edge="{{$ctrl.thumbFeedbackRightEdge}}"></awsdocs-thumb-feedback></div><noscript><div><div><div><div id="js_error_message"><p><img src="https://d1ge0kk1l5kms0.cloudfront.net/images/G/01/webservices/console/warning.png" alt="Warning" /> <strong>Javascript is disabled or is unavailable in your browser.</strong></p><p>To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.</p></div></div></div></div></noscript><div id="main-col-footer" class="awsui-util-font-size-0"><div id="doc-conventions"><a target="_top" href="/general/latest/gr/docconventions.html">Document Conventions</a></div><div class="prev-next"><div id="previous" class="prev-link" accesskey="p" href="./vpc-migrate-ipv6-example.html">Example dual-stack VPC</div><div id="next" class="next-link" accesskey="n" href="./configure-your-vpc.html">Virtual private clouds</div></div></div><awsdocs-page-utilities></awsdocs-page-utilities></div><div id="quick-feedback-yes" style="display: none;"><div class="title">Did this page help you? - Yes</div><div class="content"><p>Thanks for letting us know we're doing a good job!</p><p>If you've got a moment, please tell us what we did right so we can do more of it.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=VPC&amp;topic_url=https://docs.aws.amazon.com/en_us/vpc/latest/userguide/aws-ipv6-support.html"></awsui-button></p></div></div><div id="quick-feedback-no" style="display: none;"><div class="title">Did this page help you? - No</div><div class="content"><p>Thanks for letting us know this page needs work. We're sorry we let you down.</p><p>If you've got a moment, please tell us how we can make the documentation better.</p><p><awsui-button id="fblink" rel="noopener noreferrer" target="_blank" text="Feedback" click="linkClick($event)" href="https://docs.aws.amazon.com/forms/aws-doc-feedback?hidden_service_name=VPC&amp;topic_url=https://docs.aws.amazon.com/en_us/vpc/latest/userguide/aws-ipv6-support.html"></awsui-button></p></div></div></div></body></div></awsdocs-view><div class="page-loading-indicator" id="page-loading-indicator"><awsui-spinner size="large"></awsui-spinner></div></div><div id="tools-panel" dom-region="tools"><awsdocs-tools-panel id="awsdocs-tools-panel"></awsdocs-tools-panel></div></awsui-app-layout><awsdocs-cookie-banner class="doc-cookie-banner"></awsdocs-cookie-banner></div></body></html>
