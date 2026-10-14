@@ -1,16 +1,10 @@
 [project]
 name = "ipv6stats"
 version = "1.0.0"
-description = "IPv6 Statistics Dashboard - global IPv6 adoption metrics"
+description = "IPv6 Statistics - a static site of global IPv6 adoption, rebuilt daily from collected data"
 requires-python = ">=3.11"
 dependencies = [
-    "folium>=0.20.0",
-    "streamlit-folium>=0.25.1",
-    "streamlit>=1.48.1",
-    "trafilatura>=2.0.0",
     "requests>=2.32.4",
-    "pandas>=2.3.1",
-    "numpy>=2.3.2",
     "plotly>=6.3.0",
     "python-dotenv>=1.0.0",
     "jinja2>=3.1.4",
