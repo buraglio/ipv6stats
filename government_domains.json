@@ -1,0 +1,155 @@
+{
+ "groups": [
+  {
+   "checked": 12,
+   "domains": [
+    {
+     "domain": "whitehouse.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "nasa.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "cdc.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "irs.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "census.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "defense.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "state.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "treasury.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "dhs.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "fbi.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "nih.gov",
+     "status": "ipv6"
+    },
+    {
+     "domain": "noaa.gov",
+     "status": "ipv6"
+    }
+   ],
+   "name": "US Federal",
+   "with_ipv6": 12
+  },
+  {
+   "checked": 6,
+   "domains": [
+    {
+     "domain": "europa.eu",
+     "status": "ipv6"
+    },
+    {
+     "domain": "ec.europa.eu",
+     "status": "ipv6"
+    },
+    {
+     "domain": "europarl.europa.eu",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "consilium.europa.eu",
+     "status": "ipv6"
+    },
+    {
+     "domain": "curia.europa.eu",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "eeas.europa.eu",
+     "status": "ipv6"
+    }
+   ],
+   "name": "European Union",
+   "with_ipv6": 4
+  },
+  {
+   "checked": 6,
+   "domains": [
+    {
+     "domain": "gov.uk",
+     "status": "ipv6"
+    },
+    {
+     "domain": "nhs.uk",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "hmrc.gov.uk",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "police.uk",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "parliament.uk",
+     "status": "ipv6"
+    },
+    {
+     "domain": "judiciary.gov.uk",
+     "status": "ipv4_only"
+    }
+   ],
+   "name": "United Kingdom",
+   "with_ipv6": 2
+  },
+  {
+   "checked": 6,
+   "domains": [
+    {
+     "domain": "australia.gov.au",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "ato.gov.au",
+     "status": "ipv6"
+    },
+    {
+     "domain": "aph.gov.au",
+     "status": "ipv6"
+    },
+    {
+     "domain": "abs.gov.au",
+     "status": "ipv6"
+    },
+    {
+     "domain": "austrade.gov.au",
+     "status": "ipv4_only"
+    },
+    {
+     "domain": "defence.gov.au",
+     "status": "ipv6"
+    }
+   ],
+   "name": "Australia",
+   "with_ipv6": 4
+  }
+ ],
+ "total": 30,
+ "unknown": 0,
+ "url": "https://github.com/buraglio/ipv6stats/blob/main/collect/sources/government.py"
+}

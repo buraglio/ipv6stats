@@ -1,0 +1,475 @@
+{
+ "active": 54,
+ "collectors": [
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1153789,
+   "ipv6_peers": 19,
+   "ipv6_prefixes": 281680,
+   "name": "route-views8",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1131986,
+   "ipv6_peers": 23,
+   "ipv6_prefixes": 275546,
+   "name": "route-views5",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "SG",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1135268,
+   "ipv6_peers": 47,
+   "ipv6_prefixes": 274783,
+   "name": "route-views.sg",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1142222,
+   "ipv6_peers": 38,
+   "ipv6_prefixes": 273166,
+   "name": "route-views.eqix",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1142302,
+   "ipv6_peers": 15,
+   "ipv6_prefixes": 272656,
+   "name": "route-views4",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "BR",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1132813,
+   "ipv6_peers": 32,
+   "ipv6_prefixes": 272350,
+   "name": "ix-br2.gru",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "BR",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1133358,
+   "ipv6_peers": 22,
+   "ipv6_prefixes": 271328,
+   "name": "route-views.rio",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "BR",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1131517,
+   "ipv6_peers": 11,
+   "ipv6_prefixes": 270397,
+   "name": "ix-br.gru",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "NL",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1136009,
+   "ipv6_peers": 37,
+   "ipv6_prefixes": 270088,
+   "name": "amsix.ams",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "GB",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1140094,
+   "ipv6_peers": 46,
+   "ipv6_prefixes": 268626,
+   "name": "route-views.linx",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1130710,
+   "ipv6_peers": 31,
+   "ipv6_prefixes": 268400,
+   "name": "route-views.chicago",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "HK",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1114570,
+   "ipv6_peers": 16,
+   "ipv6_prefixes": 268168,
+   "name": "hkix.hkg",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "AE",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1134623,
+   "ipv6_peers": 22,
+   "ipv6_prefixes": 267490,
+   "name": "route-views.uaeix",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "ZA",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1121331,
+   "ipv6_peers": 46,
+   "ipv6_prefixes": 267431,
+   "name": "route-views.napafrica",
+   "rir_region": "AFRINIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1140681,
+   "ipv6_peers": 16,
+   "ipv6_prefixes": 267398,
+   "name": "route-views.ny",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1133469,
+   "ipv6_peers": 19,
+   "ipv6_prefixes": 267075,
+   "name": "route-views7",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "AU",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1122650,
+   "ipv6_peers": 25,
+   "ipv6_prefixes": 266066,
+   "name": "route-views.sydney",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "DE",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1129732,
+   "ipv6_peers": 14,
+   "ipv6_prefixes": 265669,
+   "name": "decix.fra",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 0,
+   "ipv6_peers": 21,
+   "ipv6_prefixes": 265396,
+   "name": "route-views6",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "SE",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1112754,
+   "ipv6_peers": 24,
+   "ipv6_prefixes": 264689,
+   "name": "netnod.mmx",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "KR",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1107218,
+   "ipv6_peers": 15,
+   "ipv6_prefixes": 264438,
+   "name": "kinx.icn",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1116739,
+   "ipv6_peers": 13,
+   "ipv6_prefixes": 264051,
+   "name": "cix.atl",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "MY",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1111661,
+   "ipv6_peers": 24,
+   "ipv6_prefixes": 263716,
+   "name": "decix.jhb",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "AU",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1112475,
+   "ipv6_peers": 28,
+   "ipv6_prefixes": 263560,
+   "name": "route-views.perth",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1131377,
+   "ipv6_peers": 9,
+   "ipv6_prefixes": 263538,
+   "name": "route-views3",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "PH",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1135133,
+   "ipv6_peers": 15,
+   "ipv6_prefixes": 263452,
+   "name": "getafix.mnl",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "BR",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1118657,
+   "ipv6_peers": 23,
+   "ipv6_prefixes": 263311,
+   "name": "route-views.fortaleza",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1106063,
+   "ipv6_peers": 27,
+   "ipv6_prefixes": 262783,
+   "name": "route-views.flix",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "TH",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1089239,
+   "ipv6_peers": 14,
+   "ipv6_prefixes": 262681,
+   "name": "route-views.bknix",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "RO",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1108681,
+   "ipv6_peers": 13,
+   "ipv6_prefixes": 261101,
+   "name": "interlan.otp",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "MX",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1112860,
+   "ipv6_peers": 13,
+   "ipv6_prefixes": 260079,
+   "name": "pitmx.qro",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "NL",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1109470,
+   "ipv6_peers": 17,
+   "ipv6_prefixes": 257139,
+   "name": "locix.fra",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "CL",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1093847,
+   "ipv6_peers": 19,
+   "ipv6_prefixes": 256345,
+   "name": "pit.scl",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "JP",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1087315,
+   "ipv6_peers": 5,
+   "ipv6_prefixes": 255106,
+   "name": "route-views.wide",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "RS",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1077597,
+   "ipv6_peers": 9,
+   "ipv6_prefixes": 254851,
+   "name": "route-views.soxrs",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1104974,
+   "ipv6_peers": 14,
+   "ipv6_prefixes": 254652,
+   "name": "route-views.sfmix",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "IT",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1104606,
+   "ipv6_peers": 19,
+   "ipv6_prefixes": 254366,
+   "name": "namex.fco",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1096450,
+   "ipv6_peers": 9,
+   "ipv6_prefixes": 254296,
+   "name": "route-views.nwax",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1100466,
+   "ipv6_peers": 16,
+   "ipv6_prefixes": 253735,
+   "name": "route-views.telxatl",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "KE",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1099621,
+   "ipv6_peers": 17,
+   "ipv6_prefixes": 253088,
+   "name": "route-views.kixp",
+   "rir_region": "AFRINIC"
+  },
+  {
+   "country": "PE",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1093176,
+   "ipv6_peers": 8,
+   "ipv6_prefixes": 252086,
+   "name": "route-views.peru",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "NG",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1071645,
+   "ipv6_peers": 6,
+   "ipv6_prefixes": 251154,
+   "name": "ixpn.los",
+   "rir_region": "AFRINIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1087661,
+   "ipv6_peers": 10,
+   "ipv6_prefixes": 249215,
+   "name": "route-views.isc",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "PH",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 779045,
+   "ipv6_peers": 2,
+   "ipv6_prefixes": 153500,
+   "name": "route-views.phoix",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 35064,
+   "ipv6_peers": 5,
+   "ipv6_prefixes": 53245,
+   "name": "pacwave.lax",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 109770,
+   "ipv6_peers": 4,
+   "ipv6_prefixes": 27482,
+   "name": "route-views.mwix",
+   "rir_region": "ARIN"
+  },
+  {
+   "country": "ID",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 34700,
+   "ipv6_peers": 9,
+   "ipv6_prefixes": 3451,
+   "name": "iix.cgk",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "BD",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 7356,
+   "ipv6_peers": 5,
+   "ipv6_prefixes": 3029,
+   "name": "route-views.bdix",
+   "rir_region": "APNIC"
+  },
+  {
+   "country": "ID",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 11216,
+   "ipv6_peers": 5,
+   "ipv6_prefixes": 1010,
+   "name": "crix.sjo",
+   "rir_region": "LACNIC"
+  },
+  {
+   "country": "IQ",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 382,
+   "ipv6_peers": 4,
+   "ipv6_prefixes": 252,
+   "name": "iraq-ixp.bgw",
+   "rir_region": "RIPE NCC"
+  },
+  {
+   "country": "GH",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1227,
+   "ipv6_peers": 0,
+   "ipv6_prefixes": 0,
+   "name": "route-views.gixa",
+   "rir_region": "AFRINIC"
+  },
+  {
+   "country": "US",
+   "date": "2026-10-14",
+   "ipv4_prefixes": 1126768,
+   "ipv6_peers": 0,
+   "ipv6_prefixes": 0,
+   "name": "route-views2",
+   "rir_region": "ARIN"
+  }
+ ],
+ "snapshot_date": "2026-10-14",
+ "url": "https://www.routeviews.org/"
+}

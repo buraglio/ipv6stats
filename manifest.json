@@ -31,6 +31,14 @@
     "status": "ok",
     "ttl_seconds": 2592000
   },
+  "apnic_region_history": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
   "arin_delegations": {
     "error": null,
     "last_attempt": "2026-10-14T19:40:41+00:00",
@@ -47,10 +55,34 @@
     "status": "ok",
     "ttl_seconds": 2592000
   },
+  "bgp_v6_ases": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 86400
+  },
+  "bgp_v6_summary": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 86400
+  },
   "bgp_v6_table": {
     "error": null,
     "last_attempt": "2026-10-14T18:35:41+00:00",
     "last_success": "2026-10-14T18:35:41+00:00",
+    "status": "ok",
+    "ttl_seconds": 86400
+  },
+  "cidr_report_aggregation": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
     "status": "ok",
     "ttl_seconds": 86400
   },
@@ -74,6 +106,30 @@
     "error": null,
     "last_attempt": "2026-10-14T19:37:46+00:00",
     "last_success": "2026-10-14T19:37:46+00:00",
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "cymru_bogons": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "government_domains": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "he_progress": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
     "status": "ok",
     "ttl_seconds": 2592000
   },
@@ -133,10 +189,26 @@
     "status": "ok",
     "ttl_seconds": 2592000
   },
+  "ipv6matrix_hosts": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
   "isoc_pulse": {
     "error": null,
     "last_attempt": "2026-10-14T20:27:27+00:00",
     "last_success": "2026-10-14T20:27:27+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "isoc_routing": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
     "schema": 1,
     "status": "ok",
     "ttl_seconds": 2592000
@@ -157,6 +229,22 @@
     "status": "ok",
     "ttl_seconds": 2592000
   },
+  "peeringdb_networks": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
+  "ripe_atlas_probes": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 2592000
+  },
   "ripe_delegations": {
     "error": null,
     "last_attempt": "2026-10-14T19:40:41+00:00",
@@ -164,6 +252,14 @@
     "schema": 2,
     "status": "ok",
     "ttl_seconds": 2592000
+  },
+  "routeviews_collectors": {
+    "error": null,
+    "last_attempt": "2026-10-14T23:53:41+00:00",
+    "last_success": "2026-10-14T23:53:41+00:00",
+    "schema": 1,
+    "status": "ok",
+    "ttl_seconds": 86400
   },
   "tranco_aaaa": {
     "error": null,

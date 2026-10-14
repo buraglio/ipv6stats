@@ -1,0 +1,221 @@
+{
+ "prefix_lengths": [
+  {
+   "length": 19,
+   "prefixes": 1,
+   "share": 0.0
+  },
+  {
+   "length": 20,
+   "prefixes": 14,
+   "share": 0.01
+  },
+  {
+   "length": 21,
+   "prefixes": 3,
+   "share": 0.0
+  },
+  {
+   "length": 22,
+   "prefixes": 6,
+   "share": 0.0
+  },
+  {
+   "length": 23,
+   "prefixes": 6,
+   "share": 0.0
+  },
+  {
+   "length": 24,
+   "prefixes": 51,
+   "share": 0.02
+  },
+  {
+   "length": 25,
+   "prefixes": 12,
+   "share": 0.0
+  },
+  {
+   "length": 26,
+   "prefixes": 20,
+   "share": 0.01
+  },
+  {
+   "length": 27,
+   "prefixes": 18,
+   "share": 0.01
+  },
+  {
+   "length": 28,
+   "prefixes": 161,
+   "share": 0.06
+  },
+  {
+   "length": 29,
+   "prefixes": 5829,
+   "share": 2.26
+  },
+  {
+   "length": 30,
+   "prefixes": 731,
+   "share": 0.28
+  },
+  {
+   "length": 31,
+   "prefixes": 374,
+   "share": 0.14
+  },
+  {
+   "length": 32,
+   "prefixes": 27264,
+   "share": 10.56
+  },
+  {
+   "length": 33,
+   "prefixes": 5731,
+   "share": 2.22
+  },
+  {
+   "length": 34,
+   "prefixes": 5408,
+   "share": 2.09
+  },
+  {
+   "length": 35,
+   "prefixes": 1893,
+   "share": 0.73
+  },
+  {
+   "length": 36,
+   "prefixes": 9571,
+   "share": 3.71
+  },
+  {
+   "length": 37,
+   "prefixes": 1395,
+   "share": 0.54
+  },
+  {
+   "length": 38,
+   "prefixes": 2764,
+   "share": 1.07
+  },
+  {
+   "length": 39,
+   "prefixes": 1866,
+   "share": 0.72
+  },
+  {
+   "length": 40,
+   "prefixes": 24361,
+   "share": 9.43
+  },
+  {
+   "length": 41,
+   "prefixes": 1837,
+   "share": 0.71
+  },
+  {
+   "length": 42,
+   "prefixes": 2910,
+   "share": 1.13
+  },
+  {
+   "length": 43,
+   "prefixes": 1421,
+   "share": 0.55
+  },
+  {
+   "length": 44,
+   "prefixes": 25132,
+   "share": 9.73
+  },
+  {
+   "length": 45,
+   "prefixes": 4651,
+   "share": 1.8
+  },
+  {
+   "length": 46,
+   "prefixes": 5304,
+   "share": 2.05
+  },
+  {
+   "length": 47,
+   "prefixes": 7977,
+   "share": 3.09
+  },
+  {
+   "length": 48,
+   "prefixes": 121174,
+   "share": 46.93
+  },
+  {
+   "length": 49,
+   "prefixes": 11,
+   "share": 0.0
+  },
+  {
+   "length": 50,
+   "prefixes": 15,
+   "share": 0.01
+  },
+  {
+   "length": 51,
+   "prefixes": 14,
+   "share": 0.01
+  },
+  {
+   "length": 52,
+   "prefixes": 17,
+   "share": 0.01
+  },
+  {
+   "length": 53,
+   "prefixes": 4,
+   "share": 0.0
+  },
+  {
+   "length": 54,
+   "prefixes": 2,
+   "share": 0.0
+  },
+  {
+   "length": 56,
+   "prefixes": 81,
+   "share": 0.03
+  },
+  {
+   "length": 58,
+   "prefixes": 3,
+   "share": 0.0
+  },
+  {
+   "length": 64,
+   "prefixes": 189,
+   "share": 0.07
+  },
+  {
+   "length": 112,
+   "prefixes": 5,
+   "share": 0.0
+  },
+  {
+   "length": 128,
+   "prefixes": 1,
+   "share": 0.0
+  }
+ ],
+ "report_date": "2026-10-14",
+ "stats": {
+  "address_space_prefix": 14.6255,
+  "average_as_path_length": 4.9151,
+  "average_prefix_length": 42.9856,
+  "fib_entries": 258227,
+  "origin_only_ases": 31223,
+  "rib_entries": 1002213,
+  "transit_only_ases": 379,
+  "unique_ases": 37741
+ },
+ "url": "https://bgp.potaroo.net/v6/as2.0/index.html"
+}

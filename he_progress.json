@@ -1,0 +1,136 @@
+{
+ "domains": {
+  "a": 241264321,
+  "a_glue": 3954051,
+  "aaaa": 51978468,
+  "aaaa_glue": 278080,
+  "domains": 315029019
+ },
+ "root_zone_processed": "2026-10-14",
+ "tlds": 1437,
+ "tlds_ipv6_glue": 1419,
+ "tlds_ipv6_ns": 1421,
+ "top_tlds": [
+  {
+   "aaaa": 30785986,
+   "domains": 167590972,
+   "downloaded": "2026-10-14",
+   "tld": "com"
+  },
+  {
+   "aaaa": 353373,
+   "domains": 18904556,
+   "downloaded": "2020-06-24",
+   "tld": "cn"
+  },
+  {
+   "aaaa": 2330359,
+   "domains": 13155766,
+   "downloaded": "2010-01-20",
+   "tld": "de"
+  },
+  {
+   "aaaa": 1926508,
+   "domains": 12430668,
+   "downloaded": "2026-10-14",
+   "tld": "net"
+  },
+  {
+   "aaaa": 2150448,
+   "domains": 12193600,
+   "downloaded": "2026-10-14",
+   "tld": "org"
+  },
+  {
+   "aaaa": 699322,
+   "domains": 10773522,
+   "downloaded": "2026-10-14",
+   "tld": "xyz"
+  },
+  {
+   "aaaa": 715693,
+   "domains": 6312487,
+   "downloaded": "2026-10-14",
+   "tld": "top"
+  },
+  {
+   "aaaa": 318462,
+   "domains": 5231672,
+   "downloaded": "2017-06-18",
+   "tld": "ru"
+  },
+  {
+   "aaaa": 1243689,
+   "domains": 5147233,
+   "downloaded": "2026-10-14",
+   "tld": "info"
+  },
+  {
+   "aaaa": 945117,
+   "domains": 4303503,
+   "downloaded": "2026-10-14",
+   "tld": "shop"
+  },
+  {
+   "aaaa": 934499,
+   "domains": 3602756,
+   "downloaded": "2026-10-14",
+   "tld": "online"
+  },
+  {
+   "aaaa": 71,
+   "domains": 3276320,
+   "downloaded": "2020-03-18",
+   "tld": "xn--fiqz9s"
+  },
+  {
+   "aaaa": 4216,
+   "domains": 3276320,
+   "downloaded": "2020-03-18",
+   "tld": "xn--fiqs8s"
+  },
+  {
+   "aaaa": 54328,
+   "domains": 2590213,
+   "downloaded": "2017-10-03",
+   "tld": "us"
+  },
+  {
+   "aaaa": 705474,
+   "domains": 2080960,
+   "downloaded": "2026-10-14",
+   "tld": "store"
+  },
+  {
+   "aaaa": 251947,
+   "domains": 1954577,
+   "downloaded": "2026-10-14",
+   "tld": "vip"
+  },
+  {
+   "aaaa": 652080,
+   "domains": 1924006,
+   "downloaded": "2026-10-14",
+   "tld": "site"
+  },
+  {
+   "aaaa": 466402,
+   "domains": 1739117,
+   "downloaded": "2026-10-14",
+   "tld": "app"
+  },
+  {
+   "aaaa": 63883,
+   "domains": 1420247,
+   "downloaded": "2010-07-14",
+   "tld": "ca"
+  },
+  {
+   "aaaa": 23509,
+   "domains": 1375153,
+   "downloaded": "2023-08-15",
+   "tld": "ir"
+  }
+ ],
+ "url": "https://bgp.he.net/ipv6-progress-report.cgi"
+}
