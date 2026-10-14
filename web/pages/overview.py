@@ -1,4 +1,5 @@
 """Overview page: the old Overview and Combined View merged, built only from collected data."""
+from collect.sources import isoc as isoc_source
 from collect.sources import tranco as tranco_source
 from web import charts, derive
 from web.data import Data
@@ -27,6 +28,12 @@ def context(data: Data) -> dict:
         "sites_label": f"Top {tranco_source.TOP_N:,} sites with IPv6 (AAAA)",
         "sites": data.datum("tranco_aaaa", lambda p: p["percentage"]),
         "tranco": data.datum("tranco_aaaa", lambda p: p),
+        # ISOC Pulse is shown on its own, not in the consensus: its top-sites figure measures the
+        # same thing as Tranco, and its user figure already blends APNIC and Cloudflare.
+        "isoc_topsites": f"{isoc_source.TOPSITES:,}",
+        "isoc_sites_label": f"Top {isoc_source.TOPSITES:,} sites with IPv6 (ISOC Pulse)",
+        "isoc_sites": data.datum("isoc_pulse", lambda p: p["websites_ipv6"]["latest"]["value"]),
+        "isoc": data.datum("isoc_pulse", lambda p: p),
         "apnic_world": data.datum("apnic", lambda p: p["world"]),
         "apnic_capable": data.datum("apnic", lambda p: p["world"]["capable"]),
         "above_threshold": ABOVE_THRESHOLD,

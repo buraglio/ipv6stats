@@ -111,6 +111,45 @@ PAYLOADS = {
                  "green_pct": 92.0}],
         "url": "https://www.vyncke.org/ipv6status/",
     },
+    "isoc_pulse": {
+        "websites_ipv6": {"latest": {"date": "2026-07-16", "value": 51.7},
+                          "series": [{"date": "2026-07-01", "value": 51.0}, {"date": "2026-07-16", "value": 51.7}]},
+        "websites_https": {"latest": {"date": "2026-07-16", "value": 95.9},
+                           "series": [{"date": "2026-07-16", "value": 95.9}]},
+        "websites_tls13": {"latest": {"date": "2026-07-16", "value": 87.8},
+                           "series": [{"date": "2026-07-16", "value": 87.8}]},
+        "users_ipv6": {"latest": {"date": "2026-10-01", "value": 44.09},
+                       "series": [{"date": "2026-10-01", "value": 44.09}]},
+        "url": "https://pulse.internetsociety.org/",
+    },
+    "cloud_endpoints": {
+        "providers": [
+            {"key": "aws", "name": "AWS", "with_ipv6": 2, "checked": 6,
+             "hosts": [{"role": "website", "host": "aws.amazon.com", "status": "ipv6"},
+                       {"role": "console", "host": "console.aws.amazon.com", "status": "ipv4_only"},
+                       {"role": "api", "host": "ec2.us-east-1.amazonaws.com", "status": "ipv4_only"},
+                       {"role": "docs", "host": "docs.aws.amazon.com", "status": "ipv6"},
+                       {"role": "storage", "host": "s3.us-east-1.amazonaws.com", "status": "ipv4_only"},
+                       {"role": "status", "host": "health.aws.amazon.com", "status": "ipv4_only"}]},
+            {"key": "gcp", "name": "Google Cloud Platform", "with_ipv6": 1, "checked": 1,
+             "hosts": [{"role": "website", "host": "cloud.google.com", "status": "ipv6"}]},
+        ],
+        "unknown": 0, "total": 7,
+    },
+    "aws_ipv6_services": {
+        "services": [{"name": "AWS Amplify", "dual_stack": "yes", "ipv6_only": "no", "public_endpoints": "yes",
+                      "private_endpoints": None},
+                     {"name": "Amazon EC2", "dual_stack": "yes", "ipv6_only": "partial", "public_endpoints": "yes",
+                      "private_endpoints": "yes"}],
+        "counts": {"dual_stack": {"yes": 2, "partial": 0, "no": 0}, "ipv6_only": {"yes": 0, "partial": 1, "no": 1},
+                   "public_endpoints": {"yes": 2, "partial": 0, "no": 0},
+                   "private_endpoints": {"yes": 1, "partial": 0, "no": 0}},
+        "total": 2, "url": "https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html",
+    },
+    "ip_ranges_aws": {"ipv4_prefixes": 10628, "ipv6_prefixes": 6944, "services": 27, "services_with_ipv6": 16,
+                      "url": "https://ip-ranges.amazonaws.com/ip-ranges.json"},
+    "ip_ranges_oracle": {"ipv4_prefixes": 900, "ipv6_prefixes": 0,
+                         "url": "https://docs.oracle.com/en-us/iaas/tools/public_ip_ranges.json"},
     "nist_usgv6": {
         "domains": 4,
         "totals": {"web": {"operational": 2, "none": 1, "not_applicable": 1},
@@ -126,7 +165,7 @@ PAYLOADS = {
 }
 
 
-def write_sample_data(data_dir: Path, omit=(), last_success=None) -> Path:
+def write_sample_data(data_dir: Path, omit=(), last_success=None, not_configured=()) -> Path:
     """Write PAYLOADS and a manifest. Keys in `omit` are recorded as failed;
     `last_success` maps key -> ISO time to override FETCHED (for staleness)."""
     data_dir = Path(data_dir)
@@ -137,7 +176,7 @@ def write_sample_data(data_dir: Path, omit=(), last_success=None) -> Path:
         if key.startswith("test_"):
             continue
         entry = {"ttl_seconds": src.ttl_seconds, "last_attempt": FETCHED}
-        if key not in PAYLOADS and src.requires_env:
+        if key in not_configured or (key not in PAYLOADS and src.requires_env):
             entry.update(status="not_configured", error=f"set {', '.join(src.requires_env)} to enable")
         elif key in omit or key not in PAYLOADS:
             entry.update(status="error", error="ConnectionError: sample failure")

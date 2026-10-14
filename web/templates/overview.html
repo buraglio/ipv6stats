@@ -9,6 +9,7 @@
   {{ metric("IPv6 BGP prefixes", bgp_current, "int",
             note=(bgp_year.value | format_value("signed_int")) ~ " in the past year" if bgp_year else None) }}
   {{ metric(sites_label, sites, "pct") }}
+  {{ metric(isoc_sites_label, isoc_sites, "pct", note="measured " ~ isoc.value.websites_ipv6.latest.date if isoc else None) }}
   {{ metric("Economies ≥ " ~ above_threshold ~ "% IPv6-capable", above, "int",
             note="of " ~ considered.value ~ " economies with at least " ~ min_samples_label ~ " APNIC samples" if considered else None) }}
 </section>
@@ -58,6 +59,14 @@
   {% if tranco %}
   <p>{{ tranco.value.with_aaaa | format_value("int") }} of the top {{ tranco.value.checked | format_value("int") }} sites ({{ tranco.value.percentage | format_value("pct") }}) publish an AAAA record on the bare domain or on <code>www</code>{% if tranco.value.get("unresolved") %} ({{ tranco.value.unresolved }} sites whose lookups failed are not counted){% endif %}.</p>
   {{ provenance(tranco) }}
+  {% else %}{{ unavailable() }}{% endif %}
+</details>
+<details class="source" open>
+  <summary>Internet Society Pulse: top websites</summary>
+  {% if isoc %}
+  <p>Of the top {{ isoc_topsites }} websites, {{ isoc.value.websites_ipv6.latest.value | format_value("pct") }} are reachable over IPv6 (measured {{ isoc.value.websites_ipv6.latest.date }}), {{ isoc.value.websites_https.latest.value | format_value("pct") }} use HTTPS (measured {{ isoc.value.websites_https.latest.date }}) and {{ isoc.value.websites_tls13.latest.value | format_value("pct") }} support TLS 1.3 (measured {{ isoc.value.websites_tls13.latest.date }}).</p>
+  <p>Pulse's global user figure, which blends APNIC, Cloudflare, Facebook and Google measurements, is {{ isoc.value.users_ipv6.latest.value | format_value("pct") }} (measured {{ isoc.value.users_ipv6.latest.date }}). It is shown for reference and not included in the consensus average, which already uses APNIC and Cloudflare directly.</p>
+  {{ provenance(isoc) }}
   {% else %}{{ unavailable() }}{% endif %}
 </details>
 <details class="source" open>

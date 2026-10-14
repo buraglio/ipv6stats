@@ -78,16 +78,18 @@ The site is being moved from the Streamlit server to a static site on GitHub Pag
   `--force` re-fetches everything; `--only <source>` fetches one.
 - `web/`: page generation. `uv run python -m web.build --data-dir data --out dist`
   renders the site from that JSON, with no network access.
-- Pages so far: Overview, Global Adoption, Country Analysis, and one page per economy
-  (`/country/<code>/`). The remaining Streamlit pages are converted in later plans.
+- Pages so far: Overview, Global Adoption, Country Analysis, Cloud Services, and one page per
+  economy (`/country/<code>/`). The remaining Streamlit pages are converted in later plans.
+- `reference/cloud_providers.toml` is hand-maintained: update an entry's `last_reviewed` when you
+  check it against the provider's documentation; the build warns after 180 days.
 - `.github/workflows/publish.yml` runs both daily at 00:00 UTC (and on pushes to `main`
   or a manual "Run workflow"), saves the data on the `data` branch, and deploys to Pages.
   Only `main` deploys; `.github/workflows/test.yml` runs the tests on `staging` and on
   pull requests. If more than a quarter of the configured sources
   fail, nothing is published and GitHub emails the failure.
-- Secrets: `CLOUDFLARE_API_KEY` (required for the Cloudflare source). The ISOC Pulse
-  source is registered but has no API client yet, so it stays "not configured";
-  `ISOC_PULSE_API_KEY` is not passed to the workflow until that client is written.
+- Secrets: `CLOUDFLARE_API_KEY` (Cloudflare Radar API token, the ~40-character secret,
+  not the 32-character token ID) and `ISOC_PULSE_API_KEY` (Internet Society Pulse API key).
+  Without a key, that source shows as "not configured" and isn't counted as a failure.
 - Tests: `uv run pytest`.
 
 Every number on the site must come from collected data; a test fails if a

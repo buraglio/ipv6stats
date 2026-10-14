@@ -107,11 +107,11 @@ def main(argv: list[str] | None = None) -> int:
 
     load_dotenv()
     import collect.sources  # noqa: F401  (registers sources)
-    from collect.dns import dns_has_aaaa
+    from collect.dns import dns_has_a, dns_has_aaaa
     from collect.http import make_session
 
     ctx = Context(session=make_session(), env=os.environ, now=datetime.now(timezone.utc),
-                  has_aaaa=dns_has_aaaa)
+                  has_aaaa=dns_has_aaaa, has_a=dns_has_a)
     result = run(SOURCES, Path(args.data_dir), ctx, force=args.force,
                  only=set(args.only) if args.only else None)
 

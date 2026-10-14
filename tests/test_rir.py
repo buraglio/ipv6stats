@@ -42,10 +42,6 @@ def test_isoc_is_opt_in():
     assert SOURCES["isoc_pulse"].requires_env == ("ISOC_PULSE_API_KEY",)
 
 
-def test_isoc_with_key_reports_missing_client():
-    with pytest.raises(NotImplementedError, match="ISOC Pulse API client"):
-        SOURCES["isoc_pulse"].fetch(make_ctx(env={"ISOC_PULSE_API_KEY": "k"}))
-
 
 RIPE_SAMPLE = """2|ripencc|1791928799|167536|19700101|20261013|+0200
 ripencc|*|ipv6|*|26850|summary

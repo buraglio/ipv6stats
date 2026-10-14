@@ -14,6 +14,8 @@ def isoc_has_client() -> bool:
         SOURCES["isoc_pulse"].fetch(make_ctx(env={"ISOC_PULSE_API_KEY": "k"}))
     except NotImplementedError:
         return False
+    except Exception:  # a real client fails here only because the fake session has no routes
+        return True
     return True
 
 
