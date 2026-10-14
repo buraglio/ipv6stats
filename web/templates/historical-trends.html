@@ -22,12 +22,15 @@
 <h2>Traffic</h2>
 {% if cloudflare_chart %}<div class="chart">{{ cloudflare_chart }}</div>{{ provenance(cloudflare) }}{% else %}{{ unavailable() }}{% endif %}
 
-<h2>Recorded by this site</h2>
+<h2>Websites</h2>
+{% if websites_chart %}<div class="chart">{{ websites_chart }}</div>{{ provenance(websites) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Measured by this site</h2>
 {% if snapshots_chart %}
 <div class="chart">{{ snapshots_chart }}</div>
-<p class="provenance">Daily snapshots from this site's own collection since {{ snapshot_start }}. A source that failed or was outdated on a day is left out for that day.</p>
+<p class="provenance">This site's own measurements, recorded on each day the measurement ran (since {{ snapshot_start }}). The lines measure different things: top-site DNS records, cloud providers' own hostnames, and federal .gov web services.</p>
 {% elif snapshot_start %}
-<p class="missing">This site started recording daily snapshots on {{ snapshot_start }}; a chart appears once there are two days of data.</p>
+<p class="missing">This site started recording its own measurements on {{ snapshot_start }}; a chart appears once there are two measurement days.</p>
 {% else %}{{ unavailable() }}{% endif %}
 
 <h2>Milestones</h2>

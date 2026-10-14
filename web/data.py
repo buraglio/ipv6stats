@@ -79,7 +79,10 @@ class Data:
 
     def history(self) -> list[dict]:
         """This site's own daily snapshots (collect/history.py), oldest first."""
-        return history_file.load(self.data_dir)
+        try:
+            return history_file.load(self.data_dir)
+        except ValueError:  # a corrupt file shows as unavailable instead of breaking the build
+            return []
 
     def status_rows(self) -> list[dict]:
         rows = []

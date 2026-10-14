@@ -1,6 +1,4 @@
 """Historical Trends: real time series only, plus this site's own daily snapshots."""
-from dataclasses import replace
-
 from collect.sources.isoc import TOPSITES
 from collect.sources.tranco import TOP_N
 from web import charts, derive
@@ -8,11 +6,10 @@ from web.data import Data, Datum, combine
 from web.pages.global_adoption import _rir_history
 
 MIN_SNAPSHOT_DAYS = 2
-SNAPSHOT_LABELS = {
-    "apnic_world_capable": "Users able to use IPv6 (APNIC)",
-    "cloudflare_ipv6": "HTTP requests over IPv6 (Cloudflare)",
+SNAPSHOT_LABELS = {  # this site's own measurements (collect/history.py)
     "tranco_aaaa": f"Top {TOP_N} sites with AAAA (Tranco)",
-    "isoc_top_sites": f"Top {TOPSITES:,} sites with IPv6 (ISOC Pulse)",
+    "cloud_hostnames": "Cloud provider hostnames with IPv6",
+    "nist_web": "US federal .gov domains with IPv6 web",
 }
 
 
@@ -31,7 +28,8 @@ def _world(data: Data):
         world = regions.value["XA"]["history"]
         lines += [_series("Able to use IPv6 (APNIC)", world), _series("Prefer IPv6 (APNIC)", world, y="preferred")]
     if isoc:
-        lines.append(_series("Global IPv6 adoption (ISOC Pulse)", isoc.value, y="value"))
+        lines.append(_series("IPv6 users, composite of APNIC, Cloudflare, Facebook and Google (ISOC Pulse)",
+                             isoc.value, y="value"))
     return combine(lines, parts)
 
 
@@ -48,6 +46,12 @@ def _snapshots(data: Data):
              for key, label in SNAPSHOT_LABELS.items()]
     lines = [line for line in lines if line["points"]]
     return Datum(lines, (), data.now, False), days
+
+
+def _websites(data: Data):
+    return data.datum("isoc_pulse", lambda p: [
+        _series(f"Top {TOPSITES:,} websites reachable over IPv6", p["websites_ipv6"]["series"], y="value"),
+        _series(f"Top {TOPSITES:,} websites using HTTPS", p["websites_https"]["series"], y="value")])
 
 
 def context(data: Data) -> dict:
@@ -73,7 +77,9 @@ def context(data: Data) -> dict:
         "cloudflare": cf,
         "cloudflare_chart": charts.line_chart(cf, x="t", y="ipv6", title="HTTP requests over IPv6 (Cloudflare)",
                                               y_title="Percent"),
-        "snapshots_chart": charts.multi_line_chart(snapshots, title="Recorded daily by this site", y_title="Percent"),
+        "websites": (websites := _websites(data)),
+        "websites_chart": charts.multi_line_chart(websites, title="Top websites (ISOC Pulse)", y_title="Percent"),
+        "snapshots_chart": charts.multi_line_chart(snapshots, title="Measured by this site", y_title="Percent"),
         "snapshot_days": len(days),
         "snapshot_start": days[0]["date"] if days else None,
     }

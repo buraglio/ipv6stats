@@ -15,22 +15,23 @@ def render(tmp_path, history=None, **kwargs):
 
 def test_real_series_charts(tmp_path):
     _, html = render(tmp_path)
-    # world, regions, BGP table, ASes, RIR allocations, Cloudflare
-    assert html.count("Plotly.newPlot") == 6
+    # world, regions, BGP table, ASes, RIR allocations, Cloudflare, websites (ISOC series)
+    assert html.count("Plotly.newPlot") == 7
+    assert "composite of APNIC, Cloudflare, Facebook and Google" in html
     assert "Africa" in html and "Oceania" in html
 
 
 def test_snapshots_note_until_two_days(tmp_path):
     _, html = render(tmp_path, history=[{"date": "2026-10-14", "values": {"tranco_aaaa": 61.2}}])
-    assert "This site started recording daily snapshots on 2026-10-14" in html
-    assert html.count("Plotly.newPlot") == 6
+    assert "This site started recording its own measurements on 2026-10-14" in html
+    assert html.count("Plotly.newPlot") == 7
 
 
 def test_snapshot_chart_with_two_days(tmp_path):
-    days = [{"date": "2026-10-14", "values": {"tranco_aaaa": 61.2, "apnic_world_capable": 43.6}},
-            {"date": "2026-10-15", "values": {"tranco_aaaa": 61.3}}]
+    days = [{"date": "2026-10-14", "values": {"tranco_aaaa": 61.2, "nist_web": 50.0}},
+            {"date": "2026-11-13", "values": {"tranco_aaaa": 61.3}}]
     _, html = render(tmp_path, history=days)
-    assert html.count("Plotly.newPlot") == 7
+    assert html.count("Plotly.newPlot") == 8
     assert "Top 1000 sites with AAAA (Tranco)" in html
 
 
@@ -49,3 +50,11 @@ def test_nav_and_legacy(tmp_path):
     out, html = render(tmp_path)
     assert 'aria-current="page">Historical Trends' in html
     assert '"Historical Trends": "historical-trends/"' in (out / "index.html").read_text()
+
+
+def test_corrupt_history_does_not_break_the_build(tmp_path):
+    out, html = render(tmp_path, history=None)
+    data = tmp_path / "data"
+    (data / "history.json").write_text("[{]")
+    build(data, tmp_path / "dist2", NOW)
+    assert "Measured by this site" in (tmp_path / "dist2" / "historical-trends" / "index.html").read_text()
