@@ -21,6 +21,9 @@ def context(data: Data) -> dict:
         "avg_prefix": field(summary, "average_prefix_length"),
         "avg_path": field(summary, "average_as_path_length"),
         "rib": field(summary, "rib_entries"),
+        # Potaroo expresses all advertised IPv6 space as the length of one equivalent prefix.
+        "space": None if field(summary, "address_space_prefix") is None
+        else replace(summary, value=f"/{summary.value['address_space_prefix']:.2f}"),
         "table_chart": charts.line_chart(data.datum("bgp_v6_table", lambda p: p["daily"]),
                                          x="date", y="prefixes", title="IPv6 BGP table size", y_title="Prefixes"),
         "ases_chart": charts.line_chart(data.datum("bgp_v6_ases", lambda p: p["daily"]),

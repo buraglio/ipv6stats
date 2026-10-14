@@ -157,7 +157,8 @@ PAYLOADS = {
     },
     "bgp_v6_summary": {
         "stats": {"fib_entries": 258530, "rib_entries": 1002824, "unique_ases": 37751, "origin_only_ases": 31235,
-                  "transit_only_ases": 379, "average_prefix_length": 42.9949, "average_as_path_length": 4.9156},
+                  "transit_only_ases": 379, "average_prefix_length": 42.9949, "average_as_path_length": 4.9156,
+                  "address_space_prefix": 14.6253},
         "prefix_lengths": [{"length": 32, "prefixes": 30000, "share": 11.6}, {"length": 44, "prefixes": 25091, "share": 9.71},
                            {"length": 48, "prefixes": 121568, "share": 47.02}],
         "url": "https://bgp.potaroo.net/v6/as2.0/index.html",

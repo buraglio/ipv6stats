@@ -41,3 +41,8 @@ def test_nav_and_legacy(tmp_path):
     out, html = render(tmp_path)
     assert 'aria-current="page">BGP Statistics' in html
     assert '"BGP Statistics": "bgp-statistics/"' in (out / "index.html").read_text()
+
+
+def test_address_space_and_rib_are_shown(tmp_path):
+    _, html = render(tmp_path)
+    assert "/14.63" in html and "1,002,824" in html
