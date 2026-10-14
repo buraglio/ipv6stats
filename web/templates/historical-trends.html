@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% from "macros.html" import provenance, unavailable, reference, freshness_table %}
+{% block content %}
+<h1>Historical IPv6 Trends</h1>
+<p>Every chart is a measured time series from its source. Nothing is projected or interpolated.</p>
+
+<h2>Worldwide</h2>
+{% if world_chart %}<div class="chart">{{ world_chart }}</div>{{ provenance(world) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>By region</h2>
+{% if regions_chart %}<div class="chart">{{ regions_chart }}</div>{{ provenance(regions) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Routing table</h2>
+<div class="grid-2">
+  <div class="card">{% if bgp_chart %}<div class="chart">{{ bgp_chart }}</div>{{ provenance(bgp) }}{% else %}{{ unavailable() }}{% endif %}</div>
+  <div class="card">{% if ases_chart %}<div class="chart">{{ ases_chart }}</div>{{ provenance(ases) }}{% else %}{{ unavailable() }}{% endif %}</div>
+</div>
+
+<h2>Address allocations</h2>
+{% if rir_chart %}<div class="chart">{{ rir_chart }}</div>{{ provenance(rirs) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Traffic</h2>
+{% if cloudflare_chart %}<div class="chart">{{ cloudflare_chart }}</div>{{ provenance(cloudflare) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Recorded by this site</h2>
+{% if snapshots_chart %}
+<div class="chart">{{ snapshots_chart }}</div>
+<p class="provenance">Daily snapshots from this site's own collection since {{ snapshot_start }}. A source that failed or was outdated on a day is left out for that day.</p>
+{% elif snapshot_start %}
+<p class="missing">This site started recording daily snapshots on {{ snapshot_start }}; a chart appears once there are two days of data.</p>
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Milestones</h2>
+{% call reference(reviewed="2026-10-14") %}
+<ul>
+  <li>December 1998: RFC 2460 specifies IPv6.</li>
+  <li>3 February 2011: IANA allocates its last IPv4 /8 blocks to the regional registries.</li>
+  <li>15 April 2011: APNIC reaches its final IPv4 /8.</li>
+  <li>8 June 2011: World IPv6 Day.</li>
+  <li>6 June 2012: World IPv6 Launch.</li>
+  <li>14 September 2012: RIPE NCC begins allocating from its last IPv4 /8.</li>
+  <li>24 September 2015: ARIN's free IPv4 pool is exhausted.</li>
+  <li>July 2017: RFC 8200 replaces RFC 2460 as the IPv6 standard.</li>
+  <li>25 November 2019: RIPE NCC runs out of IPv4 addresses.</li>
+  <li>19 November 2020: OMB memorandum M-21-07 sets US federal IPv6-only targets.</li>
+</ul>
+{% endcall %}
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

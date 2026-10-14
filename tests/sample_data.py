@@ -176,6 +176,13 @@ PAYLOADS = {
                         "ipv6_prefixes": 255106, "ipv6_peers": 5, "ipv4_prefixes": 1087315}],
         "active": 57, "snapshot_date": "2026-10-14", "url": "https://www.routeviews.org/",
     },
+    "apnic_region_history": {
+        "regions": {code: {"name": name, "history": [{"date": "2025-10-13", "capable": base, "preferred": base - 2},
+                                                     {"date": "2026-10-12", "capable": base + 2, "preferred": base}]}
+                    for code, name, base in (("XA", "World", 41.0), ("XB", "Africa", 5.0), ("XC", "Americas", 49.0),
+                                             ("XD", "Asia", 48.0), ("XE", "Europe", 35.0), ("XF", "Oceania", 40.0))},
+        "url": "https://stats.labs.apnic.net/ipv6/",
+    },
     "nist_usgv6": {
         "domains": 4,
         "totals": {"web": {"operational": 2, "none": 1, "not_applicable": 1},
