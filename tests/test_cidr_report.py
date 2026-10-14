@@ -43,3 +43,25 @@ def test_names_are_optional():
     routes = {cr.URL: FakeResponse(text=FIXTURE)}  # RIPEstat unreachable
     payload = SOURCES["cidr_report_aggregation"].fetch(make_ctx(routes=routes))
     assert all(a["name"] is None for a in payload["ases"])
+
+
+def test_slow_name_service_cannot_stall_the_run():
+    # RIPEstat stalling must not cost one timeout per AS: stop after a couple of failures.
+    import requests
+
+    class Stalling:
+        def __init__(self):
+            self.calls = 0
+
+        def get(self, url, **kwargs):
+            self.calls += 1
+            if url.startswith(cr.URL):
+                return FakeResponse(text=FIXTURE)
+            raise requests.Timeout("read timed out")
+
+    ctx = make_ctx()
+    stalling = Stalling()
+    object.__setattr__(ctx, "session", stalling)
+    payload = SOURCES["cidr_report_aggregation"].fetch(ctx)
+    assert all(a["name"] is None for a in payload["ases"])
+    assert stalling.calls <= 1 + cr.MAX_NAME_FAILURES

@@ -1,6 +1,7 @@
 """CIDR Report (IPv6): ASes that could shrink the routing table most by aggregating."""
 import logging
 import re
+import time
 from datetime import datetime
 
 from collect.registry import DAY, Context, source
@@ -17,6 +18,11 @@ ROW = re.compile(
     r"<td align=right>&nbsp;&nbsp;<tt>(-?\d+)</tt></td><td align=right>&nbsp;&nbsp;<tt>([\d.]+)%</tt>&nbsp;&nbsp;</td>"
 )
 MIN_ROWS = 10
+# Names are optional labels: a slow or failing RIPEstat must not stall the daily run.
+MAX_NAME_FAILURES = 2
+NAME_BUDGET_SECONDS = 60
+NAME_TIMEOUT_SECONDS = 10
+clock = time.monotonic  # replaced in tests
 
 
 def parse_date(text: str) -> str:
@@ -37,14 +43,16 @@ def parse(page: str, min_rows: int = MIN_ROWS) -> dict:
     return {"date": parse_date(date.group(1)), "table": table, "ases": ases, "url": URL}
 
 
-def _name(ctx: Context, asn: int) -> str | None:
+def _name(ctx: Context, asn: int) -> tuple[str | None, bool]:
+    """(name, lookup_ok). A missing name is only a missing label."""
     try:
-        response = ctx.session.get(f"{NAMES_URL}?resource=AS{asn}", timeout=20)
+        response = ctx.session.get(f"{NAMES_URL}?resource=AS{asn}&sourceapp=ipv6stats",
+                                   timeout=NAME_TIMEOUT_SECONDS)
         response.raise_for_status()
-        return response.json()["data"].get("holder") or None
-    except Exception as exc:  # a missing name is only a missing label
+        return response.json()["data"].get("holder") or None, True
+    except Exception as exc:
         logger.info("no RIPEstat name for AS%s: %s", asn, exc)
-        return None
+        return None, False
 
 
 @source("cidr_report_aggregation", DAY, title="CIDR Report IPv6 aggregation summary", url=URL)
@@ -52,6 +60,11 @@ def fetch(ctx: Context) -> dict:
     response = ctx.session.get(URL, timeout=60)
     response.raise_for_status()
     parsed = parse(response.text)
+    started, failures = clock(), 0
     for row in parsed["ases"]:
-        row["name"] = _name(ctx, row["asn"])
+        if failures >= MAX_NAME_FAILURES or clock() - started > NAME_BUDGET_SECONDS:
+            logger.warning("skipping remaining AS name lookups after %s failures", failures)
+            break
+        row["name"], ok = _name(ctx, row["asn"])
+        failures += not ok
     return parsed
