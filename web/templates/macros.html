@@ -1,0 +1,43 @@
+{% macro provenance(d) -%}
+{% if d %}<div class="provenance">{{ d | provenance_text }}{% if d.stale %} · <span class="stale">⚠ stale since {{ d.fetched_at.date().isoformat() }}</span>{% endif %}</div>{% endif %}
+{%- endmacro %}
+
+{% macro unavailable() -%}
+<p class="missing">— source unavailable</p>
+{%- endmacro %}
+
+{% macro metric(label, d, fmt, note=None) -%}
+<div class="metric">
+  <div class="metric-label">{{ label }}</div>
+  {% if d is none %}
+  <div class="metric-value missing">— source unavailable</div>
+  {% else %}
+  <div class="metric-value">{{ d.value | format_value(fmt) }}</div>
+  {% if note %}<div class="metric-note">{{ note }}</div>{% endif %}
+  {{ provenance(d) }}
+  {% endif %}
+</div>
+{%- endmacro %}
+
+{% macro reference(reviewed) -%}
+<aside class="reference"><div class="provenance">Reference — last reviewed {{ reviewed }}</div>{{ caller() }}</aside>
+{%- endmacro %}
+
+{% macro freshness_table(rows) -%}
+<div class="table-wrap">
+<table>
+  <thead><tr><th>Source</th><th>Status</th><th>Last success</th><th>Last attempt</th><th>Re-fetched every</th></tr></thead>
+  <tbody>
+  {% for r in rows %}
+    <tr>
+      <td><a href="{{ r.url }}">{{ r.title }}</a></td>
+      <td class="status-{{ r.status | replace('_', '-') | replace(' ', '-') }}">{{ r.status | replace("_", " ") }}{% if r.stale %} <span class="stale">⚠ stale</span>{% endif %}{% if r.error %}<div class="provenance">{{ r.error }}</div>{% endif %}</td>
+      <td>{{ r.last_success | date_only }}</td>
+      <td>{{ r.last_attempt | date_only }}</td>
+      <td>{{ r.ttl_days }} day{{ "s" if r.ttl_days != 1 else "" }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{%- endmacro %}

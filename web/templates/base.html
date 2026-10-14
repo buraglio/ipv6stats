@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }} · IPv6 Global Statistics</title>
+<link rel="stylesheet" href="{{ base }}static/site.css">
+<script src="{{ base }}static/theme.js"></script>
+<script src="{{ base }}static/plotly.min.js"></script>
+{% if legacy_pages is defined %}
+<script type="application/json" id="legacy-pages">{{ legacy_pages | tojson }}</script>
+<script src="{{ base }}static/legacy-redirect.js"></script>
+{% endif %}
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ base or './' }}"><img src="https://ipv6.army/images/v6.png" alt="" width="32" height="32">IPv6 Global Statistics</a>
+    <nav class="site-nav" aria-label="Pages">
+      {% for p in pages %}
+      <a href="{{ base }}{{ p.slug }}/"{% if p.slug == current %} aria-current="page"{% endif %}>{{ p.title }}</a>
+      {% endfor %}
+    </nav>
+    <div class="header-tools">
+      <a href="https://ipv6compatibility.com/">IPv6 Compatibility Database</a>
+      <a href="https://tools.forwardingplane.net">IPv6 Tools</a>
+      <a href="https://www.ipv6.army">IPv6 Tests</a>
+      <button id="theme-toggle" type="button">Toggle theme</button>
+    </div>
+  </div>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  Data refreshed daily at 00:00 UTC · Last build: {{ built_at }} · <a href="https://github.com/buraglio/ipv6stats">Source code</a>
+</footer>
+</body>
+</html>

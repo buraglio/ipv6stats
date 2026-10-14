@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% from "macros.html" import metric, provenance, unavailable, freshness_table %}
+{% block content %}
+<h1>IPv6 Adoption Overview</h1>
+
+<section class="metric-row" aria-label="Headline numbers">
+  {{ metric("Global IPv6 adoption (consensus)", consensus, "pct", note=consensus_note) }}
+  {{ metric("Cloudflare HTTP requests over IPv6", cf_ipv6, "pct") }}
+  {{ metric("IPv6 BGP prefixes", bgp_current, "int",
+            note=(bgp_year.value | format_value("signed_int")) ~ " in the past year" if bgp_year else None) }}
+  {{ metric(sites_label, sites, "pct") }}
+  {{ metric("Economies ≥ " ~ above_threshold ~ "% IPv6-capable", above, "int",
+            note="of " ~ considered.value ~ " economies with at least " ~ min_samples_label ~ " APNIC samples" if considered else None) }}
+</section>
+<ul class="components">
+  {% for label, d in components %}
+  <li>{{ label }}: {% if d %}{{ d.value | format_value("pct") }}{% else %}<span class="missing">— source unavailable</span>{% endif %}</li>
+  {% endfor %}
+</ul>
+
+<h2>Current trends</h2>
+<div class="grid-2">
+  <div class="card">
+    <h3>IPv6 capability by region</h3>
+    {% if regions %}
+    <ol>
+      {% for r in regions.value %}<li>{{ r.name }}: {{ r.capable | format_value("pct") }}</li>{% endfor %}
+    </ol>
+    {{ provenance(regions) }}
+    {% else %}{{ unavailable() }}{% endif %}
+  </div>
+  <div class="card">
+    <h3>Country leaders and registries</h3>
+    {% if top_economy %}
+    <p><strong>{{ top_economy.value.name }}</strong> has the highest share of IPv6-capable users: {{ top_economy.value.capable | format_value("pct") }}.</p>
+    {% endif %}
+    {% if us %}
+    <p>{{ us.value.name }}: {{ us.value.capable | format_value("pct") }} of users IPv6-capable.</p>
+    {% endif %}
+    {% if top_economy or us %}{{ provenance(top_economy or us) }}{% else %}{{ unavailable() }}{% endif %}
+    {% if lacnic %}
+    <p>LACNIC region: {{ lacnic.value.total_blocks_32 | format_value("int") }} IPv6 /32 equivalents allocated across {{ lacnic.value.countries }} economies.</p>
+    {{ provenance(lacnic) }}
+    {% endif %}
+  </div>
+</div>
+
+<h2>Detailed statistics by source</h2>
+<details class="source" open>
+  <summary>APNIC Labs: users able to use IPv6</summary>
+  {% if apnic_world %}
+  <p>{{ apnic_world.value.capable | format_value("pct") }} of users worldwide are IPv6-capable and {{ apnic_world.value.preferred | format_value("pct") }} prefer IPv6, from {{ apnic_world.value.samples | format_value("int") }} measurement samples.</p>
+  {{ provenance(apnic_world) }}
+  {% else %}{{ unavailable() }}{% endif %}
+</details>
+<details class="source" open>
+  <summary>Top sites with IPv6 (Tranco list, AAAA lookups)</summary>
+  {% if tranco %}
+  <p>{{ tranco.value.with_aaaa | format_value("int") }} of the top {{ tranco.value.checked | format_value("int") }} sites ({{ tranco.value.percentage | format_value("pct") }}) publish an AAAA record on the bare domain or on <code>www</code>{% if tranco.value.get("unresolved") %} ({{ tranco.value.unresolved }} sites whose lookups failed are not counted){% endif %}.</p>
+  {{ provenance(tranco) }}
+  {% else %}{{ unavailable() }}{% endif %}
+</details>
+<details class="source" open>
+  <summary>IPv6 BGP routing table</summary>
+  {% if bgp_current %}
+  <p>{{ bgp_current.value | format_value("int") }} IPv6 prefixes in the routing table{% if bgp_year %}, {{ bgp_year.value | format_value("signed_int") }} over the past year{% endif %}{% if bgp_month %} and {{ bgp_month.value | format_value("signed_int") }} in the last 30 days{% endif %}.</p>
+  {% if bgp_chart %}<div class="chart">{{ bgp_chart }}</div>{% endif %}
+  {{ provenance(bgp_current) }}
+  {% else %}{{ unavailable() }}{% endif %}
+</details>
+<details class="source" open>
+  <summary>Cloudflare Radar: HTTP requests by IP version</summary>
+  {% if cf_ipv6 %}
+  <p>{{ cf_ipv6.value | format_value("pct") }} of HTTP requests to Cloudflare use IPv6{% if cf_ipv4 %} and {{ cf_ipv4.value | format_value("pct") }} use IPv4{% endif %}.</p>
+  {% if cf_chart %}<div class="chart">{{ cf_chart }}</div>{% endif %}
+  {{ provenance(cf_ipv6) }}
+  {% else %}{{ unavailable() }}{% endif %}
+</details>
+
+<h2>Key combined insights</h2>
+<ul>
+  {% if consensus %}<li>Averaging {{ consensus_note }}, global IPv6 adoption is {{ consensus.value | format_value("pct") }}.</li>{% endif %}
+  {% if apnic_capable and sites %}<li>{{ apnic_capable.value | format_value("pct") }} of users can use IPv6, while {{ sites.value | format_value("pct") }} of the top sites publish AAAA records: a difference of {{ (sites.value - apnic_capable.value) | format_value("pct_points") }}.</li>{% endif %}
+  {% if bgp_year %}<li>The IPv6 routing table changed by {{ bgp_year.value | format_value("signed_int") }} prefixes over the past year.</li>{% endif %}
+  {% if regions and regions.value %}<li>{{ regions.value[0].name }} leads all regions at {{ regions.value[0].capable | format_value("pct") }} IPv6-capable.</li>{% endif %}
+  {% if not (consensus or bgp_year or regions) %}<li class="missing">— source unavailable</li>{% endif %}
+</ul>
+
+<h2>Recent updates</h2>
+<ul>
+  {% if bgp_month %}<li>IPv6 BGP table: {{ bgp_month.value | format_value("signed_int") }} prefixes in the last 30 days.</li>{% endif %}
+  {% if lacnic %}<li>LACNIC: {{ lacnic.value.total_blocks_32 | format_value("int") }} IPv6 /32 equivalents allocated across {{ lacnic.value.countries }} economies (registry file of {{ lacnic.value.file_date }}).</li>{% endif %}
+  {% if afrinic %}<li>AFRINIC: {{ afrinic.value.total_blocks_32 | format_value("int") }} IPv6 /32 equivalents allocated across {{ afrinic.value.countries }} economies (registry file of {{ afrinic.value.file_date }}).</li>{% endif %}
+  {% if not (bgp_month or lacnic or afrinic) %}<li class="missing">— source unavailable</li>{% endif %}
+</ul>
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

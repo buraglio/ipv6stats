@@ -1,0 +1,759 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>IPv6 Measurement Maps</title>
+<style type="text/css">
+  body { font-family: "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;font-size: 0.9em;}
+  a:link {color: #660066; text-decoration: none}
+  a:active {color: #0000ee; text-decoration: none}
+  a:visited {color: #666633; text-decoration: none}
+#chart_div div {
+    background-color: transparent;
+}
+#chart_div table {
+    background-color: transparent;
+}
+#chart_div > div {
+    background: transparent url(/images/bg-watermark.png) no-repeat;
+}
+#Map_canvas > div > div > div {
+    background: transparent url(/images/bg-watermark.png) no-repeat;
+}
+#Map_canvas rect {
+    opacity: 0;
+}
+</style> 
+  <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+<script type='text/javascript'>
+    var setPref;
+    function checkCookie() {
+      var name = 'ipv6_zoom' + '=';
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      console.log('all cookies:');
+      console.log(ca)
+      console.log('iterate cookies');
+      for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        console.log(i+': '+ca[i])
+        while (c.charAt(0) == ' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+          console.log(c)
+          // Cookie found, check value
+          var c_value = c.substring(name.length, c.length);
+          console.log(c_value);
+          if (c_value === "") {
+            var checkBox = document.getElementById('zoom');
+            if  (checkBox.checked == false) {
+              return;
+            }
+          } else {
+            if (c_value == 1) {
+              console.log('redirecting'
+);
+              window.location.replace("https://stats.labs.apnic.net/ipv6-zoom");
+              return;
+            } // if exists and is 0, do nothing
+          }
+        }
+      }
+      // Cookie not found, set it
+      setPrefs();
+    }
+    </script>
+<script>
+    function setCookie(page) {
+      console.log("setPref is set to " + setPref);
+      if (setPref == 1) {
+        var date = new Date();
+        date.setTime(date.getTime() + (7*24*60*60*1000)); // 7 days, that as long as safari will remember it anyway
+        var expires = 'expires=' + date.toUTCString();
+        document.cookie = 'ipv6_zoom=' + page + '; ' + expires + '; SameSite=Strict; path=/';
+      } else {
+          document.cookie = 'ipv6_zoom=; ' + expires + '; SameSite=Strict; path=/';
+      }
+    }
+    </script>
+<script type='text/javascript'>
+      function setPrefs() {
+        var checkBox = document.getElementById('zoom');
+        if (checkBox.checked == true){
+          setPref = 1;
+          console.log('checkbox checked');
+        } else {
+          setPref = 0;
+          console.log('checkbox unchecked');
+        }
+        setCookie(0);
+      }
+      </script>
+<script type='text/javascript'>
+  function drawCharts() {
+      var data = new google.visualization.arrayToDataTable([
+        ['Country', 'Capable'],
+/* select sc_cc, sc_capable_v6,  sc_seen, sc_dt from v6cc where sc_dt between '14/09/2026' and '13/10/2026' */
+/* US, 2019662, 3289979 14/09/2026 comment*/
+/* US, 1971918, 3201843 15/09/2026 comment*/
+/* US, 1943374, 3175711 16/09/2026 comment*/
+/* US, 2040600, 3339044 17/09/2026 comment*/
+/* US, 2101751, 3464564 18/09/2026 comment*/
+/* US, 2083516, 3368380 19/09/2026 comment*/
+/* US, 2035641, 3268272 20/09/2026 comment*/
+/* US, 2199063, 3596018 21/09/2026 comment*/
+/* US, 2117315, 3450114 22/09/2026 comment*/
+/* US, 2007952, 3286483 23/09/2026 comment*/
+/* US, 1868117, 3071379 24/09/2026 comment*/
+/* US, 1827990, 2968393 25/09/2026 comment*/
+/* US, 1876986, 3009525 26/09/2026 comment*/
+/* US, 1942874, 3114150 27/09/2026 comment*/
+/* US, 1886236, 3059446 28/09/2026 comment*/
+/* US, 1850745, 3001965 29/09/2026 comment*/
+/* US, 1813182, 2954672 30/09/2026 comment*/
+/* US, 2081993, 3406917 01/10/2026 comment*/
+/* US, 2181600, 3535004 02/10/2026 comment*/
+/* US, 2201702, 3498874 03/10/2026 comment*/
+/* US, 2196377, 3479888 04/10/2026 comment*/
+/* US, 2249104, 3603587 05/10/2026 comment*/
+/* US, 2075351, 3354304 06/10/2026 comment*/
+/* US, 1667353, 2687950 07/10/2026 comment*/
+/* US, 1904003, 3072958 08/10/2026 comment*/
+/* US, 1854757, 2986245 09/10/2026 comment*/
+/* US, 2055894, 3247086 10/10/2026 comment*/
+/* US, 2256314, 3546221 11/10/2026 comment*/
+/* US, 2159500, 3435560 12/10/2026 comment*/
+/* US, 1996550, 3205425 13/10/2026 comment*/
+          ['AD', {v: 0.26, f:'0.26%'}],
+          ['AE', {v: 50.62, f:'50.62%'}],
+          ['AF', {v: 11.13, f:'11.13%'}],
+          ['AG', {v: 1.02, f:'1.02%'}],
+          ['AI', {v: 36.21, f:'36.21%'}],
+          ['AL', {v: 8.42, f:'8.42%'}],
+          ['AM', {v: 8.94, f:'8.94%'}],
+          ['AO', {v: 15.10, f:'15.10%'}],
+          ['AQ', {v: 7.19, f:'7.19%'}],
+          ['AR', {v: 34.50, f:'34.50%'}],
+          ['AS', {v: 1.77, f:'1.77%'}],
+          ['AT', {v: 43.92, f:'43.92%'}],
+          ['AU', {v: 47.38, f:'47.38%'}],
+          ['AW', {v: 0.20, f:'0.20%'}],
+          ['AX', {v: 71.88, f:'71.88%'}],
+          ['AZ', {v: 0.35, f:'0.35%'}],
+          ['BA', {v: 11.42, f:'11.42%'}],
+          ['BB', {v: 22.24, f:'22.24%'}],
+          ['BD', {v: 17.99, f:'17.99%'}],
+          ['BE', {v: 71.25, f:'71.25%'}],
+          ['BF', {v: 10.83, f:'10.83%'}],
+          ['BG', {v: 23.69, f:'23.69%'}],
+          ['BH', {v: 21.73, f:'21.73%'}],
+          ['BI', {v: 2.67, f:'2.67%'}],
+          ['BJ', {v: 4.25, f:'4.25%'}],
+          ['BL', {v: 97.11, f:'97.11%'}],
+          ['BM', {v: 18.95, f:'18.95%'}],
+          ['BN', {v: 0.18, f:'0.18%'}],
+          ['BO', {v: 44.47, f:'44.47%'}],
+          ['BQ', {v: 1.45, f:'1.45%'}],
+          ['BR', {v: 59.50, f:'59.50%'}],
+          ['BS', {v: 39.43, f:'39.43%'}],
+          ['BT', {v: 40.31, f:'40.31%'}],
+          ['BW', {v: 7.75, f:'7.75%'}],
+          ['BY', {v: 15.29, f:'15.29%'}],
+          ['BZ', {v: 45.34, f:'45.34%'}],
+          ['CA', {v: 45.00, f:'45.00%'}],
+          ['CD', {v: 4.93, f:'4.93%'}],
+          ['CF', {v: 18.30, f:'18.30%'}],
+          ['CG', {v: 24.10, f:'24.10%'}],
+          ['CH', {v: 48.75, f:'48.75%'}],
+          ['CI', {v: 17.59, f:'17.59%'}],
+          ['CK', {v: 37.68, f:'37.68%'}],
+          ['CL', {v: 23.20, f:'23.20%'}],
+          ['CM', {v: 2.08, f:'2.08%'}],
+          ['CN', {v: 49.65, f:'49.65%'}],
+          ['CO', {v: 21.38, f:'21.38%'}],
+          ['CR', {v: 15.01, f:'15.01%'}],
+          ['CU', {v: 0.04, f:'0.04%'}],
+          ['CV', {v: 5.40, f:'5.40%'}],
+          ['CW', {v: 9.18, f:'9.18%'}],
+          ['CY', {v: 21.41, f:'21.41%'}],
+          ['CZ', {v: 38.78, f:'38.78%'}],
+          ['DE', {v: 72.90, f:'72.90%'}],
+          ['DJ', {v: 0.20, f:'0.20%'}],
+          ['DK', {v: 25.06, f:'25.06%'}],
+          ['DM', {v: 39.59, f:'39.59%'}],
+          ['DO', {v: 39.39, f:'39.39%'}],
+          ['DZ', {v: 0.31, f:'0.31%'}],
+          ['EC', {v: 37.86, f:'37.86%'}],
+          ['EE', {v: 47.24, f:'47.24%'}],
+          ['EG', {v: 5.31, f:'5.31%'}],
+          ['ER', {v: 11.07, f:'11.07%'}],
+          ['ES', {v: 10.71, f:'10.71%'}],
+          ['ET', {v: 0.25, f:'0.25%'}],
+          ['FI', {v: 51.04, f:'51.04%'}],
+          ['FJ', {v: 39.84, f:'39.84%'}],
+          ['FK', {v: 72.61, f:'72.61%'}],
+          ['FM', {v: 17.56, f:'17.56%'}],
+          ['FO', {v: 2.48, f:'2.48%'}],
+          ['FR', {v: 85.63, f:'85.63%'}],
+          ['GA', {v: 34.24, f:'34.24%'}],
+          ['GB', {v: 54.32, f:'54.32%'}],
+          ['GD', {v: 7.10, f:'7.10%'}],
+          ['GE', {v: 12.30, f:'12.30%'}],
+          ['GF', {v: 44.79, f:'44.79%'}],
+          ['GG', {v: 0.59, f:'0.59%'}],
+          ['GH', {v: 1.80, f:'1.80%'}],
+          ['GI', {v: 0.21, f:'0.21%'}],
+          ['GL', {v: 0.26, f:'0.26%'}],
+          ['GM', {v: 0.62, f:'0.62%'}],
+          ['GN', {v: 1.24, f:'1.24%'}],
+          ['GP', {v: 47.03, f:'47.03%'}],
+          ['GQ', {v: 1.14, f:'1.14%'}],
+          ['GR', {v: 57.04, f:'57.04%'}],
+          ['GT', {v: 57.47, f:'57.47%'}],
+          ['GU', {v: 6.58, f:'6.58%'}],
+          ['GW', {v: 14.28, f:'14.28%'}],
+          ['GY', {v: 28.37, f:'28.37%'}],
+          ['HK', {v: 9.67, f:'9.67%'}],
+          ['HN', {v: 22.79, f:'22.79%'}],
+          ['HR', {v: 6.06, f:'6.06%'}],
+          ['HT', {v: 10.26, f:'10.26%'}],
+          ['HU', {v: 55.97, f:'55.97%'}],
+          ['ID', {v: 29.40, f:'29.40%'}],
+          ['IE', {v: 44.59, f:'44.59%'}],
+          ['IL', {v: 63.96, f:'63.96%'}],
+          ['IM', {v: 26.04, f:'26.04%'}],
+          ['IN', {v: 76.63, f:'76.63%'}],
+          ['IO', {v: 0.45, f:'0.45%'}],
+          ['IQ', {v: 1.26, f:'1.26%'}],
+          ['IR', {v: 21.74, f:'21.74%'}],
+          ['IS', {v: 13.50, f:'13.50%'}],
+          ['IT', {v: 19.37, f:'19.37%'}],
+          ['JE', {v: 0.24, f:'0.24%'}],
+          ['JM', {v: 16.51, f:'16.51%'}],
+          ['JO', {v: 19.87, f:'19.87%'}],
+          ['JP', {v: 61.94, f:'61.94%'}],
+          ['KE', {v: 16.66, f:'16.66%'}],
+          ['KG', {v: 1.56, f:'1.56%'}],
+          ['KH', {v: 0.49, f:'0.49%'}],
+          ['KI', {v: 58.03, f:'58.03%'}],
+          ['KM', {v: 0.55, f:'0.55%'}],
+          ['KN', {v: 0.23, f:'0.23%'}],
+          ['KP', {v: 0.00, f:'0.00%'}],
+          ['KR', {v: 29.23, f:'29.23%'}],
+          ['KW', {v: 26.10, f:'26.10%'}],
+          ['KY', {v: 1.30, f:'1.30%'}],
+          ['KZ', {v: 28.27, f:'28.27%'}],
+          ['LA', {v: 4.44, f:'4.44%'}],
+          ['LB', {v: 0.51, f:'0.51%'}],
+          ['LC', {v: 14.78, f:'14.78%'}],
+          ['LI', {v: 49.99, f:'49.99%'}],
+          ['LK', {v: 62.00, f:'62.00%'}],
+          ['LR', {v: 5.71, f:'5.71%'}],
+          ['LS', {v: 0.21, f:'0.21%'}],
+          ['LT', {v: 25.43, f:'25.43%'}],
+          ['LU', {v: 56.07, f:'56.07%'}],
+          ['LV', {v: 35.98, f:'35.98%'}],
+          ['LY', {v: 4.08, f:'4.08%'}],
+          ['MA', {v: 3.49, f:'3.49%'}],
+          ['MC', {v: 1.08, f:'1.08%'}],
+          ['MD', {v: 19.19, f:'19.19%'}],
+          ['ME', {v: 0.13, f:'0.13%'}],
+          ['MF', {v: 51.65, f:'51.65%'}],
+          ['MG', {v: 5.48, f:'5.48%'}],
+          ['MH', {v: 29.43, f:'29.43%'}],
+          ['MK', {v: 0.18, f:'0.18%'}],
+          ['ML', {v: 17.35, f:'17.35%'}],
+          ['MM', {v: 8.57, f:'8.57%'}],
+          ['MN', {v: 46.67, f:'46.67%'}],
+          ['MO', {v: 50.02, f:'50.02%'}],
+          ['MP', {v: 21.46, f:'21.46%'}],
+          ['MQ', {v: 50.07, f:'50.07%'}],
+          ['MR', {v: 5.27, f:'5.27%'}],
+          ['MS', {v: 0.00, f:'0.00%'}],
+          ['MT', {v: 0.20, f:'0.20%'}],
+          ['MU', {v: 0.32, f:'0.32%'}],
+          ['MV', {v: 16.75, f:'16.75%'}],
+          ['MW', {v: 1.38, f:'1.38%'}],
+          ['MX', {v: 58.32, f:'58.32%'}],
+          ['MY', {v: 73.25, f:'73.25%'}],
+          ['MZ', {v: 4.32, f:'4.32%'}],
+          ['NA', {v: 0.55, f:'0.55%'}],
+          ['NC', {v: 12.60, f:'12.60%'}],
+          ['NE', {v: 11.17, f:'11.17%'}],
+          ['NF', {v: 0.00, f:'0.00%'}],
+          ['NG', {v: 5.49, f:'5.49%'}],
+          ['NI', {v: 33.97, f:'33.97%'}],
+          ['NL', {v: 52.44, f:'52.44%'}],
+          ['NO', {v: 53.51, f:'53.51%'}],
+          ['NP', {v: 61.67, f:'61.67%'}],
+          ['NR', {v: 49.55, f:'49.55%'}],
+          ['NU', {v: 9.46, f:'9.46%'}],
+          ['NZ', {v: 33.05, f:'33.05%'}],
+          ['OM', {v: 29.82, f:'29.82%'}],
+          ['PA', {v: 3.95, f:'3.95%'}],
+          ['PE', {v: 34.81, f:'34.81%'}],
+          ['PF', {v: 18.69, f:'18.69%'}],
+          ['PG', {v: 26.78, f:'26.78%'}],
+          ['PH', {v: 20.95, f:'20.95%'}],
+          ['PK', {v: 23.21, f:'23.21%'}],
+          ['PL', {v: 19.59, f:'19.59%'}],
+          ['PM', {v: 0.09, f:'0.09%'}],
+          ['PR', {v: 54.02, f:'54.02%'}],
+          ['PS', {v: 0.53, f:'0.53%'}],
+          ['PT', {v: 48.23, f:'48.23%'}],
+          ['PW', {v: 0.46, f:'0.46%'}],
+          ['PY', {v: 45.15, f:'45.15%'}],
+          ['QA', {v: 48.42, f:'48.42%'}],
+          ['RE', {v: 36.99, f:'36.99%'}],
+          ['RO', {v: 33.12, f:'33.12%'}],
+          ['RS', {v: 7.11, f:'7.11%'}],
+          ['RU', {v: 5.57, f:'5.57%'}],
+          ['RW', {v: 9.41, f:'9.41%'}],
+          ['SA', {v: 74.31, f:'74.31%'}],
+          ['SB', {v: 15.27, f:'15.27%'}],
+          ['SC', {v: 3.29, f:'3.29%'}],
+          ['SD', {v: 10.18, f:'10.18%'}],
+          ['SE', {v: 34.22, f:'34.22%'}],
+          ['SG', {v: 21.70, f:'21.70%'}],
+          ['SH', {v: 15.06, f:'15.06%'}],
+          ['SI', {v: 9.66, f:'9.66%'}],
+          ['SJ', {v: 4.88, f:'4.88%'}],
+          ['SK', {v: 13.24, f:'13.24%'}],
+          ['SL', {v: 1.61, f:'1.61%'}],
+          ['SM', {v: 0.08, f:'0.08%'}],
+          ['SN', {v: 34.23, f:'34.23%'}],
+          ['SO', {v: 0.49, f:'0.49%'}],
+          ['SR', {v: 57.28, f:'57.28%'}],
+          ['SS', {v: 22.94, f:'22.94%'}],
+          ['ST', {v: 3.49, f:'3.49%'}],
+          ['SV', {v: 14.07, f:'14.07%'}],
+          ['SX', {v: 27.10, f:'27.10%'}],
+          ['SY', {v: 0.72, f:'0.72%'}],
+          ['SZ', {v: 2.55, f:'2.55%'}],
+          ['TC', {v: 31.09, f:'31.09%'}],
+          ['TD', {v: 11.26, f:'11.26%'}],
+          ['TG', {v: 18.01, f:'18.01%'}],
+          ['TH', {v: 52.41, f:'52.41%'}],
+          ['TJ', {v: 1.11, f:'1.11%'}],
+          ['TK', {v: 19.88, f:'19.88%'}],
+          ['TL', {v: 10.62, f:'10.62%'}],
+          ['TM', {v: 0.36, f:'0.36%'}],
+          ['TN', {v: 27.38, f:'27.38%'}],
+          ['TO', {v: 30.17, f:'30.17%'}],
+          ['TR', {v: 21.71, f:'21.71%'}],
+          ['TT', {v: 25.17, f:'25.17%'}],
+          ['TV', {v: 49.99, f:'49.99%'}],
+          ['TW', {v: 59.17, f:'59.17%'}],
+          ['TZ', {v: 0.58, f:'0.58%'}],
+          ['UA', {v: 14.52, f:'14.52%'}],
+          ['UG', {v: 1.92, f:'1.92%'}],
+          ['UM', {v: 85.33, f:'85.33%'}],
+          ['US', {v: 61.90, f:'61.90%'}],
+          ['UY', {v: 61.93, f:'61.93%'}],
+          ['UZ', {v: 10.92, f:'10.92%'}],
+          ['VA', {v: 1.41, f:'1.41%'}],
+          ['VC', {v: 15.83, f:'15.83%'}],
+          ['VE', {v: 10.49, f:'10.49%'}],
+          ['VG', {v: 16.33, f:'16.33%'}],
+          ['VI', {v: 9.74, f:'9.74%'}],
+          ['VN', {v: 64.32, f:'64.32%'}],
+          ['VU', {v: 20.94, f:'20.94%'}],
+          ['WF', {v: 37.89, f:'37.89%'}],
+          ['WS', {v: 9.41, f:'9.41%'}],
+          ['YE', {v: 9.38, f:'9.38%'}],
+          ['YT', {v: 24.56, f:'24.56%'}],
+          ['ZA', {v: 4.15, f:'4.15%'}],
+          ['ZM', {v: 3.98, f:'3.98%'}],
+          ['ZW', {v: 26.03, f:'26.03%'}]
+      ]);
+        var mapOptions =    {   legend:      {textStyle: {color: 'blue', fontSize: 16}},
+                                region:     'world',
+                                resolution: 'countries',
+                                width:      1240,
+                                height:     730,
+                                colorAxis:  { minValue: 0,
+                                              maxValue: 98,
+                                colors:   ['#FF0000','#FFF60D','#25F60D'] } 
+                            };
+
+        var Container = document.getElementById('Map_canvas');
+        var GeoChart = new google.visualization.GeoChart(Container);
+
+        var myMapView = new google.visualization.DataView(data)
+        myMapView.setColumns([0,1]);
+        // register the 'select' event handler
+        google.visualization.events.addListener(GeoChart, 'select', function () {
+                // GeoChart selections return an array of objects 
+                // with a row property; no column information
+                var selection = GeoChart.getSelection();
+                window.location = '/ipv6/'+myMapView.getValue(selection[0].row, 0);
+        });
+
+        mapOptions.region = "world";
+        GeoChart.draw(myMapView, mapOptions);
+
+     };
+
+     google.charts.load('current', {packages: ['corechart', 'geochart']});
+     google.charts.setOnLoadCallback(drawCharts);
+   </script>
+    <script type='text/javascript'>
+     google.charts.load('current', {packages: ['table']});
+     google.charts.setOnLoadCallback(drawTable);
+    function drawTable() {
+      var table2 = new google.visualization.arrayToDataTable([
+        ['Code', 'Region', 'IPv6 Capable', 'IPv6 Preferred','Samples']        ,
+["<a href=\"/ipv6/XA\">XA</a>","<a href=\"/ipv6/XA\">World</a>",{v: 43.65, f:'43.65%'}, {v: 41.02, f: '41.02%'},972331706]        ,
+["<a href=\"/ipv6/XC\">XC</a>","<a href=\"/ipv6/XC\">Americas</a>",{v: 51.00, f:'51.00%'}, {v: 49.62, f: '49.62%'},171761189],
+["<a href=\"/ipv6/XD\">XD</a>","<a href=\"/ipv6/XD\">Asia</a>",{v: 50.21, f:'50.21%'}, {v: 46.38, f: '46.38%'},552325624],
+["<a href=\"/ipv6/XF\">XF</a>","<a href=\"/ipv6/XF\">Oceania</a>",{v: 42.77, f:'42.77%'}, {v: 39.73, f: '39.73%'},7103833],
+["<a href=\"/ipv6/XE\">XE</a>","<a href=\"/ipv6/XE\">Europe</a>",{v: 36.87, f:'36.87%'}, {v: 35.72, f: '35.72%'},134455991],
+["<a href=\"/ipv6/XB\">XB</a>","<a href=\"/ipv6/XB\">Africa</a>",{v: 6.50, f:'6.50%'}, {v: 6.26, f: '6.26%'},106684416],
+["<a href=\"/ipv6/XG\">XG</a>","<a href=\"/ipv6/XG\">Unclassified</a>",{v: 1.85, f:'1.85%'}, {v: 1.72, f: '1.72%'},16151]
+    ]);
+        var options = {
+          'allowHtml' : 'true'
+          };
+
+        var astable = new google.visualization.Table(document.getElementById('table2_div'));
+        astable.draw(table2, options);
+
+    };
+    </script>
+    <script type='text/javascript'>
+     google.charts.load('current', {packages: ['table']});
+     google.charts.setOnLoadCallback(drawTable);
+    function drawTable() {
+      var table3 = new google.visualization.arrayToDataTable([
+        ['Code', 'SubRegion', 'IPv6 Capable', 'IPv6 Preferred','Samples']        ,
+["<a href=\"/ipv6/QO\">QO</a>","<a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 71.93, f:'71.93%'}, {v: 70.57, f: '70.57%'},37288892],
+["<a href=\"/ipv6/XT\">XT</a>","<a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 65.81, f:'65.81%'}, {v: 63.77, f: '63.77%'},181359377],
+["<a href=\"/ipv6/XQ\">XQ</a>","<a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 59.70, f:'59.70%'}, {v: 57.71, f: '57.71%'},65674864],
+["<a href=\"/ipv6/XO\">XO</a>","<a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 52.67, f:'52.67%'}, {v: 52.10, f: '52.10%'},26660578],
+["<a href=\"/ipv6/XS\">XS</a>","<a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 49.88, f:'49.88%'}, {v: 42.67, f: '42.67%'},223627186],
+["<a href=\"/ipv6/QM\">QM</a>","<a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 48.61, f:'48.61%'}, {v: 47.30, f: '47.30%'},22638066],
+["<a href=\"/ipv6/QP\">QP</a>","<a href=\"/ipv6/QP\">Australia and New Zealand</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 44.87, f:'44.87%'}, {v: 41.67, f: '41.67%'},6351776],
+["<a href=\"/ipv6/XP\">XP</a>","<a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 44.57, f:'44.57%'}, {v: 43.40, f: '43.40%'},74017851],
+["<a href=\"/ipv6/XU\">XU</a>","<a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 36.90, f:'36.90%'}, {v: 35.99, f: '35.99%'},85014815],
+["<a href=\"/ipv6/QQ\">QQ</a>","<a href=\"/ipv6/QQ\">Melanesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 27.11, f:'27.11%'}, {v: 25.21, f: '25.21%'},586918],
+["<a href=\"/ipv6/XV\">XV</a>","<a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 25.93, f:'25.93%'}, {v: 25.15, f: '25.15%'},51837272],
+["<a href=\"/ipv6/XN\">XN</a>","<a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 24.92, f:'24.92%'}, {v: 24.19, f: '24.19%'},5407850],
+["<a href=\"/ipv6/QN\">QN</a>","<a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 18.68, f:'18.68%'}, {v: 17.84, f: '17.84%'},24881610],
+["<a href=\"/ipv6/QS\">QS</a>","<a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 18.13, f:'18.13%'}, {v: 16.44, f: '16.44%'},100037],
+["<a href=\"/ipv6/QR\">QR</a>","<a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 16.95, f:'16.95%'}, {v: 16.63, f: '16.63%'},65056],
+["<a href=\"/ipv6/XR\">XR</a>","<a href=\"/ipv6/XR\">Central Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 15.25, f:'15.25%'}, {v: 13.94, f: '13.94%'},10486915],
+["<a href=\"/ipv6/XW\">XW</a>","<a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 14.29, f:'14.29%'}, {v: 13.21, f: '13.21%'},49647377],
+["<a href=\"/ipv6/XL\">XL</a>","<a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 8.66, f:'8.66%'}, {v: 8.17, f: '8.17%'},31230223],
+["<a href=\"/ipv6/XI\">XI</a>","<a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 8.21, f:'8.21%'}, {v: 7.92, f: '7.92%'},7754529],
+["<a href=\"/ipv6/XJ\">XJ</a>","<a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 6.08, f:'6.08%'}, {v: 5.95, f: '5.95%'},32344118],
+["<a href=\"/ipv6/XH\">XH</a>","<a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.78, f:'4.78%'}, {v: 4.70, f: '4.70%'},26154853],
+["<a href=\"/ipv6/XK\">XK</a>","<a href=\"/ipv6/XK\">Southern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.06, f:'4.06%'}, {v: 3.94, f: '3.94%'},9200631]
+    ]);
+        var options = {
+          'allowHtml' : 'true'
+          };
+
+        var astable = new google.visualization.Table(document.getElementById('table3_div'));
+        astable.draw(table3, options);
+
+    };
+    </script>
+    <script type='text/javascript'>
+     google.charts.load('current', {packages: ['table']});
+     google.charts.setOnLoadCallback(drawTable);
+    function drawTable() {
+      var table = new google.visualization.arrayToDataTable([
+        ['CC', 'Country', 'IPv6 Capable', 'IPv6 Preferred','Samples']        ,
+["<a href=\"/ipv6/BL\">BL</a>","<a href=\"/ipv6/BL\">Saint Barthelemy</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 97.11, f:'97.11%'}, {v: 96.06, f: '96.06%'},1421],
+["<a href=\"/ipv6/FR\">FR</a>","<a href=\"/ipv6/FR\">France</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 85.63, f:'85.63%'}, {v: 84.82, f: '84.82%'},22134854],
+["<a href=\"/ipv6/IN\">IN</a>","<a href=\"/ipv6/IN\">India</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 76.63, f:'76.63%'}, {v: 74.22, f: '74.22%'},123526515],
+["<a href=\"/ipv6/SA\">SA</a>","<a href=\"/ipv6/SA\">Saudi Arabia</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 74.31, f:'74.31%'}, {v: 72.98, f: '72.98%'},8908390],
+["<a href=\"/ipv6/MY\">MY</a>","<a href=\"/ipv6/MY\">Malaysia</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 73.25, f:'73.25%'}, {v: 72.42, f: '72.42%'},8234722],
+["<a href=\"/ipv6/DE\">DE</a>","<a href=\"/ipv6/DE\">Germany</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 72.90, f:'72.90%'}, {v: 71.00, f: '71.00%'},16704182],
+["<a href=\"/ipv6/FK\">FK</a>","<a href=\"/ipv6/FK\">Falkland Islands</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 72.61, f:'72.61%'}, {v: 70.09, f: '70.09%'},1946],
+["<a href=\"/ipv6/AX\">AX</a>","<a href=\"/ipv6/AX\">Aland Islands</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 71.88, f:'71.88%'}, {v: 71.14, f: '71.14%'},14818],
+["<a href=\"/ipv6/BE\">BE</a>","<a href=\"/ipv6/BE\">Belgium</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 71.25, f:'71.25%'}, {v: 69.93, f: '69.93%'},3447791],
+["<a href=\"/ipv6/VN\">VN</a>","<a href=\"/ipv6/VN\">Vietnam</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 64.32, f:'64.32%'}, {v: 62.91, f: '62.91%'},26589580],
+["<a href=\"/ipv6/IL\">IL</a>","<a href=\"/ipv6/IL\">Israel</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 63.96, f:'63.96%'}, {v: 58.93, f: '58.93%'},2801363],
+["<a href=\"/ipv6/LK\">LK</a>","<a href=\"/ipv6/LK\">Sri Lanka</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 62.00, f:'62.00%'}, {v: 61.43, f: '61.43%'},1445841],
+["<a href=\"/ipv6/JP\">JP</a>","<a href=\"/ipv6/JP\">Japan</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 61.94, f:'61.94%'}, {v: 59.64, f: '59.64%'},76293912],
+["<a href=\"/ipv6/UY\">UY</a>","<a href=\"/ipv6/UY\">Uruguay</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 61.93, f:'61.93%'}, {v: 60.81, f: '60.81%'},1346002],
+["<a href=\"/ipv6/US\">US</a>","<a href=\"/ipv6/US\">United States of America</a>, <a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 61.90, f:'61.90%'}, {v: 59.85, f: '59.85%'},97679957],
+["<a href=\"/ipv6/NP\">NP</a>","<a href=\"/ipv6/NP\">Nepal</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 61.67, f:'61.67%'}, {v: 60.50, f: '60.50%'},2359010],
+["<a href=\"/ipv6/BR\">BR</a>","<a href=\"/ipv6/BR\">Brazil</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 59.50, f:'59.50%'}, {v: 58.14, f: '58.14%'},37828470],
+["<a href=\"/ipv6/TW\">TW</a>","<a href=\"/ipv6/TW\">Taiwan</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 59.17, f:'59.17%'}, {v: 56.23, f: '56.23%'},10154238],
+["<a href=\"/ipv6/MX\">MX</a>","<a href=\"/ipv6/MX\">Mexico</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 58.32, f:'58.32%'}, {v: 57.77, f: '57.77%'},25507708],
+["<a href=\"/ipv6/KI\">KI</a>","<a href=\"/ipv6/KI\">Kiribati</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 58.03, f:'58.03%'}, {v: 57.57, f: '57.57%'},16270],
+["<a href=\"/ipv6/GT\">GT</a>","<a href=\"/ipv6/GT\">Guatemala</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 57.47, f:'57.47%'}, {v: 56.49, f: '56.49%'},1106818],
+["<a href=\"/ipv6/SR\">SR</a>","<a href=\"/ipv6/SR\">Suriname</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 57.28, f:'57.28%'}, {v: 56.24, f: '56.24%'},221330],
+["<a href=\"/ipv6/GR\">GR</a>","<a href=\"/ipv6/GR\">Greece</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 57.04, f:'57.04%'}, {v: 56.08, f: '56.08%'},3003797],
+["<a href=\"/ipv6/LU\">LU</a>","<a href=\"/ipv6/LU\">Luxembourg</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 56.07, f:'56.07%'}, {v: 54.65, f: '54.65%'},219983],
+["<a href=\"/ipv6/HU\">HU</a>","<a href=\"/ipv6/HU\">Hungary</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 55.97, f:'55.97%'}, {v: 53.91, f: '53.91%'},2925581],
+["<a href=\"/ipv6/GB\">GB</a>","<a href=\"/ipv6/GB\">United Kingdom of Great Britain and Northern Ireland</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 54.32, f:'54.32%'}, {v: 53.43, f: '53.43%'},15282908],
+["<a href=\"/ipv6/PR\">PR</a>","<a href=\"/ipv6/PR\">Puerto Rico</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 54.02, f:'54.02%'}, {v: 52.05, f: '52.05%'},1013447],
+["<a href=\"/ipv6/NO\">NO</a>","<a href=\"/ipv6/NO\">Norway</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 53.51, f:'53.51%'}, {v: 50.62, f: '50.62%'},2055515],
+["<a href=\"/ipv6/NL\">NL</a>","<a href=\"/ipv6/NL\">Netherlands</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 52.44, f:'52.44%'}, {v: 51.18, f: '51.18%'},5769887],
+["<a href=\"/ipv6/TH\">TH</a>","<a href=\"/ipv6/TH\">Thailand</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 52.41, f:'52.41%'}, {v: 51.53, f: '51.53%'},12914890],
+["<a href=\"/ipv6/MF\">MF</a>","<a href=\"/ipv6/MF\">Saint Martin (French part)</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 51.65, f:'51.65%'}, {v: 50.93, f: '50.93%'},8240],
+["<a href=\"/ipv6/FI\">FI</a>","<a href=\"/ipv6/FI\">Finland</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 51.04, f:'51.04%'}, {v: 49.53, f: '49.53%'},1800118],
+["<a href=\"/ipv6/AE\">AE</a>","<a href=\"/ipv6/AE\">United Arab Emirates</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 50.62, f:'50.62%'}, {v: 49.28, f: '49.28%'},1985201],
+["<a href=\"/ipv6/MQ\">MQ</a>","<a href=\"/ipv6/MQ\">Martinique</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 50.07, f:'50.07%'}, {v: 49.39, f: '49.39%'},168818],
+["<a href=\"/ipv6/MO\">MO</a>","<a href=\"/ipv6/MO\">Macao Special Administrative Region of China</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 50.02, f:'50.02%'}, {v: 44.63, f: '44.63%'},507089],
+["<a href=\"/ipv6/LI\">LI</a>","<a href=\"/ipv6/LI\">Liechtenstein</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 49.99, f:'49.99%'}, {v: 49.55, f: '49.55%'},13089],
+["<a href=\"/ipv6/TV\">TV</a>","<a href=\"/ipv6/TV\">Tuvalu</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 49.99, f:'49.99%'}, {v: 48.40, f: '48.40%'},3351],
+["<a href=\"/ipv6/CN\">CN</a>","<a href=\"/ipv6/CN\">China</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 49.65, f:'49.65%'}, {v: 41.21, f: '41.21%'},40839827],
+["<a href=\"/ipv6/NR\">NR</a>","<a href=\"/ipv6/NR\">Nauru</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 49.55, f:'49.55%'}, {v: 48.72, f: '48.72%'},3754],
+["<a href=\"/ipv6/CH\">CH</a>","<a href=\"/ipv6/CH\">Switzerland</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 48.75, f:'48.75%'}, {v: 47.89, f: '47.89%'},2199182],
+["<a href=\"/ipv6/QA\">QA</a>","<a href=\"/ipv6/QA\">Qatar</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 48.42, f:'48.42%'}, {v: 46.52, f: '46.52%'},896445],
+["<a href=\"/ipv6/PT\">PT</a>","<a href=\"/ipv6/PT\">Portugal</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 48.23, f:'48.23%'}, {v: 47.66, f: '47.66%'},3752955],
+["<a href=\"/ipv6/AU\">AU</a>","<a href=\"/ipv6/AU\">Australia</a>, <a href=\"/ipv6/QP\">Australia and New Zealand</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 47.38, f:'47.38%'}, {v: 44.27, f: '44.27%'},6664964],
+["<a href=\"/ipv6/EE\">EE</a>","<a href=\"/ipv6/EE\">Estonia</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 47.24, f:'47.24%'}, {v: 45.27, f: '45.27%'},384277],
+["<a href=\"/ipv6/GP\">GP</a>","<a href=\"/ipv6/GP\">Guadeloupe</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 47.03, f:'47.03%'}, {v: 46.35, f: '46.35%'},218647],
+["<a href=\"/ipv6/MN\">MN</a>","<a href=\"/ipv6/MN\">Mongolia</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 46.67, f:'46.67%'}, {v: 45.10, f: '45.10%'},963925],
+["<a href=\"/ipv6/BZ\">BZ</a>","<a href=\"/ipv6/BZ\">Belize</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 45.34, f:'45.34%'}, {v: 44.33, f: '44.33%'},118353],
+["<a href=\"/ipv6/PY\">PY</a>","<a href=\"/ipv6/PY\">Paraguay</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 45.15, f:'45.15%'}, {v: 43.74, f: '43.74%'},1285846],
+["<a href=\"/ipv6/CA\">CA</a>","<a href=\"/ipv6/CA\">Canada</a>, <a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 45.00, f:'45.00%'}, {v: 43.43, f: '43.43%'},15445328],
+["<a href=\"/ipv6/GF\">GF</a>","<a href=\"/ipv6/GF\">French Guiana</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 44.79, f:'44.79%'}, {v: 43.78, f: '43.78%'},71809],
+["<a href=\"/ipv6/IE\">IE</a>","<a href=\"/ipv6/IE\">Ireland</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 44.59, f:'44.59%'}, {v: 43.85, f: '43.85%'},1438204],
+["<a href=\"/ipv6/BO\">BO</a>","<a href=\"/ipv6/BO\">Bolivia</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 44.47, f:'44.47%'}, {v: 44.16, f: '44.16%'},2474667],
+["<a href=\"/ipv6/AT\">AT</a>","<a href=\"/ipv6/AT\">Austria</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 43.92, f:'43.92%'}, {v: 42.80, f: '42.80%'},2144644],
+["<a href=\"/ipv6/BT\">BT</a>","<a href=\"/ipv6/BT\">Bhutan</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 40.31, f:'40.31%'}, {v: 39.62, f: '39.62%'},116647],
+["<a href=\"/ipv6/FJ\">FJ</a>","<a href=\"/ipv6/FJ\">Fiji</a>, <a href=\"/ipv6/QQ\">Melanesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 39.84, f:'39.84%'}, {v: 38.51, f: '38.51%'},171685],
+["<a href=\"/ipv6/DM\">DM</a>","<a href=\"/ipv6/DM\">Dominica</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 39.59, f:'39.59%'}, {v: 39.45, f: '39.45%'},46394],
+["<a href=\"/ipv6/BS\">BS</a>","<a href=\"/ipv6/BS\">Bahamas</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 39.43, f:'39.43%'}, {v: 38.68, f: '38.68%'},167511],
+["<a href=\"/ipv6/DO\">DO</a>","<a href=\"/ipv6/DO\">Dominican Republic</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 39.39, f:'39.39%'}, {v: 38.19, f: '38.19%'},1667099],
+["<a href=\"/ipv6/CZ\">CZ</a>","<a href=\"/ipv6/CZ\">Czech Republic</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 38.78, f:'38.78%'}, {v: 36.80, f: '36.80%'},3221422],
+["<a href=\"/ipv6/WF\">WF</a>","<a href=\"/ipv6/WF\">Wallis and Futuna Islands</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 37.89, f:'37.89%'}, {v: 37.20, f: '37.20%'},6068],
+["<a href=\"/ipv6/EC\">EC</a>","<a href=\"/ipv6/EC\">Ecuador</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 37.86, f:'37.86%'}, {v: 37.38, f: '37.38%'},3350916],
+["<a href=\"/ipv6/CK\">CK</a>","<a href=\"/ipv6/CK\">Cook Islands</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 37.68, f:'37.68%'}, {v: 36.22, f: '36.22%'},7240],
+["<a href=\"/ipv6/RE\">RE</a>","<a href=\"/ipv6/RE\">Reunion</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 36.99, f:'36.99%'}, {v: 36.45, f: '36.45%'},362924],
+["<a href=\"/ipv6/AI\">AI</a>","<a href=\"/ipv6/AI\">Anguilla</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 36.21, f:'36.21%'}, {v: 35.80, f: '35.80%'},8467],
+["<a href=\"/ipv6/LV\">LV</a>","<a href=\"/ipv6/LV\">Latvia</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 35.98, f:'35.98%'}, {v: 34.59, f: '34.59%'},742633],
+["<a href=\"/ipv6/PE\">PE</a>","<a href=\"/ipv6/PE\">Peru</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 34.81, f:'34.81%'}, {v: 34.36, f: '34.36%'},6252532],
+["<a href=\"/ipv6/AR\">AR</a>","<a href=\"/ipv6/AR\">Argentina</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 34.50, f:'34.50%'}, {v: 32.35, f: '32.35%'},13527167],
+["<a href=\"/ipv6/GA\">GA</a>","<a href=\"/ipv6/GA\">Gabon</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 34.24, f:'34.24%'}, {v: 31.55, f: '31.55%'},142021],
+["<a href=\"/ipv6/SN\">SN</a>","<a href=\"/ipv6/SN\">Senegal</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 34.23, f:'34.23%'}, {v: 33.67, f: '33.67%'},2518213],
+["<a href=\"/ipv6/SE\">SE</a>","<a href=\"/ipv6/SE\">Sweden</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 34.22, f:'34.22%'}, {v: 31.31, f: '31.31%'},4567032],
+["<a href=\"/ipv6/NI\">NI</a>","<a href=\"/ipv6/NI\">Nicaragua</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 33.97, f:'33.97%'}, {v: 32.93, f: '32.93%'},808202],
+["<a href=\"/ipv6/RO\">RO</a>","<a href=\"/ipv6/RO\">Romania</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 33.12, f:'33.12%'}, {v: 32.84, f: '32.84%'},3921346],
+["<a href=\"/ipv6/NZ\">NZ</a>","<a href=\"/ipv6/NZ\">New Zealand</a>, <a href=\"/ipv6/QP\">Australia and New Zealand</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 33.05, f:'33.05%'}, {v: 29.40, f: '29.40%'},1953833],
+["<a href=\"/ipv6/TC\">TC</a>","<a href=\"/ipv6/TC\">Turks and Caicos Islands</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 31.09, f:'31.09%'}, {v: 30.61, f: '30.61%'},18523],
+["<a href=\"/ipv6/TO\">TO</a>","<a href=\"/ipv6/TO\">Tonga</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 30.17, f:'30.17%'}, {v: 25.85, f: '25.85%'},17216],
+["<a href=\"/ipv6/OM\">OM</a>","<a href=\"/ipv6/OM\">Oman</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 29.82, f:'29.82%'}, {v: 29.22, f: '29.22%'},1292874],
+["<a href=\"/ipv6/MH\">MH</a>","<a href=\"/ipv6/MH\">Marshall Islands</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 29.43, f:'29.43%'}, {v: 28.73, f: '28.73%'},10904],
+["<a href=\"/ipv6/ID\">ID</a>","<a href=\"/ipv6/ID\">Indonesia</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 29.40, f:'29.40%'}, {v: 28.48, f: '28.48%'},41501091],
+["<a href=\"/ipv6/KR\">KR</a>","<a href=\"/ipv6/KR\">Republic of Korea</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 29.23, f:'29.23%'}, {v: 28.42, f: '28.42%'},16767093],
+["<a href=\"/ipv6/GY\">GY</a>","<a href=\"/ipv6/GY\">Guyana</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 28.37, f:'28.37%'}, {v: 27.36, f: '27.36%'},377211],
+["<a href=\"/ipv6/KZ\">KZ</a>","<a href=\"/ipv6/KZ\">Kazakhstan</a>, <a href=\"/ipv6/XR\">Central Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 28.27, f:'28.27%'}, {v: 26.36, f: '26.36%'},6740996],
+["<a href=\"/ipv6/TN\">TN</a>","<a href=\"/ipv6/TN\">Tunisia</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 27.38, f:'27.38%'}, {v: 26.60, f: '26.60%'},2955684],
+["<a href=\"/ipv6/SX\">SX</a>","<a href=\"/ipv6/SX\">Sint Maarten (Dutch part)</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 27.10, f:'27.10%'}, {v: 26.63, f: '26.63%'},24067],
+["<a href=\"/ipv6/PG\">PG</a>","<a href=\"/ipv6/PG\">Papua New Guinea</a>, <a href=\"/ipv6/QQ\">Melanesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 26.78, f:'26.78%'}, {v: 24.29, f: '24.29%'},202256],
+["<a href=\"/ipv6/KW\">KW</a>","<a href=\"/ipv6/KW\">Kuwait</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 26.10, f:'26.10%'}, {v: 25.61, f: '25.61%'},1196639],
+["<a href=\"/ipv6/IM\">IM</a>","<a href=\"/ipv6/IM\">Isle of Man</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 26.04, f:'26.04%'}, {v: 25.54, f: '25.54%'},53684],
+["<a href=\"/ipv6/ZW\">ZW</a>","<a href=\"/ipv6/ZW\">Zimbabwe</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 26.03, f:'26.03%'}, {v: 25.61, f: '25.61%'},1111855],
+["<a href=\"/ipv6/LT\">LT</a>","<a href=\"/ipv6/LT\">Lithuania</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 25.43, f:'25.43%'}, {v: 23.94, f: '23.94%'},826716],
+["<a href=\"/ipv6/TT\">TT</a>","<a href=\"/ipv6/TT\">Trinidad and Tobago</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 25.17, f:'25.17%'}, {v: 24.45, f: '24.45%'},919295],
+["<a href=\"/ipv6/DK\">DK</a>","<a href=\"/ipv6/DK\">Denmark</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 25.06, f:'25.06%'}, {v: 23.31, f: '23.31%'},2606154],
+["<a href=\"/ipv6/YT\">YT</a>","<a href=\"/ipv6/YT\">Mayotte</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 24.56, f:'24.56%'}, {v: 24.04, f: '24.04%'},27033],
+["<a href=\"/ipv6/CG\">CG</a>","<a href=\"/ipv6/CG\">Congo</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 24.10, f:'24.10%'}, {v: 23.91, f: '23.91%'},315081],
+["<a href=\"/ipv6/BG\">BG</a>","<a href=\"/ipv6/BG\">Bulgaria</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 23.69, f:'23.69%'}, {v: 23.02, f: '23.02%'},2297405],
+["<a href=\"/ipv6/PK\">PK</a>","<a href=\"/ipv6/PK\">Pakistan</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 23.21, f:'23.21%'}, {v: 22.62, f: '22.62%'},12422043],
+["<a href=\"/ipv6/CL\">CL</a>","<a href=\"/ipv6/CL\">Chile</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 23.20, f:'23.20%'}, {v: 22.43, f: '22.43%'},5891103],
+["<a href=\"/ipv6/SS\">SS</a>","<a href=\"/ipv6/SS\">South Sudan</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 22.94, f:'22.94%'}, {v: 22.57, f: '22.57%'},83384],
+["<a href=\"/ipv6/HN\">HN</a>","<a href=\"/ipv6/HN\">Honduras</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 22.79, f:'22.79%'}, {v: 22.31, f: '22.31%'},869382],
+["<a href=\"/ipv6/BB\">BB</a>","<a href=\"/ipv6/BB\">Barbados</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 22.24, f:'22.24%'}, {v: 21.91, f: '21.91%'},226894],
+["<a href=\"/ipv6/IR\">IR</a>","<a href=\"/ipv6/IR\">Iran (Islamic Republic of)</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 21.74, f:'21.74%'}, {v: 20.86, f: '20.86%'},83502],
+["<a href=\"/ipv6/BH\">BH</a>","<a href=\"/ipv6/BH\">Bahrain</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 21.73, f:'21.73%'}, {v: 21.21, f: '21.21%'},434611],
+["<a href=\"/ipv6/TR\">TR</a>","<a href=\"/ipv6/TR\">Turkey</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 21.71, f:'21.71%'}, {v: 20.90, f: '20.90%'},15633152],
+["<a href=\"/ipv6/SG\">SG</a>","<a href=\"/ipv6/SG\">Singapore</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 21.70, f:'21.70%'}, {v: 15.72, f: '15.72%'},2428898],
+["<a href=\"/ipv6/MP\">MP</a>","<a href=\"/ipv6/MP\">Northern Mariana Islands</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 21.46, f:'21.46%'}, {v: 20.93, f: '20.93%'},10004],
+["<a href=\"/ipv6/CY\">CY</a>","<a href=\"/ipv6/CY\">Cyprus</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 21.41, f:'21.41%'}, {v: 20.62, f: '20.62%'},527127],
+["<a href=\"/ipv6/CO\">CO</a>","<a href=\"/ipv6/CO\">Colombia</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 21.38, f:'21.38%'}, {v: 20.52, f: '20.52%'},9726795],
+["<a href=\"/ipv6/PH\">PH</a>","<a href=\"/ipv6/PH\">Philippines</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 20.95, f:'20.95%'}, {v: 20.33, f: '20.33%'},15031833],
+["<a href=\"/ipv6/VU\">VU</a>","<a href=\"/ipv6/VU\">Vanuatu</a>, <a href=\"/ipv6/QQ\">Melanesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 20.94, f:'20.94%'}, {v: 20.58, f: '20.58%'},1385],
+["<a href=\"/ipv6/TK\">TK</a>","<a href=\"/ipv6/TK\">Tokelau</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 19.88, f:'19.88%'}, {v: 18.67, f: '18.67%'},166],
+["<a href=\"/ipv6/JO\">JO</a>","<a href=\"/ipv6/JO\">Jordan</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 19.87, f:'19.87%'}, {v: 19.06, f: '19.06%'},2259817],
+["<a href=\"/ipv6/PL\">PL</a>","<a href=\"/ipv6/PL\">Poland</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 19.59, f:'19.59%'}, {v: 18.99, f: '18.99%'},7627737],
+["<a href=\"/ipv6/IT\">IT</a>","<a href=\"/ipv6/IT\">Italy</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 19.37, f:'19.37%'}, {v: 18.06, f: '18.06%'},13764930],
+["<a href=\"/ipv6/MD\">MD</a>","<a href=\"/ipv6/MD\">Republic of Moldova</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 19.19, f:'19.19%'}, {v: 19.05, f: '19.05%'},819051],
+["<a href=\"/ipv6/BM\">BM</a>","<a href=\"/ipv6/BM\">Bermuda</a>, <a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 18.95, f:'18.95%'}, {v: 18.41, f: '18.41%'},48667],
+["<a href=\"/ipv6/PF\">PF</a>","<a href=\"/ipv6/PF\">French Polynesia</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 18.69, f:'18.69%'}, {v: 16.69, f: '16.69%'},78514],
+["<a href=\"/ipv6/CF\">CF</a>","<a href=\"/ipv6/CF\">Central African Republic</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 18.30, f:'18.30%'}, {v: 17.83, f: '17.83%'},49454],
+["<a href=\"/ipv6/TG\">TG</a>","<a href=\"/ipv6/TG\">Togo</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 18.01, f:'18.01%'}, {v: 16.50, f: '16.50%'},533133],
+["<a href=\"/ipv6/BD\">BD</a>","<a href=\"/ipv6/BD\">Bangladesh</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 17.99, f:'17.99%'}, {v: 17.83, f: '17.83%'},10949871],
+["<a href=\"/ipv6/CI\">CI</a>","<a href=\"/ipv6/CI\">Cote d'Ivoire</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 17.59, f:'17.59%'}, {v: 16.76, f: '16.76%'},3527868],
+["<a href=\"/ipv6/FM\">FM</a>","<a href=\"/ipv6/FM\">Micronesia (Federated States of)</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 17.56, f:'17.56%'}, {v: 17.14, f: '17.14%'},18286],
+["<a href=\"/ipv6/ML\">ML</a>","<a href=\"/ipv6/ML\">Mali</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 17.35, f:'17.35%'}, {v: 17.07, f: '17.07%'},928683],
+["<a href=\"/ipv6/MV\">MV</a>","<a href=\"/ipv6/MV\">Maldives</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 16.75, f:'16.75%'}, {v: 16.59, f: '16.59%'},236832],
+["<a href=\"/ipv6/KE\">KE</a>","<a href=\"/ipv6/KE\">Kenya</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 16.66, f:'16.66%'}, {v: 16.48, f: '16.48%'},3018637],
+["<a href=\"/ipv6/JM\">JM</a>","<a href=\"/ipv6/JM\">Jamaica</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 16.51, f:'16.51%'}, {v: 16.26, f: '16.26%'},681856],
+["<a href=\"/ipv6/VG\">VG</a>","<a href=\"/ipv6/VG\">British Virgin Islands</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 16.33, f:'16.33%'}, {v: 15.97, f: '15.97%'},23488],
+["<a href=\"/ipv6/VC\">VC</a>","<a href=\"/ipv6/VC\">Saint Vincent and the Grenadines</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 15.83, f:'15.83%'}, {v: 15.63, f: '15.63%'},52041],
+["<a href=\"/ipv6/BY\">BY</a>","<a href=\"/ipv6/BY\">Belarus</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 15.29, f:'15.29%'}, {v: 14.53, f: '14.53%'},2892166],
+["<a href=\"/ipv6/SB\">SB</a>","<a href=\"/ipv6/SB\">Solomon Islands</a>, <a href=\"/ipv6/QQ\">Melanesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 15.27, f:'15.27%'}, {v: 14.84, f: '14.84%'},27079],
+["<a href=\"/ipv6/AO\">AO</a>","<a href=\"/ipv6/AO\">Angola</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 15.10, f:'15.10%'}, {v: 14.68, f: '14.68%'},923686],
+["<a href=\"/ipv6/SH\">SH</a>","<a href=\"/ipv6/SH\">Saint Helena, Ascension, and Tristan da Cunha</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 15.06, f:'15.06%'}, {v: 12.97, f: '12.97%'},239],
+["<a href=\"/ipv6/CR\">CR</a>","<a href=\"/ipv6/CR\">Costa Rica</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 15.01, f:'15.01%'}, {v: 14.43, f: '14.43%'},1563312],
+["<a href=\"/ipv6/LC\">LC</a>","<a href=\"/ipv6/LC\">Saint Lucia</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 14.78, f:'14.78%'}, {v: 14.68, f: '14.68%'},87639],
+["<a href=\"/ipv6/UA\">UA</a>","<a href=\"/ipv6/UA\">Ukraine</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 14.52, f:'14.52%'}, {v: 13.84, f: '13.84%'},9607865],
+["<a href=\"/ipv6/GW\">GW</a>","<a href=\"/ipv6/GW\">Guinea-Bissau</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 14.28, f:'14.28%'}, {v: 14.09, f: '14.09%'},22911],
+["<a href=\"/ipv6/SV\">SV</a>","<a href=\"/ipv6/SV\">El Salvador</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 14.07, f:'14.07%'}, {v: 13.73, f: '13.73%'},974973],
+["<a href=\"/ipv6/IS\">IS</a>","<a href=\"/ipv6/IS\">Iceland</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 13.50, f:'13.50%'}, {v: 12.85, f: '12.85%'},176290],
+["<a href=\"/ipv6/SK\">SK</a>","<a href=\"/ipv6/SK\">Slovakia</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 13.24, f:'13.24%'}, {v: 12.87, f: '12.87%'},1479385],
+["<a href=\"/ipv6/NC\">NC</a>","<a href=\"/ipv6/NC\">New Caledonia</a>, <a href=\"/ipv6/QQ\">Melanesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 12.60, f:'12.60%'}, {v: 11.77, f: '11.77%'},76786],
+["<a href=\"/ipv6/GE\">GE</a>","<a href=\"/ipv6/GE\">Georgia</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 12.30, f:'12.30%'}, {v: 12.03, f: '12.03%'},1040634],
+["<a href=\"/ipv6/BA\">BA</a>","<a href=\"/ipv6/BA\">Bosnia and Herzegovina</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 11.42, f:'11.42%'}, {v: 11.10, f: '11.10%'},840487],
+["<a href=\"/ipv6/TD\">TD</a>","<a href=\"/ipv6/TD\">Chad</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 11.26, f:'11.26%'}, {v: 11.00, f: '11.00%'},243811],
+["<a href=\"/ipv6/NE\">NE</a>","<a href=\"/ipv6/NE\">Niger</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 11.17, f:'11.17%'}, {v: 10.80, f: '10.80%'},368177],
+["<a href=\"/ipv6/AF\">AF</a>","<a href=\"/ipv6/AF\">Afghanistan</a>, <a href=\"/ipv6/XT\">Southern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 11.13, f:'11.13%'}, {v: 10.75, f: '10.75%'},578812],
+["<a href=\"/ipv6/ER\">ER</a>","<a href=\"/ipv6/ER\">Eritrea</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 11.07, f:'11.07%'}, {v: 10.67, f: '10.67%'},506],
+["<a href=\"/ipv6/UZ\">UZ</a>","<a href=\"/ipv6/UZ\">Uzbekistan</a>, <a href=\"/ipv6/XR\">Central Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 10.92, f:'10.92%'}, {v: 9.62, f: '9.62%'},3332325],
+["<a href=\"/ipv6/BF\">BF</a>","<a href=\"/ipv6/BF\">Burkina Faso</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 10.83, f:'10.83%'}, {v: 9.98, f: '9.98%'},744723],
+["<a href=\"/ipv6/ES\">ES</a>","<a href=\"/ipv6/ES\">Spain</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 10.71, f:'10.71%'}, {v: 10.08, f: '10.08%'},12100598],
+["<a href=\"/ipv6/TL\">TL</a>","<a href=\"/ipv6/TL\">Timor-Leste</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 10.62, f:'10.62%'}, {v: 10.31, f: '10.31%'},88704],
+["<a href=\"/ipv6/VE\">VE</a>","<a href=\"/ipv6/VE\">Venezuela</a>, <a href=\"/ipv6/XP\">South America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 10.49, f:'10.49%'}, {v: 10.35, f: '10.35%'},7701771],
+["<a href=\"/ipv6/HT\">HT</a>","<a href=\"/ipv6/HT\">Haiti</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 10.26, f:'10.26%'}, {v: 10.07, f: '10.07%'},691259],
+["<a href=\"/ipv6/SD\">SD</a>","<a href=\"/ipv6/SD\">Sudan</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 10.18, f:'10.18%'}, {v: 10.08, f: '10.08%'},1131247],
+["<a href=\"/ipv6/VI\">VI</a>","<a href=\"/ipv6/VI\">United States Virgin Islands</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 9.74, f:'9.74%'}, {v: 8.77, f: '8.77%'},46678],
+["<a href=\"/ipv6/HK\">HK</a>","<a href=\"/ipv6/HK\">Hong Kong Special Administrative Region of China</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 9.67, f:'9.67%'}, {v: 2.47, f: '2.47%'},4706261],
+["<a href=\"/ipv6/SI\">SI</a>","<a href=\"/ipv6/SI\">Slovenia</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 9.66, f:'9.66%'}, {v: 9.50, f: '9.50%'},480211],
+["<a href=\"/ipv6/NU\">NU</a>","<a href=\"/ipv6/NU\">Niue</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 9.46, f:'9.46%'}, {v: 9.34, f: '9.34%'},846],
+["<a href=\"/ipv6/WS\">WS</a>","<a href=\"/ipv6/WS\">Samoa</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 9.41, f:'9.41%'}, {v: 9.26, f: '9.26%'},34588],
+["<a href=\"/ipv6/RW\">RW</a>","<a href=\"/ipv6/RW\">Rwanda</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 9.41, f:'9.41%'}, {v: 9.30, f: '9.30%'},496905],
+["<a href=\"/ipv6/YE\">YE</a>","<a href=\"/ipv6/YE\">Yemen</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 9.38, f:'9.38%'}, {v: 9.05, f: '9.05%'},321256],
+["<a href=\"/ipv6/CW\">CW</a>","<a href=\"/ipv6/CW\">Curacao</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 9.18, f:'9.18%'}, {v: 9.14, f: '9.14%'},88579],
+["<a href=\"/ipv6/AM\">AM</a>","<a href=\"/ipv6/AM\">Armenia</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 8.94, f:'8.94%'}, {v: 8.71, f: '8.71%'},1023309],
+["<a href=\"/ipv6/MM\">MM</a>","<a href=\"/ipv6/MM\">Myanmar</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 8.57, f:'8.57%'}, {v: 8.46, f: '8.46%'},720507],
+["<a href=\"/ipv6/AL\">AL</a>","<a href=\"/ipv6/AL\">Albania</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 8.42, f:'8.42%'}, {v: 6.15, f: '6.15%'},1450247],
+["<a href=\"/ipv6/BW\">BW</a>","<a href=\"/ipv6/BW\">Botswana</a>, <a href=\"/ipv6/XK\">Southern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 7.75, f:'7.75%'}, {v: 7.60, f: '7.60%'},244350],
+["<a href=\"/ipv6/AQ\">AQ</a>","<a href=\"/ipv6/AQ\">Antartica</a>, <a href=\"/ipv6/XG\">Unclassified</a>, <a href=\"/ipv6/XA\">World</a>",{v: 7.19, f:'7.19%'}, {v: 5.88, f: '5.88%'},153],
+["<a href=\"/ipv6/RS\">RS</a>","<a href=\"/ipv6/RS\">Serbia</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 7.11, f:'7.11%'}, {v: 6.95, f: '6.95%'},2275462],
+["<a href=\"/ipv6/GD\">GD</a>","<a href=\"/ipv6/GD\">Grenada</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 7.10, f:'7.10%'}, {v: 7.04, f: '7.04%'},57557],
+["<a href=\"/ipv6/GU\">GU</a>","<a href=\"/ipv6/GU\">Guam</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 6.58, f:'6.58%'}, {v: 6.40, f: '6.40%'},75970],
+["<a href=\"/ipv6/HR\">HR</a>","<a href=\"/ipv6/HR\">Croatia</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 6.06, f:'6.06%'}, {v: 5.97, f: '5.97%'},1237297],
+["<a href=\"/ipv6/LR\">LR</a>","<a href=\"/ipv6/LR\">Liberia</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 5.71, f:'5.71%'}, {v: 5.38, f: '5.38%'},404827],
+["<a href=\"/ipv6/RU\">RU</a>","<a href=\"/ipv6/RU\">Russian Federation</a>, <a href=\"/ipv6/XW\">Eastern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 5.57, f:'5.57%'}, {v: 4.25, f: '4.25%'},76644],
+["<a href=\"/ipv6/NG\">NG</a>","<a href=\"/ipv6/NG\">Nigeria</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 5.49, f:'5.49%'}, {v: 4.98, f: '4.98%'},12381940],
+["<a href=\"/ipv6/MG\">MG</a>","<a href=\"/ipv6/MG\">Madagascar</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 5.48, f:'5.48%'}, {v: 5.38, f: '5.38%'},213446],
+["<a href=\"/ipv6/CV\">CV</a>","<a href=\"/ipv6/CV\">Cape Verde</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 5.40, f:'5.40%'}, {v: 5.32, f: '5.32%'},81832],
+["<a href=\"/ipv6/EG\">EG</a>","<a href=\"/ipv6/EG\">Egypt</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 5.31, f:'5.31%'}, {v: 5.20, f: '5.20%'},13772627],
+["<a href=\"/ipv6/MR\">MR</a>","<a href=\"/ipv6/MR\">Mauritania</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 5.27, f:'5.27%'}, {v: 5.19, f: '5.19%'},359113],
+["<a href=\"/ipv6/CD\">CD</a>","<a href=\"/ipv6/CD\">Democratic Republic of the Congo</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.93, f:'4.93%'}, {v: 4.85, f: '4.85%'},2937272],
+["<a href=\"/ipv6/SJ\">SJ</a>","<a href=\"/ipv6/SJ\">Svalbard and Jan Mayen Islands</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 4.88, f:'4.88%'}, {v: 4.88, f: '4.88%'},123],
+["<a href=\"/ipv6/LA\">LA</a>","<a href=\"/ipv6/LA\">Lao People's Democratic Republic</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 4.44, f:'4.44%'}, {v: 4.37, f: '4.37%'},716433],
+["<a href=\"/ipv6/MZ\">MZ</a>","<a href=\"/ipv6/MZ\">Mozambique</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.32, f:'4.32%'}, {v: 4.25, f: '4.25%'},702062],
+["<a href=\"/ipv6/BJ\">BJ</a>","<a href=\"/ipv6/BJ\">Benin</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.25, f:'4.25%'}, {v: 3.99, f: '3.99%'},862760],
+["<a href=\"/ipv6/ZA\">ZA</a>","<a href=\"/ipv6/ZA\">South Africa</a>, <a href=\"/ipv6/XK\">Southern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.15, f:'4.15%'}, {v: 4.03, f: '4.03%'},5442085],
+["<a href=\"/ipv6/LY\">LY</a>","<a href=\"/ipv6/LY\">Libya</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 4.08, f:'4.08%'}, {v: 4.02, f: '4.02%'},1747539],
+["<a href=\"/ipv6/ZM\">ZM</a>","<a href=\"/ipv6/ZM\">Zambia</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 3.98, f:'3.98%'}, {v: 3.88, f: '3.88%'},1039859],
+["<a href=\"/ipv6/PA\">PA</a>","<a href=\"/ipv6/PA\">Panama</a>, <a href=\"/ipv6/XO\">Central America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 3.95, f:'3.95%'}, {v: 3.85, f: '3.85%'},955579],
+["<a href=\"/ipv6/MA\">MA</a>","<a href=\"/ipv6/MA\">Morocco</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 3.49, f:'3.49%'}, {v: 3.40, f: '3.40%'},3489917],
+["<a href=\"/ipv6/ST\">ST</a>","<a href=\"/ipv6/ST\">Sao Tome and Principe</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 3.49, f:'3.49%'}, {v: 3.37, f: '3.37%'},11992],
+["<a href=\"/ipv6/SC\">SC</a>","<a href=\"/ipv6/SC\">Seychelles</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 3.29, f:'3.29%'}, {v: 1.90, f: '1.90%'},133086],
+["<a href=\"/ipv6/BI\">BI</a>","<a href=\"/ipv6/BI\">Burundi</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 2.67, f:'2.67%'}, {v: 2.63, f: '2.63%'},159081],
+["<a href=\"/ipv6/SZ\">SZ</a>","<a href=\"/ipv6/SZ\">Swaziland</a>, <a href=\"/ipv6/XK\">Southern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 2.55, f:'2.55%'}, {v: 2.49, f: '2.49%'},135716],
+["<a href=\"/ipv6/FO\">FO</a>","<a href=\"/ipv6/FO\">Faeroe Islands</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 2.48, f:'2.48%'}, {v: 2.35, f: '2.35%'},29224],
+["<a href=\"/ipv6/CM\">CM</a>","<a href=\"/ipv6/CM\">Cameroon</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 2.08, f:'2.08%'}, {v: 1.91, f: '1.91%'},1242010],
+["<a href=\"/ipv6/UG\">UG</a>","<a href=\"/ipv6/UG\">Uganda</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 1.92, f:'1.92%'}, {v: 1.90, f: '1.90%'},2273592],
+["<a href=\"/ipv6/GH\">GH</a>","<a href=\"/ipv6/GH\">Ghana</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 1.80, f:'1.80%'}, {v: 1.66, f: '1.66%'},4411448],
+["<a href=\"/ipv6/AS\">AS</a>","<a href=\"/ipv6/AS\">American Samoa</a>, <a href=\"/ipv6/QS\">Polynesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 1.77, f:'1.77%'}, {v: 1.69, f: '1.69%'},27420],
+["<a href=\"/ipv6/SL\">SL</a>","<a href=\"/ipv6/SL\">Sierra Leone</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 1.61, f:'1.61%'}, {v: 1.54, f: '1.54%'},760089],
+["<a href=\"/ipv6/KG\">KG</a>","<a href=\"/ipv6/KG\">Kyrgyzstan</a>, <a href=\"/ipv6/XR\">Central Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 1.56, f:'1.56%'}, {v: 1.49, f: '1.49%'},1000339],
+["<a href=\"/ipv6/BQ\">BQ</a>","<a href=\"/ipv6/BQ\">Bonaire, Sint Eustatius and Saba</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 1.45, f:'1.45%'}, {v: 1.42, f: '1.42%'},11087],
+["<a href=\"/ipv6/VA\">VA</a>","<a href=\"/ipv6/VA\">Holy See</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 1.41, f:'1.41%'}, {v: 0.94, f: '0.94%'},213],
+["<a href=\"/ipv6/MW\">MW</a>","<a href=\"/ipv6/MW\">Malawi</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 1.38, f:'1.38%'}, {v: 1.34, f: '1.34%'},519876],
+["<a href=\"/ipv6/KY\">KY</a>","<a href=\"/ipv6/KY\">Cayman Islands</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 1.30, f:'1.30%'}, {v: 1.26, f: '1.26%'},36798],
+["<a href=\"/ipv6/IQ\">IQ</a>","<a href=\"/ipv6/IQ\">Iraq</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 1.26, f:'1.26%'}, {v: 1.20, f: '1.20%'},7326553],
+["<a href=\"/ipv6/GN\">GN</a>","<a href=\"/ipv6/GN\">Guinea</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 1.24, f:'1.24%'}, {v: 1.22, f: '1.22%'},1147839],
+["<a href=\"/ipv6/GQ\">GQ</a>","<a href=\"/ipv6/GQ\">Equatorial Guinea</a>, <a href=\"/ipv6/XI\">Middle Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 1.14, f:'1.14%'}, {v: 1.06, f: '1.06%'},59163],
+["<a href=\"/ipv6/TJ\">TJ</a>","<a href=\"/ipv6/TJ\">Tajikistan</a>, <a href=\"/ipv6/XR\">Central Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 1.11, f:'1.11%'}, {v: 1.04, f: '1.04%'},575811],
+["<a href=\"/ipv6/MC\">MC</a>","<a href=\"/ipv6/MC\">Monaco</a>, <a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 1.08, f:'1.08%'}, {v: 0.32, f: '0.32%'},16034],
+["<a href=\"/ipv6/AG\">AG</a>","<a href=\"/ipv6/AG\">Antigua and Barbuda</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 1.02, f:'1.02%'}, {v: 0.96, f: '0.96%'},65822],
+["<a href=\"/ipv6/SY\">SY</a>","<a href=\"/ipv6/SY\">Syrian Arab Republic</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.72, f:'0.72%'}, {v: 0.69, f: '0.69%'},2183263],
+["<a href=\"/ipv6/GM\">GM</a>","<a href=\"/ipv6/GM\">Gambia</a>, <a href=\"/ipv6/XL\">Western Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.62, f:'0.62%'}, {v: 0.61, f: '0.61%'},373236],
+["<a href=\"/ipv6/GG\">GG</a>","<a href=\"/ipv6/GG\">Guernsey</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.59, f:'0.59%'}, {v: 0.57, f: '0.57%'},32300],
+["<a href=\"/ipv6/TZ\">TZ</a>","<a href=\"/ipv6/TZ\">United Republic of Tanzania</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.58, f:'0.58%'}, {v: 0.55, f: '0.55%'},2459436],
+["<a href=\"/ipv6/NA\">NA</a>","<a href=\"/ipv6/NA\">Namibia</a>, <a href=\"/ipv6/XK\">Southern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.55, f:'0.55%'}, {v: 0.54, f: '0.54%'},184554],
+["<a href=\"/ipv6/KM\">KM</a>","<a href=\"/ipv6/KM\">Comoros</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.55, f:'0.55%'}, {v: 0.55, f: '0.55%'},43817],
+["<a href=\"/ipv6/PS\">PS</a>","<a href=\"/ipv6/PS\">State of Palestine</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.53, f:'0.53%'}, {v: 0.39, f: '0.39%'},912138],
+["<a href=\"/ipv6/LB\">LB</a>","<a href=\"/ipv6/LB\">Lebanon</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.51, f:'0.51%'}, {v: 0.46, f: '0.46%'},1939488],
+["<a href=\"/ipv6/SO\">SO</a>","<a href=\"/ipv6/SO\">Somalia</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.49, f:'0.49%'}, {v: 0.48, f: '0.48%'},698860],
+["<a href=\"/ipv6/KH\">KH</a>","<a href=\"/ipv6/KH\">Cambodia</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.49, f:'0.49%'}, {v: 0.46, f: '0.46%'},1405898],
+["<a href=\"/ipv6/PW\">PW</a>","<a href=\"/ipv6/PW\">Palau</a>, <a href=\"/ipv6/QR\">Micronesia</a>, <a href=\"/ipv6/XF\">Oceania</a>",{v: 0.46, f:'0.46%'}, {v: 0.45, f: '0.45%'},10544],
+["<a href=\"/ipv6/IO\">IO</a>","<a href=\"/ipv6/IO\">British Indian Ocean Territory</a>, <a href=\"/ipv6/XG\">Unclassified</a>, <a href=\"/ipv6/XA\">World</a>",{v: 0.45, f:'0.45%'}, {v: 0.45, f: '0.45%'},449],
+["<a href=\"/ipv6/TM\">TM</a>","<a href=\"/ipv6/TM\">Turkmenistan</a>, <a href=\"/ipv6/XR\">Central Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.36, f:'0.36%'}, {v: 0.36, f: '0.36%'},4167],
+["<a href=\"/ipv6/AZ\">AZ</a>","<a href=\"/ipv6/AZ\">Azerbaijan</a>, <a href=\"/ipv6/XV\">Western Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.35, f:'0.35%'}, {v: 0.33, f: '0.33%'},1791575],
+["<a href=\"/ipv6/MU\">MU</a>","<a href=\"/ipv6/MU\">Mauritius</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.32, f:'0.32%'}, {v: 0.30, f: '0.30%'},455828],
+["<a href=\"/ipv6/DZ\">DZ</a>","<a href=\"/ipv6/DZ\">Algeria</a>, <a href=\"/ipv6/XJ\">Northern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.31, f:'0.31%'}, {v: 0.27, f: '0.27%'},7261074],
+["<a href=\"/ipv6/GL\">GL</a>","<a href=\"/ipv6/GL\">Greenland</a>, <a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 0.26, f:'0.26%'}, {v: 0.25, f: '0.25%'},45468],
+["<a href=\"/ipv6/AD\">AD</a>","<a href=\"/ipv6/AD\">Andorra</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.26, f:'0.26%'}, {v: 0.24, f: '0.24%'},41276],
+["<a href=\"/ipv6/ET\">ET</a>","<a href=\"/ipv6/ET\">Ethiopia</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.25, f:'0.25%'}, {v: 0.24, f: '0.24%'},1643539],
+["<a href=\"/ipv6/JE\">JE</a>","<a href=\"/ipv6/JE\">Jersey</a>, <a href=\"/ipv6/QM\">Northern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.24, f:'0.24%'}, {v: 0.23, f: '0.23%'},56760],
+["<a href=\"/ipv6/KN\">KN</a>","<a href=\"/ipv6/KN\">Saint Kitts and Nevis</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 0.23, f:'0.23%'}, {v: 0.21, f: '0.21%'},36713],
+["<a href=\"/ipv6/LS\">LS</a>","<a href=\"/ipv6/LS\">Lesotho</a>, <a href=\"/ipv6/XK\">Southern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.21, f:'0.21%'}, {v: 0.20, f: '0.20%'},82923],
+["<a href=\"/ipv6/GI\">GI</a>","<a href=\"/ipv6/GI\">Gibraltar</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.21, f:'0.21%'}, {v: 0.21, f: '0.21%'},23764],
+["<a href=\"/ipv6/DJ\">DJ</a>","<a href=\"/ipv6/DJ\">Djibouti</a>, <a href=\"/ipv6/XH\">Eastern Africa</a>, <a href=\"/ipv6/XB\">Africa</a>",{v: 0.20, f:'0.20%'}, {v: 0.19, f: '0.19%'},66541],
+["<a href=\"/ipv6/MT\">MT</a>","<a href=\"/ipv6/MT\">Malta</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.20, f:'0.20%'}, {v: 0.18, f: '0.18%'},186520],
+["<a href=\"/ipv6/AW\">AW</a>","<a href=\"/ipv6/AW\">Aruba</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 0.20, f:'0.20%'}, {v: 0.19, f: '0.19%'},48010],
+["<a href=\"/ipv6/BN\">BN</a>","<a href=\"/ipv6/BN\">Brunei Darussalam</a>, <a href=\"/ipv6/XU\">South-Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>",{v: 0.18, f:'0.18%'}, {v: 0.16, f: '0.16%'},205081],
+["<a href=\"/ipv6/MK\">MK</a>","<a href=\"/ipv6/MK\">North Macedonia</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.18, f:'0.18%'}, {v: 0.15, f: '0.15%'},704487],
+["<a href=\"/ipv6/ME\">ME</a>","<a href=\"/ipv6/ME\">Montenegro</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.13, f:'0.13%'}, {v: 0.12, f: '0.12%'},326486],
+["<a href=\"/ipv6/PM\">PM</a>","<a href=\"/ipv6/PM\">Saint Pierre and Miquelon</a>, <a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 0.09, f:'0.09%'}, {v: 0.09, f: '0.09%'},6598],
+["<a href=\"/ipv6/SM\">SM</a>","<a href=\"/ipv6/SM\">San Marino</a>, <a href=\"/ipv6/QN\">Southern Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 0.08, f:'0.08%'}, {v: 0.05, f: '0.05%'},16043],
+["<a href=\"/ipv6/CU\">CU</a>","<a href=\"/ipv6/CU\">Cuba</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 0.04, f:'0.04%'}, {v: 0.04, f: '0.04%'},360086],
+["<a href=\"/ipv6/KP\">KP</a>","<a href=\"/ipv6/KP\">Democratic People's Republic of Korea</a>, <a href=\"/ipv6/XS\">Eastern Asia</a>, <a href=\"/ipv6/XD\">Asia</a>","","",10],
+["<a href=\"/ipv6/NF\">NF</a>","<a href=\"/ipv6/NF\">Norfolk Island</a>, <a href=\"/ipv6/QP\">Australia and New Zealand</a>, <a href=\"/ipv6/XF\">Oceania</a>","","",45],
+["<a href=\"/ipv6/UM\">UM</a>","<a href=\"/ipv6/UM\">United States Minor Outlying Islands</a>, <a href=\"/ipv6/XG\">Unclassified</a>, <a href=\"/ipv6/XA\">World</a>","","",75],
+["<a href=\"/ipv6/MS\">MS</a>","<a href=\"/ipv6/MS\">Montserrat</a>, <a href=\"/ipv6/XN\">Caribbean</a>, <a href=\"/ipv6/XC\">Americas</a>","","",50]
+    ]);
+        var options = {
+          'allowHtml' : 'true'
+          };
+
+        var astable = new google.visualization.Table(document.getElementById('table_div'));
+        astable.draw(table, options);
+
+    };
+    </script>
+    </head>
+    <body onload="checkCookie()">
+
+<h2>IPv6 Capable Rate by country (%)</h2><a onclick="return setCookie(1)" href="/ipv6-zoom">Click here for a zoomable map</a></br>
+     <input type="checkbox" id="zoom" onclick="setPrefs()" name="remzoom" value="yes" ><label for="remzoom">Remember current choice for 7 days</label>
+    <div id='Map_canvas' style="width: 1240px; height: 900px; margin: 0"></div>
+<p>30 day average (14/09/2026 - 13/10/2026)</p>
+
+<hr>
+<p><FORM ACTION="/ipv6/">
+<b>Plot Type</b>: 
+<SELECT NAME="s">
+<OPTION SELECTED>IPv6 Capable
+<OPTION>IPv6 Preferred
+<OPTION>Measurement Sample Size
+</SELECT><p>
+<b>Date:</b> <input type="text" name="d" value="Auto">&nbsp;&nbsp;&nbsp;
+<b>Window (Days)</b> <INPUT TYPE="number" NAME="w" min="1" max="120" value="30"></p>
+<b>Colour Range (max value - "Auto" is auto scaling)</b> <INPUT TYPE="text" NAME="t" value="Auto"></p>
+<INPUT TYPE="submit" value="Redraw"><p>
+</ul></FORM><hr>
+ 
+                    <div id="table1_div"></div>
+<pre>
+
+
+
+</pre>
+                    <div id="table2_div"></div>
+<pre>
+
+
+
+</pre>
+                    <div id="table3_div"></div>
+<pre>
+
+
+
+</pre>
+                    <div id="table_div"></div>
+
+    </body>
+</html>
