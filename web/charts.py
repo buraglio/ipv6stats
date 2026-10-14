@@ -24,7 +24,7 @@ def line_chart(d: Datum | None, *, x: str, y: str, title: str, y_title: str) -> 
         title=title, height=340, showlegend=False, yaxis_title=y_title,
         margin=dict(l=56, r=16, t=48, b=40),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-        xaxis=dict(type="date", rangeselector=dict(buttons=RANGE_BUTTONS)),
+        xaxis=dict(type="date", rangeselector=dict(buttons=RANGE_BUTTONS, x=1, xanchor="right", y=1.02)),
     )
     return Markup(fig.to_html(full_html=False, include_plotlyjs=False,
                               config={"displaylogo": False, "responsive": True}))

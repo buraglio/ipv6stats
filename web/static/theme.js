@@ -15,8 +15,14 @@
     var css = getComputedStyle(root);
     var text = css.getPropertyValue("--text").trim();
     var grid = css.getPropertyValue("--grid").trim();
+    var bg = css.getPropertyValue("--bg").trim();
+    var border = css.getPropertyValue("--border").trim();
     document.querySelectorAll(".js-plotly-plot").forEach(function (el) {
-      window.Plotly.relayout(el, { "font.color": text, "xaxis.gridcolor": grid, "yaxis.gridcolor": grid });
+      window.Plotly.relayout(el, {
+        "font.color": text, "xaxis.gridcolor": grid, "yaxis.gridcolor": grid,
+        "xaxis.rangeselector.bgcolor": bg, "xaxis.rangeselector.activecolor": border,
+        "xaxis.rangeselector.font.color": text
+      });
     });
   }
 
