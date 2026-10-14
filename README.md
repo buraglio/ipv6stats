@@ -79,10 +79,11 @@ The site is being moved from the Streamlit server to a static site on GitHub Pag
 - `web/`: page generation. `uv run python -m web.build --data-dir data --out dist`
   renders the site from that JSON, with no network access.
 - `.github/workflows/publish.yml` runs both daily at 00:00 UTC, saves the data on the
-  `data` branch, and deploys to Pages. If more than a quarter of the sources that were
-  due fail, nothing is published and GitHub emails the failure.
-- Secrets: `CLOUDFLARE_API_KEY` (required for the Cloudflare source),
-  `ISOC_PULSE_API_KEY` (optional; the ISOC Pulse source is off without it).
+  `data` branch, and deploys to Pages. If more than a quarter of the configured sources
+  fail, nothing is published and GitHub emails the failure.
+- Secrets: `CLOUDFLARE_API_KEY` (required for the Cloudflare source). The ISOC Pulse
+  source is registered but has no API client yet, so it stays "not configured";
+  `ISOC_PULSE_API_KEY` is not passed to the workflow until that client is written.
 - Tests: `uv run pytest`.
 
 Every number on the site must come from collected data; a test fails if a
