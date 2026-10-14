@@ -41,10 +41,23 @@ def test_government_and_registries(tmp_path):
 def test_routing_security_unavailable_without_key(tmp_path):
     _, html = render(tmp_path, not_configured=("isoc_routing",))
     sec = html[html.index("Routing security"):html.index("Measurement networks")]
-    assert "— source unavailable" in sec
+    assert "not configured" in sec and "ISOC_PULSE_API_KEY" in sec
 
 
 def test_nav_and_legacy(tmp_path):
     out, html = render(tmp_path)
     assert 'aria-current="page">Extended Data Sources' in html
     assert '"Extended Data Sources": "extended-data-sources/"' in (out / "index.html").read_text()
+
+
+def test_carrier_uses_its_own_country_table(tmp_path):
+    _, html = render(tmp_path)
+    # AS7922 also appears in France's table (iterated last); Comcast's row must use the US table
+    row = html[html.index("<td>Comcast</td>"):html.index("</tr>", html.index("<td>Comcast</td>"))]
+    assert "85.3%" in row and "1.0%" not in row
+
+
+def test_labels_match_what_is_measured(tmp_path):
+    _, html = render(tmp_path)
+    assert "crawled hosts with IPv6" in html and "reachable over IPv6 (crawl" not in html
+    assert "report unicast IPv6 support (self-reported)" in html

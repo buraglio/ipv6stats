@@ -31,3 +31,12 @@ def test_routing_security_requires_key():
 def test_rov_rejects_changed_format():
     with pytest.raises(ValueError, match="ISOC Pulse response format changed"):
         SOURCES["isoc_routing"].fetch(make_ctx(routes=routes(rov={"data": [{"date": "2026-10-10", "value": 0.5}]}), env=KEY))
+
+
+def test_roa_zero_points_are_gaps_not_measurements():
+    with_gaps = {"data": [{"date": "2019-01-09", "value": 0.0}, {"date": "2019-10-08", "value": 0.29},
+                          {"date": "2019-10-09", "value": 0.0}, {"date": "2019-10-28", "value": 0.30}]}
+    r = routes(); r[f"{isoc.API}/roa?ip_version=6"] = FakeResponse(json_data=with_gaps)
+    p = SOURCES["isoc_routing"].fetch(make_ctx(routes=r, env=KEY))
+    assert [x["date"] for x in p["roa_ipv6"]["series"]] == ["2019-10-08", "2019-10-28"]
+    assert p["roa_ipv6"]["latest"]["value"] == 30.0

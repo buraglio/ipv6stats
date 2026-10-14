@@ -7,7 +7,7 @@ import tomllib
 from pathlib import Path
 
 from collect.registry import MONTH, Context, source
-from collect.sources.cloud_endpoints import check
+from collect.sources.cloud_endpoints import CANARIES, check
 
 LIST_FILE = Path(__file__).resolve().parents[2] / "reference" / "government_domains.toml"
 METHOD = "https://github.com/buraglio/ipv6stats/blob/main/collect/sources/government.py"
@@ -22,10 +22,10 @@ def _status(domain: str, has_aaaa, has_a) -> str:
     apex = check(domain, has_aaaa, has_a)
     if apex == "ipv6":
         return apex
-    www = check(f"www.{domain}", has_aaaa, has_a)
-    if www == "ipv6":
-        return www
-    return "ipv4_only" if "ipv4_only" in (apex, www) else "unknown"
+    www = has_aaaa(f"www.{domain}")  # a missing www. name is normal; only a failed lookup is unknown
+    if www:
+        return "ipv6"
+    return "unknown" if apex == "unknown" or www is None else "ipv4_only"
 
 
 def measure(listing: dict, has_aaaa, has_a) -> dict:
@@ -44,4 +44,7 @@ def measure(listing: dict, has_aaaa, has_a) -> dict:
 
 @source("government_domains", MONTH, title="Government websites with IPv6 (AAAA lookups, measured)", url=METHOD)
 def fetch(ctx: Context) -> dict:
+    if not any(check(host, ctx.has_aaaa, ctx.has_a) == "ipv6" for host in CANARIES):
+        raise ValueError(f"no AAAA answer even for known dual-stack hosts {', '.join(CANARIES)}; "
+                         "the resolver may be filtering IPv6 answers")
     return measure(load_list(), ctx.has_aaaa, ctx.has_a)

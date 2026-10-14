@@ -21,6 +21,19 @@ def test_government_lookup_failures_fail_the_source():
 
 
 def test_fetch_reads_reference_list():
+    domains = {d for g in gov.load_list()["group"] for d in g["domains"]}
+    result = SOURCES["government_domains"].fetch(make_ctx(aaaa=domains | set(gov.CANARIES)))
+    assert result["total"] == len(domains) and result["unknown"] == 0
+
+
+def test_resolver_hiding_aaaa_fails_the_source():
     hosts = {d for g in gov.load_list()["group"] for d in g["domains"]}
-    result = SOURCES["government_domains"].fetch(make_ctx(aaaa=hosts))
-    assert result["total"] == len(hosts) and result["unknown"] == 0
+    with pytest.raises(ValueError, match="dual-stack"):
+        SOURCES["government_domains"].fetch(make_ctx(aaaa=set(), a=hosts))
+
+
+def test_failed_half_lookup_is_unknown_not_ipv4():
+    # apex lookup timed out, www has only IPv4: the apex might have IPv6, so the answer is unknown
+    def has_aaaa(name):
+        return None if name == "a.example" else False
+    assert gov._status("a.example", has_aaaa, lambda n: True) == "unknown"

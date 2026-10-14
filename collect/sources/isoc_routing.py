@@ -20,9 +20,17 @@ def parse_rov(body: dict) -> dict:
     return {"latest": series[-1], "series": series}
 
 
+def without_gaps(series: dict) -> dict:
+    """ROA coverage of address space can't drop to zero and recover; zero points are missing data."""
+    points = [p for p in series["series"] if p["value"] > 0]
+    if not points:
+        raise ValueError("ISOC Pulse ROA series has no non-zero values")
+    return {"latest": points[-1], "series": points}
+
+
 @source("isoc_routing", MONTH, title="Internet Society Pulse routing security (API)", url=HOME,
         requires_env=("ISOC_PULSE_API_KEY",))
 def fetch(ctx: Context) -> dict:
-    return {"roa_ipv6": parse_series(_get(ctx, "/roa?ip_version=6")),
-            "roa_ipv4": parse_series(_get(ctx, "/roa?ip_version=4")),
+    return {"roa_ipv6": without_gaps(parse_series(_get(ctx, "/roa?ip_version=6"))),
+            "roa_ipv4": without_gaps(parse_series(_get(ctx, "/roa?ip_version=4"))),
             "rov": parse_rov(_get(ctx, "/rov")), "url": HOME}

@@ -19,13 +19,14 @@
 <p>ROAs cover {{ routing.value.roa_ipv6.latest.value | format_value("pct") }} of advertised IPv6 address space and {{ routing.value.roa_ipv4.latest.value | format_value("pct") }} of IPv4 ({{ routing.value.roa_ipv6.latest.date }}). Route origin validation: {{ routing.value.rov.latest.partial | format_value("pct") }} partial and {{ routing.value.rov.latest.full | format_value("pct") }} full ({{ routing.value.rov.latest.date }}).</p>
 <div class="chart">{{ roa_chart }}</div>
 {{ provenance(routing) }}
+{% elif routing_status == "not_configured" %}<p class="missing">Routing security is not configured: set ISOC_PULSE_API_KEY to collect ISOC Pulse routing-security data.</p>
 {% else %}{{ unavailable() }}{% endif %}
 {% if bogons %}<p>Team Cymru lists {{ bogons.value.prefixes | format_value("int") }} IPv6 bogon prefixes (updated {{ bogons.value.updated }}).</p>{{ provenance(bogons) }}{% else %}{{ unavailable() }}{% endif %}
 
 <h2>Measurement networks</h2>
 {% if atlas %}<p>RIPE Atlas: {{ atlas.value.ipv6_works | format_value("int") }} of {{ atlas.value.connected | format_value("int") }} connected probes have working IPv6 ({{ atlas.value.ipv4_works | format_value("int") }} have working IPv4).</p>{{ provenance(atlas) }}{% else %}{{ unavailable() }}{% endif %}
 {% if matrix %}
-<p>IPv6 Matrix: {{ matrix.value.latest.share | format_value("pct") }} of {{ matrix.value.latest.hosts | format_value("int") }} crawled hosts reachable over IPv6 (crawl of {{ matrix.value.latest.date }}).</p>
+<p>IPv6 Matrix: {{ matrix.value.latest.share | format_value("pct") }} of {{ matrix.value.latest.hosts | format_value("int") }} crawled hosts with IPv6 (crawl of {{ matrix.value.latest.date }}).</p>
 <div class="chart">{{ matrix_chart }}</div>
 <details class="source"><summary>By country (largest crawls)</summary>
 <div class="table-wrap"><table><thead><tr><th>Country</th><th>Hosts</th><th>With IPv6</th></tr></thead>
@@ -35,7 +36,7 @@
 {% else %}{{ unavailable() }}{% endif %}
 
 <h2>Interconnection</h2>
-{% if peeringdb %}<p>{{ peeringdb.value.ipv6_networks | format_value("int") }} of {{ peeringdb.value.networks | format_value("int") }} networks in PeeringDB list IPv6 traffic.</p>{{ provenance(peeringdb) }}{% else %}{{ unavailable() }}{% endif %}
+{% if peeringdb %}<p>{{ peeringdb.value.ipv6_networks | format_value("int") }} of {{ peeringdb.value.networks | format_value("int") }} networks in PeeringDB report unicast IPv6 support (self-reported).</p>{{ provenance(peeringdb) }}{% else %}{{ unavailable() }}{% endif %}
 
 <h2>Access networks</h2>
 <p class="provenance">Network list maintained by this site, last reviewed {{ carriers_reviewed }}; figures from APNIC's per-network measurements.</p>
