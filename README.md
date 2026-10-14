@@ -78,8 +78,10 @@ The site is being moved from the Streamlit server to a static site on GitHub Pag
   `--force` re-fetches everything; `--only <source>` fetches one.
 - `web/`: page generation. `uv run python -m web.build --data-dir data --out dist`
   renders the site from that JSON, with no network access.
-- `.github/workflows/publish.yml` runs both daily at 00:00 UTC, saves the data on the
-  `data` branch, and deploys to Pages. If more than a quarter of the configured sources
+- `.github/workflows/publish.yml` runs both daily at 00:00 UTC (and on pushes to `main`
+  or a manual "Run workflow"), saves the data on the `data` branch, and deploys to Pages.
+  Only `main` deploys; `.github/workflows/test.yml` runs the tests on `staging` and on
+  pull requests. If more than a quarter of the configured sources
   fail, nothing is published and GitHub emails the failure.
 - Secrets: `CLOUDFLARE_API_KEY` (required for the Cloudflare source). The ISOC Pulse
   source is registered but has no API client yet, so it stays "not configured";

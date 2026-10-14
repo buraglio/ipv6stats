@@ -22,3 +22,24 @@ def test_workflow_does_not_enable_isoc_before_its_client_exists():
     if isoc_has_client():
         pytest.skip("ISOC client exists; the secret may be passed")
     assert "secrets.ISOC_PULSE_API_KEY" not in WORKFLOW.read_text()
+
+
+TESTS_WORKFLOW = WORKFLOW.parent / "test.yml"
+
+
+def test_publish_runs_only_from_main():
+    # Pages has one site per repo and schedule/dispatch only run from the default branch.
+    text = WORKFLOW.read_text()
+    assert 'cron: "0 0 * * *"' in text
+    assert "workflow_dispatch:" in text
+    assert "branches: [main]" in text
+    assert "static-site" not in text
+
+
+def test_other_branches_run_tests_without_secrets_or_deploys():
+    text = TESTS_WORKFLOW.read_text()
+    assert "branches: [staging]" in text
+    assert "pull_request:" in text
+    assert "uv run pytest" in text
+    assert "secrets." not in text
+    assert "deploy-pages" not in text

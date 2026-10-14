@@ -1,0 +1,28 @@
+name: Tests
+
+# Runs the test suite on staging and pull requests. No secrets, no data collection,
+# no deploy: only main publishes the site (publish.yml).
+on:
+  push:
+    branches: [staging]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: uv sync --frozen
+
+      - name: Test
+        run: uv run pytest -q

@@ -10,7 +10,7 @@ on:
         type: boolean
         default: false
   push:
-    branches: [static-site]   # until merged to main, a push is the only way to run it (see Step 7)
+    branches: [main]   # Pages has one site per repo; only main deploys. Other branches: test.yml
 
 permissions:
   contents: write
