@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Callable, Iterable
@@ -28,6 +28,13 @@ def combine(value: Any, inputs: Iterable[Datum]) -> Datum:
         raise ValueError("combine() needs at least one input")
     return Datum(value, tuple(sorted({s for d in inputs for s in d.sources})),
                  min(d.fetched_at for d in inputs), any(d.stale for d in inputs))
+
+
+def field(d: Datum | None, key: str) -> Datum | None:
+    """A Datum for one key of a dict-valued Datum, keeping its provenance."""
+    if d is None or not isinstance(d.value, dict) or d.value.get(key) is None:
+        return None
+    return replace(d, value=d.value[key])
 
 
 class Data:
