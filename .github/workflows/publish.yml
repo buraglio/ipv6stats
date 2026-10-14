@@ -56,7 +56,7 @@ jobs:
         id: collect
         env:
           CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          # Add ISOC_PULSE_API_KEY here once collect/sources/isoc.py has a real API client.
+          ISOC_PULSE_API_KEY: ${{ secrets.ISOC_PULSE_API_KEY }}
         run: uv run python -m collect.run --data-dir data ${{ inputs.force && '--force' || '' }}
 
       - name: Save data (also after a failed collect, to keep the error record)

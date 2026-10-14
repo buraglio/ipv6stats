@@ -85,9 +85,9 @@ The site is being moved from the Streamlit server to a static site on GitHub Pag
   Only `main` deploys; `.github/workflows/test.yml` runs the tests on `staging` and on
   pull requests. If more than a quarter of the configured sources
   fail, nothing is published and GitHub emails the failure.
-- Secrets: `CLOUDFLARE_API_KEY` (required for the Cloudflare source). The ISOC Pulse
-  source is registered but has no API client yet, so it stays "not configured";
-  `ISOC_PULSE_API_KEY` is not passed to the workflow until that client is written.
+- Secrets: `CLOUDFLARE_API_KEY` (Cloudflare Radar API token, the ~40-character secret,
+  not the 32-character token ID) and `ISOC_PULSE_API_KEY` (Internet Society Pulse API key).
+  Without a key, that source shows as "not configured" and isn't counted as a failure.
 - Tests: `uv run pytest`.
 
 Every number on the site must come from collected data; a test fails if a

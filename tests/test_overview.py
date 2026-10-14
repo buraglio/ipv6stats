@@ -65,7 +65,7 @@ def test_stale_source_is_marked(tmp_path):
 
 def test_freshness_table_lists_opt_in_source(tmp_path):
     html = render(tmp_path)
-    assert "Internet Society Pulse API (opt-in)" in html
+    assert "Internet Society Pulse API" in html
     assert "not configured" in html
     assert "ISOC_PULSE_API_KEY" in html
 
