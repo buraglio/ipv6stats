@@ -78,7 +78,8 @@ The site is being moved from the Streamlit server to a static site on GitHub Pag
   `--force` re-fetches everything; `--only <source>` fetches one.
 - `web/`: page generation. `uv run python -m web.build --data-dir data --out dist`
   renders the site from that JSON, with no network access.
-- Pages so far: Overview, Global Adoption, Country Analysis, Cloud Services, and one page per
+- Pages so far: Overview, Global Adoption, Country Analysis, Cloud Services, BGP Statistics,
+  and one page per
   economy (`/country/<code>/`). The remaining Streamlit pages are converted in later plans.
 - `reference/cloud_providers.toml` is hand-maintained: update an entry's `last_reviewed` when you
   check it against the provider's documentation; the build warns after 180 days.
