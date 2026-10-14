@@ -1,7 +1,7 @@
 [project]
 name = "ipv6stats"
 version = "1.0.0"
-description = "IPv6 Statistics Dashboard - High-performance Streamlit app for global IPv6 adoption metrics"
+description = "IPv6 Statistics Dashboard - global IPv6 adoption metrics"
 requires-python = ">=3.11"
 dependencies = [
     "folium>=0.20.0",
@@ -12,16 +12,16 @@ dependencies = [
     "pandas>=2.3.1",
     "numpy>=2.3.2",
     "plotly>=6.3.0",
+    "python-dotenv>=1.0.0",
+    "jinja2>=3.1.4",
+    "dnspython>=2.6.1",
 ]
 
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+[dependency-groups]
+dev = ["pytest>=8.3"]
 
-[tool.setuptools]
-py-modules = []
+[tool.uv]
+package = false
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["pages*"]
-exclude = ["img*", "venv*", "*.egg-info*"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]

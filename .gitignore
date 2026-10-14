@@ -43,3 +43,7 @@ Thumbs.db
 CHANGES
 
 .env
+# Static site pipeline
+data/
+dist/
+.pytest_cache/
