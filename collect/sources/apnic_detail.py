@@ -2,6 +2,7 @@
 import html
 import logging
 import re
+import time
 from datetime import date
 
 from collect.registry import MONTH, Context, source
@@ -12,6 +13,8 @@ logger = logging.getLogger(__name__)
 TOP_ECONOMIES = 50
 TOP_NETWORKS = 20
 MAX_MISSING = 5
+DEADLINE_SECONDS = 600  # stop well inside the workflow's 30-minute limit
+clock = time.monotonic  # replaced in tests
 # History rows: [new Date('2011-10-20'),0.19,0.22]  -> date, IPv6-capable, IPv6-preferred
 # (sample-count rows have only two values and are not matched)
 SERIES = re.compile(r"\[new Date\('(\d{4}-\d{2}-\d{2})'\),([\d.]+),([\d.]+)\]")
@@ -52,16 +55,20 @@ def fetch(ctx: Context) -> dict:
     response = ctx.session.get(apnic.URL, timeout=30)
     response.raise_for_status()
     ranked = sorted(apnic.parse(response.text)["economies"], key=lambda e: e["samples"], reverse=True)
+    started = clock()
     economies, missing = {}, []
     for economy in ranked[:TOP_ECONOMIES]:
         code = economy["code"]
-        try:
-            page = ctx.session.get(f"{apnic.URL}{code}", timeout=60)
-            page.raise_for_status()
-            economies[code] = parse_economy(page.text)
-        except Exception as exc:  # one bad page must not discard the others
-            logger.warning("APNIC page for %s failed: %s", code, exc)
+        if clock() - started > DEADLINE_SECONDS:  # out of time: count the rest as missing
             missing.append(code)
-    if len(missing) > MAX_MISSING:
-        raise ValueError(f"{len(missing)} APNIC economy pages failed: {', '.join(missing)}")
+        else:
+            try:
+                page = ctx.session.get(f"{apnic.URL}{code}", timeout=60)
+                page.raise_for_status()
+                economies[code] = parse_economy(page.text)
+            except Exception as exc:  # one bad page must not discard the others
+                logger.warning("APNIC page for %s failed: %s", code, exc)
+                missing.append(code)
+        if len(missing) > MAX_MISSING:  # the result will be discarded; stop fetching
+            raise ValueError(f"{len(missing)} APNIC economy pages failed: {', '.join(missing)}")
     return {"economies": economies, "missing": missing}

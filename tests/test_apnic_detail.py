@@ -67,3 +67,28 @@ def test_fetch_tolerates_a_few_failed_pages(monkeypatch):
     monkeypatch.setattr(apnic_detail, "MAX_MISSING", 0)
     with pytest.raises(ValueError, match="economy pages failed"):
         SOURCES["apnic_economy_detail"].fetch(make_ctx(routes=routes))
+
+
+def test_stops_fetching_once_too_many_pages_failed(monkeypatch):
+    monkeypatch.setattr(apnic_detail, "TOP_ECONOMIES", 3)
+    monkeypatch.setattr(apnic_detail, "MAX_MISSING", 0)
+    codes = top_codes(3)
+    routes = {f"{apnic.URL}{c}": FakeResponse(status_code=503) for c in codes}
+    routes[apnic.URL] = FakeResponse(text=MAIN)
+    ctx = make_ctx(routes=routes)
+    with pytest.raises(ValueError, match="economy pages failed"):
+        SOURCES["apnic_economy_detail"].fetch(ctx)
+    assert len(ctx.session.calls) == 2  # main page + first economy; no point fetching the rest
+
+
+def test_overall_deadline_marks_remaining_pages_missing(monkeypatch):
+    monkeypatch.setattr(apnic_detail, "TOP_ECONOMIES", 3)
+    monkeypatch.setattr(apnic_detail, "MAX_MISSING", 5)
+    ticks = iter([0, 0, apnic_detail.DEADLINE_SECONDS + 1, apnic_detail.DEADLINE_SECONDS + 2])
+    monkeypatch.setattr(apnic_detail, "clock", lambda: next(ticks))
+    codes = top_codes(3)
+    routes = {f"{apnic.URL}{c}": FakeResponse(text=US) for c in codes}
+    routes[apnic.URL] = FakeResponse(text=MAIN)
+    result = SOURCES["apnic_economy_detail"].fetch(make_ctx(routes=routes))
+    assert sorted(result["economies"]) == [codes[0]]
+    assert result["missing"] == codes[1:]
