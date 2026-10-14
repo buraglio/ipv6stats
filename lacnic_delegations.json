@@ -1,0 +1,58 @@
+{
+ "countries": 30,
+ "file_date": "2026-10-13",
+ "top_countries": [
+  {
+   "blocks_32": 8477.55,
+   "code": "BR",
+   "share": 49.41
+  },
+  {
+   "blocks_32": 5318.1,
+   "code": "AR",
+   "share": 31.0
+  },
+  {
+   "blocks_32": 763.08,
+   "code": "MX",
+   "share": 4.45
+  },
+  {
+   "blocks_32": 510.0,
+   "code": "VE",
+   "share": 2.97
+  },
+  {
+   "blocks_32": 425.84,
+   "code": "CO",
+   "share": 2.48
+  },
+  {
+   "blocks_32": 293.0,
+   "code": "CL",
+   "share": 1.71
+  },
+  {
+   "blocks_32": 255.01,
+   "code": "EC",
+   "share": 1.49
+  },
+  {
+   "blocks_32": 221.0,
+   "code": "PE",
+   "share": 1.29
+  },
+  {
+   "blocks_32": 204.01,
+   "code": "DO",
+   "share": 1.19
+  },
+  {
+   "blocks_32": 102.0,
+   "code": "HN",
+   "share": 0.59
+  }
+ ],
+ "total_blocks_32": 17157.79,
+ "url": "https://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-latest"
+}

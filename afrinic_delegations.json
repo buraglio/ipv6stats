@@ -1,0 +1,58 @@
+{
+ "countries": 53,
+ "file_date": "2026-10-14",
+ "top_countries": [
+  {
+   "blocks_32": 5283.08,
+   "code": "ZA",
+   "share": 45.38
+  },
+  {
+   "blocks_32": 4141.0,
+   "code": "EG",
+   "share": 35.57
+  },
+  {
+   "blocks_32": 288.0,
+   "code": "MW",
+   "share": 2.47
+  },
+  {
+   "blocks_32": 286.0,
+   "code": "GH",
+   "share": 2.46
+  },
+  {
+   "blocks_32": 271.0,
+   "code": "MA",
+   "share": 2.33
+  },
+  {
+   "blocks_32": 266.0,
+   "code": "RW",
+   "share": 2.28
+  },
+  {
+   "blocks_32": 260.0,
+   "code": "ET",
+   "share": 2.23
+  },
+  {
+   "blocks_32": 153.0,
+   "code": "KE",
+   "share": 1.31
+  },
+  {
+   "blocks_32": 133.01,
+   "code": "NG",
+   "share": 1.14
+  },
+  {
+   "blocks_32": 60.0,
+   "code": "TZ",
+   "share": 0.52
+  }
+ ],
+ "total_blocks_32": 11642.1,
+ "url": "https://ftp.afrinic.net/pub/stats/afrinic/delegated-afrinic-latest"
+}

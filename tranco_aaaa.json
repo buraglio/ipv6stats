@@ -1,0 +1,509 @@
+{
+ "checked": 1000,
+ "list_url": "https://tranco-list.eu/",
+ "percentage": 40.8,
+ "top": [
+  {
+   "aaaa": true,
+   "domain": "google.com",
+   "rank": 1
+  },
+  {
+   "aaaa": true,
+   "domain": "cloudflare.com",
+   "rank": 2
+  },
+  {
+   "aaaa": true,
+   "domain": "gstatic.com",
+   "rank": 3
+  },
+  {
+   "aaaa": true,
+   "domain": "facebook.com",
+   "rank": 4
+  },
+  {
+   "aaaa": false,
+   "domain": "amazonaws.com",
+   "rank": 5
+  },
+  {
+   "aaaa": false,
+   "domain": "akamai.net",
+   "rank": 6
+  },
+  {
+   "aaaa": true,
+   "domain": "microsoft.com",
+   "rank": 7
+  },
+  {
+   "aaaa": true,
+   "domain": "googleapis.com",
+   "rank": 8
+  },
+  {
+   "aaaa": true,
+   "domain": "apple.com",
+   "rank": 9
+  },
+  {
+   "aaaa": true,
+   "domain": "youtube.com",
+   "rank": 10
+  },
+  {
+   "aaaa": true,
+   "domain": "instagram.com",
+   "rank": 11
+  },
+  {
+   "aaaa": true,
+   "domain": "fbcdn.net",
+   "rank": 12
+  },
+  {
+   "aaaa": false,
+   "domain": "ezviz7.com",
+   "rank": 13
+  },
+  {
+   "aaaa": true,
+   "domain": "mail.ru",
+   "rank": 14
+  },
+  {
+   "aaaa": false,
+   "domain": "twitter.com",
+   "rank": 15
+  },
+  {
+   "aaaa": false,
+   "domain": "domaincontrol.com",
+   "rank": 16
+  },
+  {
+   "aaaa": true,
+   "domain": "dzen.ru",
+   "rank": 17
+  },
+  {
+   "aaaa": true,
+   "domain": "linkedin.com",
+   "rank": 18
+  },
+  {
+   "aaaa": false,
+   "domain": "akamaiedge.net",
+   "rank": 19
+  },
+  {
+   "aaaa": false,
+   "domain": "hicloudcam.com",
+   "rank": 20
+  },
+  {
+   "aaaa": true,
+   "domain": "googlevideo.com",
+   "rank": 21
+  },
+  {
+   "aaaa": false,
+   "domain": "akadns.net",
+   "rank": 22
+  },
+  {
+   "aaaa": true,
+   "domain": "googletagmanager.com",
+   "rank": 23
+  },
+  {
+   "aaaa": true,
+   "domain": "office.com",
+   "rank": 24
+  },
+  {
+   "aaaa": true,
+   "domain": "live.com",
+   "rank": 25
+  },
+  {
+   "aaaa": true,
+   "domain": "azure.com",
+   "rank": 26
+  },
+  {
+   "aaaa": true,
+   "domain": "amazon.com",
+   "rank": 27
+  },
+  {
+   "aaaa": false,
+   "domain": "gtld-servers.net",
+   "rank": 28
+  },
+  {
+   "aaaa": false,
+   "domain": "appsflyersdk.com",
+   "rank": 29
+  },
+  {
+   "aaaa": false,
+   "domain": "github.com",
+   "rank": 30
+  },
+  {
+   "aaaa": true,
+   "domain": "wikipedia.org",
+   "rank": 31
+  },
+  {
+   "aaaa": false,
+   "domain": "cloudfront.net",
+   "rank": 32
+  },
+  {
+   "aaaa": false,
+   "domain": "aaplimg.com",
+   "rank": 33
+  },
+  {
+   "aaaa": true,
+   "domain": "whatsapp.net",
+   "rank": 34
+  },
+  {
+   "aaaa": true,
+   "domain": "bing.com",
+   "rank": 35
+  },
+  {
+   "aaaa": true,
+   "domain": "fastly.net",
+   "rank": 36
+  },
+  {
+   "aaaa": false,
+   "domain": "apple-dns.net",
+   "rank": 37
+  },
+  {
+   "aaaa": true,
+   "domain": "cloud.microsoft",
+   "rank": 38
+  },
+  {
+   "aaaa": false,
+   "domain": "trafficmanager.net",
+   "rank": 39
+  },
+  {
+   "aaaa": false,
+   "domain": "office.net",
+   "rank": 40
+  },
+  {
+   "aaaa": true,
+   "domain": "sharepoint.com",
+   "rank": 41
+  },
+  {
+   "aaaa": true,
+   "domain": "googleusercontent.com",
+   "rank": 42
+  },
+  {
+   "aaaa": true,
+   "domain": "gandi.net",
+   "rank": 43
+  },
+  {
+   "aaaa": true,
+   "domain": "netflix.com",
+   "rank": 44
+  },
+  {
+   "aaaa": false,
+   "domain": "microsoftonline.com",
+   "rank": 45
+  },
+  {
+   "aaaa": true,
+   "domain": "doubleclick.net",
+   "rank": 46
+  },
+  {
+   "aaaa": true,
+   "domain": "youtu.be",
+   "rank": 47
+  },
+  {
+   "aaaa": false,
+   "domain": "x.com",
+   "rank": 48
+  },
+  {
+   "aaaa": true,
+   "domain": "skype.com",
+   "rank": 49
+  },
+  {
+   "aaaa": true,
+   "domain": "wordpress.org",
+   "rank": 50
+  },
+  {
+   "aaaa": true,
+   "domain": "icloud.com",
+   "rank": 51
+  },
+  {
+   "aaaa": false,
+   "domain": "digicert.com",
+   "rank": 52
+  },
+  {
+   "aaaa": false,
+   "domain": "pinterest.com",
+   "rank": 53
+  },
+  {
+   "aaaa": true,
+   "domain": "googledomains.com",
+   "rank": 54
+  },
+  {
+   "aaaa": true,
+   "domain": "googlesyndication.com",
+   "rank": 55
+  },
+  {
+   "aaaa": true,
+   "domain": "cloudflare.net",
+   "rank": 56
+  },
+  {
+   "aaaa": true,
+   "domain": "whatsapp.com",
+   "rank": 57
+  },
+  {
+   "aaaa": false,
+   "domain": "tiktok.com",
+   "rank": 58
+  },
+  {
+   "aaaa": true,
+   "domain": "goo.gl",
+   "rank": 59
+  },
+  {
+   "aaaa": false,
+   "domain": "gvt1.com",
+   "rank": 60
+  },
+  {
+   "aaaa": false,
+   "domain": "windowsupdate.com",
+   "rank": 61
+  },
+  {
+   "aaaa": true,
+   "domain": "yahoo.com",
+   "rank": 62
+  },
+  {
+   "aaaa": true,
+   "domain": "adobe.com",
+   "rank": 63
+  },
+  {
+   "aaaa": false,
+   "domain": "windows.net",
+   "rank": 64
+  },
+  {
+   "aaaa": false,
+   "domain": "endpoints.news",
+   "rank": 65
+  },
+  {
+   "aaaa": false,
+   "domain": "pv-cdn.net",
+   "rank": 66
+  },
+  {
+   "aaaa": true,
+   "domain": "zoom.us",
+   "rank": 67
+  },
+  {
+   "aaaa": false,
+   "domain": "roblox.com",
+   "rank": 68
+  },
+  {
+   "aaaa": true,
+   "domain": "wa.me",
+   "rank": 69
+  },
+  {
+   "aaaa": true,
+   "domain": "myfritz.net",
+   "rank": 70
+  },
+  {
+   "aaaa": true,
+   "domain": "spotify.com",
+   "rank": 71
+  },
+  {
+   "aaaa": false,
+   "domain": "tiktokcdn.com",
+   "rank": 72
+  },
+  {
+   "aaaa": true,
+   "domain": "edgekey.net",
+   "rank": 73
+  },
+  {
+   "aaaa": false,
+   "domain": "akam.net",
+   "rank": 74
+  },
+  {
+   "aaaa": false,
+   "domain": "opera.com",
+   "rank": 75
+  },
+  {
+   "aaaa": false,
+   "domain": "msn.com",
+   "rank": 76
+  },
+  {
+   "aaaa": false,
+   "domain": "baidu.com",
+   "rank": 77
+  },
+  {
+   "aaaa": true,
+   "domain": "nginx.org",
+   "rank": 78
+  },
+  {
+   "aaaa": true,
+   "domain": "ntp.org",
+   "rank": 79
+  },
+  {
+   "aaaa": true,
+   "domain": "workers.dev",
+   "rank": 80
+  },
+  {
+   "aaaa": true,
+   "domain": "qq.com",
+   "rank": 81
+  },
+  {
+   "aaaa": false,
+   "domain": "root-servers.net",
+   "rank": 82
+  },
+  {
+   "aaaa": false,
+   "domain": "tiktokv.com",
+   "rank": 83
+  },
+  {
+   "aaaa": true,
+   "domain": "yandex.net",
+   "rank": 84
+  },
+  {
+   "aaaa": false,
+   "domain": "vimeo.com",
+   "rank": 85
+  },
+  {
+   "aaaa": false,
+   "domain": "gwfb.net",
+   "rank": 86
+  },
+  {
+   "aaaa": false,
+   "domain": "f5.com",
+   "rank": 87
+  },
+  {
+   "aaaa": false,
+   "domain": "a2z.com",
+   "rank": 88
+  },
+  {
+   "aaaa": true,
+   "domain": "mozilla.org",
+   "rank": 89
+  },
+  {
+   "aaaa": true,
+   "domain": "blogspot.com",
+   "rank": 90
+  },
+  {
+   "aaaa": true,
+   "domain": "chatgpt.com",
+   "rank": 91
+  },
+  {
+   "aaaa": true,
+   "domain": "triplinkintl.com",
+   "rank": 92
+  },
+  {
+   "aaaa": false,
+   "domain": "nginx.com",
+   "rank": 93
+  },
+  {
+   "aaaa": true,
+   "domain": "b-cdn.net",
+   "rank": 94
+  },
+  {
+   "aaaa": false,
+   "domain": "yccdn.ru",
+   "rank": 95
+  },
+  {
+   "aaaa": true,
+   "domain": "yandex.ru",
+   "rank": 96
+  },
+  {
+   "aaaa": false,
+   "domain": "gvt2.com",
+   "rank": 97
+  },
+  {
+   "aaaa": false,
+   "domain": "amazonvideo.com",
+   "rank": 98
+  },
+  {
+   "aaaa": true,
+   "domain": "yuga.com",
+   "rank": 99
+  },
+  {
+   "aaaa": false,
+   "domain": "wordpress.com",
+   "rank": 100
+  }
+ ],
+ "unresolved": 0,
+ "with_aaaa": 408
+}
