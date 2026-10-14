@@ -47,3 +47,16 @@ def test_reference_has_no_missing_values_written_as_text():
     assert '"None"' not in text
     s3 = next(s for p in reference.load_cloud_providers() if p["key"] == "aws" for s in p["service"] if s["name"] == "S3")
     assert "prefix_delegation" not in s3 and "nat_free_egress" not in s3
+
+
+def test_list_reference_files_load_and_have_no_statistics():
+    carriers, gov = reference.load_carriers(), reference.load_government()
+    assert carriers["carrier"][0]["asn"] == 21928 and gov["group"][0]["domains"]
+    for path in (reference.CARRIERS_FILE, reference.GOVERNMENT_FILE):
+        assert "%" not in path.read_text()
+
+
+def test_list_reviews_warn_when_old():
+    old = datetime(2027, 6, 1, tzinfo=timezone.utc)
+    assert len(reference.list_reviews(old)) == 2
+    assert reference.list_reviews(datetime(2026, 10, 15, tzinfo=timezone.utc)) == []

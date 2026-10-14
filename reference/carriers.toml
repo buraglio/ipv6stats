@@ -1,0 +1,78 @@
+# Access networks shown on the Extended Data Sources page. Lists only: their IPv6 figures
+# come from APNIC's per-network measurements. Update last_reviewed when you check the list.
+last_reviewed = "2026-10-14"
+
+[[carrier]]
+name = "T-Mobile USA"
+asn = 21928
+country = "US"
+
+[[carrier]]
+name = "Verizon Wireless"
+asn = 22394
+country = "US"
+
+[[carrier]]
+name = "AT&T Mobility"
+asn = 20057
+country = "US"
+
+[[carrier]]
+name = "Comcast"
+asn = 7922
+country = "US"
+
+[[carrier]]
+name = "Reliance Jio"
+asn = 55836
+country = "IN"
+
+[[carrier]]
+name = "Bharti Airtel"
+asn = 9498
+country = "IN"
+
+[[carrier]]
+name = "Deutsche Telekom"
+asn = 3320
+country = "DE"
+
+[[carrier]]
+name = "Vodafone Germany"
+asn = 3209
+country = "DE"
+
+[[carrier]]
+name = "Orange France"
+asn = 3215
+country = "FR"
+
+[[carrier]]
+name = "BT / EE"
+asn = 2856
+country = "GB"
+
+[[carrier]]
+name = "NTT Docomo"
+asn = 9605
+country = "JP"
+
+[[carrier]]
+name = "SoftBank"
+asn = 17676
+country = "JP"
+
+[[carrier]]
+name = "Telstra"
+asn = 1221
+country = "AU"
+
+[[carrier]]
+name = "SK Telecom"
+asn = 9644
+country = "KR"
+
+[[carrier]]
+name = "KT"
+asn = 4766
+country = "KR"

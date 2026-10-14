@@ -443,3 +443,47 @@ Owner-approved approach: measured data plus a curated reference file. Letter gra
 ### Page
 
 `/cloud-services/` (legacy `?page=Cloud Services`): a comparison table of all 23 providers (hostnames with IPv6 "n of m", published IPv6/IPv4 prefix counts where available, curated support summary, review date); an AWS per-service summary with the full table in a collapsible section; and a section per provider combining its measured hostnames and ranges with its curated reference block. The old summary metrics, grade chart and readiness matrix are removed.
+
+## Amendment 4 — remaining pages and switch-over (2026-10-14)
+
+Owner-approved lists for the remaining work. Each item becomes its own plan.
+
+### BGP Statistics (`/bgp-statistics/`)
+- **Potaroo IPv6 report** (`bgp.potaroo.net/v6/as2.0/index.html`): summary statistics keyed by each statistic's data-file name: FIB/RIB entries, unique ASes, origin-only and transit-only ASes, average prefix length, average AS path length, address space advertised. Plus the prefix-length distribution (count and percentage per length).
+- **AS count history** from Potaroo's `bgp-as-count.txt` (same format as `bgp-active.txt`) gives real AS growth. It replaces the invented `total_asns` / `monthly_growth` / `new_asns`.
+- **CIDR Report** (`www.cidr-report.org/v6/as2.0/`): the dated aggregation table (top 30 ASes by possible aggregation gain: prefixes now, after aggregation, name). Labeled as such, not as "top ASes by prefix count".
+- **RouteViews API**: active collectors and each collector's latest IPv6 prefix and peer counts.
+- **Kept:** BGP table history (`bgp_v6_table`), Cisco 6lab (`cisco_6lab`).
+- **Removed:** the hand-typed prefix-size distribution and top-ASN list.
+
+### Historical Trends (`/historical-trends/`)
+- **APNIC history** for the world (`XA`) and the five regions (`XB`–`XF`).
+- **ISOC Pulse** global user series.
+- Potaroo BGP and AS history; RIR allocation history; Cloudflare 52-week series.
+- **Charts from our own `data` branch history.**
+- **Removed:** invented curves, "Facebook" trends. Text sections become dated reference blocks without statistics, or are removed.
+
+### Extended Data Sources (`/extended-data-sources/`)
+- **Kept/added:**
+  - RIR detail sections, moved from Global Adoption (without ARIN "membership statistics")
+  - Hurricane Electric IPv6 progress report
+  - Team Cymru IPv6 bogons
+  - RIPE Atlas IPv6 probes
+  - PeeringDB networks with IPv6
+  - ISOC Pulse `/roa`, `/rov` (and `/ixp` if usable), replacing RIPEstat RPKI and IXPDB
+  - Tranco
+  - Government domains AAAA check
+  - Mobile carriers via APNIC per-AS data, with the carrier ASN list as a reference file
+  - IPv6 Matrix, if its API is usable
+- **Removed:** CAIDA (never fetched), World IPv6 Launch (archived), IPv6-Test.com, ipv6enabled.net.
+
+### Data Sources (`/data-sources/`)
+Generated from the source registry (title, link, method, schedule, status, last update) and the reference files. The hand-written attribution text is removed.
+
+### Switch-over
+DNS already points at GitHub Pages (2026-10-14). Remaining steps:
+1. HTTPS certificate and "Enforce HTTPS" (owner, in Pages settings).
+2. Legacy `?page=` redirects for every converted page.
+3. A 404 page.
+4. Remove the Streamlit files and dependencies.
+5. Retire the container.

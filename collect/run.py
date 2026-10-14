@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Mapping
 
+from collect import history
 from collect import manifest as manifest_file
 from collect.registry import SOURCES, Context, Source
 
@@ -92,6 +93,11 @@ def run(sources: Mapping[str, Source], data_dir: Path, ctx: Context, force: bool
     result.attempted.sort()
     result.failed.sort()
     manifest_file.save(data_dir, manifest)
+    try:  # the snapshot file is auxiliary: it must never fail a collection run
+        history.record(data_dir, manifest, sources, ctx.now)
+    except ValueError as exc:
+        logger.warning("not recording today's snapshot: %s", exc)
+        print(f"::warning::not recording today's snapshot: {exc}")
     return result
 
 

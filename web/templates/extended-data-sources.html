@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% from "macros.html" import provenance, unavailable, freshness_table %}
+{% block content %}
+<h1>Extended IPv6 Data Sources</h1>
+
+<h2>Domains and DNS</h2>
+{% if he %}
+<p>{{ he.value.tlds_ipv6_ns | format_value("int") }} of {{ he.value.tlds | format_value("int") }} top-level domains have IPv6 nameservers, and {{ he.value.tlds_ipv6_glue | format_value("int") }} have IPv6 glue in the root zone (root zone processed {{ he.value.root_zone_processed }}).</p>
+<p>Across the zone files Hurricane Electric can download, {{ he.value.domains.aaaa | format_value("int") }} of {{ he.value.domains.domains | format_value("int") }} registered domains have an AAAA record. Some zone files are years old; each TLD's download date is shown below.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>TLD</th><th>Domains</th><th>With AAAA</th><th>Zone downloaded</th></tr></thead>
+  <tbody>{% for t in tlds %}<tr><td>{{ t.tld }}</td><td>{{ t.domains | format_value("int") }}</td><td>{{ t.aaaa | format_value("int") }}</td><td>{% if t.old %}<span class="stale">zone data from {{ t.downloaded }}</span>{% else %}{{ t.downloaded }}{% endif %}</td></tr>{% endfor %}</tbody>
+</table></div>
+{{ provenance(he) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Routing security</h2>
+{% if routing %}
+<p>ROAs cover {{ routing.value.roa_ipv6.latest.value | format_value("pct") }} of advertised IPv6 address space and {{ routing.value.roa_ipv4.latest.value | format_value("pct") }} of IPv4 ({{ routing.value.roa_ipv6.latest.date }}). Route origin validation: {{ routing.value.rov.latest.partial | format_value("pct") }} partial and {{ routing.value.rov.latest.full | format_value("pct") }} full ({{ routing.value.rov.latest.date }}).</p>
+<div class="chart">{{ roa_chart }}</div>
+{{ provenance(routing) }}
+{% elif routing_status == "not_configured" %}<p class="missing">Routing security is not configured: set ISOC_PULSE_API_KEY to collect ISOC Pulse routing-security data.</p>
+{% else %}{{ unavailable() }}{% endif %}
+{% if bogons %}<p>Team Cymru lists {{ bogons.value.prefixes | format_value("int") }} IPv6 bogon prefixes (updated {{ bogons.value.updated }}).</p>{{ provenance(bogons) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Measurement networks</h2>
+{% if atlas %}<p>RIPE Atlas: {{ atlas.value.ipv6_works | format_value("int") }} of {{ atlas.value.connected | format_value("int") }} connected probes have working IPv6 ({{ atlas.value.ipv4_works | format_value("int") }} have working IPv4).</p>{{ provenance(atlas) }}{% else %}{{ unavailable() }}{% endif %}
+{% if matrix %}
+<p>IPv6 Matrix: {{ matrix.value.latest.share | format_value("pct") }} of {{ matrix.value.latest.hosts | format_value("int") }} crawled hosts with IPv6 (crawl of {{ matrix.value.latest.date }}).</p>
+<div class="chart">{{ matrix_chart }}</div>
+<details class="source"><summary>By country (largest crawls)</summary>
+<div class="table-wrap"><table><thead><tr><th>Country</th><th>Hosts</th><th>With IPv6</th></tr></thead>
+<tbody>{% for c in matrix.value.countries %}<tr><td>{{ c.code }}</td><td>{{ c.hosts | format_value("int") }}</td><td>{{ c.share | format_value("pct") }}</td></tr>{% endfor %}</tbody></table></div>
+</details>
+{{ provenance(matrix) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Interconnection</h2>
+{% if peeringdb %}<p>{{ peeringdb.value.ipv6_networks | format_value("int") }} of {{ peeringdb.value.networks | format_value("int") }} networks in PeeringDB report unicast IPv6 support (self-reported).</p>{{ provenance(peeringdb) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Access networks</h2>
+<p class="provenance">Network list maintained by this site, last reviewed {{ carriers_reviewed }}; figures from APNIC's per-network measurements.</p>
+{% if carrier_detail %}
+<div class="table-wrap"><table>
+  <thead><tr><th>Network</th><th>AS</th><th>Country</th><th>IPv6-capable</th><th>Prefers IPv6</th></tr></thead>
+  <tbody>{% for c in carriers %}<tr><td>{{ c.name }}</td><td>AS{{ c.asn }}</td><td>{{ c.country }}</td>
+  {% if c.apnic %}<td>{{ c.apnic.capable | format_value("pct") }}</td><td>{{ c.apnic.preferred | format_value("pct") }}</td>
+  {% else %}<td colspan="2" class="missing">not among APNIC's largest networks for its economy</td>{% endif %}</tr>{% endfor %}</tbody>
+</table></div>
+{{ provenance(carrier_detail) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Government websites</h2>
+<p class="provenance">Domain list maintained by this site, last reviewed {{ government_reviewed }}. A site counts when its domain or www. name publishes an IPv6 address.</p>
+{% if government %}
+{% for g in government.value.groups %}
+<details class="source"><summary>{{ g.name }}: {{ g.with_ipv6 }} of {{ g.checked }} with IPv6</summary>
+<ul>{% for d in g.domains %}<li><code>{{ d.domain }}</code>: {{ {"ipv6": "IPv6", "ipv4_only": "IPv4 only", "unknown": "unknown"}[d.status] }}</li>{% endfor %}</ul>
+</details>
+{% endfor %}
+{{ provenance(government) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Regional registries</h2>
+{% for name, d in rir_details %}
+<details class="source"><summary>{{ name }}</summary>
+{% if d %}
+<p>{{ d.value.total_blocks_32 | format_value("int") }} IPv6 /32 equivalents across {{ d.value.countries }} economies (registry file of {{ d.value.file_date }}).</p>
+<div class="table-wrap"><table><thead><tr><th>Economy</th><th>/32 equivalents</th><th>Share</th></tr></thead>
+<tbody>{% for c in d.value.top_countries[:rir_top] %}<tr><td>{{ c.code }}</td><td>{{ c.blocks_32 | format_value("int") }}</td><td>{{ c.share | format_value("pct") }}</td></tr>{% endfor %}</tbody></table></div>
+{{ provenance(d) }}
+{% else %}{{ unavailable() }}{% endif %}
+</details>
+{% endfor %}
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

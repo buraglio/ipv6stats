@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from "macros.html" import metric, provenance, unavailable, freshness_table %}
+{% block content %}
+<h1>IPv6 BGP Routing Statistics</h1>
+
+<section class="metric-row" aria-label="Headline numbers">
+  {{ metric("IPv6 prefixes in the routing table", fib, "int",
+            note=(fib_year.value | format_value("signed_int")) ~ " in the past year" if fib_year else None) }}
+  {{ metric("ASes in the IPv6 routing table", ases, "int",
+            note=(ases_year.value | format_value("signed_int")) ~ " in the past year" if ases_year else None) }}
+  {{ metric("Origin-only ASes", origin_only, "int") }}
+  {{ metric("Transit-only ASes", transit_only, "int") }}
+  {{ metric("Average prefix length", avg_prefix, "decimal") }}
+  {{ metric("Average AS path length", avg_path, "decimal") }}
+  {{ metric("BGP entries seen, all paths (RIB)", rib, "int") }}
+  {{ metric("Advertised IPv6 space, as one prefix", space, "text") }}
+</section>
+
+<h2>Growth</h2>
+<div class="grid-2">
+  <div class="card">{% if table_chart %}<div class="chart">{{ table_chart }}</div>{{ provenance(fib) }}{% else %}{{ unavailable() }}{% endif %}</div>
+  <div class="card">{% if ases_chart %}<div class="chart">{{ ases_chart }}</div>{{ provenance(ases) }}{% else %}{{ unavailable() }}{% endif %}</div>
+</div>
+
+<h2>Prefix lengths</h2>
+{% if lengths %}
+<div class="chart">{{ lengths_chart }}</div>
+<details class="source"><summary>All prefix lengths</summary>
+<div class="table-wrap"><table>
+  <thead><tr><th>Length</th><th>Prefixes</th><th>Share of table</th></tr></thead>
+  <tbody>{% for r in lengths.value %}<tr><td>/{{ r.length }}</td><td>{{ r.prefixes | format_value("int") }}</td><td>{{ r.share | format_value("pct") if r.share is not none else "—" }}</td></tr>{% endfor %}</tbody>
+</table></div>
+</details>
+{{ provenance(lengths) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>ASes that could shrink the table most by aggregating</h2>
+{% if aggregation %}
+<p>As of {{ aggregation.value.date }}, the table could shrink from {{ aggregation.value.table.now | format_value("int") }} to {{ aggregation.value.table.aggregated | format_value("int") }} entries if every AS aggregated its announcements. These ASes would contribute most:</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>AS</th><th>Name</th><th>Prefixes now</th><th>After aggregation</th><th>Reduction</th></tr></thead>
+  <tbody>{% for a in aggregation.value.ases %}<tr><td>AS{{ a.asn }}</td><td>{{ a.name or "—" }}</td><td>{{ a.now | format_value("int") }}</td><td>{{ a.aggregated | format_value("int") }}</td><td>{{ a.gain_pct | format_value("pct") }}</td></tr>{% endfor %}</tbody>
+</table></div>
+{{ provenance(aggregation) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>RouteViews collectors</h2>
+{% if routeviews %}
+<p>{{ routeviews.value.active }} active RouteViews collectors; latest snapshot {{ routeviews.value.snapshot_date }}.</p>
+<div class="table-wrap"><table>
+  <thead><tr><th>Collector</th><th>Region</th><th>IPv6 prefixes</th><th>IPv6 peers</th><th>Snapshot</th></tr></thead>
+  <tbody>{% for c in routeviews.value.collectors %}<tr><td>{{ c.name }}</td><td>{{ c.rir_region or "—" }}</td><td>{{ c.ipv6_prefixes | format_value("int") }}</td><td>{{ c.ipv6_peers }}</td><td>{{ c.date }}</td></tr>{% endfor %}</tbody>
+</table></div>
+{{ provenance(routeviews) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>IPv6 users (Cisco 6lab)</h2>
+{% if sixlab %}
+<ol>{% for c in sixlab.value %}<li>{{ c.name }}: {{ c.ipv6_users_pct | format_value("pct") }}</li>{% endfor %}</ol>
+{{ provenance(sixlab) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

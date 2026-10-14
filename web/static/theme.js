@@ -26,6 +26,13 @@
     });
   }
 
+  // Charts drawn while the page is still laying out can size themselves to Plotly's 700px
+  // default; re-measure them once everything has loaded.
+  window.addEventListener("load", function () {
+    if (!window.Plotly) return;
+    document.querySelectorAll(".js-plotly-plot").forEach(function (el) { window.Plotly.Plots.resize(el); });
+  });
+
   document.addEventListener("DOMContentLoaded", function () {
     restyleCharts();
     var button = document.getElementById("theme-toggle");

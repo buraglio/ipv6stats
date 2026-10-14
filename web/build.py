@@ -19,7 +19,7 @@ from plotly.offline import get_plotlyjs
 from web import reference
 from web.data import Data
 from web.format import date_only, format_value, provenance_text
-from web.pages import cloud_services, country, country_analysis, global_adoption, overview
+from web.pages import bgp_statistics, cloud_services, country, country_analysis, data_sources, extended_data_sources, global_adoption, historical_trends, overview
 
 HERE = Path(__file__).parent
 TEMPLATES = HERE / "templates"
@@ -39,16 +39,23 @@ PAGES = (
     Page("global-adoption", "Global Adoption", global_adoption.context),
     Page("country-analysis", "Country Analysis", country_analysis.context),
     Page("cloud-services", "Cloud Services", cloud_services.context),
+    Page("bgp-statistics", "BGP Statistics", bgp_statistics.context),
+    Page("historical-trends", "Historical Trends", historical_trends.context),
+    Page("extended-data-sources", "Extended Data Sources", extended_data_sources.context),
+    Page("data-sources", "Data Sources", data_sources.context),
 )
 
-# Old Streamlit ?page= names -> new paths. Later plans add the remaining pages;
-# names not listed here land on the Overview.
+# Old Streamlit ?page= names -> new paths; unknown names land on the Overview.
 LEGACY_PAGES = {
     "Overview": "overview/",
     "Combined View": "overview/",
     "Global Adoption": "global-adoption/",
     "Country Analysis": "country-analysis/",
     "Cloud Services": "cloud-services/",
+    "BGP Statistics": "bgp-statistics/",
+    "Historical Trends": "historical-trends/",
+    "Extended Data Sources": "extended-data-sources/",
+    "Data Sources": "data-sources/",
 }
 
 
@@ -98,7 +105,10 @@ def build(data_dir: Path, out_dir: Path, now: datetime) -> list[str]:
     for slug, page_context in country.pages(data):
         context = {**common, "current": "country-analysis", **page_context}
         _write(out_dir / "country" / slug / "index.html", country_template.render(context, base="../../"))
-    return check_reference_dates(TEMPLATES, now) + reference.stale_reviews(reference.load_cloud_providers(), now)
+    not_found = env.get_template("404.html")
+    _write(out_dir / "404.html", not_found.render({**common, "page_title": "Page not found", "current": ""}, base="/"))
+    return (check_reference_dates(TEMPLATES, now) + reference.stale_reviews(reference.load_cloud_providers(), now)
+            + reference.list_reviews(now))
 
 
 def main(argv: list[str] | None = None) -> int:

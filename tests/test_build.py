@@ -24,6 +24,8 @@ def test_build_writes_pages_and_assets(tmp_path):
 def test_internal_links_are_relative_and_resolve(tmp_path):
     out = built(tmp_path)
     for page in out.rglob("*.html"):
+        if page.name == "404.html":
+            continue
         for link in LINK.findall(page.read_text()):
             if link.startswith(("http://", "https://", "mailto:", "#")):
                 continue
@@ -79,3 +81,10 @@ def test_build_survives_plan_1_format_data(tmp_path):
     out = tmp_path / "dist"
     build(data_dir, out, NOW)
     assert "3 of 5 registries" in (out / "global-adoption" / "index.html").read_text()
+
+
+def test_404_page_uses_root_links(tmp_path):
+    # GitHub Pages serves 404.html at any depth, so its links must be root-absolute.
+    page = (built(tmp_path) / "404.html").read_text()
+    assert 'href="/static/site.css"' in page and 'href="/overview/"' in page
+    assert "Page not found" in page

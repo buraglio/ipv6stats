@@ -1,15 +1,16 @@
-"""IPv6 BGP table size history from Geoff Huston's Potaroo reports."""
+"""IPv6 BGP table size and AS count history from Geoff Huston's Potaroo reports."""
 from datetime import datetime, timedelta, timezone
 
 from collect.registry import DAY, Context, source
 
 URL = "https://bgp.potaroo.net/v6/as2.0/bgp-active.txt"  # "<unix time> <active entries>" hourly
 PAGE = "https://bgp.potaroo.net/v6/as2.0/index.html"
+AS_URL = "https://bgp.potaroo.net/v6/as2.0/bgp-as-count.txt"  # "<unix time> <unique ASes>"
 MIN_DAYS = 365
 MAX_AGE = timedelta(days=3)  # newest sample older than this means the report stopped updating
 
 
-def parse(text: str, min_days: int = MIN_DAYS, now: datetime | None = None) -> dict:
+def parse(text: str, min_days: int = MIN_DAYS, now: datetime | None = None, field: str = "prefixes") -> dict:
     latest_per_day: dict[str, tuple[int, int]] = {}
     for line in text.splitlines():
         parts = line.split()
@@ -21,7 +22,7 @@ def parse(text: str, min_days: int = MIN_DAYS, now: datetime | None = None) -> d
             latest_per_day[day] = (ts, count)
     if len(latest_per_day) < min_days:
         raise ValueError(f"Potaroo file format changed: only {len(latest_per_day)} days parsed")
-    daily = [{"date": day, "prefixes": count} for day, (_, count) in sorted(latest_per_day.items())]
+    daily = [{"date": day, field: count} for day, (_, count) in sorted(latest_per_day.items())]
     last_ts, last_count = latest_per_day[daily[-1]["date"]]
     last_at = datetime.fromtimestamp(last_ts, timezone.utc)
     if now is not None and now - last_at > MAX_AGE:
@@ -36,3 +37,10 @@ def fetch(ctx: Context) -> dict:
     response = ctx.session.get(URL, timeout=60)
     response.raise_for_status()
     return parse(response.text, now=ctx.now)
+
+
+@source("bgp_v6_ases", DAY, title="Potaroo IPv6 AS count history", url=PAGE)
+def fetch_ases(ctx: Context) -> dict:
+    response = ctx.session.get(AS_URL, timeout=60)
+    response.raise_for_status()
+    return parse(response.text, now=ctx.now, field="ases")

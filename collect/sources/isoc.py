@@ -1,5 +1,7 @@
 """Internet Society Pulse API: IPv6, HTTPS and TLS 1.3 on the top websites, and Pulse's
-global IPv6 user figure. Needs ISOC_PULSE_API_KEY (account at pulse.internetsociety.org/en/api/).
+global IPv6 user figure.
+
+Needs ISOC_PULSE_API_KEY (account at pulse.internetsociety.org/en/api/).
 Docs: https://pulse.internetsociety.org/api/docs
 """
 from collect.registry import MONTH, Context, source

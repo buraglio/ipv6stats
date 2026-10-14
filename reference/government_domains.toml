@@ -1,0 +1,20 @@
+# Government websites checked for IPv6 (AAAA on the domain or www.) by
+# collect/sources/government.py. Lists only. Update last_reviewed when you check the list.
+last_reviewed = "2026-10-14"
+
+[[group]]
+name = "US Federal"
+domains = ["whitehouse.gov", "nasa.gov", "cdc.gov", "irs.gov", "census.gov", "defense.gov", "state.gov",
+           "treasury.gov", "dhs.gov", "fbi.gov", "nih.gov", "noaa.gov"]
+
+[[group]]
+name = "European Union"
+domains = ["europa.eu", "ec.europa.eu", "europarl.europa.eu", "consilium.europa.eu", "curia.europa.eu", "eeas.europa.eu"]
+
+[[group]]
+name = "United Kingdom"
+domains = ["gov.uk", "nhs.uk", "hmrc.gov.uk", "police.uk", "parliament.uk", "judiciary.gov.uk"]
+
+[[group]]
+name = "Australia"
+domains = ["australia.gov.au", "ato.gov.au", "aph.gov.au", "abs.gov.au", "austrade.gov.au", "defence.gov.au"]
