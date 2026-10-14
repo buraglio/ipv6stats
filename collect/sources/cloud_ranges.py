@@ -2,48 +2,58 @@
 
 One source per provider, so one broken file only affects that provider.
 """
+import ipaddress
 import json
 
 from collect.registry import MONTH, Context, source
 
+AWS_AGGREGATE = "AMAZON"  # ip-ranges.json repeats every prefix under this name; it isn't a service
 
-def _counts(v4: int, v6: int, **extra) -> dict:
-    if v4 + v6 == 0:
+
+def _counts(prefixes: list[str], **extra) -> dict:
+    """Count distinct IPv4 and IPv6 prefixes; anything that isn't a prefix means the file changed."""
+    networks = set()
+    for text in prefixes:
+        try:
+            networks.add(ipaddress.ip_network(text.strip(), strict=False))
+        except ValueError as exc:
+            raise ValueError(f"IP range file format changed: not a prefix: {text.strip()[:60]!r}") from exc
+    if not networks:
         raise ValueError("IP range file format changed: no prefixes found")
-    return {"ipv4_prefixes": v4, "ipv6_prefixes": v6, **extra}
+    return {"ipv4_prefixes": sum(n.version == 4 for n in networks),
+            "ipv6_prefixes": sum(n.version == 6 for n in networks), **extra}
 
 
 def _aws(texts):
     d = json.loads(texts[0])
-    v4_services = {p["service"] for p in d["prefixes"]}
-    v6_services = {p["service"] for p in d["ipv6_prefixes"]}
-    return _counts(len(d["prefixes"]), len(d["ipv6_prefixes"]),
-                   services=len(v4_services | v6_services), services_with_ipv6=len(v6_services))
+    v4 = [(p["ip_prefix"], p["service"]) for p in d["prefixes"]]
+    v6 = [(p["ipv6_prefix"], p["service"]) for p in d["ipv6_prefixes"]]
+    services = {svc for _, svc in v4 + v6 if svc != AWS_AGGREGATE}
+    v6_services = {svc for _, svc in v6 if svc != AWS_AGGREGATE}
+    return _counts([prefix for prefix, _ in v4 + v6], services=len(services), services_with_ipv6=len(v6_services))
 
 
 def _gcp(texts):
     prefixes = json.loads(texts[0])["prefixes"]
-    return _counts(sum("ipv4Prefix" in p for p in prefixes), sum("ipv6Prefix" in p for p in prefixes))
+    return _counts([p.get("ipv4Prefix") or p.get("ipv6Prefix") or "" for p in prefixes])
 
 
 def _oracle(texts):
-    cidrs = [c["cidr"] for region in json.loads(texts[0])["regions"] for c in region["cidrs"]]
-    return _counts(sum(":" not in c for c in cidrs), sum(":" in c for c in cidrs))
+    return _counts([c["cidr"] for region in json.loads(texts[0])["regions"] for c in region["cidrs"]])
 
 
 def _first_column(texts):  # CSV geofeeds: prefix,country,region,city,postal
-    prefixes = [line.split(",")[0].strip() for line in texts[0].splitlines()
-                if line.strip() and not line.startswith("#")]
-    return _counts(sum(":" not in p for p in prefixes), sum(":" in p for p in prefixes))
+    return _counts([line.split(",")[0] for line in texts[0].splitlines()
+                    if line.strip() and not line.startswith("#")])
 
 
 def _cloudflare(texts):
-    return _counts(len(texts[0].split()), len(texts[1].split()))
+    return _counts(texts[0].split() + texts[1].split())
 
 
 def _fastly(texts):
     d = json.loads(texts[0])
-    return _counts(len(d["addresses"]), len(d["ipv6_addresses"]))
+    return _counts(d["addresses"] + d["ipv6_addresses"])
 
 
 PROVIDERS = {

@@ -32,7 +32,7 @@ def test_counts_per_provider(key, v4, v6):
 
 def test_aws_counts_services():
     payload = SOURCES["ip_ranges_aws"].fetch(ctx_for("aws", SAMPLES["aws"]))
-    assert (payload["services"], payload["services_with_ipv6"]) == (2, 1)
+    assert (payload["services"], payload["services_with_ipv6"]) == (1, 0)  # AMAZON is an aggregate, not a service
 
 
 def test_rejects_empty_or_changed_file():
@@ -44,3 +44,21 @@ def test_rejects_empty_or_changed_file():
 
 def test_each_provider_is_its_own_source():
     assert {f"ip_ranges_{k}" for k in cr.PROVIDERS} <= set(SOURCES)
+
+
+def test_aws_counts_distinct_prefixes_and_ignores_the_amazon_aggregate():
+    # ip-ranges.json lists every prefix under "AMAZON" and again under its service.
+    doubled = {"prefixes": [{"ip_prefix": "3.2.0.0/16", "service": "AMAZON"}, {"ip_prefix": "3.2.0.0/16", "service": "EC2"},
+                            {"ip_prefix": "3.0.0.0/15", "service": "AMAZON"}],
+               "ipv6_prefixes": [{"ipv6_prefix": "2600:1f00::/24", "service": "AMAZON"},
+                                 {"ipv6_prefix": "2600:1f00::/24", "service": "EC2"}]}
+    payload = SOURCES["ip_ranges_aws"].fetch(ctx_for("aws", [json.dumps(doubled)]))
+    assert (payload["ipv4_prefixes"], payload["ipv6_prefixes"]) == (2, 1)
+    assert (payload["services"], payload["services_with_ipv6"]) == (1, 1)
+
+
+def test_error_page_is_not_counted_as_prefixes():
+    with pytest.raises(ValueError, match="not a prefix"):
+        SOURCES["ip_ranges_cloudflare"].fetch(ctx_for("cloudflare", ["<html>Service unavailable</html>", "2400:cb00::/32"]))
+    with pytest.raises(ValueError, match="not a prefix"):
+        SOURCES["ip_ranges_linode"].fetch(ctx_for("linode", ["<!doctype html>\n<p>maintenance</p>\n"]))
