@@ -1,2 +1,2 @@
 """Importing this package registers every source with collect.registry."""
-from collect.sources import apnic  # noqa: F401
+from collect.sources import apnic, bgp  # noqa: F401
