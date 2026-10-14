@@ -78,6 +78,8 @@ The site is being moved from the Streamlit server to a static site on GitHub Pag
   `--force` re-fetches everything; `--only <source>` fetches one.
 - `web/`: page generation. `uv run python -m web.build --data-dir data --out dist`
   renders the site from that JSON, with no network access.
+- Pages so far: Overview, Global Adoption, Country Analysis, and one page per economy
+  (`/country/<code>/`). The remaining Streamlit pages are converted in later plans.
 - `.github/workflows/publish.yml` runs both daily at 00:00 UTC (and on pushes to `main`
   or a manual "Run workflow"), saves the data on the `data` branch, and deploys to Pages.
   Only `main` deploys; `.github/workflows/test.yml` runs the tests on `staging` and on
