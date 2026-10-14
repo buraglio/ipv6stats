@@ -21,6 +21,7 @@ UNIT = 32
 COUNTED = {"allocated", "assigned"}
 TOP_N = 10
 NO_DATE = "00000000"
+SCHEMA = 2  # 2: added by_country and history
 
 
 def _is_yyyymmdd(text: str) -> bool:
@@ -80,7 +81,7 @@ def _register(key: str, registry: str, title: str) -> None:
     def fetch(ctx: Context) -> dict:
         return _fetch(ctx, registry, url)
 
-    source(key, MONTH, title=title, url=url)(fetch)
+    source(key, MONTH, title=title, url=url, schema=SCHEMA)(fetch)
 
 
 for _key, _registry, _title in REGISTRIES:

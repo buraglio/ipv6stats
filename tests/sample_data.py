@@ -143,7 +143,7 @@ def write_sample_data(data_dir: Path, omit=(), last_success=None) -> Path:
             entry.update(status="error", error="ConnectionError: sample failure")
         else:
             (data_dir / f"{key}.json").write_text(json.dumps(PAYLOADS[key]))
-            entry.update(status="ok", error=None, last_success=overrides.get(key, FETCHED))
+            entry.update(status="ok", error=None, last_success=overrides.get(key, FETCHED), schema=src.schema)
         manifest[key] = entry
     save(data_dir, manifest)
     return data_dir

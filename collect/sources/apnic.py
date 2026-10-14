@@ -16,6 +16,7 @@ ROW = re.compile(
 LINK_TEXT = re.compile(r">([^<]+)</a>")
 WORLD = "XA"
 MIN_ECONOMIES = 100  # fewer means the page layout changed
+SCHEMA = 2  # 2: sub-regions moved out of economies
 
 
 def is_region_code(code: str) -> bool:
@@ -46,7 +47,7 @@ def parse(page: str, min_economies: int = MIN_ECONOMIES) -> dict:
             "economies": sorted(economies, key=lambda r: r["code"]), "url": URL}
 
 
-@source("apnic", MONTH, title="APNIC Labs IPv6 measurement", url=URL)
+@source("apnic", MONTH, title="APNIC Labs IPv6 measurement", url=URL, schema=SCHEMA)
 def fetch(ctx: Context) -> dict:
     response = ctx.session.get(URL, timeout=30)
     response.raise_for_status()

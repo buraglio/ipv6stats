@@ -60,3 +60,16 @@ def test_missing_data_dir_has_no_data(tmp_path):
     data = Data(tmp_path / "does-not-exist", NOW)
     assert data.datum("apnic", lambda p: p) is None
     assert all(r["status"] == "never run" for r in data.status_rows())
+
+
+def test_old_format_payload_is_unavailable_until_refetched(tmp_path):
+    import json
+    from collect.manifest import load, save
+    data_dir = write_sample_data(tmp_path)
+    manifest = load(data_dir)
+    manifest["lacnic_delegations"]["schema"] = 1   # written by the Plan 1 parser
+    save(data_dir, manifest)
+    data = Data(data_dir, NOW)
+    assert data.datum("lacnic_delegations", lambda p: p["by_country"]) is None
+    row = {r["key"]: r for r in data.status_rows()}["lacnic_delegations"]
+    assert row["status"] == "outdated format"

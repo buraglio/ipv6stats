@@ -59,3 +59,23 @@ def test_reference_dates_warn_when_old(tmp_path):
     now = datetime(2026, 10, 14, tzinfo=timezone.utc)
     warnings = check_reference_dates(tmp_path, now)
     assert len(warnings) == 1 and "old.html" in warnings[0]
+
+
+def test_build_survives_plan_1_format_data(tmp_path):
+    # The data branch holds files written before by_country/history existed.
+    import json
+    from collect.manifest import load, save
+    data_dir = write_sample_data(tmp_path / "data")
+    for key in ("lacnic_delegations", "afrinic_delegations", "apnic"):
+        path = data_dir / f"{key}.json"
+        payload = json.loads(path.read_text())
+        for field in ("by_country", "history", "subregions"):
+            payload.pop(field, None)
+        path.write_text(json.dumps(payload))
+    manifest = load(data_dir)
+    for key in ("lacnic_delegations", "afrinic_delegations", "apnic"):
+        manifest[key].pop("schema", None)
+    save(data_dir, manifest)
+    out = tmp_path / "dist"
+    build(data_dir, out, NOW)
+    assert "3 of 5 registries" in (out / "global-adoption" / "index.html").read_text()
