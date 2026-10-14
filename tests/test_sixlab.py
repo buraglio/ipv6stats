@@ -19,7 +19,7 @@ SAMPLE = """var UsersData = {
 def test_parse_sample_uses_last_column():
     parsed = sixlab.parse(SAMPLE, min_countries=1)
     assert parsed["countries"][0] == {"code": "US", "name": "United States of America", "ipv6_users_pct": 57.2}
-    assert len(parsed["countries"]) == 3
+    assert len(parsed["countries"]) == 2  # Anguilla's row has no data
 
 
 def test_parse_recorded_file():
@@ -35,3 +35,9 @@ def test_rejects_changed_format():
 def test_fetch():
     ctx = make_ctx(routes={sixlab.URL: FakeResponse(text=FIXTURE)})
     assert SOURCES["cisco_6lab"].fetch(ctx)["countries"]
+
+
+def test_rows_without_data_are_left_out():
+    # 6lab lists some territories as 0.0,0.0,0.0: no data, not zero IPv6 users.
+    codes = [c["code"] for c in sixlab.parse(SAMPLE, min_countries=1)["countries"]]
+    assert codes == ["US", "AE"]
