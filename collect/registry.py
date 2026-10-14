@@ -17,6 +17,7 @@ class Context:
     env: Mapping[str, str]
     now: datetime
     has_aaaa: Callable[[str], bool | None]  # None = lookup failed
+    has_a: Callable[[str], bool | None] = lambda name: True  # None = lookup failed
 
 
 @dataclass(frozen=True)

@@ -8,11 +8,19 @@ _resolver = dns.resolver.Resolver()
 _resolver.lifetime = LIFETIME_SECONDS
 
 
-def dns_has_aaaa(name: str) -> bool | None:
+def _has(name: str, rdtype: str) -> bool | None:
     """True/False when DNS gave an answer; None when the lookup itself failed."""
     try:
-        return len(_resolver.resolve(name, "AAAA")) > 0
+        return len(_resolver.resolve(name, rdtype)) > 0
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
         return False
     except dns.exception.DNSException:  # timeouts, SERVFAIL, bad names: unknown
         return None
+
+
+def dns_has_aaaa(name: str) -> bool | None:
+    return _has(name, "AAAA")
+
+
+def dns_has_a(name: str) -> bool | None:
+    return _has(name, "A")
