@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Callable, Iterable
 
 import collect.sources  # noqa: F401  (registers sources)
+from collect import history as history_file
 from collect import manifest as manifest_file
 from collect.registry import DAY, SOURCES
 
@@ -75,6 +76,10 @@ class Data:
         if value is None:
             return None
         return Datum(value, (key,), self.fetched_at(key), self.is_stale(key))
+
+    def history(self) -> list[dict]:
+        """This site's own daily snapshots (collect/history.py), oldest first."""
+        return history_file.load(self.data_dir)
 
     def status_rows(self) -> list[dict]:
         rows = []
