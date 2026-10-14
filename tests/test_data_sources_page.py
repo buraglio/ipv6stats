@@ -23,7 +23,7 @@ def test_every_source_is_described(tmp_path):
 
 
 def test_description_comes_from_the_collector_module():
-    assert describe(SOURCES["bgp_v6_table"]).startswith("IPv6 BGP table size history")
+    assert describe(SOURCES["bgp_v6_table"]).startswith("IPv6 BGP table size and AS count history")
 
 
 def test_reference_files_and_keys(tmp_path):
@@ -36,3 +36,15 @@ def test_reference_files_and_keys(tmp_path):
 def test_every_old_page_name_redirects():
     assert set(OLD_PAGES) <= set(LEGACY_PAGES)
     assert LEGACY_PAGES["Data Sources"] == "data-sources/"
+
+
+def test_each_source_description_fits_its_source():
+    assert "AS count" in describe(SOURCES["bgp_v6_ases"])
+    assert "ISOC_PULSE_API_KEY" not in describe(SOURCES["isoc_pulse"])   # the page lists the secret separately
+
+
+def test_provenance_prose_does_not_overstate(tmp_path):
+    _, html = render(tmp_path)
+    assert "Nothing is estimated" in html
+    assert "except the reference lists" not in html
+    assert "“Reference” boxes" in html or "Reference boxes" in html

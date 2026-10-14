@@ -1,4 +1,4 @@
-"""IPv6 BGP table size history from Geoff Huston's Potaroo reports."""
+"""IPv6 BGP table size and AS count history from Geoff Huston's Potaroo reports."""
 from datetime import datetime, timedelta, timezone
 
 from collect.registry import DAY, Context, source
