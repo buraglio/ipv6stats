@@ -315,3 +315,82 @@ the pipeline. The only exception is reference material.
   a source consistently fails from Actions, decide case by case (different
   endpoint, self-hosted runner, or drop the source).
 - **Scraped sources changing format:** handled by parser tests plus last-good data.
+
+## Amendment 1 — findings during planning (2026-10-14)
+
+Reading the collectors closely showed that much of the dashboard's data is generated
+in code, not fetched. This amendment records what was found and the decisions made.
+Where it conflicts with earlier sections, this amendment wins.
+
+### Findings
+
+- **Generated datasets (no network request):** `get_global_historical_data`,
+  `get_regional_trends`, `get_bgp_timeline`, `get_bgp_historical_data` (invented growth
+  curves); `get_country_analysis`, `get_country_historical_data`,
+  `get_regional_comparison` (hand-typed country tables and invented curves);
+  `get_google_country_stats`; `get_prefix_size_distribution`;
+  `get_top_asns_by_prefixes`.
+- **`get_current_bgp_stats()` is partly made up:** `total_asns: 65000`,
+  `monthly_growth: 2100`, and `estimated_growth_yearly: 26000` in every BGP code path.
+- **"Facebook" statistics are Cloudflare Radar data.** Meta no longer publishes them.
+  When the API call fails, the code falls back to hand-typed estimates.
+- **Google's statistics page can't be read reliably** (drawn by JavaScript; its data
+  file returns 404). The "Google" number has really been APNIC's.
+- **ISOC Pulse has no public feed any more.** The JSON endpoint returns HTML; data
+  now needs an account and API key. The live site's "IPv6 Websites 49%" has always
+  been the hard-coded fallback.
+- **LACNIC and AFRINIC** return hand-typed numbers on failure (marked `error`, not
+  `fallback`).
+
+### Real replacements confirmed
+
+- **APNIC** (`stats.labs.apnic.net/ipv6/`): IPv6-capable %, IPv6-preferred % and
+  sample count for the world, 6 regions, and 259 economies.
+- **Potaroo** (`bgp.potaroo.net/v6/as2.0/bgp-active.txt`): hourly IPv6 BGP table size
+  since 2003. Replaces the BGP prefix count, and gives real 30-day and yearly growth.
+- **Tranco top 1000 + DNS AAAA lookups** (apex or `www.`), run by us: replaces "IPv6
+  Websites".
+- **Cloudflare Radar** `timeseries_groups/ip_version` (existing key): IPv6 share of
+  HTTP traffic, with 52 weeks of history.
+
+### Decisions
+
+- **Splitting the work.** The migration is delivered as several plans:
+  1. Foundation + merged Overview + workflow + preview deploy (Plan 1).
+  2. One plan per group of pages (Global Adoption + Country Analysis; BGP Statistics;
+     Historical Trends; Cloud Services + Extended Data Sources + Data Sources). Each
+     starts with a list, approved by the owner, of which generated datasets get a real
+     source and which are removed.
+  3. Switch-over plan.
+- **Collectors are ported one page group at a time.** The Streamlit app
+  (`app.py`, `data_sources.py`) stays untouched until the switch-over plan, so
+  production keeps running from `main` on the container.
+- **BGP:** the decision "use `get_current_bgp_stats()` everywhere" is carried out
+  as a single new BGP source, `bgp_v6_table` (Potaroo), used everywhere.
+- **IPv6 websites:** measured from the Tranco top 1000 (`tranco_aaaa`). An
+  **ISOC Pulse source is opt-in**: registered with `requires_env=ISOC_PULSE_API_KEY`;
+  without the key it shows "not configured" and doesn't count as a failure. Its
+  API client is written after the owner has a key (see Follow-ups).
+- **Consensus** = average of whichever of APNIC world IPv6-capable, Cloudflare IPv6
+  traffic share, and Tranco AAAA share have data.
+- **APNIC per-economy rankings** count only economies with at least 100,000 samples,
+  so tiny territories don't top the list.
+- **"Facebook" labels are dropped.** Cloudflare data is labeled as Cloudflare.
+  Cloudflare's `top/locations?ipVersion=IPv6` most likely returns each country's
+  share of global IPv6 traffic, not adoption within the country. It is left out of
+  Plan 1 until that's checked with a live key.
+- **Overview headline row:** consensus; Cloudflare IPv6 traffic share; BGP IPv6
+  prefixes (with yearly change); top-1000 sites with AAAA; economies at or above
+  50% IPv6-capable.
+- **Static Overview text with no data behind it is removed** (e.g. "Mobile traffic
+  is 50% more likely…", "US Milestone…", the fixed Key Insights and Recent Updates
+  lines). Those sections are generated from data.
+- **Datum fields:** `{value, sources: tuple[str, ...], fetched_at, stale}`. A
+  derived datum lists every input source.
+- **Sources record a title and URL** in the registry, for the provenance shown on
+  the site.
+
+### Follow-ups (outside Plan 1)
+
+- ISOC Pulse API client, once the owner has an account and key.
+- Check what Cloudflare `top/locations` values mean; use or drop them.
