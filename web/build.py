@@ -18,7 +18,7 @@ from plotly.offline import get_plotlyjs
 
 from web.data import Data
 from web.format import date_only, format_value, provenance_text
-from web.pages import country, country_analysis, overview
+from web.pages import country, country_analysis, global_adoption, overview
 
 HERE = Path(__file__).parent
 TEMPLATES = HERE / "templates"
@@ -35,6 +35,7 @@ class Page:
 
 PAGES = (
     Page("overview", "Overview", overview.context),
+    Page("global-adoption", "Global Adoption", global_adoption.context),
     Page("country-analysis", "Country Analysis", country_analysis.context),
 )
 
@@ -43,6 +44,7 @@ PAGES = (
 LEGACY_PAGES = {
     "Overview": "overview/",
     "Combined View": "overview/",
+    "Global Adoption": "global-adoption/",
     "Country Analysis": "country-analysis/",
 }
 
