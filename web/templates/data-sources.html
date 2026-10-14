@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Data Sources</h1>
-<p>Every number on this site comes from one of the sources below. A daily job at 00:00 UTC fetches each source that is due, keeps the last good copy when a fetch fails, and rebuilds the site. A value whose source has not updated for twice its usual interval is marked stale. Nothing is estimated or typed in by hand except the reference lists at the end, which are labelled with their review dates.</p>
+<p>Every number on this site comes from one of the sources below. A daily job at 00:00 UTC fetches each source that is due, keeps the last good copy when a fetch fails, and rebuilds the site. A value whose source has not updated for twice its usual interval is marked stale. Nothing is estimated. Hand-maintained content (the reference lists at the end, and the “Reference” boxes on some pages, such as historical milestones and policy targets) shows when it was last reviewed.</p>
 
 <h2>Collected sources</h2>
 {% for s in sources %}
