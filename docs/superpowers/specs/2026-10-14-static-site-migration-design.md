@@ -420,3 +420,26 @@ Removed (no live source): Google (it was APNIC), "Facebook" (Cloudflare data und
 - **NIST USGv6**: per-agency web/mail/DNS status from real data. The OMB M-21-07 targets appear as a dated **reference** block.
 - **The map** is a Plotly choropleth. Its geography file (`world_110m.json`, matching the bundled plotly.js 3.1.0) is served from `static/topojson/`, so visitors make no third-party requests. ISO2→ISO3 mapping uses `pycountry`. folium is not used.
 - Legacy redirects: `Global Adoption` → `global-adoption/`, `Country Analysis` → `country-analysis/`.
+
+## Amendment 3 — Cloud Services (2026-10-14)
+
+Owner-approved approach: measured data plus a curated reference file. Letter grades are removed.
+
+### Measured sources (all `MONTH`)
+
+| Source key | What | Checked |
+|---|---|---|
+| `cloud_endpoints` | For 23 providers, whether up to 6 of their own default hostnames (website, console, API, docs, object storage, status page) publish AAAA records. A hostname with no AAAA but an A record counts as IPv4-only; a failed lookup, or a name that no longer resolves, counts as unknown. The source fails if more than 5% of lookups are unknown. GitHub runners have no IPv6, so this measures *published* IPv6, not end-to-end reachability. | Draft list resolved 2026-10-14 (Azure storage uses Microsoft's public `azureopendatastorage` account) |
+| `aws_ipv6_services` | AWS's "AWS services that support IPv6" table: per service, dual-stack / IPv6-only / public endpoints / private endpoints (Yes, No, Partial, blank). Any other value raises. | 191 services |
+| `ip_ranges_<provider>` (`aws`, `gcp`, `oracle`, `digitalocean`, `linode`, `cloudflare`, `fastly`) | Count of IPv4 and IPv6 prefixes in each provider's published IP-range file; for AWS also services with IPv6 ranges. Shown as counts, not a percentage, because prefix counts don't compare address space. | All live; Oracle publishes 0 IPv6 |
+
+### Curated reference
+
+- `reference/cloud_providers.toml`, edited by hand: per provider `key`, `name`, `last_reviewed` (required), optional `documentation`, `overall_support`, `ipv6_only_support`, `cost_impact`, `outlook`, `limitations`, `recent_progress`, `special_features`, `notes`, and `[[provider.service]]` entries (dual-stack, IPv6-only, NAT-free egress, prefix delegation, notes).
+- Migrated from `get_cloud_ipv6_status()` and `cloud_data.py`, with `last_reviewed = "2025-10-04"` (their last edit). Strings containing statistics (`%`) are dropped: "59% of services still IPv4-only", "IPv6 Always-On (98.1% domains)", and the `ipv6_traffic_percentage` field. Dated prices stay as reference facts. Grades are removed.
+- A test rejects `%` in the file. The build warns about any provider reviewed more than 180 days ago.
+- Provider keys in the file must match the `cloud_endpoints` providers (tested).
+
+### Page
+
+`/cloud-services/` (legacy `?page=Cloud Services`): a comparison table of all 23 providers (hostnames with IPv6 "n of m", published IPv6/IPv4 prefix counts where available, curated support summary, review date); an AWS per-service summary with the full table in a collapsible section; and a section per provider combining its measured hostnames and ranges with its curated reference block. The old summary metrics, grade chart and readiness matrix are removed.
