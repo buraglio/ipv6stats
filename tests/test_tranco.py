@@ -55,3 +55,29 @@ def test_fetch_full_list(monkeypatch):
     ctx = make_ctx(routes={tranco.LIST_URL: FakeResponse(content=make_zip(rows))},
                    aaaa={"google.com", "www.example.org", "ignored.com"})
     assert SOURCES["tranco_aaaa"].fetch(ctx)["with_aaaa"] == 2
+
+
+def test_unknown_lookups_are_left_out_of_the_share():
+    def has(name):
+        return None if name.startswith(("slow", "www.slow")) else name in {"a0.com", "a1.com"}
+
+    domains = [f"a{i}.com" for i in range(99)] + ["slow.com"]
+    result = tranco.measure(domains, has)
+    assert result["unresolved"] == 1
+    assert result["with_aaaa"] == 2
+    assert result["percentage"] == 2.0  # 2 of the 99 that resolved
+
+
+def test_too_many_unknown_lookups_fail_the_source():
+    def has(name):
+        return None if "slow" in name else True
+
+    domains = [f"a{i}.com" for i in range(97)] + ["slow1.com", "slow2.com", "slow3.com"]
+    with pytest.raises(ValueError, match="DNS lookups failed"):
+        tranco.measure(domains, has)
+
+
+def test_unknown_apex_still_counts_www():
+    has = {"slow.com": None, "www.slow.com": True}.get
+    assert tranco.has_ipv6("slow.com", has) is True
+    assert tranco.has_ipv6("other.com", {"other.com": None}.get) is None

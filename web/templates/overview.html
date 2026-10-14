@@ -56,7 +56,7 @@
 <details class="source" open>
   <summary>Top sites with IPv6 (Tranco list, AAAA lookups)</summary>
   {% if tranco %}
-  <p>{{ tranco.value.with_aaaa | format_value("int") }} of the top {{ tranco.value.checked | format_value("int") }} sites ({{ tranco.value.percentage | format_value("pct") }}) publish an AAAA record on the bare domain or on <code>www</code>.</p>
+  <p>{{ tranco.value.with_aaaa | format_value("int") }} of the top {{ tranco.value.checked | format_value("int") }} sites ({{ tranco.value.percentage | format_value("pct") }}) publish an AAAA record on the bare domain or on <code>www</code>{% if tranco.value.get("unresolved") %} ({{ tranco.value.unresolved }} sites whose lookups failed are not counted){% endif %}.</p>
   {{ provenance(tranco) }}
   {% else %}{{ unavailable() }}{% endif %}
 </details>

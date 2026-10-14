@@ -16,7 +16,7 @@ class Context:
     session: Any  # requests.Session, or tests.fakes.FakeSession
     env: Mapping[str, str]
     now: datetime
-    has_aaaa: Callable[[str], bool]
+    has_aaaa: Callable[[str], bool | None]  # None = lookup failed
 
 
 @dataclass(frozen=True)

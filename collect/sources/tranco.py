@@ -11,6 +11,7 @@ HOME = "https://tranco-list.eu/"
 TOP_N = 1000
 SHOW_N = 100
 WORKERS = 32
+MAX_UNRESOLVED = 0.02  # above this share of failed lookups, the measurement is not trusted
 
 
 def top_domains(zip_bytes: bytes, n: int) -> list[str]:
@@ -26,22 +27,31 @@ def top_domains(zip_bytes: bytes, n: int) -> list[str]:
     return domains
 
 
-def has_ipv6(domain: str, has_aaaa: Callable[[str], bool]) -> bool:
-    if has_aaaa(domain):
+def has_ipv6(domain: str, has_aaaa: Callable[[str], bool | None]) -> bool | None:
+    """True/False, or None when the lookups failed and the answer is unknown."""
+    apex = has_aaaa(domain)
+    if apex or domain.startswith("www."):
+        return apex
+    www = has_aaaa(f"www.{domain}")
+    if www:
         return True
-    return not domain.startswith("www.") and has_aaaa(f"www.{domain}")
+    return None if apex is None or www is None else False
 
 
-def measure(domains: list[str], has_aaaa: Callable[[str], bool]) -> dict:
+def measure(domains: list[str], has_aaaa: Callable[[str], bool | None]) -> dict:
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         flags = list(pool.map(lambda d: has_ipv6(d, has_aaaa), domains))
-    with_aaaa = sum(flags)
+    unresolved = sum(1 for f in flags if f is None)
+    if unresolved > MAX_UNRESOLVED * len(domains):
+        raise ValueError(f"{unresolved} of {len(domains)} DNS lookups failed; not trusting the result")
+    with_aaaa = sum(1 for f in flags if f is True)
     if with_aaaa == 0:
         raise ValueError("no domain has an AAAA record; DNS resolution is probably broken")
     return {
         "checked": len(domains),
+        "unresolved": unresolved,
         "with_aaaa": with_aaaa,
-        "percentage": round(100 * with_aaaa / len(domains), 1),
+        "percentage": round(100 * with_aaaa / (len(domains) - unresolved), 1),
         "top": [{"rank": i + 1, "domain": d, "aaaa": f}
                 for i, (d, f) in enumerate(zip(domains[:SHOW_N], flags))],
         "list_url": HOME,
