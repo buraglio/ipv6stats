@@ -13,7 +13,8 @@ def stat(stem, value, label="x"):
     return f'<a href="/cgi-bin/plota">{label}</a></td><td><b><a href="{stem}.txt" target="text">{value}</a></b></td>'
 
 
-ALL = "".join(stat(stem, i + 1) for i, stem in enumerate(ps.WANTED)) + "".join(
+DATED = "<p>Report last updated at Wed Oct 14 19:45:06 2026 (Australian Eastern Time)</p>"
+ALL = DATED + "".join(stat(stem, i + 1) for i, stem in enumerate(ps.WANTED)) + "".join(
     stat(f"bgp-prefix-{n}", n * 10) + stat(f"bgp-p-prefix-{n}", n / 10) for n in range(32, 49))
 
 
@@ -37,3 +38,19 @@ def test_summary_rejects_missing_statistics():
 
 def test_fetch():
     assert SOURCES["bgp_v6_summary"].fetch(make_ctx(routes={ps.URL: FakeResponse(text=FIXTURE)}))["stats"]
+
+
+def test_summary_rejects_a_report_that_stopped_updating():
+    from datetime import datetime, timezone
+    assert ps.parse(ALL, now=datetime(2026, 10, 15, tzinfo=timezone.utc))["report_date"] == "2026-10-14"
+    with pytest.raises(ValueError, match="stopped updating"):
+        ps.parse(ALL, now=datetime(2026, 10, 20, tzinfo=timezone.utc))
+
+
+def test_summary_requires_report_date():
+    with pytest.raises(ValueError, match="Potaroo report format changed"):
+        ps.parse(ALL.replace(DATED, ""))
+
+
+def test_address_space_advertised_is_collected():
+    assert "address_space_prefix" in ps.parse(FIXTURE)["stats"]

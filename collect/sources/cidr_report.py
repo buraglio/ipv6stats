@@ -2,7 +2,7 @@
 import logging
 import re
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from collect.registry import DAY, Context, source
 
@@ -18,6 +18,7 @@ ROW = re.compile(
     r"<td align=right>&nbsp;&nbsp;<tt>(-?\d+)</tt></td><td align=right>&nbsp;&nbsp;<tt>([\d.]+)%</tt>&nbsp;&nbsp;</td>"
 )
 MIN_ROWS = 10
+MAX_AGE = timedelta(days=3)
 # Names are optional labels: a slow or failing RIPEstat must not stall the daily run.
 MAX_NAME_FAILURES = 2
 NAME_BUDGET_SECONDS = 60
@@ -29,18 +30,23 @@ def parse_date(text: str) -> str:
     return datetime.strptime(text, "%d%b%y").date().isoformat()
 
 
-def parse(page: str, min_rows: int = MIN_ROWS) -> dict:
+def parse(page: str, min_rows: int = MIN_ROWS, now: datetime | None = None) -> dict:
     date = DATE.search(page)
     table, ases = None, []
-    for name, now, aggregated, gain, pct in ROW.findall(page):
-        row = {"now": int(now), "aggregated": int(aggregated), "gain": int(gain), "gain_pct": float(pct)}
+    for name, current, aggregated, gain, pct in ROW.findall(page):
+        row = {"now": int(current), "aggregated": int(aggregated), "gain": int(gain), "gain_pct": float(pct)}
+        if row["now"] - row["aggregated"] != row["gain"]:  # columns shifted
+            raise ValueError(f"CIDR Report format changed: {name} columns don't add up")
         if name == "Table":
             table = row
         else:
             ases.append({"asn": int(name[2:]), **row, "name": None})
     if date is None or table is None or len(ases) < min_rows:
         raise ValueError(f"CIDR Report format changed: date={bool(date)}, table={bool(table)}, rows={len(ases)}")
-    return {"date": parse_date(date.group(1)), "table": table, "ases": ases, "url": URL}
+    report_date = parse_date(date.group(1))
+    if now is not None and now.date() - datetime.fromisoformat(report_date).date() > MAX_AGE:
+        raise ValueError(f"CIDR Report stopped updating: report dated {report_date}")
+    return {"date": report_date, "table": table, "ases": ases, "url": URL}
 
 
 def _name(ctx: Context, asn: int) -> tuple[str | None, bool]:
@@ -59,7 +65,7 @@ def _name(ctx: Context, asn: int) -> tuple[str | None, bool]:
 def fetch(ctx: Context) -> dict:
     response = ctx.session.get(URL, timeout=60)
     response.raise_for_status()
-    parsed = parse(response.text)
+    parsed = parse(response.text, now=ctx.now)
     started, failures = clock(), 0
     for row in parsed["ases"]:
         if failures >= MAX_NAME_FAILURES or clock() - started > NAME_BUDGET_SECONDS:

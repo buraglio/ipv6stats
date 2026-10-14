@@ -65,3 +65,17 @@ def test_slow_name_service_cannot_stall_the_run():
     payload = SOURCES["cidr_report_aggregation"].fetch(ctx)
     assert all(a["name"] is None for a in payload["ases"])
     assert stalling.calls <= 1 + cr.MAX_NAME_FAILURES
+
+
+def test_cidr_rejects_a_report_that_stopped_updating():
+    from datetime import datetime, timezone
+    with pytest.raises(ValueError, match="stopped updating"):
+        cr.parse(FIXTURE, now=datetime(2026, 10, 20, tzinfo=timezone.utc))
+
+
+def test_cidr_rejects_columns_that_do_not_add_up():
+    # now - aggregated == gain on every row; a column shift breaks it.
+    first = cr.parse(FIXTURE)["ases"][0]
+    shifted = FIXTURE.replace(f"<tt>{first['aggregated']}</tt>", f"<tt>{first['aggregated'] + 1}</tt>", 1)
+    with pytest.raises(ValueError, match="CIDR Report format changed"):
+        cr.parse(shifted)
