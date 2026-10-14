@@ -22,7 +22,7 @@ def test_headline_numbers_come_from_data(tmp_path):
 
 def test_removed_static_claims_are_gone(tmp_path):
     html = render(tmp_path)
-    for text in ["228,789", "49%", "12%", "IPv6-only Support", "Facebook", "Mobile Leadership",
+    for text in ["228,789", "49%", "12%", "IPv6-only Support", "Facebook IPv6", "(Facebook)", "Facebook Platform", "Mobile Leadership",
                  "US Milestone", "25+", "France (80%)", "13.2%"]:
         assert text not in html, text
 
@@ -64,7 +64,7 @@ def test_stale_source_is_marked(tmp_path):
 
 
 def test_freshness_table_lists_opt_in_source(tmp_path):
-    html = render(tmp_path)
+    html = render(tmp_path, not_configured=("isoc_pulse",))
     assert "Internet Society Pulse API" in html
     assert "not configured" in html
     assert "ISOC_PULSE_API_KEY" in html
@@ -73,3 +73,23 @@ def test_freshness_table_lists_opt_in_source(tmp_path):
 def test_charts_render(tmp_path):
     html = render(tmp_path)
     assert html.count("Plotly.newPlot") == 2
+
+
+def test_isoc_pulse_numbers_with_their_measurement_date(tmp_path):
+    html = render(tmp_path)
+    assert "Top 1,000 sites with IPv6 (ISOC Pulse)" in html
+    assert '<div class="metric-value">51.7%</div>' in html
+    assert "measured 2026-07-16" in html
+    pulse = html[html.index("Internet Society Pulse: top websites"):]
+    for text in ("95.9%", "87.8%", "44.1%", "2026-10-01"):
+        assert text in pulse, text
+
+
+def test_isoc_is_not_in_the_consensus(tmp_path):
+    assert "3 of 3 sources" in render(tmp_path)
+
+
+def test_overview_without_isoc(tmp_path):
+    html = render(tmp_path, not_configured=("isoc_pulse",))
+    assert "Top 1,000 sites with IPv6 (ISOC Pulse)" in html
+    assert "— source unavailable" in html

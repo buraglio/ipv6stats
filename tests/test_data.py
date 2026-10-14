@@ -48,7 +48,7 @@ def test_combine_merges_provenance():
 
 
 def test_status_rows(tmp_path):
-    rows = {r["key"]: r for r in Data(write_sample_data(tmp_path), NOW).status_rows()}
+    rows = {r["key"]: r for r in Data(write_sample_data(tmp_path, not_configured=("isoc_pulse",)), NOW).status_rows()}
     assert rows["isoc_pulse"]["status"] == "not_configured"
     assert "ISOC_PULSE_API_KEY" in rows["isoc_pulse"]["error"]
     assert rows["bgp_v6_table"]["ttl_days"] == 1

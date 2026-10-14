@@ -111,6 +111,17 @@ PAYLOADS = {
                  "green_pct": 92.0}],
         "url": "https://www.vyncke.org/ipv6status/",
     },
+    "isoc_pulse": {
+        "websites_ipv6": {"latest": {"date": "2026-07-16", "value": 51.7},
+                          "series": [{"date": "2026-07-01", "value": 51.0}, {"date": "2026-07-16", "value": 51.7}]},
+        "websites_https": {"latest": {"date": "2026-07-16", "value": 95.9},
+                           "series": [{"date": "2026-07-16", "value": 95.9}]},
+        "websites_tls13": {"latest": {"date": "2026-07-16", "value": 87.8},
+                           "series": [{"date": "2026-07-16", "value": 87.8}]},
+        "users_ipv6": {"latest": {"date": "2026-10-01", "value": 44.09},
+                       "series": [{"date": "2026-10-01", "value": 44.09}]},
+        "url": "https://pulse.internetsociety.org/",
+    },
     "nist_usgv6": {
         "domains": 4,
         "totals": {"web": {"operational": 2, "none": 1, "not_applicable": 1},
@@ -126,7 +137,7 @@ PAYLOADS = {
 }
 
 
-def write_sample_data(data_dir: Path, omit=(), last_success=None) -> Path:
+def write_sample_data(data_dir: Path, omit=(), last_success=None, not_configured=()) -> Path:
     """Write PAYLOADS and a manifest. Keys in `omit` are recorded as failed;
     `last_success` maps key -> ISO time to override FETCHED (for staleness)."""
     data_dir = Path(data_dir)
@@ -137,7 +148,7 @@ def write_sample_data(data_dir: Path, omit=(), last_success=None) -> Path:
         if key.startswith("test_"):
             continue
         entry = {"ttl_seconds": src.ttl_seconds, "last_attempt": FETCHED}
-        if key not in PAYLOADS and src.requires_env:
+        if key in not_configured or (key not in PAYLOADS and src.requires_env):
             entry.update(status="not_configured", error=f"set {', '.join(src.requires_env)} to enable")
         elif key in omit or key not in PAYLOADS:
             entry.update(status="error", error="ConnectionError: sample failure")
