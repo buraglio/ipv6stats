@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% from "macros.html" import metric %}
+{% block content %}
+<h1>IPv6 Adoption Overview</h1>
+<section class="metric-row">
+  {{ metric("Global IPv6 adoption (consensus)", consensus, "pct") }}
+</section>
+{% endblock %}
