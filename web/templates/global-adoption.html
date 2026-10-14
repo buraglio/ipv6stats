@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% from "macros.html" import metric, provenance, unavailable, freshness_table %}
+{% block content %}
+<h1>Global IPv6 Adoption</h1>
+
+<section class="metric-row" aria-label="Headline numbers">
+  {{ metric("Global IPv6 adoption (consensus)", consensus, "pct", note=consensus_note) }}
+  {{ metric("Economies ≥ " ~ above_threshold ~ "% IPv6-capable", above, "int",
+            note="of " ~ considered.value ~ " with at least " ~ min_samples_label ~ " APNIC samples" if considered else None) }}
+  {{ metric("Highest share of IPv6-capable users", top_capable, "pct", note=top_economy.value.name if top_economy else None) }}
+  {{ metric("IPv6 allocated by the RIRs (/32 equivalents)", rir_total, "int", note=rir_count_note) }}
+  {{ metric("Cloudflare HTTP requests over IPv6", cf_ipv6, "pct") }}
+  {{ metric("Top sites with IPv6 (AAAA)", sites, "pct") }}
+</section>
+
+<h2>By region</h2>
+{% if regions_chart %}<div class="chart">{{ regions_chart }}</div>{{ provenance(regions) }}{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Top economies</h2>
+<p>The {{ top_table_size }} economies with the highest share of IPv6-capable users (APNIC), among those with at least {{ min_samples_label }} samples. 6lab is a second measurement of IPv6 users; the last column is the share of the country's top websites fully reachable over IPv6 (Vyncke).</p>
+{% if top_table %}
+<div class="table-wrap"><table>
+  <thead><tr><th>#</th><th>Economy</th><th>IPv6-capable</th><th>Prefers IPv6</th><th>Samples</th><th>IPv6 users (6lab)</th><th>Top websites on IPv6</th></tr></thead>
+  <tbody>
+  {% for r in top_table.value %}
+    <tr><td>{{ loop.index }}</td><td><a href="{{ base }}country/{{ r.slug }}/">{{ r.name }}</a></td>
+      <td>{{ r.capable | format_value("pct") }}</td><td>{{ r.preferred | format_value("pct") }}</td>
+      <td>{{ r.samples | format_value("int") }}</td>
+      <td>{{ r.sixlab | format_value("pct") if r.sixlab is not none else "—" }}</td>
+      <td>{{ r.web | format_value("pct") if r.web is not none else "—" }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{{ provenance(top_table) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Address allocations by registry</h2>
+{% if rirs %}
+<div class="table-wrap"><table>
+  <thead><tr><th>Registry</th><th>IPv6 /32 equivalents</th><th>Economies</th><th>Registry file</th></tr></thead>
+  <tbody>
+  {% for r in rirs.value %}
+    <tr><td>{{ r.name }}</td><td>{{ r.total | format_value("int") }}</td><td>{{ r.countries }}</td><td>{{ r.file_date }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{% if rir_chart %}<div class="chart">{{ rir_chart }}</div>{% endif %}
+<p class="provenance">Growth is plotted by each record's allocation date; records without a date count in the totals but not in the chart.</p>
+{{ provenance(rirs) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Websites on IPv6 by country</h2>
+<p>Share of each country's top websites (by country-code domain) whose web, email and DNS services are fully reachable over IPv6.</p>
+{% if websites %}
+<div class="table-wrap"><table>
+  <thead><tr><th>Country</th><th>Web</th><th>Email</th><th>DNS</th></tr></thead>
+  <tbody>
+  {% for r in websites.value %}
+    <tr><td>{{ r.name }}</td>
+      <td>{{ r.web | format_value("pct") if r.web is not none else "—" }}</td>
+      <td>{{ r.email | format_value("pct") if r.email is not none else "—" }}</td>
+      <td>{{ r.dns | format_value("pct") if r.dns is not none else "—" }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table></div>
+{{ provenance(websites) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Callable, Iterable
@@ -30,6 +30,13 @@ def combine(value: Any, inputs: Iterable[Datum]) -> Datum:
                  min(d.fetched_at for d in inputs), any(d.stale for d in inputs))
 
 
+def field(d: Datum | None, key: str) -> Datum | None:
+    """A Datum for one key of a dict-valued Datum, keeping its provenance."""
+    if d is None or not isinstance(d.value, dict) or d.value.get(key) is None:
+        return None
+    return replace(d, value=d.value[key])
+
+
 class Data:
     def __init__(self, data_dir: Path, now: datetime):
         self.data_dir = Path(data_dir)
@@ -42,9 +49,13 @@ class Data:
             raise KeyError(f"unknown source: {key}")
         if key not in self._payloads:
             path = self.data_dir / f"{key}.json"
-            ok = self.manifest.get(key, {}).get("last_success") and path.exists()
+            ok = self.manifest.get(key, {}).get("last_success") and self._current_format(key) and path.exists()
             self._payloads[key] = json.loads(path.read_text()) if ok else None
         return self._payloads[key]
+
+    def _current_format(self, key: str) -> bool:
+        """False for JSON written by an older parser; it is unavailable until re-fetched."""
+        return self.manifest.get(key, {}).get("schema", 1) == SOURCES[key].schema
 
     def fetched_at(self, key: str) -> datetime:
         return datetime.fromisoformat(self.manifest[key]["last_success"])
@@ -71,7 +82,9 @@ class Data:
             entry = self.manifest.get(key, {})
             rows.append({
                 "key": key, "title": src.title, "url": src.url,
-                "status": entry.get("status", "never run"), "error": entry.get("error"),
+                "status": ("outdated format" if entry.get("last_success") and not self._current_format(key)
+                           else entry.get("status", "never run")),
+                "error": entry.get("error"),
                 "last_success": entry.get("last_success"), "last_attempt": entry.get("last_attempt"),
                 "ttl_days": src.ttl_seconds // DAY,
                 "stale": bool(entry.get("last_success")) and self.is_stale(key),

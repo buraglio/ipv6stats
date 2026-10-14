@@ -16,10 +16,16 @@ ROW = re.compile(
 LINK_TEXT = re.compile(r">([^<]+)</a>")
 WORLD = "XA"
 MIN_ECONOMIES = 100  # fewer means the page layout changed
+SCHEMA = 2  # 2: sub-regions moved out of economies
+
+
+def is_region_code(code: str) -> bool:
+    """APNIC codes regions and sub-regions from ISO's user-assigned ranges (QM-QZ, XA-XZ)."""
+    return code[0] == "X" or (code[0] == "Q" and code[1] >= "M")
 
 
 def parse(page: str, min_economies: int = MIN_ECONOMIES) -> dict:
-    world, regions, economies, seen = None, [], [], set()
+    world, regions, subregions, economies, seen = None, [], [], [], set()
     for match in ROW.finditer(page):
         code, names, capable, preferred, samples = match.groups()
         if code in seen:  # the page repeats rows in several tables; keep the first
@@ -30,18 +36,18 @@ def parse(page: str, min_economies: int = MIN_ECONOMIES) -> dict:
                "capable": float(capable), "preferred": float(preferred), "samples": int(samples)}
         if code == WORLD:
             world = row
-        elif len(links) == 1:  # regions list only themselves; economies also list parents
-            regions.append(row)
+        elif is_region_code(code):  # regions list only themselves; sub-regions also list a parent
+            (regions if len(links) == 1 else subregions).append(row)
         else:
             economies.append(row)
     if world is None or len(economies) < min_economies:
         raise ValueError(f"APNIC page format changed: world={'found' if world else 'missing'}, "
                          f"economies={len(economies)}")
-    return {"world": world, "regions": regions,
+    return {"world": world, "regions": regions, "subregions": subregions,
             "economies": sorted(economies, key=lambda r: r["code"]), "url": URL}
 
 
-@source("apnic", MONTH, title="APNIC Labs IPv6 measurement", url=URL)
+@source("apnic", MONTH, title="APNIC Labs IPv6 measurement", url=URL, schema=SCHEMA)
 def fetch(ctx: Context) -> dict:
     response = ctx.session.get(URL, timeout=30)
     response.raise_for_status()

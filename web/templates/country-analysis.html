@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% from "macros.html" import provenance, unavailable, freshness_table %}
+{% block content %}
+<h1>Country Analysis</h1>
+
+{% if map_chart %}<div class="chart chart-map">{{ map_chart }}</div>{{ provenance(map_points) }}{% else %}{{ unavailable() }}{% endif %}
+
+<div class="grid-2">
+  <div class="card">
+    <h3>Leaders</h3>
+    {% if leaders %}
+    <ol>
+      {% for r in leaders.value %}<li><a href="{{ base }}country/{{ r.slug }}/">{{ r.name }}</a>: {{ r.capable | format_value("pct") }}</li>{% endfor %}
+    </ol>
+    {{ provenance(leaders) }}
+    {% else %}{{ unavailable() }}{% endif %}
+  </div>
+  <div class="card">
+    <h3>By region</h3>
+    {% if regions %}
+    <ol>
+      {% for r in regions.value %}<li>{{ r.name }}: {{ r.capable | format_value("pct") }}</li>{% endfor %}
+    </ol>
+    {{ provenance(regions) }}
+    {% else %}{{ unavailable() }}{% endif %}
+  </div>
+</div>
+
+<h2>US federal government</h2>
+{% if nist %}
+<p>{{ nist_web.value | format_value("int") }} of {{ nist.value.domains | format_value("int") }} federal .gov domains tested by NIST serve their website over IPv6. <a href="{{ base }}country/us/">Agency details on the United States page</a>.</p>
+{{ provenance(nist) }}
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>All economies</h2>
+{% if index %}
+<ul class="country-index">
+  {% for e in index.value %}<li><a href="{{ base }}country/{{ e.slug }}/">{{ e.name }}</a></li>{% endfor %}
+</ul>
+{% else %}{{ unavailable() }}{% endif %}
+
+<h2>Data freshness</h2>
+{{ freshness_table(freshness) }}
+{% endblock %}

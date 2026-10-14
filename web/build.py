@@ -18,7 +18,7 @@ from plotly.offline import get_plotlyjs
 
 from web.data import Data
 from web.format import date_only, format_value, provenance_text
-from web.pages import overview
+from web.pages import country, country_analysis, global_adoption, overview
 
 HERE = Path(__file__).parent
 TEMPLATES = HERE / "templates"
@@ -33,11 +33,20 @@ class Page:
     context: Callable[[Data], dict]
 
 
-PAGES = (Page("overview", "Overview", overview.context),)
+PAGES = (
+    Page("overview", "Overview", overview.context),
+    Page("global-adoption", "Global Adoption", global_adoption.context),
+    Page("country-analysis", "Country Analysis", country_analysis.context),
+)
 
 # Old Streamlit ?page= names -> new paths. Later plans add the remaining pages;
 # names not listed here land on the Overview.
-LEGACY_PAGES = {"Overview": "overview/", "Combined View": "overview/"}
+LEGACY_PAGES = {
+    "Overview": "overview/",
+    "Combined View": "overview/",
+    "Global Adoption": "global-adoption/",
+    "Country Analysis": "country-analysis/",
+}
 
 
 def make_env() -> Environment:
@@ -82,6 +91,10 @@ def build(data_dir: Path, out_dir: Path, now: datetime) -> list[str]:
         _write(out_dir / page.slug / "index.html", template.render(context, base="../"))
         if page.slug == "overview":
             _write(out_dir / "index.html", template.render(context, base="", legacy_pages=LEGACY_PAGES))
+    country_template = env.get_template("country.html")
+    for slug, page_context in country.pages(data):
+        context = {**common, "current": "country-analysis", **page_context}
+        _write(out_dir / "country" / slug / "index.html", country_template.render(context, base="../../"))
     return check_reference_dates(TEMPLATES, now)
 
 

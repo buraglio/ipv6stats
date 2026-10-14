@@ -27,18 +27,20 @@ class Source:
     title: str
     url: str
     requires_env: tuple[str, ...] = ()
+    schema: int = 1  # bump when the payload's shape changes, so stored JSON is re-fetched
 
 
 SOURCES: dict[str, Source] = {}
 
 
-def source(key: str, ttl_seconds: int, *, title: str, url: str, requires_env: tuple[str, ...] = ()):
+def source(key: str, ttl_seconds: int, *, title: str, url: str, requires_env: tuple[str, ...] = (),
+           schema: int = 1):
     """Register a fetch function. The JSON is written to data/<key>.json."""
 
     def register(fn):
         if key in SOURCES:
             raise ValueError(f"duplicate source key: {key}")
-        SOURCES[key] = Source(key, ttl_seconds, fn, title, url, requires_env)
+        SOURCES[key] = Source(key, ttl_seconds, fn, title, url, requires_env, schema)
         return fn
 
     return register

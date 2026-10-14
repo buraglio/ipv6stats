@@ -50,3 +50,18 @@ def test_fetch_http_error_raises():
     ctx = make_ctx(routes={apnic.URL: FakeResponse(status_code=503)})
     with pytest.raises(Exception, match="503"):
         SOURCES["apnic"].fetch(ctx)
+
+
+SUBREGIONS = r"""
+["<a href=\"/ipv6/XA\">XA</a>","<a href=\"/ipv6/XA\">World</a>",{v: 43.65, f:'x'}, {v: 41.02, f: 'x'},972331706]
+["<a href=\"/ipv6/QO\">QO</a>","<a href=\"/ipv6/QO\">Western Europe</a>, <a href=\"/ipv6/XE\">Europe</a>",{v: 71.9, f:'x'}, {v: 70.6, f: 'x'},37288892]
+["<a href=\"/ipv6/XQ\">XQ</a>","<a href=\"/ipv6/XQ\">Northern America</a>, <a href=\"/ipv6/XC\">Americas</a>",{v: 59.7, f:'x'}, {v: 57.7, f: 'x'},65674864]
+["<a href=\"/ipv6/QA\">QA</a>","<a href=\"/ipv6/QA\">Qatar</a>, <a href=\"/ipv6/QV\">Western Asia</a>",{v: 20.0, f:'x'}, {v: 19.0, f: 'x'},500000]
+"""
+
+
+def test_subregions_are_not_economies():
+    # APNIC codes sub-regions from ISO's user-assigned ranges (QM-QZ, XA-XZ).
+    parsed = apnic.parse(SUBREGIONS, min_economies=1)
+    assert [r["code"] for r in parsed["economies"]] == ["QA"]
+    assert [r["name"] for r in parsed["subregions"]] == ["Western Europe", "Northern America"]

@@ -48,3 +48,6 @@ table { width: 100%; border-collapse: collapse; font-size: 14px; }
 th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
 .status-error { color: var(--warn); }
 .site-footer { padding-top: 16px; padding-bottom: 32px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border); }
+.chart-map { min-height: 460px; }
+.country-index { columns: 3 200px; padding-left: 20px; margin: 0; }
+.country-index li { break-inside: avoid; }

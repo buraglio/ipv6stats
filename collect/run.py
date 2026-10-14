@@ -68,7 +68,8 @@ def run(sources: Mapping[str, Source], data_dir: Path, ctx: Context, force: bool
         if missing:
             entry.update(status="not_configured", error=f"set {', '.join(missing)} to enable")
             result.not_configured.append(key)
-        elif force or manifest_file.is_due(entry, src.ttl_seconds, ctx.now):
+        elif (force or manifest_file.is_due(entry, src.ttl_seconds, ctx.now)
+              or entry.get("schema", 1) != src.schema):
             due.append(src)
         else:
             result.skipped.append(key)
@@ -82,7 +83,7 @@ def run(sources: Mapping[str, Source], data_dir: Path, ctx: Context, force: bool
             result.attempted.append(src.key)
             try:
                 _write_payload(data_dir / f"{src.key}.json", future.result())
-                entry.update(status="ok", error=None, last_success=now_iso)
+                entry.update(status="ok", error=None, last_success=now_iso, schema=src.schema)
             except Exception as exc:  # any failure keeps the previous JSON
                 logger.exception("source %s failed", src.key)
                 entry.update(status="error", error=f"{type(exc).__name__}: {exc}"[:500])

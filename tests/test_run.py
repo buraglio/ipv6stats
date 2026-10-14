@@ -115,3 +115,13 @@ def test_threshold_counts_sources_not_due_as_healthy():
     assert not exceeds_threshold(one_broken)
     two_broken = RunResult(attempted=["apnic", "bgp", "c"], failed=["apnic", "c"], skipped=["d", "e"])
     assert exceeds_threshold(two_broken)
+
+
+def test_format_change_makes_source_due_again(tmp_path):
+    # A parser change bumps the source's schema; the old JSON must be re-fetched
+    # even though its re-fetch interval hasn't passed.
+    run({"a": Source("a", 30 * DAY, lambda c: {"x": 1}, "Stub", "https://example.net/")}, tmp_path, make_ctx(now=NOW))
+    later = make_ctx(now=NOW + timedelta(days=1))
+    result = run({"a": Source("a", 30 * DAY, lambda c: {"x": 2}, "Stub", "https://example.net/", (), 2)}, tmp_path, later)
+    assert result.attempted == ["a"]
+    assert load(tmp_path)["a"]["schema"] == 2

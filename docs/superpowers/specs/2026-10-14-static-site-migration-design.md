@@ -394,3 +394,29 @@ Where it conflicts with earlier sections, this amendment wins.
 
 - ISOC Pulse API client, once the owner has an account and key.
 - Check what Cloudflare `top/locations` values mean; use or drop them.
+
+## Amendment 2 — Global Adoption and Country Analysis (2026-10-14)
+
+Owner-approved source list for the second page group. Where it conflicts with earlier
+sections, this amendment wins.
+
+### Sources
+
+| Source key | What | Checked |
+|---|---|---|
+| `ripe_delegations`, `arin_delegations`, `apnic_delegations` (+ existing `lacnic_delegations`, `afrinic_delegations`) | All five RIR delegation files. Payload gains `by_country` (every country's /32 equivalents) and `history` (cumulative /32 equivalents per year, from each record's allocation date). Replaces the Maigron history page (403). | All five files live |
+| `apnic_economy_detail` | APNIC per-economy pages (`/ipv6/<CC>`) for the 50 economies with the most samples: daily capable/preferred history since 2011 (thinned to weekly) and the per-network (AS) table (top 20 by samples). Up to 5 pages may fail; they are listed in the payload and shown as unavailable. | US page: 10,897 daily rows, AS table present |
+| `cisco_6lab` | `6lab-stats.com/6lab-stats/curr/users.js` (community mirror of Cisco 6lab, updated daily). Only the last column, IPv6 users %, is used; the meaning of the other columns can't be confirmed. | Live, modified 2026-10-14 |
+| `vyncke` | `vyncke.org/ipv6status/`: per-country Web, Email and DNS tables (top 50 sites per ccTLD): green % (fully IPv6-enabled) and weighted %. ccTLD codes are mapped to ISO (`uk`→`GB`); `eu` is left out of country joins. | Live |
+| `nist_usgv6` | `usgv6-deploymon.nist.gov/cgi-bin/generate-gov`: per-domain DNS/Mail/Web status from cell colors (green operational, yellow in progress, red none, grey not applicable), aggregated per agency. | 1,299 of 1,320 rows parsed in the probe; web-operational count matched NIST's headline (707) |
+
+Removed (no live source): Google (it was APNIC), "Facebook" (Cloudflare data under the wrong name, or estimates), Akamai (403), Maigron (403), ipv6enabled.net (page has no data), Cloudflare DNS client-vs-server (blog numbers), "major allocation milestones", per-country mobile % and "ISP support", NIST "geographic distribution". Team Cymru bogons moves to Extended Data Sources. Cloudflare per-country data waits until the Cloudflare key works.
+
+### Pages
+
+- **Global Adoption** (`/global-adoption/`) becomes "who has IPv6": headline numbers, APNIC regions, a top-economies table (APNIC, 6lab, Vyncke side by side), a cross-RIR comparison with allocation growth over time, website IPv6 by country (Vyncke), and the existing Cloudflare and Tranco summaries. Sections replace the old 11-option dropdown; with the removals, every remaining section fits on one page. Detailed per-RIR sections move to Extended Data Sources (a later plan).
+- **Country Analysis** (`/country-analysis/`): world map of APNIC IPv6 capability for every economy, leaders, regional breakdown, and a country index.
+- **One static page per economy** (`/country/<cc>/`) replaces the country dropdown and its hidden cards: APNIC capable/preferred/samples, 6lab %, Vyncke web/email/DNS, RIR allocations; history chart and AS table for the top 50 economies; the US page carries the NIST USGv6 section. A static site can generate these cheaply, they link and bookmark cleanly, and each page stays small.
+- **NIST USGv6**: per-agency web/mail/DNS status from real data. The OMB M-21-07 targets appear as a dated **reference** block.
+- **The map** is a Plotly choropleth. Its geography file (`world_110m.json`, matching the bundled plotly.js 3.1.0) is served from `static/topojson/`, so visitors make no third-party requests. ISO2→ISO3 mapping uses `pycountry`. folium is not used.
+- Legacy redirects: `Global Adoption` → `global-adoption/`, `Country Analysis` → `country-analysis/`.

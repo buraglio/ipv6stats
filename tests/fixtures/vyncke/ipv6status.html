@@ -1,0 +1,2439 @@
+<html xmlns:og="http://opengraphprotocol.org/schema/"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+	<title>IPv6 Deployment Aggregated Status</title>
+	<meta property="og:title" content="IPv6 Deployment Aggregated Status"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://ipv6status.vyncke.org/"/>
+	<meta property="og:image" content="https://ipv6status.vyncke.org/index.png"/>
+	<meta property="og:site_name" content="IPv6 Deployment Status"/>
+	<meta property="fb:admins" content="620147832"/>
+	<meta property="og:description"
+	content="Statistics about IPv6 deployment on different countries as measured by IPv6-enabled web sites."/>
+
+	<link rel="alternate" title="New Worldwide IPv6 Sites" href="https://ipv6status.vyncke.org/atom/sites.ww.atom" type="application/atom+xml" />
+	<link rel="stylesheet" type="text/css" href="flags/flags-sprite.css" />
+<!-- bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<!-- Matomo -->
+<script type="text/javascript">
+	  var _paq = window._paq = window._paq || [];
+	    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+	    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+	    _paq.push(['trackPageView']);
+	      _paq.push(['enableLinkTracking']);
+	      (function() {
+		          var u="//analytics.vyncke.org/";
+			      _paq.push(['setTrackerUrl', u+'matomo.php']);
+			      _paq.push(['setSiteId', '1']);
+			          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			          g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+				    })();
+</script>
+<noscript><p><img src="//analytics.vyncke.org/matomo.php?idsite=1&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
+</head>
+<body lang="en" dir="ltr">
+<div class="container-fluid">
+<h1>IPv6 Deployment Aggregated Status</h1>
+
+<div class="row">
+<div class="col-md-9 col-sm-12">
+Limited to the top-50 per Top Level Domain extracted from the free Cisco Umbrella (previously Alexa, then Amazon) top 1 million web sites
+(the Alexa list has been desactivated end of November 2016 then was reactivated, hence incomplete statistics, the switch to Cisco Umbrella is dated September 2025).
+See the bottom of this page for more information on the tests.
+<br/>
+Click on a country to see specific statistics about top sites within this country or click on a flag:
+<ul>
+<li><b>AfriNIC</b>: <a href="detailed.php?country=dz"><img class="flag-dz" src="/flags/flags-sprite.png" border=0 title="Algeria"></a>
+<a href="detailed.php?country=ao"><img class="flag-ao" src="/flags/flags-sprite.png" border=0 title="Angola"></a>
+<a href="detailed.php?country=bj"><img class="flag-bj" src="/flags/flags-sprite.png" border=0 title="Benin"></a>
+<a href="detailed.php?country=bw"><img class="flag-bw" src="/flags/flags-sprite.png" border=0 title="Botswana"></a>
+<a href="detailed.php?country=bf"><img class="flag-bf" src="/flags/flags-sprite.png" border=0 title="Burkina Faso"></a>
+<a href="detailed.php?country=bi"><img class="flag-bi" src="/flags/flags-sprite.png" border=0 title="Burundi"></a>
+<a href="detailed.php?country=cm"><img class="flag-cm" src="/flags/flags-sprite.png" border=0 title="Cameroon"></a>
+<a href="detailed.php?country=cv"><img class="flag-cv" src="/flags/flags-sprite.png" border=0 title="Cape Verde"></a>
+<a href="detailed.php?country=cf"><img class="flag-cf" src="/flags/flags-sprite.png" border=0 title="Central African Republic"></a>
+<a href="detailed.php?country=td"><img class="flag-td" src="/flags/flags-sprite.png" border=0 title="Chad"></a>
+<a href="detailed.php?country=km"><img class="flag-km" src="/flags/flags-sprite.png" border=0 title="Comoros"></a>
+<a href="detailed.php?country=cg"><img class="flag-cg" src="/flags/flags-sprite.png" border=0 title="Congo (Brazzaville)"></a>
+<a href="detailed.php?country=cd"><img class="flag-cd" src="/flags/flags-sprite.png" border=0 title="Congo (Democratic Republic)"></a>
+<a href="detailed.php?country=ci"><img class="flag-ci" src="/flags/flags-sprite.png" border=0 title="Cote d'Ivoire"></a>
+<a href="detailed.php?country=dj"><img class="flag-dj" src="/flags/flags-sprite.png" border=0 title="Djibouti"></a>
+<a href="detailed.php?country=eg"><img class="flag-eg" src="/flags/flags-sprite.png" border=0 title="Egypt"></a>
+<a href="detailed.php?country=gq"><img class="flag-gq" src="/flags/flags-sprite.png" border=0 title="Equatorial Guinea"></a>
+<a href="detailed.php?country=er"><img class="flag-er" src="/flags/flags-sprite.png" border=0 title="Eritrea"></a>
+<a href="detailed.php?country=et"><img class="flag-et" src="/flags/flags-sprite.png" border=0 title="Ethiopia"></a>
+<a href="detailed.php?country=tf"><img class="flag-tf" src="/flags/flags-sprite.png" border=0 title="French Southern and Antarctic Lands"></a>
+<a href="detailed.php?country=ga"><img class="flag-ga" src="/flags/flags-sprite.png" border=0 title="Gabon"></a>
+<a href="detailed.php?country=gm"><img class="flag-gm" src="/flags/flags-sprite.png" border=0 title="Gambia"></a>
+<a href="detailed.php?country=gh"><img class="flag-gh" src="/flags/flags-sprite.png" border=0 title="Ghana"></a>
+<a href="detailed.php?country=gn"><img class="flag-gn" src="/flags/flags-sprite.png" border=0 title="Guinea"></a>
+<a href="detailed.php?country=gw"><img class="flag-gw" src="/flags/flags-sprite.png" border=0 title="Guinea-Bissau"></a>
+<a href="detailed.php?country=ke"><img class="flag-ke" src="/flags/flags-sprite.png" border=0 title="Kenya"></a>
+<a href="detailed.php?country=ls"><img class="flag-ls" src="/flags/flags-sprite.png" border=0 title="Lesotho"></a>
+<a href="detailed.php?country=lr"><img class="flag-lr" src="/flags/flags-sprite.png" border=0 title="Liberia"></a>
+<a href="detailed.php?country=ly"><img class="flag-ly" src="/flags/flags-sprite.png" border=0 title="Libya"></a>
+<a href="detailed.php?country=mg"><img class="flag-mg" src="/flags/flags-sprite.png" border=0 title="Madagascar"></a>
+<a href="detailed.php?country=mw"><img class="flag-mw" src="/flags/flags-sprite.png" border=0 title="Malawi"></a>
+<a href="detailed.php?country=ml"><img class="flag-ml" src="/flags/flags-sprite.png" border=0 title="Mali"></a>
+<a href="detailed.php?country=mr"><img class="flag-mr" src="/flags/flags-sprite.png" border=0 title="Mauritania"></a>
+<a href="detailed.php?country=mu"><img class="flag-mu" src="/flags/flags-sprite.png" border=0 title="Mauritius"></a>
+<a href="detailed.php?country=ma"><img class="flag-ma" src="/flags/flags-sprite.png" border=0 title="Morocco"></a>
+<a href="detailed.php?country=mz"><img class="flag-mz" src="/flags/flags-sprite.png" border=0 title="Mozambique"></a>
+<a href="detailed.php?country=na"><img class="flag-na" src="/flags/flags-sprite.png" border=0 title="Namibia"></a>
+<a href="detailed.php?country=ne"><img class="flag-ne" src="/flags/flags-sprite.png" border=0 title="Niger"></a>
+<a href="detailed.php?country=ng"><img class="flag-ng" src="/flags/flags-sprite.png" border=0 title="Nigeria"></a>
+<a href="detailed.php?country=rw"><img class="flag-rw" src="/flags/flags-sprite.png" border=0 title="Rwanda"></a>
+<a href="detailed.php?country=st"><img class="flag-st" src="/flags/flags-sprite.png" border=0 title="São Tomé and Príncipe"></a>
+<a href="detailed.php?country=sn"><img class="flag-sn" src="/flags/flags-sprite.png" border=0 title="Senegal"></a>
+<a href="detailed.php?country=sc"><img class="flag-sc" src="/flags/flags-sprite.png" border=0 title="Seychelles"></a>
+<a href="detailed.php?country=sl"><img class="flag-sl" src="/flags/flags-sprite.png" border=0 title="Sierra Leone"></a>
+<a href="detailed.php?country=so"><img class="flag-so" src="/flags/flags-sprite.png" border=0 title="Somalia"></a>
+<a href="detailed.php?country=za"><img class="flag-za" src="/flags/flags-sprite.png" border=0 title="South Africa"></a>
+<a href="detailed.php?country=ss"><img class="flag-ss" src="/flags/flags-sprite.png" border=0 title="South Sudan"></a>
+<a href="detailed.php?country=sd"><img class="flag-sd" src="/flags/flags-sprite.png" border=0 title="Sudan"></a>
+<a href="detailed.php?country=sz"><img class="flag-sz" src="/flags/flags-sprite.png" border=0 title="Swaziland"></a>
+<a href="detailed.php?country=tz"><img class="flag-tz" src="/flags/flags-sprite.png" border=0 title="Tanzania"></a>
+<a href="detailed.php?country=tg"><img class="flag-tg" src="/flags/flags-sprite.png" border=0 title="Togo"></a>
+<a href="detailed.php?country=tn"><img class="flag-tn" src="/flags/flags-sprite.png" border=0 title="Tunisia"></a>
+<a href="detailed.php?country=ug"><img class="flag-ug" src="/flags/flags-sprite.png" border=0 title="Uganda"></a>
+<a href="detailed.php?country=zm"><img class="flag-zm" src="/flags/flags-sprite.png" border=0 title="Zambia"></a>
+<a href="detailed.php?country=zw"><img class="flag-zw" src="/flags/flags-sprite.png" border=0 title="Zimbabwe"></a>
+</li><li><b>APNIC</b>: <a href="detailed.php?country=af"><img class="flag-af" src="/flags/flags-sprite.png" border=0 title="Afghanistan"></a>
+<a href="detailed.php?country=as"><img class="flag-as" src="/flags/flags-sprite.png" border=0 title="American Samoa"></a>
+<a href="detailed.php?country=au"><img class="flag-au" src="/flags/flags-sprite.png" border=0 title="Australia"></a>
+<a href="detailed.php?country=bd"><img class="flag-bd" src="/flags/flags-sprite.png" border=0 title="Bangladesh"></a>
+<a href="detailed.php?country=bt"><img class="flag-bt" src="/flags/flags-sprite.png" border=0 title="Bhutan"></a>
+<a href="detailed.php?country=bn"><img class="flag-bn" src="/flags/flags-sprite.png" border=0 title="Brunei"></a>
+<a href="detailed.php?country=kh"><img class="flag-kh" src="/flags/flags-sprite.png" border=0 title="Cambodia"></a>
+<a href="detailed.php?country=cn"><img class="flag-cn" src="/flags/flags-sprite.png" border=0 title="China"></a>
+<a href="detailed.php?country=cx"><img class="flag-cx" src="/flags/flags-sprite.png" border=0 title="Christmas Island"></a>
+<a href="detailed.php?country=cc"><img class="flag-cc" src="/flags/flags-sprite.png" border=0 title="Cocos (Keeling) Islands"></a>
+<a href="detailed.php?country=fm"><img class="flag-fm" src="/flags/flags-sprite.png" border=0 title="Federated States of Micronesia"></a>
+<a href="detailed.php?country=fj"><img class="flag-fj" src="/flags/flags-sprite.png" border=0 title="Fiji"></a>
+<a href="detailed.php?country=pf"><img class="flag-pf" src="/flags/flags-sprite.png" border=0 title="French Polynesia"></a>
+<a href="detailed.php?country=gu"><img class="flag-gu" src="/flags/flags-sprite.png" border=0 title="Guam"></a>
+<a href="detailed.php?country=hk"><img class="flag-hk" src="/flags/flags-sprite.png" border=0 title="Hong Kong"></a>
+<a href="detailed.php?country=in"><img class="flag-in" src="/flags/flags-sprite.png" border=0 title="India"></a>
+<a href="detailed.php?country=io"><img class="flag-io" src="/flags/flags-sprite.png" border=0 title="Indian Ocean"></a>
+<a href="detailed.php?country=id"><img class="flag-id" src="/flags/flags-sprite.png" border=0 title="Indonesia"></a>
+<a href="detailed.php?country=jp"><img class="flag-jp" src="/flags/flags-sprite.png" border=0 title="Japan"></a>
+<a href="detailed.php?country=kp"><img class="flag-kp" src="/flags/flags-sprite.png" border=0 title="Korea (Democratic People's Republic)"></a>
+<a href="detailed.php?country=la"><img class="flag-la" src="/flags/flags-sprite.png" border=0 title="Laos"></a>
+<a href="detailed.php?country=mo"><img class="flag-mo" src="/flags/flags-sprite.png" border=0 title="Macau"></a>
+<a href="detailed.php?country=my"><img class="flag-my" src="/flags/flags-sprite.png" border=0 title="Malaysia"></a>
+<a href="detailed.php?country=mv"><img class="flag-mv" src="/flags/flags-sprite.png" border=0 title="Maldives"></a>
+<a href="detailed.php?country=mn"><img class="flag-mn" src="/flags/flags-sprite.png" border=0 title="Mongolia"></a>
+<a href="detailed.php?country=mm"><img class="flag-mm" src="/flags/flags-sprite.png" border=0 title="Myanmar (Burma)"></a>
+<a href="detailed.php?country=np"><img class="flag-np" src="/flags/flags-sprite.png" border=0 title="Nepal"></a>
+<a href="detailed.php?country=nc"><img class="flag-nc" src="/flags/flags-sprite.png" border=0 title="New Caledonia"></a>
+<a href="detailed.php?country=nz"><img class="flag-nz" src="/flags/flags-sprite.png" border=0 title="New Zealand"></a>
+<a href="detailed.php?country=nu"><img class="flag-nu" src="/flags/flags-sprite.png" border=0 title="Niue"></a>
+<a href="detailed.php?country=pk"><img class="flag-pk" src="/flags/flags-sprite.png" border=0 title="Pakistan"></a>
+<a href="detailed.php?country=pw"><img class="flag-pw" src="/flags/flags-sprite.png" border=0 title="Palau"></a>
+<a href="detailed.php?country=pg"><img class="flag-pg" src="/flags/flags-sprite.png" border=0 title="Papua New Guinea"></a>
+<a href="detailed.php?country=ph"><img class="flag-ph" src="/flags/flags-sprite.png" border=0 title="Philippines"></a>
+<a href="detailed.php?country=pn"><img class="flag-pn" src="/flags/flags-sprite.png" border=0 title="Pitcairn Islands"></a>
+<a href="detailed.php?country=re"><img class="flag-re" src="/flags/flags-sprite.png" border=0 title="Reunion"></a>
+<a href="detailed.php?country=ws"><img class="flag-ws" src="/flags/flags-sprite.png" border=0 title="Samoa"></a>
+<a href="detailed.php?country=sg"><img class="flag-sg" src="/flags/flags-sprite.png" border=0 title="Singapore"></a>
+<a href="detailed.php?country=kr"><img class="flag-kr" src="/flags/flags-sprite.png" border=0 title="South Korea"></a>
+<a href="detailed.php?country=lk"><img class="flag-lk" src="/flags/flags-sprite.png" border=0 title="Sri Lanka"></a>
+<a href="detailed.php?country=tw"><img class="flag-tw" src="/flags/flags-sprite.png" border=0 title="Taiwan"></a>
+<a href="detailed.php?country=th"><img class="flag-th" src="/flags/flags-sprite.png" border=0 title="Thailand"></a>
+<a href="detailed.php?country=tl"><img class="flag-tl" src="/flags/flags-sprite.png" border=0 title="Timor-Leste"></a>
+<a href="detailed.php?country=tk"><img class="flag-tk" src="/flags/flags-sprite.png" border=0 title="Tokelau"></a>
+<a href="detailed.php?country=to"><img class="flag-to" src="/flags/flags-sprite.png" border=0 title="Tonga"></a>
+<a href="detailed.php?country=tv"><img class="flag-tv" src="/flags/flags-sprite.png" border=0 title="Tuvalu"></a>
+<a href="detailed.php?country=vu"><img class="flag-vu" src="/flags/flags-sprite.png" border=0 title="Vanuatu"></a>
+<a href="detailed.php?country=vn"><img class="flag-vn" src="/flags/flags-sprite.png" border=0 title="Vietnam"></a>
+</li><li><b>ARIN</b>: <a href="detailed.php?country=ai"><img class="flag-ai" src="/flags/flags-sprite.png" border=0 title="Anguilla"></a>
+<a href="detailed.php?country=ag"><img class="flag-ag" src="/flags/flags-sprite.png" border=0 title="Antigua and Barbuda"></a>
+<a href="detailed.php?country=bs"><img class="flag-bs" src="/flags/flags-sprite.png" border=0 title="Bahamas"></a>
+<a href="detailed.php?country=bb"><img class="flag-bb" src="/flags/flags-sprite.png" border=0 title="Barbados"></a>
+<a href="detailed.php?country=bm"><img class="flag-bm" src="/flags/flags-sprite.png" border=0 title="Bermuda"></a>
+<a href="detailed.php?country=ca"><img class="flag-ca" src="/flags/flags-sprite.png" border=0 title="Canada"></a>
+<a href="detailed.php?country=ky"><img class="flag-ky" src="/flags/flags-sprite.png" border=0 title="Cayman Islands"></a>
+<a href="detailed.php?country=dm"><img class="flag-dm" src="/flags/flags-sprite.png" border=0 title="Dominica"></a>
+<a href="detailed.php?country=gd"><img class="flag-gd" src="/flags/flags-sprite.png" border=0 title="Grenada"></a>
+<a href="detailed.php?country=gp"><img class="flag-gp" src="/flags/flags-sprite.png" border=0 title="Guadeloupe"></a>
+<a href="detailed.php?country=jm"><img class="flag-jm" src="/flags/flags-sprite.png" border=0 title="Jamaica"></a>
+<a href="detailed.php?country=mq"><img class="flag-mq" src="/flags/flags-sprite.png" border=0 title="Martinique"></a>
+<a href="detailed.php?country=sh"><img class="flag-sh" src="/flags/flags-sprite.png" border=0 title="Saint Helena"></a>
+<a href="detailed.php?country=kn"><img class="flag-kn" src="/flags/flags-sprite.png" border=0 title="Saint Kitts and Nevis"></a>
+<a href="detailed.php?country=tc"><img class="flag-tc" src="/flags/flags-sprite.png" border=0 title="Turks and Caicos Islands"></a>
+<a href="detailed.php?country=vi"><img class="flag-vi" src="/flags/flags-sprite.png" border=0 title="U.S. Virgin Islands"></a>
+<a href="detailed.php?country=us"><img class="flag-us" src="/flags/flags-sprite.png" border=0 title="United States of America"></a>
+<a href="detailed.php?country=vg"><img class="flag-vg" src="/flags/flags-sprite.png" border=0 title="Virgin Islands (Bristish)"></a>
+</li><li><b>LACNIC</b>: <a href="detailed.php?country=ar"><img class="flag-ar" src="/flags/flags-sprite.png" border=0 title="Argentina"></a>
+<a href="detailed.php?country=aw"><img class="flag-aw" src="/flags/flags-sprite.png" border=0 title="Aruba"></a>
+<a href="detailed.php?country=bz"><img class="flag-bz" src="/flags/flags-sprite.png" border=0 title="Belize"></a>
+<a href="detailed.php?country=bo"><img class="flag-bo" src="/flags/flags-sprite.png" border=0 title="Bolivia"></a>
+<a href="detailed.php?country=br"><img class="flag-br" src="/flags/flags-sprite.png" border=0 title="Brazil"></a>
+<a href="detailed.php?country=cl"><img class="flag-cl" src="/flags/flags-sprite.png" border=0 title="Chile"></a>
+<a href="detailed.php?country=co"><img class="flag-co" src="/flags/flags-sprite.png" border=0 title="Colombia"></a>
+<a href="detailed.php?country=cr"><img class="flag-cr" src="/flags/flags-sprite.png" border=0 title="Costa Rica"></a>
+<a href="detailed.php?country=cu"><img class="flag-cu" src="/flags/flags-sprite.png" border=0 title="Cuba"></a>
+<a href="detailed.php?country=do"><img class="flag-do" src="/flags/flags-sprite.png" border=0 title="Dominican Republic"></a>
+<a href="detailed.php?country=ec"><img class="flag-ec" src="/flags/flags-sprite.png" border=0 title="Ecuador"></a>
+<a href="detailed.php?country=sv"><img class="flag-sv" src="/flags/flags-sprite.png" border=0 title="El Salvador"></a>
+<a href="detailed.php?country=gf"><img class="flag-gf" src="/flags/flags-sprite.png" border=0 title="French Guiana"></a>
+<a href="detailed.php?country=gt"><img class="flag-gt" src="/flags/flags-sprite.png" border=0 title="Guatemala"></a>
+<a href="detailed.php?country=gy"><img class="flag-gy" src="/flags/flags-sprite.png" border=0 title="Guyana (Republic of)"></a>
+<a href="detailed.php?country=ht"><img class="flag-ht" src="/flags/flags-sprite.png" border=0 title="Haiti"></a>
+<a href="detailed.php?country=hn"><img class="flag-hn" src="/flags/flags-sprite.png" border=0 title="Honduras"></a>
+<a href="detailed.php?country=mx"><img class="flag-mx" src="/flags/flags-sprite.png" border=0 title="Mexico"></a>
+<a href="detailed.php?country=an"><img class="flag-an" src="/flags/flags-sprite.png" border=0 title="Netherlands Antilles"></a>
+<a href="detailed.php?country=ni"><img class="flag-ni" src="/flags/flags-sprite.png" border=0 title="Nicaragua"></a>
+<a href="detailed.php?country=pa"><img class="flag-pa" src="/flags/flags-sprite.png" border=0 title="Panama"></a>
+<a href="detailed.php?country=py"><img class="flag-py" src="/flags/flags-sprite.png" border=0 title="Paraguay"></a>
+<a href="detailed.php?country=pe"><img class="flag-pe" src="/flags/flags-sprite.png" border=0 title="Peru"></a>
+<a href="detailed.php?country=pr"><img class="flag-pr" src="/flags/flags-sprite.png" border=0 title="Puerto Rico"></a>
+<a href="detailed.php?country=sx"><img class="flag-sx" src="/flags/flags-sprite.png" border=0 title="Sint Maarten"></a>
+<a href="detailed.php?country=gs"><img class="flag-gs" src="/flags/flags-sprite.png" border=0 title="South Georgia and the South Sandwich Islands"></a>
+<a href="detailed.php?country=sr"><img class="flag-sr" src="/flags/flags-sprite.png" border=0 title="Suriname"></a>
+<a href="detailed.php?country=tt"><img class="flag-tt" src="/flags/flags-sprite.png" border=0 title="Trinidad and Tobago"></a>
+<a href="detailed.php?country=uy"><img class="flag-uy" src="/flags/flags-sprite.png" border=0 title="Uruguay"></a>
+<a href="detailed.php?country=ve"><img class="flag-ve" src="/flags/flags-sprite.png" border=0 title="Venezuela"></a>
+</li><li><b>RIPE</b>: <a href="detailed.php?country=al"><img class="flag-al" src="/flags/flags-sprite.png" border=0 title="Albania"></a>
+<a href="detailed.php?country=ad"><img class="flag-ad" src="/flags/flags-sprite.png" border=0 title="Andorra"></a>
+<a href="detailed.php?country=am"><img class="flag-am" src="/flags/flags-sprite.png" border=0 title="Armenia"></a>
+<a href="detailed.php?country=at"><img class="flag-at" src="/flags/flags-sprite.png" border=0 title="Austria"></a>
+<a href="detailed.php?country=az"><img class="flag-az" src="/flags/flags-sprite.png" border=0 title="Azerbaijan"></a>
+<a href="detailed.php?country=ax"><img class="flag-ax" src="/flags/flags-sprite.png" border=0 title="Ã…land Islands"></a>
+<a href="detailed.php?country=bh"><img class="flag-bh" src="/flags/flags-sprite.png" border=0 title="Bahrain"></a>
+<a href="detailed.php?country=by"><img class="flag-by" src="/flags/flags-sprite.png" border=0 title="Belarus"></a>
+<a href="detailed.php?country=be"><img class="flag-be" src="/flags/flags-sprite.png" border=0 title="Belgium"></a>
+<a href="detailed.php?country=ba"><img class="flag-ba" src="/flags/flags-sprite.png" border=0 title="Bosnia and Herzegovina"></a>
+<a href="detailed.php?country=bg"><img class="flag-bg" src="/flags/flags-sprite.png" border=0 title="Bulgaria"></a>
+<a href="detailed.php?country=hr"><img class="flag-hr" src="/flags/flags-sprite.png" border=0 title="Croatia"></a>
+<a href="detailed.php?country=cy"><img class="flag-cy" src="/flags/flags-sprite.png" border=0 title="Cyprus"></a>
+<a href="detailed.php?country=cz"><img class="flag-cz" src="/flags/flags-sprite.png" border=0 title="Czech Republic"></a>
+<a href="detailed.php?country=dk"><img class="flag-dk" src="/flags/flags-sprite.png" border=0 title="Denmark"></a>
+<a href="detailed.php?country=ee"><img class="flag-ee" src="/flags/flags-sprite.png" border=0 title="Estonia"></a>
+<a href="detailed.php?country=eu"><img class="flag-eu" src="/flags/flags-sprite.png" border=0 title="European Union"></a>
+<a href="detailed.php?country=fi"><img class="flag-fi" src="/flags/flags-sprite.png" border=0 title="Finland"></a>
+<a href="detailed.php?country=fr"><img class="flag-fr" src="/flags/flags-sprite.png" border=0 title="France"></a>
+<a href="detailed.php?country=ge"><img class="flag-ge" src="/flags/flags-sprite.png" border=0 title="Georgia"></a>
+<a href="detailed.php?country=de"><img class="flag-de" src="/flags/flags-sprite.png" border=0 title="Germany"></a>
+<a href="detailed.php?country=gi"><img class="flag-gi" src="/flags/flags-sprite.png" border=0 title="Gibraltar"></a>
+<a href="detailed.php?country=gr"><img class="flag-gr" src="/flags/flags-sprite.png" border=0 title="Greece"></a>
+<a href="detailed.php?country=gl"><img class="flag-gl" src="/flags/flags-sprite.png" border=0 title="Greenland"></a>
+<a href="detailed.php?country=gg"><img class="flag-gg" src="/flags/flags-sprite.png" border=0 title="Guernsey"></a>
+<a href="detailed.php?country=hu"><img class="flag-hu" src="/flags/flags-sprite.png" border=0 title="Hungary"></a>
+<a href="detailed.php?country=is"><img class="flag-is" src="/flags/flags-sprite.png" border=0 title="Iceland"></a>
+<a href="detailed.php?country=ir"><img class="flag-ir" src="/flags/flags-sprite.png" border=0 title="Iran"></a>
+<a href="detailed.php?country=iq"><img class="flag-iq" src="/flags/flags-sprite.png" border=0 title="Iraq"></a>
+<a href="detailed.php?country=ie"><img class="flag-ie" src="/flags/flags-sprite.png" border=0 title="Ireland"></a>
+<a href="detailed.php?country=il"><img class="flag-il" src="/flags/flags-sprite.png" border=0 title="Israel"></a>
+<a href="detailed.php?country=it"><img class="flag-it" src="/flags/flags-sprite.png" border=0 title="Italy"></a>
+<a href="detailed.php?country=je"><img class="flag-je" src="/flags/flags-sprite.png" border=0 title="Jersey"></a>
+<a href="detailed.php?country=jo"><img class="flag-jo" src="/flags/flags-sprite.png" border=0 title="Jordan"></a>
+<a href="detailed.php?country=kz"><img class="flag-kz" src="/flags/flags-sprite.png" border=0 title="Kazakhstan"></a>
+<a href="detailed.php?country=kw"><img class="flag-kw" src="/flags/flags-sprite.png" border=0 title="Kuwait"></a>
+<a href="detailed.php?country=kg"><img class="flag-kg" src="/flags/flags-sprite.png" border=0 title="Kyrgyzstan"></a>
+<a href="detailed.php?country=lv"><img class="flag-lv" src="/flags/flags-sprite.png" border=0 title="Latvia"></a>
+<a href="detailed.php?country=lb"><img class="flag-lb" src="/flags/flags-sprite.png" border=0 title="Lebanon"></a>
+<a href="detailed.php?country=li"><img class="flag-li" src="/flags/flags-sprite.png" border=0 title="Liechtenstein"></a>
+<a href="detailed.php?country=lt"><img class="flag-lt" src="/flags/flags-sprite.png" border=0 title="Lithuania"></a>
+<a href="detailed.php?country=lu"><img class="flag-lu" src="/flags/flags-sprite.png" border=0 title="Luxembourg"></a>
+<a href="detailed.php?country=mk"><img class="flag-mk" src="/flags/flags-sprite.png" border=0 title="Macedonia"></a>
+<a href="detailed.php?country=mt"><img class="flag-mt" src="/flags/flags-sprite.png" border=0 title="Malta"></a>
+<a href="detailed.php?country=md"><img class="flag-md" src="/flags/flags-sprite.png" border=0 title="Moldova"></a>
+<a href="detailed.php?country=mc"><img class="flag-mc" src="/flags/flags-sprite.png" border=0 title="Monaco"></a>
+<a href="detailed.php?country=me"><img class="flag-me" src="/flags/flags-sprite.png" border=0 title="Montenegro"></a>
+<a href="detailed.php?country=nl"><img class="flag-nl" src="/flags/flags-sprite.png" border=0 title="Netherlands"></a>
+<a href="detailed.php?country=no"><img class="flag-no" src="/flags/flags-sprite.png" border=0 title="Norway"></a>
+<a href="detailed.php?country=om"><img class="flag-om" src="/flags/flags-sprite.png" border=0 title="Oman"></a>
+<a href="detailed.php?country=ps"><img class="flag-ps" src="/flags/flags-sprite.png" border=0 title="Palestinian Territory"></a>
+<a href="detailed.php?country=pl"><img class="flag-pl" src="/flags/flags-sprite.png" border=0 title="Poland"></a>
+<a href="detailed.php?country=pt"><img class="flag-pt" src="/flags/flags-sprite.png" border=0 title="Portugal"></a>
+<a href="detailed.php?country=qa"><img class="flag-qa" src="/flags/flags-sprite.png" border=0 title="Qatar"></a>
+<a href="detailed.php?country=ro"><img class="flag-ro" src="/flags/flags-sprite.png" border=0 title="Romania"></a>
+<a href="detailed.php?country=ru"><img class="flag-ru" src="/flags/flags-sprite.png" border=0 title="Russia"></a>
+<a href="detailed.php?country=sm"><img class="flag-sm" src="/flags/flags-sprite.png" border=0 title="San Marino"></a>
+<a href="detailed.php?country=sa"><img class="flag-sa" src="/flags/flags-sprite.png" border=0 title="Saudi Arabia"></a>
+<a href="detailed.php?country=rs"><img class="flag-rs" src="/flags/flags-sprite.png" border=0 title="Serbia"></a>
+<a href="detailed.php?country=sk"><img class="flag-sk" src="/flags/flags-sprite.png" border=0 title="Slovakia"></a>
+<a href="detailed.php?country=si"><img class="flag-si" src="/flags/flags-sprite.png" border=0 title="Slovenia"></a>
+<a href="detailed.php?country=es"><img class="flag-es" src="/flags/flags-sprite.png" border=0 title="Spain"></a>
+<a href="detailed.php?country=sj"><img class="flag-sj" src="/flags/flags-sprite.png" border=0 title="Svalbard and Jan Mayen Islands"></a>
+<a href="detailed.php?country=se"><img class="flag-se" src="/flags/flags-sprite.png" border=0 title="Sweden"></a>
+<a href="detailed.php?country=ch"><img class="flag-ch" src="/flags/flags-sprite.png" border=0 title="Switzerland"></a>
+<a href="detailed.php?country=sy"><img class="flag-sy" src="/flags/flags-sprite.png" border=0 title="Syria"></a>
+<a href="detailed.php?country=tj"><img class="flag-tj" src="/flags/flags-sprite.png" border=0 title="Tajikistan"></a>
+<a href="detailed.php?country=tr"><img class="flag-tr" src="/flags/flags-sprite.png" border=0 title="Turkey"></a>
+<a href="detailed.php?country=tm"><img class="flag-tm" src="/flags/flags-sprite.png" border=0 title="Turkmenistan"></a>
+<a href="detailed.php?country=ua"><img class="flag-ua" src="/flags/flags-sprite.png" border=0 title="Ukraine"></a>
+<a href="detailed.php?country=ae"><img class="flag-ae" src="/flags/flags-sprite.png" border=0 title="United Arab Emirates"></a>
+<a href="detailed.php?country=gb"><img class="flag-gb" src="/flags/flags-sprite.png" border=0 title="United-Kingdom"></a>
+<a href="detailed.php?country=uz"><img class="flag-uz" src="/flags/flags-sprite.png" border=0 title="Uzbekistan"></a>
+<a href="detailed.php?country=va"><img class="flag-va" src="/flags/flags-sprite.png" border=0 title="Vatican City"></a>
+<a href="detailed.php?country=ye"><img class="flag-ye" src="/flags/flags-sprite.png" border=0 title="Yemen"></a>
+</li></ul>
+</div><!-- col-md-9 col-sm-12 -->
+<div class="col-md-3 col-sm-6" align="right">
+<div style="width: 600px; height: 400px; overflow: hidden; position:relative;">	
+<a href="gmap.php?metric=w&rir="><iframe style="width: 1200px; height: 800px; border:1;transform: scale(0.5); transform-origin: 0 0;" src="gmap.php?metric=w&rir="></iframe></a>
+</div>
+</div><!-- col -->
+</div><!-- row -->
+
+<div class="row">
+	<div class="col">
+Or do you prefer to have the <a href=allgreen.html>list of all fully IPv6-enabled sites?</a>. 
+Display per country <a href=prefixes.php>IPv6 prefixes</a>.
+<br/><a href=compare.php>Compare</a> IPv6 deployments among countries.
+<a href=project.php>Predict</a> IPv6 deployments in one country.
+<!--See all <a href=p2p.php>IPv6-enabled BitTorrent peers</a>.-->
+Same information as <a href=xml_today.php>XML</a>.
+
+<iframe src="https://www.facebook.com/plugins/like.php?href=https://www.vyncke.org/ipv6status/index.php" scrolling="no" frameborder="0" style="height: 62px; width: 100%" allowTransparency="true"></iframe>
+Show countries with less than 50 sites: <input type=checkbox name=small_samples         onchange="window.location.href='/ipv6status/index.php?small_samples=on';">
+	</div><!-- col -->
+</div><!-- row -->
+
+<div class="row">
+<div class="col-xs-12 col-md-6 col-lg-3">
+<h3>Web (Umbrella)</h3>
+  <!--a href="plotsite.php?metric=w&global=legacy&pct=y"><img border=0 src="plotsite.php?metric=w&global=legacy&pct=y" width=102 height=70></a-->
+  <a href="plotsite.php?metric=w&global=y&pct=y"><img border=0 src="plotsite.php?metric=w&global=y&pct=y" width=102 height=70></a>
+  <table class="table table-striped table-hover">
+  <thead>
+  <tr><th>Rank</th><th>Country</th><th>Sample<br/>size</th><th>Weighted</th><th>Green</th><th>Orange<br/>Test/broken</th></tr>
+  </thead>
+  <tbody>
+<tr><td>1<td><a href=detailed.php?country=no><img class="flag-no" src="/flags/flags-sprite.png" border=0> Norway</a>
+	<td align=right>50
+	<td align=right>55.54%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>2<td><a href=detailed.php?country=gr><img class="flag-gr" src="/flags/flags-sprite.png" border=0> Greece</a>
+	<td align=right>50
+	<td align=right>78.71%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>3<td><a href=detailed.php?country=nl><img class="flag-nl" src="/flags/flags-sprite.png" border=0> Netherlands</a>
+	<td align=right>50
+	<td align=right>40.15%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>4<td><a href=detailed.php?country=ng><img class="flag-ng" src="/flags/flags-sprite.png" border=0> Nigeria</a>
+	<td align=right>50
+	<td align=right>69.12%
+	<td align=right>60.0% (30)
+	<td align=right>0.0% (0)
+<tr><td>5<td><a href=detailed.php?country=se><img class="flag-se" src="/flags/flags-sprite.png" border=0> Sweden</a>
+	<td align=right>50
+	<td align=right>68.49%
+	<td align=right>60.0% (30)
+	<td align=right>0.0% (0)
+<tr><td>6<td><a href=detailed.php?country=de><img class="flag-de" src="/flags/flags-sprite.png" border=0> Germany</a>
+	<td align=right>50
+	<td align=right>71.71%
+	<td align=right>58.0% (29)
+	<td align=right>0.0% (0)
+<tr><td>7<td><a href=detailed.php?country=ai><img class="flag-ai" src="/flags/flags-sprite.png" border=0> Anguilla</a>
+	<td align=right>50
+	<td align=right>41.28%
+	<td align=right>58.0% (29)
+	<td align=right>0.0% (0)
+<tr><td>8<td><a href=detailed.php?country=do><img class="flag-do" src="/flags/flags-sprite.png" border=0> Dominican Republic</a>
+	<td align=right>50
+	<td align=right>71.26%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>9<td><a href=detailed.php?country=gg><img class="flag-gg" src="/flags/flags-sprite.png" border=0> Guernsey</a>
+	<td align=right>50
+	<td align=right>43.15%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>10<td><a href=detailed.php?country=az><img class="flag-az" src="/flags/flags-sprite.png" border=0> Azerbaijan</a>
+	<td align=right>50
+	<td align=right>65.84%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>11<td><a href=detailed.php?country=th><img class="flag-th" src="/flags/flags-sprite.png" border=0> Thailand</a>
+	<td align=right>50
+	<td align=right>50.76%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>12<td><a href=detailed.php?country=lt><img class="flag-lt" src="/flags/flags-sprite.png" border=0> Lithuania</a>
+	<td align=right>50
+	<td align=right>40.05%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>13<td><a href=detailed.php?country=cz><img class="flag-cz" src="/flags/flags-sprite.png" border=0> Czech Republic</a>
+	<td align=right>50
+	<td align=right>60.15%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>14<td><a href=detailed.php?country=ch><img class="flag-ch" src="/flags/flags-sprite.png" border=0> Switzerland</a>
+	<td align=right>50
+	<td align=right>37.94%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>15<td><a href=detailed.php?country=za><img class="flag-za" src="/flags/flags-sprite.png" border=0> South Africa</a>
+	<td align=right>50
+	<td align=right>48.35%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>16<td><a href=detailed.php?country=in><img class="flag-in" src="/flags/flags-sprite.png" border=0> India</a>
+	<td align=right>50
+	<td align=right>63.26%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>17<td><a href=detailed.php?country=lk><img class="flag-lk" src="/flags/flags-sprite.png" border=0> Sri Lanka</a>
+	<td align=right>50
+	<td align=right>52.45%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>18<td><a href=detailed.php?country=ps><img class="flag-ps" src="/flags/flags-sprite.png" border=0> Palestinian Territory</a>
+	<td align=right>50
+	<td align=right>34.54%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>19<td><a href=detailed.php?country=us><img class="flag-us" src="/flags/flags-sprite.png" border=0> United States of America</a>
+	<td align=right>50
+	<td align=right>70.51%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>20<td><a href=detailed.php?country=cy><img class="flag-cy" src="/flags/flags-sprite.png" border=0> Cyprus</a>
+	<td align=right>50
+	<td align=right>41.49%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>21<td><a href=detailed.php?country=ba><img class="flag-ba" src="/flags/flags-sprite.png" border=0> Bosnia and Herzegovina</a>
+	<td align=right>50
+	<td align=right>43.77%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>22<td><a href=detailed.php?country=me><img class="flag-me" src="/flags/flags-sprite.png" border=0> Montenegro</a>
+	<td align=right>50
+	<td align=right>64.05%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>23<td><a href=detailed.php?country=ro><img class="flag-ro" src="/flags/flags-sprite.png" border=0> Romania</a>
+	<td align=right>50
+	<td align=right>32.11%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>24<td><a href=detailed.php?country=br><img class="flag-br" src="/flags/flags-sprite.png" border=0> Brazil</a>
+	<td align=right>50
+	<td align=right>51.26%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>25<td><a href=detailed.php?country=al><img class="flag-al" src="/flags/flags-sprite.png" border=0> Albania</a>
+	<td align=right>50
+	<td align=right>27.47%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>26<td><a href=detailed.php?country=iq><img class="flag-iq" src="/flags/flags-sprite.png" border=0> Iraq</a>
+	<td align=right>50
+	<td align=right>62.88%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>27<td><a href=detailed.php?country=so><img class="flag-so" src="/flags/flags-sprite.png" border=0> Somalia</a>
+	<td align=right>50
+	<td align=right>56.37%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>28<td><a href=detailed.php?country=gt><img class="flag-gt" src="/flags/flags-sprite.png" border=0> Guatemala</a>
+	<td align=right>50
+	<td align=right>50.17%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>29<td><a href=detailed.php?country=fi><img class="flag-fi" src="/flags/flags-sprite.png" border=0> Finland</a>
+	<td align=right>50
+	<td align=right>65.29%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>30<td><a href=detailed.php?country=nz><img class="flag-nz" src="/flags/flags-sprite.png" border=0> New Zealand</a>
+	<td align=right>50
+	<td align=right>51.70%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>31<td><a href=detailed.php?country=am><img class="flag-am" src="/flags/flags-sprite.png" border=0> Armenia</a>
+	<td align=right>50
+	<td align=right>55.94%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>32<td><a href=detailed.php?country=co><img class="flag-co" src="/flags/flags-sprite.png" border=0> Colombia</a>
+	<td align=right>50
+	<td align=right>36.06%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>33<td><a href=detailed.php?country=au><img class="flag-au" src="/flags/flags-sprite.png" border=0> Australia</a>
+	<td align=right>50
+	<td align=right>37.93%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>34<td><a href=detailed.php?country=fr><img class="flag-fr" src="/flags/flags-sprite.png" border=0> France</a>
+	<td align=right>50
+	<td align=right>57.62%
+	<td align=right>44.0% (22)
+	<td align=right>2.0% (1)
+<tr><td>35<td><a href=detailed.php?country=sg><img class="flag-sg" src="/flags/flags-sprite.png" border=0> Singapore</a>
+	<td align=right>50
+	<td align=right>41.57%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>36<td><a href=detailed.php?country=at><img class="flag-at" src="/flags/flags-sprite.png" border=0> Austria</a>
+	<td align=right>50
+	<td align=right>63.86%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>37<td><a href=detailed.php?country=sk><img class="flag-sk" src="/flags/flags-sprite.png" border=0> Slovakia</a>
+	<td align=right>50
+	<td align=right>56.76%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>38<td><a href=detailed.php?country=mu><img class="flag-mu" src="/flags/flags-sprite.png" border=0> Mauritius</a>
+	<td align=right>50
+	<td align=right>24.46%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>39<td><a href=detailed.php?country=is><img class="flag-is" src="/flags/flags-sprite.png" border=0> Iceland</a>
+	<td align=right>50
+	<td align=right>54.93%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>40<td><a href=detailed.php?country=ph><img class="flag-ph" src="/flags/flags-sprite.png" border=0> Philippines</a>
+	<td align=right>50
+	<td align=right>49.62%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>41<td><a href=detailed.php?country=pk><img class="flag-pk" src="/flags/flags-sprite.png" border=0> Pakistan</a>
+	<td align=right>50
+	<td align=right>54.63%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>42<td><a href=detailed.php?country=ua><img class="flag-ua" src="/flags/flags-sprite.png" border=0> Ukraine</a>
+	<td align=right>50
+	<td align=right>56.01%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>43<td><a href=detailed.php?country=cn><img class="flag-cn" src="/flags/flags-sprite.png" border=0> China</a>
+	<td align=right>50
+	<td align=right>30.70%
+	<td align=right>42.0% (21)
+	<td align=right>4.0% (2)
+<tr><td>44<td><a href=detailed.php?country=ee><img class="flag-ee" src="/flags/flags-sprite.png" border=0> Estonia</a>
+	<td align=right>50
+	<td align=right>24.27%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>45<td><a href=detailed.php?country=ke><img class="flag-ke" src="/flags/flags-sprite.png" border=0> Kenya</a>
+	<td align=right>50
+	<td align=right>46.79%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>46<td><a href=detailed.php?country=it><img class="flag-it" src="/flags/flags-sprite.png" border=0> Italy</a>
+	<td align=right>50
+	<td align=right>53.29%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>47<td><a href=detailed.php?country=mk><img class="flag-mk" src="/flags/flags-sprite.png" border=0> Macedonia</a>
+	<td align=right>50
+	<td align=right>57.58%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>48<td><a href=detailed.php?country=ie><img class="flag-ie" src="/flags/flags-sprite.png" border=0> Ireland</a>
+	<td align=right>50
+	<td align=right>36.19%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>49<td><a href=detailed.php?country=hr><img class="flag-hr" src="/flags/flags-sprite.png" border=0> Croatia</a>
+	<td align=right>50
+	<td align=right>28.55%
+	<td align=right>40.0% (20)
+	<td align=right>2.0% (1)
+<tr><td>50<td><a href=detailed.php?country=il><img class="flag-il" src="/flags/flags-sprite.png" border=0> Israel</a>
+	<td align=right>50
+	<td align=right>33.64%
+	<td align=right>40.0% (20)
+	<td align=right>2.0% (1)
+<tr><td>51<td><a href=detailed.php?country=sv><img class="flag-sv" src="/flags/flags-sprite.png" border=0> El Salvador</a>
+	<td align=right>50
+	<td align=right>56.03%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>52<td><a href=detailed.php?country=pa><img class="flag-pa" src="/flags/flags-sprite.png" border=0> Panama</a>
+	<td align=right>50
+	<td align=right>48.87%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>53<td><a href=detailed.php?country=ly><img class="flag-ly" src="/flags/flags-sprite.png" border=0> Libya</a>
+	<td align=right>50
+	<td align=right>28.74%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>54<td><a href=detailed.php?country=eu><img class="flag-eu" src="/flags/flags-sprite.png" border=0> European Union</a>
+	<td align=right>50
+	<td align=right>42.24%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>55<td><a href=detailed.php?country=vc><img class="flag-vc" src="/flags/flags-sprite.png" border=0> Saint Vincent and the Grenadines</a>
+	<td align=right>50
+	<td align=right>24.76%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>56<td><a href=detailed.php?country=sh><img class="flag-sh" src="/flags/flags-sprite.png" border=0> Saint Helena</a>
+	<td align=right>50
+	<td align=right>55.52%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>57<td><a href=detailed.php?country=mm><img class="flag-mm" src="/flags/flags-sprite.png" border=0> Myanmar (Burma)</a>
+	<td align=right>50
+	<td align=right>28.34%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>58<td><a href=detailed.php?country=hu><img class="flag-hu" src="/flags/flags-sprite.png" border=0> Hungary</a>
+	<td align=right>50
+	<td align=right>70.73%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>59<td><a href=detailed.php?country=my><img class="flag-my" src="/flags/flags-sprite.png" border=0> Malaysia</a>
+	<td align=right>50
+	<td align=right>31.21%
+	<td align=right>38.0% (19)
+	<td align=right>2.0% (1)
+<tr><td>60<td><a href=detailed.php?country=dk><img class="flag-dk" src="/flags/flags-sprite.png" border=0> Denmark</a>
+	<td align=right>50
+	<td align=right>55.45%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>61<td><a href=detailed.php?country=ws><img class="flag-ws" src="/flags/flags-sprite.png" border=0> Samoa</a>
+	<td align=right>50
+	<td align=right>27.84%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>62<td><a href=detailed.php?country=ma><img class="flag-ma" src="/flags/flags-sprite.png" border=0> Morocco</a>
+	<td align=right>50
+	<td align=right>64.25%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>63<td><a href=detailed.php?country=zw><img class="flag-zw" src="/flags/flags-sprite.png" border=0> Zimbabwe</a>
+	<td align=right>50
+	<td align=right>50.05%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>64<td><a href=detailed.php?country=pe><img class="flag-pe" src="/flags/flags-sprite.png" border=0> Peru</a>
+	<td align=right>50
+	<td align=right>52.12%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>65<td><a href=detailed.php?country=ar><img class="flag-ar" src="/flags/flags-sprite.png" border=0> Argentina</a>
+	<td align=right>50
+	<td align=right>38.46%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>66<td><a href=detailed.php?country=bg><img class="flag-bg" src="/flags/flags-sprite.png" border=0> Bulgaria</a>
+	<td align=right>50
+	<td align=right>51.39%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>67<td><a href=detailed.php?country=si><img class="flag-si" src="/flags/flags-sprite.png" border=0> Slovenia</a>
+	<td align=right>50
+	<td align=right>34.00%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>68<td><a href=detailed.php?country=hn><img class="flag-hn" src="/flags/flags-sprite.png" border=0> Honduras</a>
+	<td align=right>50
+	<td align=right>18.23%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>69<td><a href=detailed.php?country=uy><img class="flag-uy" src="/flags/flags-sprite.png" border=0> Uruguay</a>
+	<td align=right>50
+	<td align=right>34.27%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>70<td><a href=detailed.php?country=py><img class="flag-py" src="/flags/flags-sprite.png" border=0> Paraguay</a>
+	<td align=right>50
+	<td align=right>30.00%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>71<td><a href=detailed.php?country=pt><img class="flag-pt" src="/flags/flags-sprite.png" border=0> Portugal</a>
+	<td align=right>50
+	<td align=right>23.37%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>72<td><a href=detailed.php?country=ug><img class="flag-ug" src="/flags/flags-sprite.png" border=0> Uganda</a>
+	<td align=right>50
+	<td align=right>46.49%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>73<td><a href=detailed.php?country=es><img class="flag-es" src="/flags/flags-sprite.png" border=0> Spain</a>
+	<td align=right>50
+	<td align=right>32.95%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>74<td><a href=detailed.php?country=lv><img class="flag-lv" src="/flags/flags-sprite.png" border=0> Latvia</a>
+	<td align=right>50
+	<td align=right>20.07%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>75<td><a href=detailed.php?country=kw><img class="flag-kw" src="/flags/flags-sprite.png" border=0> Kuwait</a>
+	<td align=right>50
+	<td align=right>38.11%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>76<td><a href=detailed.php?country=gb><img class="flag-gb" src="/flags/flags-sprite.png" border=0> United-Kingdom</a>
+	<td align=right>50
+	<td align=right>66.14%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>77<td><a href=detailed.php?country=rs><img class="flag-rs" src="/flags/flags-sprite.png" border=0> Serbia</a>
+	<td align=right>50
+	<td align=right>24.68%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>78<td><a href=detailed.php?country=tn><img class="flag-tn" src="/flags/flags-sprite.png" border=0> Tunisia</a>
+	<td align=right>50
+	<td align=right>41.41%
+	<td align=right>32.0% (16)
+	<td align=right>2.0% (1)
+<tr><td>79<td><a href=detailed.php?country=mx><img class="flag-mx" src="/flags/flags-sprite.png" border=0> Mexico</a>
+	<td align=right>50
+	<td align=right>36.32%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>80<td><a href=detailed.php?country=ca><img class="flag-ca" src="/flags/flags-sprite.png" border=0> Canada</a>
+	<td align=right>50
+	<td align=right>53.06%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>81<td><a href=detailed.php?country=ae><img class="flag-ae" src="/flags/flags-sprite.png" border=0> United Arab Emirates</a>
+	<td align=right>50
+	<td align=right>40.77%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>82<td><a href=detailed.php?country=la><img class="flag-la" src="/flags/flags-sprite.png" border=0> Laos</a>
+	<td align=right>50
+	<td align=right>55.28%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>83<td><a href=detailed.php?country=lb><img class="flag-lb" src="/flags/flags-sprite.png" border=0> Lebanon</a>
+	<td align=right>50
+	<td align=right>47.18%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>84<td><a href=detailed.php?country=id><img class="flag-id" src="/flags/flags-sprite.png" border=0> Indonesia</a>
+	<td align=right>50
+	<td align=right>44.01%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>85<td><a href=detailed.php?country=cr><img class="flag-cr" src="/flags/flags-sprite.png" border=0> Costa Rica</a>
+	<td align=right>50
+	<td align=right>47.46%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>86<td><a href=detailed.php?country=md><img class="flag-md" src="/flags/flags-sprite.png" border=0> Moldova</a>
+	<td align=right>50
+	<td align=right>47.65%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>87<td><a href=detailed.php?country=to><img class="flag-to" src="/flags/flags-sprite.png" border=0> Tonga</a>
+	<td align=right>50
+	<td align=right>27.22%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>88<td><a href=detailed.php?country=li><img class="flag-li" src="/flags/flags-sprite.png" border=0> Liechtenstein</a>
+	<td align=right>50
+	<td align=right>15.99%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>89<td><a href=detailed.php?country=tr><img class="flag-tr" src="/flags/flags-sprite.png" border=0> Turkey</a>
+	<td align=right>50
+	<td align=right>52.39%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>90<td><a href=detailed.php?country=re><img class="flag-re" src="/flags/flags-sprite.png" border=0> Reunion</a>
+	<td align=right>50
+	<td align=right>22.63%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>91<td><a href=detailed.php?country=sa><img class="flag-sa" src="/flags/flags-sprite.png" border=0> Saudi Arabia</a>
+	<td align=right>50
+	<td align=right>43.93%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>92<td><a href=detailed.php?country=cl><img class="flag-cl" src="/flags/flags-sprite.png" border=0> Chile</a>
+	<td align=right>50
+	<td align=right>17.33%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>93<td><a href=detailed.php?country=bz><img class="flag-bz" src="/flags/flags-sprite.png" border=0> Belize</a>
+	<td align=right>50
+	<td align=right>23.89%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>94<td><a href=detailed.php?country=eg><img class="flag-eg" src="/flags/flags-sprite.png" border=0> Egypt</a>
+	<td align=right>50
+	<td align=right>55.93%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>95<td><a href=detailed.php?country=ci><img class="flag-ci" src="/flags/flags-sprite.png" border=0> Cote d'Ivoire</a>
+	<td align=right>50
+	<td align=right>51.51%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>96<td><a href=detailed.php?country=jo><img class="flag-jo" src="/flags/flags-sprite.png" border=0> Jordan</a>
+	<td align=right>50
+	<td align=right>39.98%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>97<td><a href=detailed.php?country=bd><img class="flag-bd" src="/flags/flags-sprite.png" border=0> Bangladesh</a>
+	<td align=right>50
+	<td align=right>26.60%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>98<td><a href=detailed.php?country=qa><img class="flag-qa" src="/flags/flags-sprite.png" border=0> Qatar</a>
+	<td align=right>50
+	<td align=right>23.99%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>99<td><a href=detailed.php?country=lu><img class="flag-lu" src="/flags/flags-sprite.png" border=0> Luxembourg</a>
+	<td align=right>50
+	<td align=right>47.52%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>100<td><a href=detailed.php?country=ag><img class="flag-ag" src="/flags/flags-sprite.png" border=0> Antigua and Barbuda</a>
+	<td align=right>50
+	<td align=right>19.44%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>101<td><a href=detailed.php?country=bo><img class="flag-bo" src="/flags/flags-sprite.png" border=0> Bolivia</a>
+	<td align=right>50
+	<td align=right>51.38%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>102<td><a href=detailed.php?country=tw><img class="flag-tw" src="/flags/flags-sprite.png" border=0> Taiwan</a>
+	<td align=right>50
+	<td align=right>35.59%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>103<td><a href=detailed.php?country=sc><img class="flag-sc" src="/flags/flags-sprite.png" border=0> Seychelles</a>
+	<td align=right>50
+	<td align=right>20.53%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>104<td><a href=detailed.php?country=vn><img class="flag-vn" src="/flags/flags-sprite.png" border=0> Vietnam</a>
+	<td align=right>50
+	<td align=right>25.85%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>105<td><a href=detailed.php?country=cm><img class="flag-cm" src="/flags/flags-sprite.png" border=0> Cameroon</a>
+	<td align=right>50
+	<td align=right>41.58%
+	<td align=right>24.0% (12)
+	<td align=right>2.0% (1)
+<tr><td>106<td><a href=detailed.php?country=ge><img class="flag-ge" src="/flags/flags-sprite.png" border=0> Georgia</a>
+	<td align=right>50
+	<td align=right>37.19%
+	<td align=right>24.0% (12)
+	<td align=right>0.0% (0)
+<tr><td>107<td><a href=detailed.php?country=tz><img class="flag-tz" src="/flags/flags-sprite.png" border=0> Tanzania</a>
+	<td align=right>50
+	<td align=right>11.46%
+	<td align=right>24.0% (12)
+	<td align=right>0.0% (0)
+<tr><td>108<td><a href=detailed.php?country=mn><img class="flag-mn" src="/flags/flags-sprite.png" border=0> Mongolia</a>
+	<td align=right>50
+	<td align=right>9.57%
+	<td align=right>24.0% (12)
+	<td align=right>0.0% (0)
+<tr><td>109<td><a href=detailed.php?country=kg><img class="flag-kg" src="/flags/flags-sprite.png" border=0> Kyrgyzstan</a>
+	<td align=right>50
+	<td align=right>10.72%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>110<td><a href=detailed.php?country=ms><img class="flag-ms" src="/flags/flags-sprite.png" border=0> Montserrat</a>
+	<td align=right>50
+	<td align=right>12.72%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>111<td><a href=detailed.php?country=np><img class="flag-np" src="/flags/flags-sprite.png" border=0> Nepal</a>
+	<td align=right>50
+	<td align=right>12.59%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>112<td><a href=detailed.php?country=bh><img class="flag-bh" src="/flags/flags-sprite.png" border=0> Bahrain</a>
+	<td align=right>50
+	<td align=right>15.79%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>113<td><a href=detailed.php?country=gh><img class="flag-gh" src="/flags/flags-sprite.png" border=0> Ghana</a>
+	<td align=right>50
+	<td align=right>46.65%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>114<td><a href=detailed.php?country=pl><img class="flag-pl" src="/flags/flags-sprite.png" border=0> Poland</a>
+	<td align=right>50
+	<td align=right>10.71%
+	<td align=right>20.0% (10)
+	<td align=right>2.0% (1)
+<tr><td>115<td><a href=detailed.php?country=ec><img class="flag-ec" src="/flags/flags-sprite.png" border=0> Ecuador</a>
+	<td align=right>50
+	<td align=right>30.31%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>116<td><a href=detailed.php?country=rw><img class="flag-rw" src="/flags/flags-sprite.png" border=0> Rwanda</a>
+	<td align=right>50
+	<td align=right>9.17%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>117<td><a href=detailed.php?country=hk><img class="flag-hk" src="/flags/flags-sprite.png" border=0> Hong Kong</a>
+	<td align=right>50
+	<td align=right>39.42%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>118<td><a href=detailed.php?country=jp><img class="flag-jp" src="/flags/flags-sprite.png" border=0> Japan</a>
+	<td align=right>50
+	<td align=right>19.74%
+	<td align=right>18.0% (9)
+	<td align=right>0.0% (0)
+<tr><td>119<td><a href=detailed.php?country=om><img class="flag-om" src="/flags/flags-sprite.png" border=0> Oman</a>
+	<td align=right>50
+	<td align=right>10.55%
+	<td align=right>16.0% (8)
+	<td align=right>0.0% (0)
+<tr><td>120<td><a href=detailed.php?country=kz><img class="flag-kz" src="/flags/flags-sprite.png" border=0> Kazakhstan</a>
+	<td align=right>50
+	<td align=right>40.09%
+	<td align=right>16.0% (8)
+	<td align=right>0.0% (0)
+<tr><td>121<td><a href=detailed.php?country=uz><img class="flag-uz" src="/flags/flags-sprite.png" border=0> Uzbekistan</a>
+	<td align=right>50
+	<td align=right>9.79%
+	<td align=right>14.0% (7)
+	<td align=right>0.0% (0)
+<tr><td>122<td><a href=detailed.php?country=by><img class="flag-by" src="/flags/flags-sprite.png" border=0> Belarus</a>
+	<td align=right>50
+	<td align=right>27.90%
+	<td align=right>12.0% (6)
+	<td align=right>0.0% (0)
+<tr><td>123<td><a href=detailed.php?country=ve><img class="flag-ve" src="/flags/flags-sprite.png" border=0> Venezuela</a>
+	<td align=right>50
+	<td align=right>11.69%
+	<td align=right>10.0% (5)
+	<td align=right>2.0% (1)
+<tr><td>124<td><a href=detailed.php?country=ga><img class="flag-ga" src="/flags/flags-sprite.png" border=0> Gabon</a>
+	<td align=right>50
+	<td align=right>27.09%
+	<td align=right>8.0% (4)
+	<td align=right>0.0% (0)
+<tr><td>125<td><a href=detailed.php?country=ml><img class="flag-ml" src="/flags/flags-sprite.png" border=0> Mali</a>
+	<td align=right>50
+	<td align=right>2.37%
+	<td align=right>6.0% (3)
+	<td align=right>2.0% (1)
+<tr><td>126<td><a href=detailed.php?country=kr><img class="flag-kr" src="/flags/flags-sprite.png" border=0> South Korea</a>
+	<td align=right>50
+	<td align=right>5.15%
+	<td align=right>6.0% (3)
+	<td align=right>0.0% (0)
+<tr><td>127<td><a href=detailed.php?country=tk><img class="flag-tk" src="/flags/flags-sprite.png" border=0> Tokelau</a>
+	<td align=right>50
+	<td align=right>2.03%
+	<td align=right>6.0% (3)
+	<td align=right>0.0% (0)
+<tr><td>128<td><a href=detailed.php?country=cf><img class="flag-cf" src="/flags/flags-sprite.png" border=0> Central African Republic</a>
+	<td align=right>50
+	<td align=right>1.34%
+	<td align=right>4.0% (2)
+	<td align=right>0.0% (0)
+<tr><td>129<td><a href=detailed.php?country=dz><img class="flag-dz" src="/flags/flags-sprite.png" border=0> Algeria</a>
+	<td align=right>50
+	<td align=right>24.97%
+	<td align=right>4.0% (2)
+	<td align=right>0.0% (0)
+<tr><td>130<td><a href=detailed.php?country=gq><img class="flag-gq" src="/flags/flags-sprite.png" border=0> Equatorial Guinea</a>
+	<td align=right>50
+	<td align=right>0.79%
+	<td align=right>2.0% (1)
+	<td align=right>0.0% (0)
+<tr><td>131<td><a href=detailed.php?country=ir><img class="flag-ir" src="/flags/flags-sprite.png" border=0> Iran</a>
+	<td align=right>50
+	<td align=right>0.42%
+	<td align=right>2.0% (1)
+	<td align=right>0.0% (0)
+</tbody>
+  </table>
+</div><!-- col -->
+<div class="col-xs-12 col-md-6 col-lg-3">
+<h3>Email (Umbrella)</h3>
+  <!--a href="plotsite.php?metric=e&global=legacy&pct=y"><img border=0 src="plotsite.php?metric=e&global=legacy&pct=y" width=102 height=70></a-->
+  <a href="plotsite.php?metric=e&global=y&pct=y"><img border=0 src="plotsite.php?metric=e&global=y&pct=y" width=102 height=70></a>
+  <table class="table table-striped table-hover">
+  <thead>
+  <tr><th>Rank</th><th>Country</th><th>Sample<br/>size</th><th>Weighted</th><th>Green</th><th>Orange<br/>Test/broken</th></tr>
+  </thead>
+  <tbody>
+<tr><td>1<td><a href=detailed.php?country=ai><img class="flag-ai" src="/flags/flags-sprite.png" border=0> Anguilla</a>
+	<td align=right>50
+	<td align=right>45.90%
+	<td align=right>78.0% (39)
+	<td align=right>0.0% (0)
+<tr><td>2<td><a href=detailed.php?country=nl><img class="flag-nl" src="/flags/flags-sprite.png" border=0> Netherlands</a>
+	<td align=right>50
+	<td align=right>54.64%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>3<td><a href=detailed.php?country=gh><img class="flag-gh" src="/flags/flags-sprite.png" border=0> Ghana</a>
+	<td align=right>50
+	<td align=right>78.55%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>4<td><a href=detailed.php?country=fi><img class="flag-fi" src="/flags/flags-sprite.png" border=0> Finland</a>
+	<td align=right>50
+	<td align=right>78.26%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>5<td><a href=detailed.php?country=no><img class="flag-no" src="/flags/flags-sprite.png" border=0> Norway</a>
+	<td align=right>50
+	<td align=right>56.72%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>6<td><a href=detailed.php?country=sv><img class="flag-sv" src="/flags/flags-sprite.png" border=0> El Salvador</a>
+	<td align=right>50
+	<td align=right>74.19%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>7<td><a href=detailed.php?country=cz><img class="flag-cz" src="/flags/flags-sprite.png" border=0> Czech Republic</a>
+	<td align=right>50
+	<td align=right>66.65%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>8<td><a href=detailed.php?country=it><img class="flag-it" src="/flags/flags-sprite.png" border=0> Italy</a>
+	<td align=right>50
+	<td align=right>43.86%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>9<td><a href=detailed.php?country=vn><img class="flag-vn" src="/flags/flags-sprite.png" border=0> Vietnam</a>
+	<td align=right>50
+	<td align=right>73.94%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>10<td><a href=detailed.php?country=lt><img class="flag-lt" src="/flags/flags-sprite.png" border=0> Lithuania</a>
+	<td align=right>50
+	<td align=right>76.79%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>11<td><a href=detailed.php?country=sk><img class="flag-sk" src="/flags/flags-sprite.png" border=0> Slovakia</a>
+	<td align=right>50
+	<td align=right>59.63%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>12<td><a href=detailed.php?country=ly><img class="flag-ly" src="/flags/flags-sprite.png" border=0> Libya</a>
+	<td align=right>50
+	<td align=right>65.96%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>13<td><a href=detailed.php?country=gr><img class="flag-gr" src="/flags/flags-sprite.png" border=0> Greece</a>
+	<td align=right>50
+	<td align=right>77.83%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>14<td><a href=detailed.php?country=ie><img class="flag-ie" src="/flags/flags-sprite.png" border=0> Ireland</a>
+	<td align=right>50
+	<td align=right>57.14%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>15<td><a href=detailed.php?country=do><img class="flag-do" src="/flags/flags-sprite.png" border=0> Dominican Republic</a>
+	<td align=right>50
+	<td align=right>73.06%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>16<td><a href=detailed.php?country=hn><img class="flag-hn" src="/flags/flags-sprite.png" border=0> Honduras</a>
+	<td align=right>50
+	<td align=right>53.02%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>17<td><a href=detailed.php?country=dk><img class="flag-dk" src="/flags/flags-sprite.png" border=0> Denmark</a>
+	<td align=right>50
+	<td align=right>67.20%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>18<td><a href=detailed.php?country=bh><img class="flag-bh" src="/flags/flags-sprite.png" border=0> Bahrain</a>
+	<td align=right>50
+	<td align=right>40.29%
+	<td align=right>60.0% (30)
+	<td align=right>0.0% (0)
+<tr><td>19<td><a href=detailed.php?country=es><img class="flag-es" src="/flags/flags-sprite.png" border=0> Spain</a>
+	<td align=right>50
+	<td align=right>62.67%
+	<td align=right>60.0% (30)
+	<td align=right>0.0% (0)
+<tr><td>20<td><a href=detailed.php?country=gg><img class="flag-gg" src="/flags/flags-sprite.png" border=0> Guernsey</a>
+	<td align=right>50
+	<td align=right>76.55%
+	<td align=right>58.0% (29)
+	<td align=right>0.0% (0)
+<tr><td>21<td><a href=detailed.php?country=ch><img class="flag-ch" src="/flags/flags-sprite.png" border=0> Switzerland</a>
+	<td align=right>50
+	<td align=right>58.12%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>22<td><a href=detailed.php?country=cl><img class="flag-cl" src="/flags/flags-sprite.png" border=0> Chile</a>
+	<td align=right>50
+	<td align=right>32.36%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>23<td><a href=detailed.php?country=pt><img class="flag-pt" src="/flags/flags-sprite.png" border=0> Portugal</a>
+	<td align=right>50
+	<td align=right>56.31%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>24<td><a href=detailed.php?country=pl><img class="flag-pl" src="/flags/flags-sprite.png" border=0> Poland</a>
+	<td align=right>50
+	<td align=right>25.28%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>25<td><a href=detailed.php?country=ee><img class="flag-ee" src="/flags/flags-sprite.png" border=0> Estonia</a>
+	<td align=right>50
+	<td align=right>64.63%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>26<td><a href=detailed.php?country=my><img class="flag-my" src="/flags/flags-sprite.png" border=0> Malaysia</a>
+	<td align=right>50
+	<td align=right>53.13%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>27<td><a href=detailed.php?country=pe><img class="flag-pe" src="/flags/flags-sprite.png" border=0> Peru</a>
+	<td align=right>50
+	<td align=right>54.87%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>28<td><a href=detailed.php?country=ng><img class="flag-ng" src="/flags/flags-sprite.png" border=0> Nigeria</a>
+	<td align=right>50
+	<td align=right>59.70%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>29<td><a href=detailed.php?country=ph><img class="flag-ph" src="/flags/flags-sprite.png" border=0> Philippines</a>
+	<td align=right>50
+	<td align=right>37.49%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>30<td><a href=detailed.php?country=br><img class="flag-br" src="/flags/flags-sprite.png" border=0> Brazil</a>
+	<td align=right>50
+	<td align=right>31.90%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>31<td><a href=detailed.php?country=si><img class="flag-si" src="/flags/flags-sprite.png" border=0> Slovenia</a>
+	<td align=right>50
+	<td align=right>27.03%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>32<td><a href=detailed.php?country=hu><img class="flag-hu" src="/flags/flags-sprite.png" border=0> Hungary</a>
+	<td align=right>50
+	<td align=right>72.22%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>33<td><a href=detailed.php?country=ec><img class="flag-ec" src="/flags/flags-sprite.png" border=0> Ecuador</a>
+	<td align=right>50
+	<td align=right>51.52%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>34<td><a href=detailed.php?country=iq><img class="flag-iq" src="/flags/flags-sprite.png" border=0> Iraq</a>
+	<td align=right>50
+	<td align=right>55.52%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>35<td><a href=detailed.php?country=us><img class="flag-us" src="/flags/flags-sprite.png" border=0> United States of America</a>
+	<td align=right>50
+	<td align=right>69.89%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>36<td><a href=detailed.php?country=se><img class="flag-se" src="/flags/flags-sprite.png" border=0> Sweden</a>
+	<td align=right>50
+	<td align=right>33.85%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>37<td><a href=detailed.php?country=zw><img class="flag-zw" src="/flags/flags-sprite.png" border=0> Zimbabwe</a>
+	<td align=right>50
+	<td align=right>37.93%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>38<td><a href=detailed.php?country=id><img class="flag-id" src="/flags/flags-sprite.png" border=0> Indonesia</a>
+	<td align=right>50
+	<td align=right>35.28%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>39<td><a href=detailed.php?country=lv><img class="flag-lv" src="/flags/flags-sprite.png" border=0> Latvia</a>
+	<td align=right>50
+	<td align=right>31.76%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>40<td><a href=detailed.php?country=ke><img class="flag-ke" src="/flags/flags-sprite.png" border=0> Kenya</a>
+	<td align=right>50
+	<td align=right>57.10%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>41<td><a href=detailed.php?country=kw><img class="flag-kw" src="/flags/flags-sprite.png" border=0> Kuwait</a>
+	<td align=right>50
+	<td align=right>45.58%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>42<td><a href=detailed.php?country=ua><img class="flag-ua" src="/flags/flags-sprite.png" border=0> Ukraine</a>
+	<td align=right>50
+	<td align=right>61.47%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>43<td><a href=detailed.php?country=vc><img class="flag-vc" src="/flags/flags-sprite.png" border=0> Saint Vincent and the Grenadines</a>
+	<td align=right>50
+	<td align=right>16.61%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>44<td><a href=detailed.php?country=ro><img class="flag-ro" src="/flags/flags-sprite.png" border=0> Romania</a>
+	<td align=right>50
+	<td align=right>36.20%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>45<td><a href=detailed.php?country=de><img class="flag-de" src="/flags/flags-sprite.png" border=0> Germany</a>
+	<td align=right>50
+	<td align=right>60.40%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>46<td><a href=detailed.php?country=th><img class="flag-th" src="/flags/flags-sprite.png" border=0> Thailand</a>
+	<td align=right>50
+	<td align=right>55.94%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>47<td><a href=detailed.php?country=cy><img class="flag-cy" src="/flags/flags-sprite.png" border=0> Cyprus</a>
+	<td align=right>50
+	<td align=right>39.75%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>48<td><a href=detailed.php?country=pa><img class="flag-pa" src="/flags/flags-sprite.png" border=0> Panama</a>
+	<td align=right>50
+	<td align=right>64.97%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>49<td><a href=detailed.php?country=mx><img class="flag-mx" src="/flags/flags-sprite.png" border=0> Mexico</a>
+	<td align=right>50
+	<td align=right>34.99%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>50<td><a href=detailed.php?country=mu><img class="flag-mu" src="/flags/flags-sprite.png" border=0> Mauritius</a>
+	<td align=right>50
+	<td align=right>34.38%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>51<td><a href=detailed.php?country=gt><img class="flag-gt" src="/flags/flags-sprite.png" border=0> Guatemala</a>
+	<td align=right>50
+	<td align=right>54.90%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>52<td><a href=detailed.php?country=am><img class="flag-am" src="/flags/flags-sprite.png" border=0> Armenia</a>
+	<td align=right>50
+	<td align=right>49.79%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>53<td><a href=detailed.php?country=il><img class="flag-il" src="/flags/flags-sprite.png" border=0> Israel</a>
+	<td align=right>50
+	<td align=right>58.68%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>54<td><a href=detailed.php?country=hr><img class="flag-hr" src="/flags/flags-sprite.png" border=0> Croatia</a>
+	<td align=right>50
+	<td align=right>43.18%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>55<td><a href=detailed.php?country=rs><img class="flag-rs" src="/flags/flags-sprite.png" border=0> Serbia</a>
+	<td align=right>50
+	<td align=right>30.44%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>56<td><a href=detailed.php?country=ar><img class="flag-ar" src="/flags/flags-sprite.png" border=0> Argentina</a>
+	<td align=right>50
+	<td align=right>64.01%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>57<td><a href=detailed.php?country=bg><img class="flag-bg" src="/flags/flags-sprite.png" border=0> Bulgaria</a>
+	<td align=right>50
+	<td align=right>49.25%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>58<td><a href=detailed.php?country=ps><img class="flag-ps" src="/flags/flags-sprite.png" border=0> Palestinian Territory</a>
+	<td align=right>50
+	<td align=right>17.92%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>59<td><a href=detailed.php?country=al><img class="flag-al" src="/flags/flags-sprite.png" border=0> Albania</a>
+	<td align=right>50
+	<td align=right>25.97%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>60<td><a href=detailed.php?country=az><img class="flag-az" src="/flags/flags-sprite.png" border=0> Azerbaijan</a>
+	<td align=right>50
+	<td align=right>44.56%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>61<td><a href=detailed.php?country=ci><img class="flag-ci" src="/flags/flags-sprite.png" border=0> Cote d'Ivoire</a>
+	<td align=right>50
+	<td align=right>26.38%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>62<td><a href=detailed.php?country=ca><img class="flag-ca" src="/flags/flags-sprite.png" border=0> Canada</a>
+	<td align=right>50
+	<td align=right>39.38%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>63<td><a href=detailed.php?country=gb><img class="flag-gb" src="/flags/flags-sprite.png" border=0> United-Kingdom</a>
+	<td align=right>50
+	<td align=right>49.45%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>64<td><a href=detailed.php?country=eg><img class="flag-eg" src="/flags/flags-sprite.png" border=0> Egypt</a>
+	<td align=right>50
+	<td align=right>56.92%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>65<td><a href=detailed.php?country=pk><img class="flag-pk" src="/flags/flags-sprite.png" border=0> Pakistan</a>
+	<td align=right>50
+	<td align=right>50.85%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>66<td><a href=detailed.php?country=tr><img class="flag-tr" src="/flags/flags-sprite.png" border=0> Turkey</a>
+	<td align=right>50
+	<td align=right>59.48%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>67<td><a href=detailed.php?country=ba><img class="flag-ba" src="/flags/flags-sprite.png" border=0> Bosnia and Herzegovina</a>
+	<td align=right>50
+	<td align=right>49.89%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>68<td><a href=detailed.php?country=by><img class="flag-by" src="/flags/flags-sprite.png" border=0> Belarus</a>
+	<td align=right>50
+	<td align=right>60.78%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>69<td><a href=detailed.php?country=za><img class="flag-za" src="/flags/flags-sprite.png" border=0> South Africa</a>
+	<td align=right>50
+	<td align=right>46.30%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>70<td><a href=detailed.php?country=om><img class="flag-om" src="/flags/flags-sprite.png" border=0> Oman</a>
+	<td align=right>50
+	<td align=right>41.42%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>71<td><a href=detailed.php?country=tw><img class="flag-tw" src="/flags/flags-sprite.png" border=0> Taiwan</a>
+	<td align=right>50
+	<td align=right>64.06%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>72<td><a href=detailed.php?country=nz><img class="flag-nz" src="/flags/flags-sprite.png" border=0> New Zealand</a>
+	<td align=right>50
+	<td align=right>32.40%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>73<td><a href=detailed.php?country=ge><img class="flag-ge" src="/flags/flags-sprite.png" border=0> Georgia</a>
+	<td align=right>50
+	<td align=right>28.85%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>74<td><a href=detailed.php?country=ug><img class="flag-ug" src="/flags/flags-sprite.png" border=0> Uganda</a>
+	<td align=right>50
+	<td align=right>43.33%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>75<td><a href=detailed.php?country=jo><img class="flag-jo" src="/flags/flags-sprite.png" border=0> Jordan</a>
+	<td align=right>50
+	<td align=right>56.25%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>76<td><a href=detailed.php?country=lk><img class="flag-lk" src="/flags/flags-sprite.png" border=0> Sri Lanka</a>
+	<td align=right>50
+	<td align=right>50.07%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>77<td><a href=detailed.php?country=lb><img class="flag-lb" src="/flags/flags-sprite.png" border=0> Lebanon</a>
+	<td align=right>50
+	<td align=right>56.87%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>78<td><a href=detailed.php?country=qa><img class="flag-qa" src="/flags/flags-sprite.png" border=0> Qatar</a>
+	<td align=right>50
+	<td align=right>32.97%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>79<td><a href=detailed.php?country=sg><img class="flag-sg" src="/flags/flags-sprite.png" border=0> Singapore</a>
+	<td align=right>50
+	<td align=right>48.42%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>80<td><a href=detailed.php?country=co><img class="flag-co" src="/flags/flags-sprite.png" border=0> Colombia</a>
+	<td align=right>50
+	<td align=right>33.96%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>81<td><a href=detailed.php?country=jp><img class="flag-jp" src="/flags/flags-sprite.png" border=0> Japan</a>
+	<td align=right>50
+	<td align=right>28.05%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>82<td><a href=detailed.php?country=fr><img class="flag-fr" src="/flags/flags-sprite.png" border=0> France</a>
+	<td align=right>50
+	<td align=right>53.24%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>83<td><a href=detailed.php?country=mn><img class="flag-mn" src="/flags/flags-sprite.png" border=0> Mongolia</a>
+	<td align=right>50
+	<td align=right>23.75%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>84<td><a href=detailed.php?country=hk><img class="flag-hk" src="/flags/flags-sprite.png" border=0> Hong Kong</a>
+	<td align=right>50
+	<td align=right>55.07%
+	<td align=right>36.0% (18)
+	<td align=right>0.0% (0)
+<tr><td>85<td><a href=detailed.php?country=tn><img class="flag-tn" src="/flags/flags-sprite.png" border=0> Tunisia</a>
+	<td align=right>50
+	<td align=right>46.88%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>86<td><a href=detailed.php?country=bo><img class="flag-bo" src="/flags/flags-sprite.png" border=0> Bolivia</a>
+	<td align=right>50
+	<td align=right>42.99%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>87<td><a href=detailed.php?country=sh><img class="flag-sh" src="/flags/flags-sprite.png" border=0> Saint Helena</a>
+	<td align=right>50
+	<td align=right>48.02%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>88<td><a href=detailed.php?country=cr><img class="flag-cr" src="/flags/flags-sprite.png" border=0> Costa Rica</a>
+	<td align=right>50
+	<td align=right>19.49%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>89<td><a href=detailed.php?country=py><img class="flag-py" src="/flags/flags-sprite.png" border=0> Paraguay</a>
+	<td align=right>50
+	<td align=right>35.11%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>90<td><a href=detailed.php?country=au><img class="flag-au" src="/flags/flags-sprite.png" border=0> Australia</a>
+	<td align=right>50
+	<td align=right>25.02%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>91<td><a href=detailed.php?country=mm><img class="flag-mm" src="/flags/flags-sprite.png" border=0> Myanmar (Burma)</a>
+	<td align=right>50
+	<td align=right>17.36%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>92<td><a href=detailed.php?country=uy><img class="flag-uy" src="/flags/flags-sprite.png" border=0> Uruguay</a>
+	<td align=right>50
+	<td align=right>52.22%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>93<td><a href=detailed.php?country=so><img class="flag-so" src="/flags/flags-sprite.png" border=0> Somalia</a>
+	<td align=right>50
+	<td align=right>18.63%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>94<td><a href=detailed.php?country=eu><img class="flag-eu" src="/flags/flags-sprite.png" border=0> European Union</a>
+	<td align=right>50
+	<td align=right>15.34%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>95<td><a href=detailed.php?country=kz><img class="flag-kz" src="/flags/flags-sprite.png" border=0> Kazakhstan</a>
+	<td align=right>50
+	<td align=right>53.69%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>96<td><a href=detailed.php?country=bd><img class="flag-bd" src="/flags/flags-sprite.png" border=0> Bangladesh</a>
+	<td align=right>50
+	<td align=right>34.96%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>97<td><a href=detailed.php?country=lu><img class="flag-lu" src="/flags/flags-sprite.png" border=0> Luxembourg</a>
+	<td align=right>50
+	<td align=right>42.88%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>98<td><a href=detailed.php?country=np><img class="flag-np" src="/flags/flags-sprite.png" border=0> Nepal</a>
+	<td align=right>50
+	<td align=right>24.67%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>99<td><a href=detailed.php?country=md><img class="flag-md" src="/flags/flags-sprite.png" border=0> Moldova</a>
+	<td align=right>50
+	<td align=right>24.62%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>100<td><a href=detailed.php?country=ag><img class="flag-ag" src="/flags/flags-sprite.png" border=0> Antigua and Barbuda</a>
+	<td align=right>50
+	<td align=right>13.30%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>101<td><a href=detailed.php?country=ms><img class="flag-ms" src="/flags/flags-sprite.png" border=0> Montserrat</a>
+	<td align=right>50
+	<td align=right>13.81%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>102<td><a href=detailed.php?country=sc><img class="flag-sc" src="/flags/flags-sprite.png" border=0> Seychelles</a>
+	<td align=right>50
+	<td align=right>49.25%
+	<td align=right>30.0% (15)
+	<td align=right>0.0% (0)
+<tr><td>103<td><a href=detailed.php?country=dz><img class="flag-dz" src="/flags/flags-sprite.png" border=0> Algeria</a>
+	<td align=right>50
+	<td align=right>34.14%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>104<td><a href=detailed.php?country=in><img class="flag-in" src="/flags/flags-sprite.png" border=0> India</a>
+	<td align=right>50
+	<td align=right>23.82%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>105<td><a href=detailed.php?country=kr><img class="flag-kr" src="/flags/flags-sprite.png" border=0> South Korea</a>
+	<td align=right>50
+	<td align=right>16.72%
+	<td align=right>28.0% (14)
+	<td align=right>0.0% (0)
+<tr><td>106<td><a href=detailed.php?country=ve><img class="flag-ve" src="/flags/flags-sprite.png" border=0> Venezuela</a>
+	<td align=right>50
+	<td align=right>25.54%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>107<td><a href=detailed.php?country=tz><img class="flag-tz" src="/flags/flags-sprite.png" border=0> Tanzania</a>
+	<td align=right>50
+	<td align=right>16.61%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>108<td><a href=detailed.php?country=is><img class="flag-is" src="/flags/flags-sprite.png" border=0> Iceland</a>
+	<td align=right>50
+	<td align=right>21.33%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>109<td><a href=detailed.php?country=at><img class="flag-at" src="/flags/flags-sprite.png" border=0> Austria</a>
+	<td align=right>50
+	<td align=right>29.97%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>110<td><a href=detailed.php?country=re><img class="flag-re" src="/flags/flags-sprite.png" border=0> Reunion</a>
+	<td align=right>50
+	<td align=right>30.51%
+	<td align=right>26.0% (13)
+	<td align=right>0.0% (0)
+<tr><td>111<td><a href=detailed.php?country=ma><img class="flag-ma" src="/flags/flags-sprite.png" border=0> Morocco</a>
+	<td align=right>50
+	<td align=right>28.16%
+	<td align=right>24.0% (12)
+	<td align=right>0.0% (0)
+<tr><td>112<td><a href=detailed.php?country=uz><img class="flag-uz" src="/flags/flags-sprite.png" border=0> Uzbekistan</a>
+	<td align=right>50
+	<td align=right>26.26%
+	<td align=right>24.0% (12)
+	<td align=right>0.0% (0)
+<tr><td>113<td><a href=detailed.php?country=mk><img class="flag-mk" src="/flags/flags-sprite.png" border=0> Macedonia</a>
+	<td align=right>50
+	<td align=right>40.29%
+	<td align=right>24.0% (12)
+	<td align=right>0.0% (0)
+<tr><td>114<td><a href=detailed.php?country=ae><img class="flag-ae" src="/flags/flags-sprite.png" border=0> United Arab Emirates</a>
+	<td align=right>50
+	<td align=right>15.66%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>115<td><a href=detailed.php?country=me><img class="flag-me" src="/flags/flags-sprite.png" border=0> Montenegro</a>
+	<td align=right>50
+	<td align=right>13.69%
+	<td align=right>22.0% (11)
+	<td align=right>0.0% (0)
+<tr><td>116<td><a href=detailed.php?country=kg><img class="flag-kg" src="/flags/flags-sprite.png" border=0> Kyrgyzstan</a>
+	<td align=right>50
+	<td align=right>8.26%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>117<td><a href=detailed.php?country=rw><img class="flag-rw" src="/flags/flags-sprite.png" border=0> Rwanda</a>
+	<td align=right>50
+	<td align=right>14.83%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>118<td><a href=detailed.php?country=ws><img class="flag-ws" src="/flags/flags-sprite.png" border=0> Samoa</a>
+	<td align=right>50
+	<td align=right>15.23%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>119<td><a href=detailed.php?country=sa><img class="flag-sa" src="/flags/flags-sprite.png" border=0> Saudi Arabia</a>
+	<td align=right>50
+	<td align=right>35.32%
+	<td align=right>16.0% (8)
+	<td align=right>0.0% (0)
+<tr><td>120<td><a href=detailed.php?country=li><img class="flag-li" src="/flags/flags-sprite.png" border=0> Liechtenstein</a>
+	<td align=right>50
+	<td align=right>6.16%
+	<td align=right>16.0% (8)
+	<td align=right>0.0% (0)
+<tr><td>121<td><a href=detailed.php?country=cm><img class="flag-cm" src="/flags/flags-sprite.png" border=0> Cameroon</a>
+	<td align=right>50
+	<td align=right>45.99%
+	<td align=right>16.0% (8)
+	<td align=right>0.0% (0)
+<tr><td>122<td><a href=detailed.php?country=to><img class="flag-to" src="/flags/flags-sprite.png" border=0> Tonga</a>
+	<td align=right>50
+	<td align=right>5.14%
+	<td align=right>12.0% (6)
+	<td align=right>0.0% (0)
+<tr><td>123<td><a href=detailed.php?country=la><img class="flag-la" src="/flags/flags-sprite.png" border=0> Laos</a>
+	<td align=right>50
+	<td align=right>14.74%
+	<td align=right>10.0% (5)
+	<td align=right>0.0% (0)
+<tr><td>124<td><a href=detailed.php?country=cn><img class="flag-cn" src="/flags/flags-sprite.png" border=0> China</a>
+	<td align=right>50
+	<td align=right>18.97%
+	<td align=right>8.0% (4)
+	<td align=right>0.0% (0)
+<tr><td>125<td><a href=detailed.php?country=bz><img class="flag-bz" src="/flags/flags-sprite.png" border=0> Belize</a>
+	<td align=right>50
+	<td align=right>7.21%
+	<td align=right>8.0% (4)
+	<td align=right>0.0% (0)
+<tr><td>126<td><a href=detailed.php?country=ml><img class="flag-ml" src="/flags/flags-sprite.png" border=0> Mali</a>
+	<td align=right>50
+	<td align=right>3.22%
+	<td align=right>6.0% (3)
+	<td align=right>0.0% (0)
+<tr><td>127<td><a href=detailed.php?country=tk><img class="flag-tk" src="/flags/flags-sprite.png" border=0> Tokelau</a>
+	<td align=right>50
+	<td align=right>1.45%
+	<td align=right>4.0% (2)
+	<td align=right>0.0% (0)
+<tr><td>128<td><a href=detailed.php?country=ga><img class="flag-ga" src="/flags/flags-sprite.png" border=0> Gabon</a>
+	<td align=right>50
+	<td align=right>1.53%
+	<td align=right>2.0% (1)
+	<td align=right>0.0% (0)
+<tr><td>129<td><a href=detailed.php?country=ir><img class="flag-ir" src="/flags/flags-sprite.png" border=0> Iran</a>
+	<td align=right>50
+	<td align=right>1.61%
+	<td align=right>2.0% (1)
+	<td align=right>0.0% (0)
+</tbody>
+  </table>
+</div><!-- col -->
+<div class="col-xs-12 col-md-6 col-lg-3">
+<h3>DNS (Umbrella)</h3>
+  <!--a href="plotsite.php?metric=d&global=legacy&pct=y"><img border=0 src="plotsite.php?metric=d&global=legacy&pct=y" width=102 height=70></a-->
+  <a href="plotsite.php?metric=d&global=y&pct=y"><img border=0 src="plotsite.php?metric=d&global=y&pct=y" width=102 height=70></a>
+  <table class="table table-striped table-hover">
+  <thead>
+  <tr><th>Rank</th><th>Country</th><th>Sample<br/>size</th><th>Weighted</th><th>Green</th><th>Orange<br/>Test/broken</th></tr>
+  </thead>
+  <tbody>
+<tr><td>1<td><a href=detailed.php?country=dk><img class="flag-dk" src="/flags/flags-sprite.png" border=0> Denmark</a>
+	<td align=right>50
+	<td align=right>90.83%
+	<td align=right>98.0% (49)
+	<td align=right>0.0% (0)
+<tr><td>2<td><a href=detailed.php?country=de><img class="flag-de" src="/flags/flags-sprite.png" border=0> Germany</a>
+	<td align=right>50
+	<td align=right>91.75%
+	<td align=right>98.0% (49)
+	<td align=right>0.0% (0)
+<tr><td>3<td><a href=detailed.php?country=fi><img class="flag-fi" src="/flags/flags-sprite.png" border=0> Finland</a>
+	<td align=right>50
+	<td align=right>90.85%
+	<td align=right>96.0% (48)
+	<td align=right>0.0% (0)
+<tr><td>4<td><a href=detailed.php?country=gg><img class="flag-gg" src="/flags/flags-sprite.png" border=0> Guernsey</a>
+	<td align=right>50
+	<td align=right>90.36%
+	<td align=right>96.0% (48)
+	<td align=right>0.0% (0)
+<tr><td>5<td><a href=detailed.php?country=au><img class="flag-au" src="/flags/flags-sprite.png" border=0> Australia</a>
+	<td align=right>50
+	<td align=right>90.24%
+	<td align=right>96.0% (48)
+	<td align=right>0.0% (0)
+<tr><td>6<td><a href=detailed.php?country=no><img class="flag-no" src="/flags/flags-sprite.png" border=0> Norway</a>
+	<td align=right>50
+	<td align=right>90.63%
+	<td align=right>94.0% (47)
+	<td align=right>0.0% (0)
+<tr><td>7<td><a href=detailed.php?country=nl><img class="flag-nl" src="/flags/flags-sprite.png" border=0> Netherlands</a>
+	<td align=right>50
+	<td align=right>89.47%
+	<td align=right>94.0% (47)
+	<td align=right>0.0% (0)
+<tr><td>8<td><a href=detailed.php?country=nz><img class="flag-nz" src="/flags/flags-sprite.png" border=0> New Zealand</a>
+	<td align=right>50
+	<td align=right>86.99%
+	<td align=right>94.0% (47)
+	<td align=right>0.0% (0)
+<tr><td>9<td><a href=detailed.php?country=lt><img class="flag-lt" src="/flags/flags-sprite.png" border=0> Lithuania</a>
+	<td align=right>50
+	<td align=right>90.61%
+	<td align=right>94.0% (47)
+	<td align=right>0.0% (0)
+<tr><td>10<td><a href=detailed.php?country=jp><img class="flag-jp" src="/flags/flags-sprite.png" border=0> Japan</a>
+	<td align=right>50
+	<td align=right>64.82%
+	<td align=right>94.0% (47)
+	<td align=right>0.0% (0)
+<tr><td>11<td><a href=detailed.php?country=ie><img class="flag-ie" src="/flags/flags-sprite.png" border=0> Ireland</a>
+	<td align=right>50
+	<td align=right>86.45%
+	<td align=right>92.0% (46)
+	<td align=right>0.0% (0)
+<tr><td>12<td><a href=detailed.php?country=cz><img class="flag-cz" src="/flags/flags-sprite.png" border=0> Czech Republic</a>
+	<td align=right>50
+	<td align=right>79.43%
+	<td align=right>92.0% (46)
+	<td align=right>0.0% (0)
+<tr><td>13<td><a href=detailed.php?country=se><img class="flag-se" src="/flags/flags-sprite.png" border=0> Sweden</a>
+	<td align=right>50
+	<td align=right>86.37%
+	<td align=right>92.0% (46)
+	<td align=right>0.0% (0)
+<tr><td>14<td><a href=detailed.php?country=us><img class="flag-us" src="/flags/flags-sprite.png" border=0> United States of America</a>
+	<td align=right>50
+	<td align=right>84.85%
+	<td align=right>92.0% (46)
+	<td align=right>0.0% (0)
+<tr><td>15<td><a href=detailed.php?country=at><img class="flag-at" src="/flags/flags-sprite.png" border=0> Austria</a>
+	<td align=right>50
+	<td align=right>85.65%
+	<td align=right>90.0% (45)
+	<td align=right>0.0% (0)
+<tr><td>16<td><a href=detailed.php?country=eu><img class="flag-eu" src="/flags/flags-sprite.png" border=0> European Union</a>
+	<td align=right>50
+	<td align=right>85.37%
+	<td align=right>90.0% (45)
+	<td align=right>0.0% (0)
+<tr><td>17<td><a href=detailed.php?country=do><img class="flag-do" src="/flags/flags-sprite.png" border=0> Dominican Republic</a>
+	<td align=right>50
+	<td align=right>82.19%
+	<td align=right>90.0% (45)
+	<td align=right>0.0% (0)
+<tr><td>18<td><a href=detailed.php?country=ai><img class="flag-ai" src="/flags/flags-sprite.png" border=0> Anguilla</a>
+	<td align=right>50
+	<td align=right>54.92%
+	<td align=right>90.0% (45)
+	<td align=right>0.0% (0)
+<tr><td>19<td><a href=detailed.php?country=lu><img class="flag-lu" src="/flags/flags-sprite.png" border=0> Luxembourg</a>
+	<td align=right>50
+	<td align=right>85.59%
+	<td align=right>90.0% (45)
+	<td align=right>0.0% (0)
+<tr><td>20<td><a href=detailed.php?country=es><img class="flag-es" src="/flags/flags-sprite.png" border=0> Spain</a>
+	<td align=right>50
+	<td align=right>87.77%
+	<td align=right>88.0% (44)
+	<td align=right>0.0% (0)
+<tr><td>21<td><a href=detailed.php?country=sg><img class="flag-sg" src="/flags/flags-sprite.png" border=0> Singapore</a>
+	<td align=right>50
+	<td align=right>87.66%
+	<td align=right>88.0% (44)
+	<td align=right>0.0% (0)
+<tr><td>22<td><a href=detailed.php?country=gb><img class="flag-gb" src="/flags/flags-sprite.png" border=0> United-Kingdom</a>
+	<td align=right>50
+	<td align=right>87.50%
+	<td align=right>88.0% (44)
+	<td align=right>0.0% (0)
+<tr><td>23<td><a href=detailed.php?country=ro><img class="flag-ro" src="/flags/flags-sprite.png" border=0> Romania</a>
+	<td align=right>50
+	<td align=right>62.23%
+	<td align=right>88.0% (44)
+	<td align=right>0.0% (0)
+<tr><td>24<td><a href=detailed.php?country=ee><img class="flag-ee" src="/flags/flags-sprite.png" border=0> Estonia</a>
+	<td align=right>50
+	<td align=right>83.13%
+	<td align=right>86.0% (43)
+	<td align=right>0.0% (0)
+<tr><td>25<td><a href=detailed.php?country=ua><img class="flag-ua" src="/flags/flags-sprite.png" border=0> Ukraine</a>
+	<td align=right>50
+	<td align=right>83.58%
+	<td align=right>86.0% (43)
+	<td align=right>0.0% (0)
+<tr><td>26<td><a href=detailed.php?country=sh><img class="flag-sh" src="/flags/flags-sprite.png" border=0> Saint Helena</a>
+	<td align=right>50
+	<td align=right>82.16%
+	<td align=right>86.0% (43)
+	<td align=right>0.0% (0)
+<tr><td>27<td><a href=detailed.php?country=lk><img class="flag-lk" src="/flags/flags-sprite.png" border=0> Sri Lanka</a>
+	<td align=right>50
+	<td align=right>85.65%
+	<td align=right>84.0% (42)
+	<td align=right>0.0% (0)
+<tr><td>28<td><a href=detailed.php?country=ch><img class="flag-ch" src="/flags/flags-sprite.png" border=0> Switzerland</a>
+	<td align=right>50
+	<td align=right>77.26%
+	<td align=right>84.0% (42)
+	<td align=right>0.0% (0)
+<tr><td>29<td><a href=detailed.php?country=mu><img class="flag-mu" src="/flags/flags-sprite.png" border=0> Mauritius</a>
+	<td align=right>50
+	<td align=right>72.03%
+	<td align=right>84.0% (42)
+	<td align=right>0.0% (0)
+<tr><td>30<td><a href=detailed.php?country=za><img class="flag-za" src="/flags/flags-sprite.png" border=0> South Africa</a>
+	<td align=right>50
+	<td align=right>67.16%
+	<td align=right>84.0% (42)
+	<td align=right>0.0% (0)
+<tr><td>31<td><a href=detailed.php?country=gr><img class="flag-gr" src="/flags/flags-sprite.png" border=0> Greece</a>
+	<td align=right>50
+	<td align=right>85.43%
+	<td align=right>84.0% (42)
+	<td align=right>0.0% (0)
+<tr><td>32<td><a href=detailed.php?country=fr><img class="flag-fr" src="/flags/flags-sprite.png" border=0> France</a>
+	<td align=right>50
+	<td align=right>80.68%
+	<td align=right>84.0% (42)
+	<td align=right>0.0% (0)
+<tr><td>33<td><a href=detailed.php?country=ms><img class="flag-ms" src="/flags/flags-sprite.png" border=0> Montserrat</a>
+	<td align=right>50
+	<td align=right>81.09%
+	<td align=right>82.0% (41)
+	<td align=right>0.0% (0)
+<tr><td>34<td><a href=detailed.php?country=cl><img class="flag-cl" src="/flags/flags-sprite.png" border=0> Chile</a>
+	<td align=right>50
+	<td align=right>82.86%
+	<td align=right>82.0% (41)
+	<td align=right>0.0% (0)
+<tr><td>35<td><a href=detailed.php?country=vn><img class="flag-vn" src="/flags/flags-sprite.png" border=0> Vietnam</a>
+	<td align=right>50
+	<td align=right>79.06%
+	<td align=right>82.0% (41)
+	<td align=right>0.0% (0)
+<tr><td>36<td><a href=detailed.php?country=br><img class="flag-br" src="/flags/flags-sprite.png" border=0> Brazil</a>
+	<td align=right>50
+	<td align=right>59.83%
+	<td align=right>80.0% (40)
+	<td align=right>0.0% (0)
+<tr><td>37<td><a href=detailed.php?country=co><img class="flag-co" src="/flags/flags-sprite.png" border=0> Colombia</a>
+	<td align=right>50
+	<td align=right>81.60%
+	<td align=right>80.0% (40)
+	<td align=right>0.0% (0)
+<tr><td>38<td><a href=detailed.php?country=gt><img class="flag-gt" src="/flags/flags-sprite.png" border=0> Guatemala</a>
+	<td align=right>50
+	<td align=right>79.69%
+	<td align=right>78.0% (39)
+	<td align=right>0.0% (0)
+<tr><td>39<td><a href=detailed.php?country=il><img class="flag-il" src="/flags/flags-sprite.png" border=0> Israel</a>
+	<td align=right>50
+	<td align=right>83.06%
+	<td align=right>78.0% (39)
+	<td align=right>0.0% (0)
+<tr><td>40<td><a href=detailed.php?country=ba><img class="flag-ba" src="/flags/flags-sprite.png" border=0> Bosnia and Herzegovina</a>
+	<td align=right>50
+	<td align=right>82.09%
+	<td align=right>78.0% (39)
+	<td align=right>0.0% (0)
+<tr><td>41<td><a href=detailed.php?country=hk><img class="flag-hk" src="/flags/flags-sprite.png" border=0> Hong Kong</a>
+	<td align=right>50
+	<td align=right>66.21%
+	<td align=right>78.0% (39)
+	<td align=right>0.0% (0)
+<tr><td>42<td><a href=detailed.php?country=ca><img class="flag-ca" src="/flags/flags-sprite.png" border=0> Canada</a>
+	<td align=right>50
+	<td align=right>86.43%
+	<td align=right>78.0% (39)
+	<td align=right>0.0% (0)
+<tr><td>43<td><a href=detailed.php?country=lv><img class="flag-lv" src="/flags/flags-sprite.png" border=0> Latvia</a>
+	<td align=right>50
+	<td align=right>50.60%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>44<td><a href=detailed.php?country=mx><img class="flag-mx" src="/flags/flags-sprite.png" border=0> Mexico</a>
+	<td align=right>50
+	<td align=right>55.81%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>45<td><a href=detailed.php?country=ng><img class="flag-ng" src="/flags/flags-sprite.png" border=0> Nigeria</a>
+	<td align=right>50
+	<td align=right>79.60%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>46<td><a href=detailed.php?country=in><img class="flag-in" src="/flags/flags-sprite.png" border=0> India</a>
+	<td align=right>50
+	<td align=right>82.44%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>47<td><a href=detailed.php?country=tw><img class="flag-tw" src="/flags/flags-sprite.png" border=0> Taiwan</a>
+	<td align=right>50
+	<td align=right>81.00%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>48<td><a href=detailed.php?country=ag><img class="flag-ag" src="/flags/flags-sprite.png" border=0> Antigua and Barbuda</a>
+	<td align=right>50
+	<td align=right>80.61%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>49<td><a href=detailed.php?country=sk><img class="flag-sk" src="/flags/flags-sprite.png" border=0> Slovakia</a>
+	<td align=right>50
+	<td align=right>77.93%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>50<td><a href=detailed.php?country=bz><img class="flag-bz" src="/flags/flags-sprite.png" border=0> Belize</a>
+	<td align=right>50
+	<td align=right>70.30%
+	<td align=right>76.0% (38)
+	<td align=right>0.0% (0)
+<tr><td>51<td><a href=detailed.php?country=si><img class="flag-si" src="/flags/flags-sprite.png" border=0> Slovenia</a>
+	<td align=right>50
+	<td align=right>79.71%
+	<td align=right>74.0% (37)
+	<td align=right>0.0% (0)
+<tr><td>52<td><a href=detailed.php?country=it><img class="flag-it" src="/flags/flags-sprite.png" border=0> Italy</a>
+	<td align=right>50
+	<td align=right>73.84%
+	<td align=right>74.0% (37)
+	<td align=right>0.0% (0)
+<tr><td>53<td><a href=detailed.php?country=hr><img class="flag-hr" src="/flags/flags-sprite.png" border=0> Croatia</a>
+	<td align=right>50
+	<td align=right>77.76%
+	<td align=right>74.0% (37)
+	<td align=right>0.0% (0)
+<tr><td>54<td><a href=detailed.php?country=bg><img class="flag-bg" src="/flags/flags-sprite.png" border=0> Bulgaria</a>
+	<td align=right>50
+	<td align=right>74.63%
+	<td align=right>74.0% (37)
+	<td align=right>0.0% (0)
+<tr><td>55<td><a href=detailed.php?country=sv><img class="flag-sv" src="/flags/flags-sprite.png" border=0> El Salvador</a>
+	<td align=right>50
+	<td align=right>72.61%
+	<td align=right>74.0% (37)
+	<td align=right>0.0% (0)
+<tr><td>56<td><a href=detailed.php?country=so><img class="flag-so" src="/flags/flags-sprite.png" border=0> Somalia</a>
+	<td align=right>50
+	<td align=right>79.10%
+	<td align=right>74.0% (37)
+	<td align=right>0.0% (0)
+<tr><td>57<td><a href=detailed.php?country=me><img class="flag-me" src="/flags/flags-sprite.png" border=0> Montenegro</a>
+	<td align=right>50
+	<td align=right>67.52%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>58<td><a href=detailed.php?country=ly><img class="flag-ly" src="/flags/flags-sprite.png" border=0> Libya</a>
+	<td align=right>50
+	<td align=right>78.51%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>59<td><a href=detailed.php?country=am><img class="flag-am" src="/flags/flags-sprite.png" border=0> Armenia</a>
+	<td align=right>50
+	<td align=right>73.09%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>60<td><a href=detailed.php?country=li><img class="flag-li" src="/flags/flags-sprite.png" border=0> Liechtenstein</a>
+	<td align=right>50
+	<td align=right>75.01%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>61<td><a href=detailed.php?country=pl><img class="flag-pl" src="/flags/flags-sprite.png" border=0> Poland</a>
+	<td align=right>50
+	<td align=right>66.87%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>62<td><a href=detailed.php?country=my><img class="flag-my" src="/flags/flags-sprite.png" border=0> Malaysia</a>
+	<td align=right>50
+	<td align=right>78.84%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>63<td><a href=detailed.php?country=cy><img class="flag-cy" src="/flags/flags-sprite.png" border=0> Cyprus</a>
+	<td align=right>50
+	<td align=right>55.40%
+	<td align=right>72.0% (36)
+	<td align=right>0.0% (0)
+<tr><td>64<td><a href=detailed.php?country=md><img class="flag-md" src="/flags/flags-sprite.png" border=0> Moldova</a>
+	<td align=right>50
+	<td align=right>81.78%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>65<td><a href=detailed.php?country=is><img class="flag-is" src="/flags/flags-sprite.png" border=0> Iceland</a>
+	<td align=right>50
+	<td align=right>79.71%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>66<td><a href=detailed.php?country=vc><img class="flag-vc" src="/flags/flags-sprite.png" border=0> Saint Vincent and the Grenadines</a>
+	<td align=right>50
+	<td align=right>40.56%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>67<td><a href=detailed.php?country=bh><img class="flag-bh" src="/flags/flags-sprite.png" border=0> Bahrain</a>
+	<td align=right>50
+	<td align=right>56.40%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>68<td><a href=detailed.php?country=pk><img class="flag-pk" src="/flags/flags-sprite.png" border=0> Pakistan</a>
+	<td align=right>50
+	<td align=right>80.05%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>69<td><a href=detailed.php?country=th><img class="flag-th" src="/flags/flags-sprite.png" border=0> Thailand</a>
+	<td align=right>50
+	<td align=right>79.57%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>70<td><a href=detailed.php?country=pt><img class="flag-pt" src="/flags/flags-sprite.png" border=0> Portugal</a>
+	<td align=right>50
+	<td align=right>38.45%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>71<td><a href=detailed.php?country=al><img class="flag-al" src="/flags/flags-sprite.png" border=0> Albania</a>
+	<td align=right>50
+	<td align=right>47.46%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>72<td><a href=detailed.php?country=by><img class="flag-by" src="/flags/flags-sprite.png" border=0> Belarus</a>
+	<td align=right>50
+	<td align=right>77.79%
+	<td align=right>70.0% (35)
+	<td align=right>0.0% (0)
+<tr><td>73<td><a href=detailed.php?country=iq><img class="flag-iq" src="/flags/flags-sprite.png" border=0> Iraq</a>
+	<td align=right>50
+	<td align=right>71.36%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>74<td><a href=detailed.php?country=pa><img class="flag-pa" src="/flags/flags-sprite.png" border=0> Panama</a>
+	<td align=right>50
+	<td align=right>70.67%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>75<td><a href=detailed.php?country=az><img class="flag-az" src="/flags/flags-sprite.png" border=0> Azerbaijan</a>
+	<td align=right>50
+	<td align=right>78.78%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>76<td><a href=detailed.php?country=cn><img class="flag-cn" src="/flags/flags-sprite.png" border=0> China</a>
+	<td align=right>50
+	<td align=right>68.20%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>77<td><a href=detailed.php?country=ph><img class="flag-ph" src="/flags/flags-sprite.png" border=0> Philippines</a>
+	<td align=right>50
+	<td align=right>75.43%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>78<td><a href=detailed.php?country=ws><img class="flag-ws" src="/flags/flags-sprite.png" border=0> Samoa</a>
+	<td align=right>50
+	<td align=right>46.24%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>79<td><a href=detailed.php?country=jo><img class="flag-jo" src="/flags/flags-sprite.png" border=0> Jordan</a>
+	<td align=right>50
+	<td align=right>65.27%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>80<td><a href=detailed.php?country=py><img class="flag-py" src="/flags/flags-sprite.png" border=0> Paraguay</a>
+	<td align=right>50
+	<td align=right>44.19%
+	<td align=right>68.0% (34)
+	<td align=right>0.0% (0)
+<tr><td>81<td><a href=detailed.php?country=cr><img class="flag-cr" src="/flags/flags-sprite.png" border=0> Costa Rica</a>
+	<td align=right>50
+	<td align=right>62.27%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>82<td><a href=detailed.php?country=id><img class="flag-id" src="/flags/flags-sprite.png" border=0> Indonesia</a>
+	<td align=right>50
+	<td align=right>75.13%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>83<td><a href=detailed.php?country=hn><img class="flag-hn" src="/flags/flags-sprite.png" border=0> Honduras</a>
+	<td align=right>50
+	<td align=right>69.96%
+	<td align=right>66.0% (33)
+	<td align=right>0.0% (0)
+<tr><td>84<td><a href=detailed.php?country=ps><img class="flag-ps" src="/flags/flags-sprite.png" border=0> Palestinian Territory</a>
+	<td align=right>50
+	<td align=right>39.65%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>85<td><a href=detailed.php?country=tz><img class="flag-tz" src="/flags/flags-sprite.png" border=0> Tanzania</a>
+	<td align=right>50
+	<td align=right>45.15%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>86<td><a href=detailed.php?country=la><img class="flag-la" src="/flags/flags-sprite.png" border=0> Laos</a>
+	<td align=right>50
+	<td align=right>76.25%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>87<td><a href=detailed.php?country=hu><img class="flag-hu" src="/flags/flags-sprite.png" border=0> Hungary</a>
+	<td align=right>50
+	<td align=right>75.63%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>88<td><a href=detailed.php?country=ge><img class="flag-ge" src="/flags/flags-sprite.png" border=0> Georgia</a>
+	<td align=right>50
+	<td align=right>59.68%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>89<td><a href=detailed.php?country=ec><img class="flag-ec" src="/flags/flags-sprite.png" border=0> Ecuador</a>
+	<td align=right>50
+	<td align=right>60.70%
+	<td align=right>64.0% (32)
+	<td align=right>0.0% (0)
+<tr><td>90<td><a href=detailed.php?country=re><img class="flag-re" src="/flags/flags-sprite.png" border=0> Reunion</a>
+	<td align=right>50
+	<td align=right>69.51%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>91<td><a href=detailed.php?country=sc><img class="flag-sc" src="/flags/flags-sprite.png" border=0> Seychelles</a>
+	<td align=right>50
+	<td align=right>65.59%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>92<td><a href=detailed.php?country=pe><img class="flag-pe" src="/flags/flags-sprite.png" border=0> Peru</a>
+	<td align=right>50
+	<td align=right>70.24%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>93<td><a href=detailed.php?country=rs><img class="flag-rs" src="/flags/flags-sprite.png" border=0> Serbia</a>
+	<td align=right>50
+	<td align=right>62.09%
+	<td align=right>62.0% (31)
+	<td align=right>0.0% (0)
+<tr><td>94<td><a href=detailed.php?country=tr><img class="flag-tr" src="/flags/flags-sprite.png" border=0> Turkey</a>
+	<td align=right>50
+	<td align=right>66.26%
+	<td align=right>58.0% (29)
+	<td align=right>0.0% (0)
+<tr><td>95<td><a href=detailed.php?country=uy><img class="flag-uy" src="/flags/flags-sprite.png" border=0> Uruguay</a>
+	<td align=right>50
+	<td align=right>67.60%
+	<td align=right>58.0% (29)
+	<td align=right>0.0% (0)
+<tr><td>96<td><a href=detailed.php?country=zw><img class="flag-zw" src="/flags/flags-sprite.png" border=0> Zimbabwe</a>
+	<td align=right>50
+	<td align=right>58.49%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>97<td><a href=detailed.php?country=ug><img class="flag-ug" src="/flags/flags-sprite.png" border=0> Uganda</a>
+	<td align=right>50
+	<td align=right>58.71%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>98<td><a href=detailed.php?country=mk><img class="flag-mk" src="/flags/flags-sprite.png" border=0> Macedonia</a>
+	<td align=right>50
+	<td align=right>69.73%
+	<td align=right>56.0% (28)
+	<td align=right>0.0% (0)
+<tr><td>99<td><a href=detailed.php?country=to><img class="flag-to" src="/flags/flags-sprite.png" border=0> Tonga</a>
+	<td align=right>50
+	<td align=right>46.96%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>100<td><a href=detailed.php?country=ke><img class="flag-ke" src="/flags/flags-sprite.png" border=0> Kenya</a>
+	<td align=right>50
+	<td align=right>64.73%
+	<td align=right>54.0% (27)
+	<td align=right>0.0% (0)
+<tr><td>101<td><a href=detailed.php?country=ar><img class="flag-ar" src="/flags/flags-sprite.png" border=0> Argentina</a>
+	<td align=right>50
+	<td align=right>70.99%
+	<td align=right>52.0% (26)
+	<td align=right>0.0% (0)
+<tr><td>102<td><a href=detailed.php?country=kw><img class="flag-kw" src="/flags/flags-sprite.png" border=0> Kuwait</a>
+	<td align=right>50
+	<td align=right>53.25%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>103<td><a href=detailed.php?country=kz><img class="flag-kz" src="/flags/flags-sprite.png" border=0> Kazakhstan</a>
+	<td align=right>50
+	<td align=right>54.87%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>104<td><a href=detailed.php?country=sa><img class="flag-sa" src="/flags/flags-sprite.png" border=0> Saudi Arabia</a>
+	<td align=right>50
+	<td align=right>56.55%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>105<td><a href=detailed.php?country=ae><img class="flag-ae" src="/flags/flags-sprite.png" border=0> United Arab Emirates</a>
+	<td align=right>50
+	<td align=right>61.41%
+	<td align=right>50.0% (25)
+	<td align=right>0.0% (0)
+<tr><td>106<td><a href=detailed.php?country=tn><img class="flag-tn" src="/flags/flags-sprite.png" border=0> Tunisia</a>
+	<td align=right>50
+	<td align=right>55.16%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>107<td><a href=detailed.php?country=mm><img class="flag-mm" src="/flags/flags-sprite.png" border=0> Myanmar (Burma)</a>
+	<td align=right>50
+	<td align=right>57.68%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>108<td><a href=detailed.php?country=bd><img class="flag-bd" src="/flags/flags-sprite.png" border=0> Bangladesh</a>
+	<td align=right>50
+	<td align=right>57.68%
+	<td align=right>48.0% (24)
+	<td align=right>0.0% (0)
+<tr><td>109<td><a href=detailed.php?country=mn><img class="flag-mn" src="/flags/flags-sprite.png" border=0> Mongolia</a>
+	<td align=right>50
+	<td align=right>30.04%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>110<td><a href=detailed.php?country=ma><img class="flag-ma" src="/flags/flags-sprite.png" border=0> Morocco</a>
+	<td align=right>50
+	<td align=right>64.47%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>111<td><a href=detailed.php?country=lb><img class="flag-lb" src="/flags/flags-sprite.png" border=0> Lebanon</a>
+	<td align=right>50
+	<td align=right>58.70%
+	<td align=right>46.0% (23)
+	<td align=right>0.0% (0)
+<tr><td>112<td><a href=detailed.php?country=np><img class="flag-np" src="/flags/flags-sprite.png" border=0> Nepal</a>
+	<td align=right>50
+	<td align=right>68.02%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>113<td><a href=detailed.php?country=eg><img class="flag-eg" src="/flags/flags-sprite.png" border=0> Egypt</a>
+	<td align=right>50
+	<td align=right>63.97%
+	<td align=right>44.0% (22)
+	<td align=right>0.0% (0)
+<tr><td>114<td><a href=detailed.php?country=gh><img class="flag-gh" src="/flags/flags-sprite.png" border=0> Ghana</a>
+	<td align=right>50
+	<td align=right>61.50%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>115<td><a href=detailed.php?country=qa><img class="flag-qa" src="/flags/flags-sprite.png" border=0> Qatar</a>
+	<td align=right>50
+	<td align=right>32.06%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>116<td><a href=detailed.php?country=kg><img class="flag-kg" src="/flags/flags-sprite.png" border=0> Kyrgyzstan</a>
+	<td align=right>50
+	<td align=right>31.23%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>117<td><a href=detailed.php?country=ci><img class="flag-ci" src="/flags/flags-sprite.png" border=0> Cote d'Ivoire</a>
+	<td align=right>50
+	<td align=right>63.64%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>118<td><a href=detailed.php?country=bo><img class="flag-bo" src="/flags/flags-sprite.png" border=0> Bolivia</a>
+	<td align=right>50
+	<td align=right>55.88%
+	<td align=right>42.0% (21)
+	<td align=right>0.0% (0)
+<tr><td>119<td><a href=detailed.php?country=cm><img class="flag-cm" src="/flags/flags-sprite.png" border=0> Cameroon</a>
+	<td align=right>50
+	<td align=right>56.94%
+	<td align=right>40.0% (20)
+	<td align=right>0.0% (0)
+<tr><td>120<td><a href=detailed.php?country=uz><img class="flag-uz" src="/flags/flags-sprite.png" border=0> Uzbekistan</a>
+	<td align=right>50
+	<td align=right>22.51%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>121<td><a href=detailed.php?country=kr><img class="flag-kr" src="/flags/flags-sprite.png" border=0> South Korea</a>
+	<td align=right>50
+	<td align=right>29.53%
+	<td align=right>38.0% (19)
+	<td align=right>0.0% (0)
+<tr><td>122<td><a href=detailed.php?country=om><img class="flag-om" src="/flags/flags-sprite.png" border=0> Oman</a>
+	<td align=right>50
+	<td align=right>23.43%
+	<td align=right>34.0% (17)
+	<td align=right>0.0% (0)
+<tr><td>123<td><a href=detailed.php?country=ve><img class="flag-ve" src="/flags/flags-sprite.png" border=0> Venezuela</a>
+	<td align=right>50
+	<td align=right>32.28%
+	<td align=right>32.0% (16)
+	<td align=right>0.0% (0)
+<tr><td>124<td><a href=detailed.php?country=rw><img class="flag-rw" src="/flags/flags-sprite.png" border=0> Rwanda</a>
+	<td align=right>50
+	<td align=right>9.70%
+	<td align=right>20.0% (10)
+	<td align=right>0.0% (0)
+<tr><td>125<td><a href=detailed.php?country=ml><img class="flag-ml" src="/flags/flags-sprite.png" border=0> Mali</a>
+	<td align=right>50
+	<td align=right>11.60%
+	<td align=right>16.0% (8)
+	<td align=right>0.0% (0)
+<tr><td>126<td><a href=detailed.php?country=tk><img class="flag-tk" src="/flags/flags-sprite.png" border=0> Tokelau</a>
+	<td align=right>50
+	<td align=right>3.91%
+	<td align=right>14.0% (7)
+	<td align=right>0.0% (0)
+<tr><td>127<td><a href=detailed.php?country=ir><img class="flag-ir" src="/flags/flags-sprite.png" border=0> Iran</a>
+	<td align=right>50
+	<td align=right>10.25%
+	<td align=right>10.0% (5)
+	<td align=right>0.0% (0)
+<tr><td>128<td><a href=detailed.php?country=ga><img class="flag-ga" src="/flags/flags-sprite.png" border=0> Gabon</a>
+	<td align=right>50
+	<td align=right>29.01%
+	<td align=right>10.0% (5)
+	<td align=right>0.0% (0)
+<tr><td>129<td><a href=detailed.php?country=dz><img class="flag-dz" src="/flags/flags-sprite.png" border=0> Algeria</a>
+	<td align=right>50
+	<td align=right>26.24%
+	<td align=right>8.0% (4)
+	<td align=right>0.0% (0)
+<tr><td>130<td><a href=detailed.php?country=cf><img class="flag-cf" src="/flags/flags-sprite.png" border=0> Central African Republic</a>
+	<td align=right>50
+	<td align=right>1.34%
+	<td align=right>4.0% (2)
+	<td align=right>0.0% (0)
+<tr><td>131<td><a href=detailed.php?country=gq><img class="flag-gq" src="/flags/flags-sprite.png" border=0> Equatorial Guinea</a>
+	<td align=right>50
+	<td align=right>0.79%
+	<td align=right>2.0% (1)
+	<td align=right>0.0% (0)
+</tbody>
+  </table>
+</div><!-- col -->
+<div class="col-xs-12 col-md-6 col-lg-3">
+<h3>Users (Google)</h3>
+<table class="table  table-striped table-hover">
+  <a href="plotpenetration.php?country=ww"><img border=0 src="plotpenetration.php?country=ww" width=102 height=70></a>
+  <thead>
+  <tr><th>Rank</th><th>Country</th><th>%-age</th></tr>
+  </thead>
+  <tbody>
+<tr><td>1<td><a href=detailed.php?country=fr#prefixes><img class="flag-fr" src="/flags/flags-sprite.png" border=0> France<td align=right>87.39 %</tr>
+<tr><td>2<td><a href=detailed.php?country=ru#prefixes><img class="flag-ru" src="/flags/flags-sprite.png" border=0> Russia<td align=right>77.57 %</tr>
+<tr><td>3<td><a href=detailed.php?country=de#prefixes><img class="flag-de" src="/flags/flags-sprite.png" border=0> Germany<td align=right>75.75 %</tr>
+<tr><td>4<td><a href=detailed.php?country=be#prefixes><img class="flag-be" src="/flags/flags-sprite.png" border=0> Belgium<td align=right>73.71 %</tr>
+<tr><td>5<td><a href=detailed.php?country=sa#prefixes><img class="flag-sa" src="/flags/flags-sprite.png" border=0> Saudi Arabia<td align=right>69.15 %</tr>
+<tr><td>6<td><a href=detailed.php?country=in#prefixes><img class="flag-in" src="/flags/flags-sprite.png" border=0> India<td align=right>67.65 %</tr>
+<tr><td>7<td><a href=detailed.php?country=my#prefixes><img class="flag-my" src="/flags/flags-sprite.png" border=0> Malaysia<td align=right>62.63 %</tr>
+<tr><td>8<td><a href=detailed.php?country=sr#prefixes><img class="flag-sr" src="/flags/flags-sprite.png" border=0> Suriname<td align=right>59.88 %</tr>
+<tr><td>9<td><a href=detailed.php?country=gt#prefixes><img class="flag-gt" src="/flags/flags-sprite.png" border=0> Guatemala<td align=right>57.54 %</tr>
+<tr><td>10<td><a href=detailed.php?country=jp#prefixes><img class="flag-jp" src="/flags/flags-sprite.png" border=0> Japan<td align=right>57.43 %</tr>
+<tr><td>11<td><a href=detailed.php?country=vn#prefixes><img class="flag-vn" src="/flags/flags-sprite.png" border=0> Vietnam<td align=right>57.42 %</tr>
+<tr><td>12<td><a href=detailed.php?country=br#prefixes><img class="flag-br" src="/flags/flags-sprite.png" border=0> Brazil<td align=right>57.13 %</tr>
+<tr><td>13<td><a href=detailed.php?country=ee#prefixes><img class="flag-ee" src="/flags/flags-sprite.png" border=0> Estonia<td align=right>57.07 %</tr>
+<tr><td>14<td><a href=detailed.php?country=lk#prefixes><img class="flag-lk" src="/flags/flags-sprite.png" border=0> Sri Lanka<td align=right>56.56 %</tr>
+<tr><td>15<td><a href=detailed.php?country=gr#prefixes><img class="flag-gr" src="/flags/flags-sprite.png" border=0> Greece<td align=right>56.13 %</tr>
+<tr><td>16<td><a href=detailed.php?country=np#prefixes><img class="flag-np" src="/flags/flags-sprite.png" border=0> Nepal<td align=right>56.13 %</tr>
+<tr><td>17<td><a href=detailed.php?country=us#prefixes><img class="flag-us" src="/flags/flags-sprite.png" border=0> United States of America<td align=right>54.66 %</tr>
+<tr><td>18<td><a href=detailed.php?country=tw#prefixes><img class="flag-tw" src="/flags/flags-sprite.png" border=0> Taiwan<td align=right>54.61 %</tr>
+<tr><td>19<td><a href=detailed.php?country=mx#prefixes><img class="flag-mx" src="/flags/flags-sprite.png" border=0> Mexico<td align=right>53.80 %</tr>
+<tr><td>20<td><a href=detailed.php?country=gb#prefixes><img class="flag-gb" src="/flags/flags-sprite.png" border=0> United-Kingdom<td align=right>53.77 %</tr>
+<tr><td>21<td><a href=detailed.php?country=no#prefixes><img class="flag-no" src="/flags/flags-sprite.png" border=0> Norway<td align=right>52.97 %</tr>
+<tr><td>22<td><a href=detailed.php?country=nl#prefixes><img class="flag-nl" src="/flags/flags-sprite.png" border=0> Netherlands<td align=right>52.70 %</tr>
+<tr><td>23<td><a href=detailed.php?country=pr#prefixes><img class="flag-pr" src="/flags/flags-sprite.png" border=0> Puerto Rico<td align=right>52.40 %</tr>
+<tr><td>24<td><a href=detailed.php?country=uy#prefixes><img class="flag-uy" src="/flags/flags-sprite.png" border=0> Uruguay<td align=right>51.37 %</tr>
+<tr><td>25<td><a href=detailed.php?country=il#prefixes><img class="flag-il" src="/flags/flags-sprite.png" border=0> Israel<td align=right>50.34 %</tr>
+<tr><td>26<td><a href=detailed.php?country=fi#prefixes><img class="flag-fi" src="/flags/flags-sprite.png" border=0> Finland<td align=right>49.22 %</tr>
+<tr><td>27<td><a href=detailed.php?country=hu#prefixes><img class="flag-hu" src="/flags/flags-sprite.png" border=0> Hungary<td align=right>48.76 %</tr>
+<tr><td>28<td><a href=detailed.php?country=pt#prefixes><img class="flag-pt" src="/flags/flags-sprite.png" border=0> Portugal<td align=right>47.07 %</tr>
+<tr><td>29<td><a href=detailed.php?country=th#prefixes><img class="flag-th" src="/flags/flags-sprite.png" border=0> Thailand<td align=right>46.23 %</tr>
+<tr><td>30<td><a href=detailed.php?country=lv#prefixes><img class="flag-lv" src="/flags/flags-sprite.png" border=0> Latvia<td align=right>46.09 %</tr>
+<tr><td>31<td><a href=detailed.php?country=cz#prefixes><img class="flag-cz" src="/flags/flags-sprite.png" border=0> Czech Republic<td align=right>45.03 %</tr>
+<tr><td>32<td><a href=detailed.php?country=ca#prefixes><img class="flag-ca" src="/flags/flags-sprite.png" border=0> Canada<td align=right>42.46 %</tr>
+<tr><td>33<td><a href=detailed.php?country=ae#prefixes><img class="flag-ae" src="/flags/flags-sprite.png" border=0> United Arab Emirates<td align=right>41.84 %</tr>
+<tr><td>34<td><a href=detailed.php?country=ch#prefixes><img class="flag-ch" src="/flags/flags-sprite.png" border=0> Switzerland<td align=right>41.49 %</tr>
+<tr><td>35<td><a href=detailed.php?country=ni#prefixes><img class="flag-ni" src="/flags/flags-sprite.png" border=0> Nicaragua<td align=right>41.26 %</tr>
+<tr><td>36<td><a href=detailed.php?country=bo#prefixes><img class="flag-bo" src="/flags/flags-sprite.png" border=0> Bolivia<td align=right>41.22 %</tr>
+<tr><td>37<td><a href=detailed.php?country=mo#prefixes><img class="flag-mo" src="/flags/flags-sprite.png" border=0> Macau<td align=right>41.18 %</tr>
+<tr><td>38<td><a href=detailed.php?country=qa#prefixes><img class="flag-qa" src="/flags/flags-sprite.png" border=0> Qatar<td align=right>41.12 %</tr>
+<tr><td>39<td><a href=detailed.php?country=bt#prefixes><img class="flag-bt" src="/flags/flags-sprite.png" border=0> Bhutan<td align=right>40.00 %</tr>
+<tr><td>40<td><a href=detailed.php?country=ie#prefixes><img class="flag-ie" src="/flags/flags-sprite.png" border=0> Ireland<td align=right>39.09 %</tr>
+<tr><td>41<td><a href=detailed.php?country=au#prefixes><img class="flag-au" src="/flags/flags-sprite.png" border=0> Australia<td align=right>39.07 %</tr>
+<tr><td>42<td><a href=detailed.php?country=do#prefixes><img class="flag-do" src="/flags/flags-sprite.png" border=0> Dominican Republic<td align=right>38.91 %</tr>
+<tr><td>43<td><a href=detailed.php?country=lt#prefixes><img class="flag-lt" src="/flags/flags-sprite.png" border=0> Lithuania<td align=right>38.57 %</tr>
+<tr><td>44<td><a href=detailed.php?country=pe#prefixes><img class="flag-pe" src="/flags/flags-sprite.png" border=0> Peru<td align=right>38.46 %</tr>
+<tr><td>45<td><a href=detailed.php?country=se#prefixes><img class="flag-se" src="/flags/flags-sprite.png" border=0> Sweden<td align=right>37.93 %</tr>
+<tr><td>46<td><a href=detailed.php?country=at#prefixes><img class="flag-at" src="/flags/flags-sprite.png" border=0> Austria<td align=right>36.76 %</tr>
+<tr><td>47<td><a href=detailed.php?country=py#prefixes><img class="flag-py" src="/flags/flags-sprite.png" border=0> Paraguay<td align=right>36.76 %</tr>
+<tr><td>48<td><a href=detailed.php?country=bz#prefixes><img class="flag-bz" src="/flags/flags-sprite.png" border=0> Belize<td align=right>36.36 %</tr>
+<tr><td>49<td><a href=detailed.php?country=ec#prefixes><img class="flag-ec" src="/flags/flags-sprite.png" border=0> Ecuador<td align=right>35.91 %</tr>
+<tr><td>50<td><a href=detailed.php?country=dm#prefixes><img class="flag-dm" src="/flags/flags-sprite.png" border=0> Dominica<td align=right>34.22 %</tr>
+<tr><td>51<td><a href=detailed.php?country=mn#prefixes><img class="flag-mn" src="/flags/flags-sprite.png" border=0> Mongolia<td align=right>33.23 %</tr>
+<tr><td>52<td><a href=detailed.php?country=cg#prefixes><img class="flag-cg" src="/flags/flags-sprite.png" border=0> Congo (Brazzaville)<td align=right>31.96 %</tr>
+<tr><td>53<td><a href=detailed.php?country=bs#prefixes><img class="flag-bs" src="/flags/flags-sprite.png" border=0> Bahamas<td align=right>31.89 %</tr>
+<tr><td>54<td><a href=detailed.php?country=sn#prefixes><img class="flag-sn" src="/flags/flags-sprite.png" border=0> Senegal<td align=right>30.43 %</tr>
+<tr><td>55<td><a href=detailed.php?country=ar#prefixes><img class="flag-ar" src="/flags/flags-sprite.png" border=0> Argentina<td align=right>29.20 %</tr>
+<tr><td>56<td><a href=detailed.php?country=ss#prefixes><img class="flag-ss" src="/flags/flags-sprite.png" border=0> South Sudan<td align=right>28.91 %</tr>
+<tr><td>57<td><a href=detailed.php?country=fj#prefixes><img class="flag-fj" src="/flags/flags-sprite.png" border=0> Fiji<td align=right>28.90 %</tr>
+<tr><td>58<td><a href=detailed.php?country=ro#prefixes><img class="flag-ro" src="/flags/flags-sprite.png" border=0> Romania<td align=right>27.05 %</tr>
+<tr><td>59<td><a href=detailed.php?country=gy#prefixes><img class="flag-gy" src="/flags/flags-sprite.png" border=0> Guyana (Republic of)<td align=right>26.38 %</tr>
+<tr><td>60<td><a href=detailed.php?country=zw#prefixes><img class="flag-zw" src="/flags/flags-sprite.png" border=0> Zimbabwe<td align=right>25.91 %</tr>
+<tr><td>61<td><a href=detailed.php?country=om#prefixes><img class="flag-om" src="/flags/flags-sprite.png" border=0> Oman<td align=right>25.61 %</tr>
+<tr><td>62<td><a href=detailed.php?country=id#prefixes><img class="flag-id" src="/flags/flags-sprite.png" border=0> Indonesia<td align=right>25.36 %</tr>
+<tr><td>63<td><a href=detailed.php?country=ga#prefixes><img class="flag-ga" src="/flags/flags-sprite.png" border=0> Gabon<td align=right>24.92 %</tr>
+<tr><td>64<td><a href=detailed.php?country=nz#prefixes><img class="flag-nz" src="/flags/flags-sprite.png" border=0> New Zealand<td align=right>24.87 %</tr>
+<tr><td>65<td><a href=detailed.php?country=dk#prefixes><img class="flag-dk" src="/flags/flags-sprite.png" border=0> Denmark<td align=right>24.86 %</tr>
+<tr><td>66<td><a href=detailed.php?country=ci#prefixes><img class="flag-ci" src="/flags/flags-sprite.png" border=0> Cote d'Ivoire<td align=right>24.40 %</tr>
+<tr><td>67<td><a href=detailed.php?country=hn#prefixes><img class="flag-hn" src="/flags/flags-sprite.png" border=0> Honduras<td align=right>24.35 %</tr>
+<tr><td>68<td><a href=detailed.php?country=kw#prefixes><img class="flag-kw" src="/flags/flags-sprite.png" border=0> Kuwait<td align=right>23.97 %</tr>
+<tr><td>69<td><a href=detailed.php?country=ml#prefixes><img class="flag-ml" src="/flags/flags-sprite.png" border=0> Mali<td align=right>23.95 %</tr>
+<tr><td>70<td><a href=detailed.php?country=sx#prefixes><img class="flag-sx" src="/flags/flags-sprite.png" border=0> Sint Maarten<td align=right>23.90 %</tr>
+<tr><td>71<td><a href=detailed.php?country=tc#prefixes><img class="flag-tc" src="/flags/flags-sprite.png" border=0> Turks and Caicos Islands<td align=right>23.04 %</tr>
+<tr><td>72<td><a href=detailed.php?country=pk#prefixes><img class="flag-pk" src="/flags/flags-sprite.png" border=0> Pakistan<td align=right>22.29 %</tr>
+<tr><td>73<td><a href=detailed.php?country=bm#prefixes><img class="flag-bm" src="/flags/flags-sprite.png" border=0> Bermuda<td align=right>21.95 %</tr>
+<tr><td>74<td><a href=detailed.php?country=tt#prefixes><img class="flag-tt" src="/flags/flags-sprite.png" border=0> Trinidad and Tobago<td align=right>21.67 %</tr>
+<tr><td>75<td><a href=detailed.php?country=kz#prefixes><img class="flag-kz" src="/flags/flags-sprite.png" border=0> Kazakhstan<td align=right>20.71 %</tr>
+<tr><td>76<td><a href=detailed.php?country=co#prefixes><img class="flag-co" src="/flags/flags-sprite.png" border=0> Colombia<td align=right>20.64 %</tr>
+<tr><td>77<td><a href=detailed.php?country=ir#prefixes><img class="flag-ir" src="/flags/flags-sprite.png" border=0> Iran<td align=right>20.34 %</tr>
+<tr><td>78<td><a href=detailed.php?country=jo#prefixes><img class="flag-jo" src="/flags/flags-sprite.png" border=0> Jordan<td align=right>20.28 %</tr>
+<tr><td>79<td><a href=detailed.php?country=tg#prefixes><img class="flag-tg" src="/flags/flags-sprite.png" border=0> Togo<td align=right>20.25 %</tr>
+<tr><td>80<td><a href=detailed.php?country=ph#prefixes><img class="flag-ph" src="/flags/flags-sprite.png" border=0> Philippines<td align=right>19.90 %</tr>
+<tr><td>81<td><a href=detailed.php?country=bg#prefixes><img class="flag-bg" src="/flags/flags-sprite.png" border=0> Bulgaria<td align=right>19.44 %</tr>
+<tr><td>82<td><a href=detailed.php?country=pg#prefixes><img class="flag-pg" src="/flags/flags-sprite.png" border=0> Papua New Guinea<td align=right>19.34 %</tr>
+<tr><td>83<td><a href=detailed.php?country=pl#prefixes><img class="flag-pl" src="/flags/flags-sprite.png" border=0> Poland<td align=right>19.04 %</tr>
+<tr><td>84<td><a href=detailed.php?country=kr#prefixes><img class="flag-kr" src="/flags/flags-sprite.png" border=0> South Korea<td align=right>18.83 %</tr>
+<tr><td>85<td><a href=detailed.php?country=tn#prefixes><img class="flag-tn" src="/flags/flags-sprite.png" border=0> Tunisia<td align=right>18.58 %</tr>
+<tr><td>86<td><a href=detailed.php?country=it#prefixes><img class="flag-it" src="/flags/flags-sprite.png" border=0> Italy<td align=right>18.58 %</tr>
+<tr><td>87<td><a href=detailed.php?country=vu#prefixes><img class="flag-vu" src="/flags/flags-sprite.png" border=0> Vanuatu<td align=right>18.30 %</tr>
+<tr><td>88<td><a href=detailed.php?country=bd#prefixes><img class="flag-bd" src="/flags/flags-sprite.png" border=0> Bangladesh<td align=right>18.21 %</tr>
+<tr><td>89<td><a href=detailed.php?country=jm#prefixes><img class="flag-jm" src="/flags/flags-sprite.png" border=0> Jamaica<td align=right>18.06 %</tr>
+<tr><td>90<td><a href=detailed.php?country=sg#prefixes><img class="flag-sg" src="/flags/flags-sprite.png" border=0> Singapore<td align=right>18.01 %</tr>
+<tr><td>91<td><a href=detailed.php?country=tr#prefixes><img class="flag-tr" src="/flags/flags-sprite.png" border=0> Turkey<td align=right>17.74 %</tr>
+<tr><td>92<td><a href=detailed.php?country=sv#prefixes><img class="flag-sv" src="/flags/flags-sprite.png" border=0> El Salvador<td align=right>17.62 %</tr>
+<tr><td>93<td><a href=detailed.php?country=cr#prefixes><img class="flag-cr" src="/flags/flags-sprite.png" border=0> Costa Rica<td align=right>16.97 %</tr>
+<tr><td>94<td><a href=detailed.php?country=cl#prefixes><img class="flag-cl" src="/flags/flags-sprite.png" border=0> Chile<td align=right>16.95 %</tr>
+<tr><td>95<td><a href=detailed.php?country=ht#prefixes><img class="flag-ht" src="/flags/flags-sprite.png" border=0> Haiti<td align=right>16.85 %</tr>
+<tr><td>96<td><a href=detailed.php?country=rw#prefixes><img class="flag-rw" src="/flags/flags-sprite.png" border=0> Rwanda<td align=right>16.83 %</tr>
+<tr><td>97<td><a href=detailed.php?country=bh#prefixes><img class="flag-bh" src="/flags/flags-sprite.png" border=0> Bahrain<td align=right>16.69 %</tr>
+<tr><td>98<td><a href=detailed.php?country=ne#prefixes><img class="flag-ne" src="/flags/flags-sprite.png" border=0> Niger<td align=right>16.66 %</tr>
+<tr><td>99<td><a href=detailed.php?country=vi#prefixes><img class="flag-vi" src="/flags/flags-sprite.png" border=0> U.S. Virgin Islands<td align=right>16.20 %</tr>
+<tr><td>100<td><a href=detailed.php?country=vg#prefixes><img class="flag-vg" src="/flags/flags-sprite.png" border=0> Virgin Islands (Bristish)<td align=right>15.27 %</tr>
+</table>
+</div><!-- col -->
+</div><!-- row -->
+Tests are:
+<ul>
+<li><b>Web</b>:
+	<ul>
+	<li>GREEN: a AAAA exists for www.$domain or $domain and an HTTP connection over IPv6 was successful</li>
+	<li>ORANGE: a AAAA exists for www6.$domain or ipv6.$domain or www.ipv6.$domain and an HTTP connection over IPv6 was successful</li>
+	<li>RED: no AAAA exists for any sensible derivation of $domain or an HTTP connection over IPv6 was not succesful</li>
+	</ul>
+</li>
+<li><b>Email</b>:
+	<ul>
+	<li>GREEN: a AAAA exists for one MX of $domain and a SMTP connection over IPv6 was successful</li>
+	<li>ORANGE: a AAAA exists for one MX of $domain but a SMTP connection over IPv6 was not successful</li>
+	<li>RED: no AAAA exists for any MX of $domain</li>
+	</ul>
+</li>
+<li><b>DNS</b>:
+	<ul>
+	<li>GREEN: a AAAA exists for one NS of $domain and a DNS query over IPv6 was answered</li>
+	<li>RED: no AAAA exists for any NS of $domain but a DNS query over IPv6 was not answered</li>
+	<li><i>n/m</i>: means <i>n</i> servers out of <i>m</i> have an IPv6 address</li>
+	</ul>
+</li>
+	
+</ul>
+<P>
+OpenDNS rank is <i>n/m</i> meaning <i>n<sup>th</sup></i> in the country (actually TLD -- so not very accurate) and <i>m<sup>th</sup></i> worldwide.
+Before 20th of November 2016, the world-wide ranking was based on Alexa top 1 million web sites until the service
+<a href="https://support.alexa.com/hc/en-us/articles/200449834-Does-Alexa-have-a-list-of-its-top-ranked-websites-">was discontinued by Alexa</a>.
+Since 20th of December
+2016, the source of the top 1 million is <a href="https://blog.opendns.com/2016/12/14/cisco-umbrella-1-million/">Umbrella</a>
+service by OpenDNS (a <a href=www.cisco.com>Cisco</a> division). The data set are not consistent, so, it may be difficult to compare the situation
+before and after December 2016.
+<hr>
+<em>Based on same prior art from Mark Prior at <a href=http://www.mrp.net/IPv6_Survey.html>http://www.mrp.net/IPv6_Survey.html</a>. 
+</div><!-- container -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
