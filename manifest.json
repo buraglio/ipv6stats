@@ -21,9 +21,10 @@
     "ttl_seconds": 86400
   },
   "cloudflare_ip_version": {
-    "error": "ValueError: Cloudflare API HTTP 400: {\"success\":false,\"errors\":[{\"code\":9106,\"message\":\"Authentication failed (status: 400)\"}],\"messages\":[],\"result\":null}\n",
-    "last_attempt": "2026-10-14T18:35:41+00:00",
-    "status": "error",
+    "error": null,
+    "last_attempt": "2026-10-14T19:37:46+00:00",
+    "last_success": "2026-10-14T19:37:46+00:00",
+    "status": "ok",
     "ttl_seconds": 2592000
   },
   "isoc_pulse": {
