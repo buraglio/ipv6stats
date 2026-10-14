@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Data Sources</h1>
+<p>Every number on this site comes from one of the sources below. A daily job at 00:00 UTC fetches each source that is due, keeps the last good copy when a fetch fails, and rebuilds the site. A value whose source has not updated for twice its usual interval is marked stale. Nothing is estimated or typed in by hand except the reference lists at the end, which are labelled with their review dates.</p>
+
+<h2>Collected sources</h2>
+{% for s in sources %}
+<details class="source" id="{{ s.key }}">
+  <summary>{{ s.title }} — {{ s.status | replace("_", " ") }}{% if s.stale %} <span class="stale">⚠ stale</span>{% endif %}</summary>
+  <p>{{ s.description }}</p>
+  <ul>
+    <li>Link: <a href="{{ s.url }}">{{ s.url }}</a></li>
+    <li>Re-fetched every {{ s.ttl_days }} day{{ "s" if s.ttl_days != 1 else "" }}; last success {{ s.last_success | date_only }}, last attempt {{ s.last_attempt | date_only }}</li>
+    {% if s.requires_env %}<li>Needs the secret {{ s.requires_env | join(", ") }}</li>{% endif %}
+    {% if s.error %}<li class="provenance">Last error: {{ s.error }}</li>{% endif %}
+  </ul>
+</details>
+{% endfor %}
+
+<h2>Reference lists</h2>
+<div class="table-wrap"><table>
+  <thead><tr><th>File</th><th>What it holds</th><th>Last reviewed</th></tr></thead>
+  <tbody>{% for r in references %}<tr><td><code>{{ r.file }}</code></td><td>{{ r.what }}</td><td>{{ r.last_reviewed }}</td></tr>{% endfor %}</tbody>
+</table></div>
+
+<h2>Source code</h2>
+<p>The collectors, page templates and tests are on <a href="https://github.com/buraglio/ipv6stats">GitHub</a>.</p>
+{% endblock %}
