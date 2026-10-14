@@ -43,3 +43,11 @@ def test_fetch_uses_context_dns():
     hosts = {h for e in ce.ENDPOINTS.values() for h in e["hosts"].values()}
     result = SOURCES["cloud_endpoints"].fetch(make_ctx(aaaa=hosts))
     assert all(p["with_ipv6"] == p["checked"] for p in result["providers"])
+
+
+def test_resolver_hiding_aaaa_answers_fails_the_source():
+    # A resolver that filters AAAA (no errors, just no answers) would otherwise mark every
+    # provider IPv4-only. Hosts known to be dual-stack act as a check.
+    hosts = {h for e in ce.ENDPOINTS.values() for h in e["hosts"].values()}
+    with pytest.raises(ValueError, match="dual-stack"):
+        SOURCES["cloud_endpoints"].fetch(make_ctx(aaaa=set(), a=hosts))

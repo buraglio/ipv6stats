@@ -12,6 +12,8 @@ METHOD = "https://github.com/buraglio/ipv6stats/blob/main/collect/sources/cloud_
 ROLES = ("website", "console", "api", "docs", "storage", "status")
 MAX_UNKNOWN = 0.05
 WORKERS = 16
+# Long-standing dual-stack hosts. If none shows IPv6, the resolver is hiding AAAA answers.
+CANARIES = ("www.cloudflare.com", "cloud.google.com")
 
 ENDPOINTS = {
     "aws": {"name": "AWS", "hosts": {"website": "aws.amazon.com", "console": "console.aws.amazon.com", "api": "ec2.us-east-1.amazonaws.com", "docs": "docs.aws.amazon.com", "storage": "s3.us-east-1.amazonaws.com", "status": "health.aws.amazon.com"}},
@@ -69,4 +71,9 @@ def measure(endpoints: dict, has_aaaa: Callable, has_a: Callable, max_unknown: f
 
 @source("cloud_endpoints", MONTH, title="Cloud provider hostnames with IPv6 (AAAA lookups, measured)", url=METHOD)
 def fetch(ctx: Context) -> dict:
-    return measure(ENDPOINTS, ctx.has_aaaa, ctx.has_a)
+    result = measure(ENDPOINTS, ctx.has_aaaa, ctx.has_a)
+    statuses = {h["host"]: h["status"] for p in result["providers"] for h in p["hosts"]}
+    if not any(statuses.get(host) == "ipv6" for host in CANARIES):
+        raise ValueError(f"no AAAA answer even for known dual-stack hosts {', '.join(CANARIES)}; "
+                         "the resolver may be filtering IPv6 answers")
+    return result
