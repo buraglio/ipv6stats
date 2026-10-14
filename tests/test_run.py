@@ -106,3 +106,12 @@ def test_failure_threshold():
     assert not exceeds_threshold(RunResult(attempted=["a", "b", "c", "d"], failed=["a"]))
     assert exceeds_threshold(RunResult(attempted=["a", "b", "c", "d"], failed=["a", "b"]))
     assert not exceeds_threshold(RunResult())
+
+
+def test_threshold_counts_sources_not_due_as_healthy():
+    # On a normal night only the daily source is due; one monthly source that keeps
+    # failing must not block every deploy (2 failures of 5 configured would).
+    one_broken = RunResult(attempted=["apnic", "bgp"], failed=["apnic"], skipped=["c", "d", "e"])
+    assert not exceeds_threshold(one_broken)
+    two_broken = RunResult(attempted=["apnic", "bgp", "c"], failed=["apnic", "c"], skipped=["d", "e"])
+    assert exceeds_threshold(two_broken)

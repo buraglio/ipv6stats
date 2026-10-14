@@ -33,9 +33,12 @@ class RunResult:
 
 
 def exceeds_threshold(result: RunResult) -> bool:
-    if not result.attempted:
+    # Measured against every configured source, not just tonight's due ones: a single
+    # broken monthly source stays due every night and must not block every deploy.
+    configured = len(result.attempted) + len(result.skipped)
+    if not configured:
         return False
-    return len(result.failed) / len(result.attempted) > FAILURE_THRESHOLD
+    return len(result.failed) / configured > FAILURE_THRESHOLD
 
 
 def _write_payload(path: Path, payload: object) -> None:
@@ -116,7 +119,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"attempted={len(result.attempted)} failed={len(result.failed)} "
           f"skipped={len(result.skipped)} not_configured={len(result.not_configured)}")
     if exceeds_threshold(result):
-        print(f"::error::{len(result.failed)} of {len(result.attempted)} sources failed; not publishing")
+        print(f"::error::{len(result.failed)} of {len(result.attempted) + len(result.skipped)} configured sources failed; not publishing")
         return 1
     return 0
 
