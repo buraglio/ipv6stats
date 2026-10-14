@@ -39,3 +39,11 @@ def test_stale_reviews_warn():
     providers = [{"name": "Old", "last_reviewed": "2025-10-04"}, {"name": "New", "last_reviewed": "2026-10-01"}]
     warnings = reference.stale_reviews(providers, datetime(2026, 10, 14, tzinfo=timezone.utc))
     assert len(warnings) == 1 and "Old" in warnings[0]
+
+
+def test_reference_has_no_missing_values_written_as_text():
+    # Fields the old data never stated must be absent, not "None" or an invented "No".
+    text = reference.CLOUD_FILE.read_text()
+    assert '"None"' not in text
+    s3 = next(s for p in reference.load_cloud_providers() if p["key"] == "aws" for s in p["service"] if s["name"] == "S3")
+    assert "prefix_delegation" not in s3 and "nat_free_egress" not in s3

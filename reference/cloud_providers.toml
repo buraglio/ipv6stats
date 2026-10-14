@@ -34,30 +34,20 @@ name = "Lambda"
 dual_stack = "Yes"
 ipv6_only = "No"
 nat_free_egress = "VPC configuration"
-prefix_delegation = "No"
 
 [[provider.service]]
 name = "S3"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["All regions support IPv6 for S3 access"]
 
 [[provider.service]]
 name = "CloudFront"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Automatic IPv6 support for all distributions"]
 
 [[provider.service]]
 name = "RDS"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Database instances support IPv6 connectivity"]
 
 [[provider]]
@@ -89,25 +79,16 @@ prefix_delegation = "Azure CNI"
 [[provider.service]]
 name = "Load Balancer"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Standard Load Balancer supports IPv6 frontend"]
 
 [[provider.service]]
 name = "App Service"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Web apps can bind to IPv6 addresses"]
 
 [[provider.service]]
 name = "Storage"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Blob, File, Queue storage support IPv6"]
 
 [[provider]]
@@ -139,25 +120,17 @@ prefix_delegation = "Kubernetes CNI"
 [[provider.service]]
 name = "Cloud Load Balancing"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Global and regional load balancers support IPv6"]
 
 [[provider.service]]
 name = "Cloud Functions"
 dual_stack = "Yes"
 ipv6_only = "No"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["VPC connector required for IPv6"]
 
 [[provider.service]]
 name = "Cloud Storage"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["All storage buckets accessible via IPv6"]
 
 [[provider]]
@@ -182,17 +155,11 @@ prefix_delegation = "/56 to VCN, /64 per subnet"
 [[provider.service]]
 name = "OKE"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Kubernetes clusters support dual-stack"]
 
 [[provider.service]]
 name = "Load Balancers"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Flexible load balancers support IPv6"]
 
 [[provider]]
@@ -217,25 +184,16 @@ prefix_delegation = "No"
 [[provider.service]]
 name = "Kubernetes"
 dual_stack = "No"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["IPv4 only for DOKS clusters currently"]
 
 [[provider.service]]
 name = "Load Balancers"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Support IPv6 forwarding to droplets"]
 
 [[provider.service]]
 name = "Spaces"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Object storage accessible via IPv6"]
 
 [[provider]]
@@ -271,25 +229,16 @@ prefix_delegation = "/64 or /56 pools per instance"
 [[provider.service]]
 name = "LKE"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Kubernetes clusters support IPv6"]
 
 [[provider.service]]
 name = "NodeBalancers"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Load balancers support IPv6 frontend"]
 
 [[provider.service]]
 name = "Object Storage"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["S3-compatible storage accessible via IPv6"]
 
 [[provider]]
@@ -307,33 +256,21 @@ notes = ["Pioneer in IPv6 adoption, free IPv6 for all plans"]
 [[provider.service]]
 name = "CDN"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Automatic IPv6 support for all zones"]
 
 [[provider.service]]
 name = "Workers"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Edge computing with IPv6 support"]
 
 [[provider.service]]
 name = "R2 Storage"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Object storage accessible via IPv6"]
 
 [[provider.service]]
 name = "Load Balancing"
 dual_stack = "Yes"
-ipv6_only = "None"
-nat_free_egress = "No"
-prefix_delegation = "No"
 notes = ["Global load balancing supports IPv6"]
 
 [[provider]]

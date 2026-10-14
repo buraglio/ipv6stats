@@ -48,3 +48,8 @@ def test_nav_and_legacy(tmp_path):
     out, html = render(tmp_path)
     assert 'aria-current="page">Cloud Services' in html
     assert '"Cloud Services": "cloud-services/"' in (out / "index.html").read_text()
+
+
+def test_missing_service_fields_render_as_dash(tmp_path):
+    _, html = render(tmp_path)
+    assert "<td>None</td>" not in html

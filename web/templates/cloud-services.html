@@ -63,7 +63,7 @@
     {% if ref.service %}
     <div class="table-wrap"><table>
       <thead><tr><th>Service</th><th>Dual-stack</th><th>IPv6-only</th><th>NAT-free IPv6 egress</th><th>Prefix delegation</th></tr></thead>
-      <tbody>{% for s in ref.service %}<tr><td>{{ s.name }}</td><td>{{ s.dual_stack }}</td><td>{{ s.ipv6_only }}</td><td>{{ s.nat_free_egress }}</td><td>{{ s.prefix_delegation }}</td></tr>{% endfor %}</tbody>
+      <tbody>{% for s in ref.service %}<tr><td>{{ s.name }}</td><td>{{ s.get("dual_stack", "—") }}</td><td>{{ s.get("ipv6_only", "—") }}</td><td>{{ s.get("nat_free_egress", "—") }}</td><td>{{ s.get("prefix_delegation", "—") }}</td></tr>{% endfor %}</tbody>
     </table></div>
     {% endif %}
     {% if ref.notes %}<ul>{% for x in ref.notes %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
