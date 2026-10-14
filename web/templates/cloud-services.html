@@ -13,7 +13,7 @@
   {% for r in rows %}
     <tr><td><a href="#{{ r.key }}">{{ r.name }}</a></td>
       <td>{% if r.endpoints %}{{ r.endpoints.with_ipv6 }} of {{ r.endpoints.checked }}{% else %}—{% endif %}</td>
-      <td>{{ prefixes(r.ranges) }}</td>
+      <td>{% if r.ranges %}{{ prefixes(r.ranges.value) }}{% if r.ranges.stale %} <span class="stale">⚠ stale since {{ r.ranges.fetched_at.date().isoformat() }}</span>{% endif %}{% elif r.publishes_ranges %}<span class="missing">source unavailable</span>{% else %}—{% endif %}</td>
       <td>{{ r.reference.get("overall_support", "—") }}</td>
       <td>{{ r.reference.get("ipv6_only_support", "—") }}</td>
       <td>{{ r.reference.last_reviewed }}</td></tr>
@@ -48,7 +48,7 @@
   {% if r.endpoints %}
   <ul>{% for h in r.endpoints.hosts %}<li>{{ h.role }}: <code>{{ h.host }}</code> — {{ status_label(h.status) }}</li>{% endfor %}</ul>
   {% else %}<p class="missing">— source unavailable</p>{% endif %}
-  {% if r.ranges %}<p>Published prefixes: {{ prefixes(r.ranges) }}{% if r.ranges.services_with_ipv6 is defined %}; {{ r.ranges.services_with_ipv6 }} of {{ r.ranges.services }} services have IPv6 ranges{% endif %}.</p>{% endif %}
+  {% if r.ranges %}<p>Published prefixes: {{ prefixes(r.ranges.value) }}{% if r.ranges.value.services_with_ipv6 is defined %}; {{ r.ranges.value.services_with_ipv6 }} of {{ r.ranges.value.services }} services have IPv6 ranges{% endif %}.</p>{{ provenance(r.ranges) }}{% elif r.publishes_ranges %}<p class="missing">Published prefixes: source unavailable</p>{% endif %}
   {% call reference(reviewed=r.reference.last_reviewed) %}
     {% set ref = r.reference %}
     <dl>

@@ -11,7 +11,8 @@ def context(data: Data) -> dict:
     present = [d for d in ranges.values() if d is not None]
     rows = [{"key": p["key"], "name": p["name"],
              "endpoints": endpoints.value.get(p["key"]) if endpoints else None,
-             "ranges": ranges[p["key"]].value if ranges.get(p["key"]) else None,
+             "ranges": ranges.get(p["key"]),  # this provider's own Datum: its own date and stale flag
+             "publishes_ranges": p["key"] in RANGE_PROVIDERS,
              "reference": p}
             for p in providers]
     return {

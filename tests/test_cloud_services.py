@@ -53,3 +53,21 @@ def test_nav_and_legacy(tmp_path):
 def test_missing_service_fields_render_as_dash(tmp_path):
     _, html = render(tmp_path)
     assert "<td>None</td>" not in html
+
+
+def test_stale_range_file_is_marked_on_its_own_row(tmp_path):
+    _, html = render(tmp_path, last_success={"ip_ranges_oracle": "2026-08-01T00:05:00+00:00"})
+    table = html[html.index("Provider comparison"):html.index("AWS services")]
+    oracle_row = table[table.index('href="#oracle"'):table.index("</tr>", table.index('href="#oracle"'))]
+    aws_row = table[table.index('href="#aws"'):table.index("</tr>", table.index('href="#aws"'))]
+    assert "stale since 2026-08-01" in oracle_row
+    assert "stale" not in aws_row
+
+
+def test_unavailable_range_source_differs_from_not_publishing(tmp_path):
+    _, html = render(tmp_path, omit=("ip_ranges_aws",))
+    table = html[html.index("Provider comparison"):html.index("AWS services")]
+    aws_row = table[table.index('href="#aws"'):table.index("</tr>", table.index('href="#aws"'))]
+    vultr_row = table[table.index('href="#vultr"'):table.index("</tr>", table.index('href="#vultr"'))]
+    assert "source unavailable" in aws_row
+    assert "source unavailable" not in vultr_row and "—" in vultr_row
