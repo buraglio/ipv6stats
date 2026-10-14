@@ -11,7 +11,7 @@ TITLES = {"web": "Web", "email": "Email", "dns": "DNS"}
 # <tr><td>1<td><a href=detailed.php?country=no><img ...> Norway</a>
 #     <td align=right>50 <td align=right>55.54% <td align=right>68.0% (34) <td align=right>0.0% (0)
 ROW = re.compile(
-    r"<tr><td>\d+<td><a href=detailed\.php\?country=([a-z]{2})>.*?>\s*([^<]+?)</a>\s*"
+    r"<tr><td>\d+<td><a href=detailed\.php\?country=([a-z]{2})>(?:<img[^>]*>)?\s*([^<]+?)</a>\s*"
     r"<td align=right>(\d+)\s*<td align=right>([\d.]+)%\s*<td align=right>([\d.]+)% \(\d+\)",
     re.S,
 )

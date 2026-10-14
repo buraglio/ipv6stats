@@ -49,3 +49,11 @@ def test_rejects_changed_format():
 def test_fetch():
     ctx = make_ctx(routes={vyncke.URL: FakeResponse(text=FIXTURE)})
     assert SOURCES["vyncke"].fetch(ctx)["web"]
+
+
+def test_row_without_flag_keeps_its_own_country():
+    # A row missing its flag image must not swallow the next row's name and numbers.
+    page = SAMPLE.replace('<img class="flag-no" src="/flags/flags-sprite.png" border=0> ', "", 1)
+    web = vyncke.parse(page, min_rows=1)["web"]
+    assert web[0]["code"] == "NO" and web[0]["name"] == "Norway" and web[0]["green_pct"] == 68.0
+    assert [r["code"] for r in web] == ["NO", "GB"]
