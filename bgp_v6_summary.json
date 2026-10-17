@@ -27,7 +27,7 @@
   },
   {
    "length": 24,
-   "prefixes": 51,
+   "prefixes": 50,
    "share": 0.02
   },
   {
@@ -47,17 +47,17 @@
   },
   {
    "length": 28,
-   "prefixes": 161,
+   "prefixes": 160,
    "share": 0.06
   },
   {
    "length": 29,
-   "prefixes": 5811,
+   "prefixes": 5816,
    "share": 2.25
   },
   {
    "length": 30,
-   "prefixes": 730,
+   "prefixes": 729,
    "share": 0.28
   },
   {
@@ -67,32 +67,32 @@
   },
   {
    "length": 32,
-   "prefixes": 27271,
+   "prefixes": 27259,
    "share": 10.55
   },
   {
    "length": 33,
-   "prefixes": 5731,
-   "share": 2.22
+   "prefixes": 5720,
+   "share": 2.21
   },
   {
    "length": 34,
-   "prefixes": 5401,
+   "prefixes": 5404,
    "share": 2.09
   },
   {
    "length": 35,
-   "prefixes": 1879,
+   "prefixes": 1894,
    "share": 0.73
   },
   {
    "length": 36,
-   "prefixes": 9575,
-   "share": 3.7
+   "prefixes": 9586,
+   "share": 3.71
   },
   {
    "length": 37,
-   "prefixes": 1397,
+   "prefixes": 1396,
    "share": 0.54
   },
   {
@@ -102,52 +102,52 @@
   },
   {
    "length": 39,
-   "prefixes": 1868,
+   "prefixes": 1865,
    "share": 0.72
   },
   {
    "length": 40,
-   "prefixes": 24386,
+   "prefixes": 24369,
    "share": 9.43
   },
   {
    "length": 41,
-   "prefixes": 1892,
-   "share": 0.73
+   "prefixes": 1918,
+   "share": 0.74
   },
   {
    "length": 42,
-   "prefixes": 2930,
+   "prefixes": 2927,
    "share": 1.13
   },
   {
    "length": 43,
-   "prefixes": 1420,
+   "prefixes": 1419,
    "share": 0.55
   },
   {
    "length": 44,
-   "prefixes": 25181,
+   "prefixes": 25168,
    "share": 9.74
   },
   {
    "length": 45,
-   "prefixes": 4645,
+   "prefixes": 4642,
    "share": 1.8
   },
   {
    "length": 46,
-   "prefixes": 5310,
+   "prefixes": 5308,
    "share": 2.05
   },
   {
    "length": 47,
-   "prefixes": 7988,
+   "prefixes": 7989,
    "share": 3.09
   },
   {
    "length": 48,
-   "prefixes": 121325,
+   "prefixes": 121323,
    "share": 46.93
   },
   {
@@ -192,7 +192,7 @@
   },
   {
    "length": 64,
-   "prefixes": 189,
+   "prefixes": 187,
    "share": 0.07
   },
   {
@@ -206,16 +206,16 @@
    "share": 0.0
   }
  ],
- "report_date": "2026-10-16",
+ "report_date": "2026-10-17",
  "stats": {
-  "address_space_prefix": 14.6267,
-  "average_as_path_length": 4.9157,
-  "average_prefix_length": 42.9895,
-  "fib_entries": 258506,
-  "origin_only_ases": 31222,
-  "rib_entries": 1003062,
-  "transit_only_ases": 381,
-  "unique_ases": 37745
+  "address_space_prefix": 14.6287,
+  "average_as_path_length": 4.9147,
+  "average_prefix_length": 42.9893,
+  "fib_entries": 258494,
+  "origin_only_ases": 31254,
+  "rib_entries": 1003125,
+  "transit_only_ases": 382,
+  "unique_ases": 37767
  },
  "url": "https://bgp.potaroo.net/v6/as2.0/index.html"
 }
