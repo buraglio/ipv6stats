@@ -43,10 +43,10 @@
   {
    "aggregated": 3668,
    "asn": 16509,
-   "gain": 2269,
+   "gain": 2267,
    "gain_pct": 38.2,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5937
+   "now": 5935
   },
   {
    "aggregated": 27,
@@ -57,20 +57,20 @@
    "now": 2126
   },
   {
-   "aggregated": 40,
+   "aggregated": 46,
    "asn": 32098,
-   "gain": 2082,
-   "gain_pct": 98.1,
+   "gain": 2076,
+   "gain_pct": 97.8,
    "name": "TRANSTELCO-INC - Transtelco Inc",
    "now": 2122
   },
   {
-   "aggregated": 226,
+   "aggregated": 202,
    "asn": 39891,
-   "gain": 2063,
-   "gain_pct": 90.1,
+   "gain": 2066,
+   "gain_pct": 91.1,
    "name": "ALJAWWALSTC-AS Saudi Telecom Company JSC",
-   "now": 2289
+   "now": 2268
   },
   {
    "aggregated": 51,
@@ -91,10 +91,10 @@
   {
    "aggregated": 51,
    "asn": 22773,
-   "gain": 1406,
+   "gain": 1405,
    "gain_pct": 96.5,
    "name": "ASN-CXA-ALL-CCI-22773-RDC - Cox Communications Inc.",
-   "now": 1457
+   "now": 1456
   },
   {
    "aggregated": 50,
@@ -137,12 +137,12 @@
    "now": 1208
   },
   {
-   "aggregated": 216,
+   "aggregated": 217,
    "asn": 25019,
    "gain": 1052,
-   "gain_pct": 83.0,
+   "gain_pct": 82.9,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1268
+   "now": 1269
   },
   {
    "aggregated": 4,
@@ -169,20 +169,20 @@
    "now": 1118
   },
   {
+   "aggregated": 413,
+   "asn": 38266,
+   "gain": 954,
+   "gain_pct": 69.8,
+   "name": "VIL-AS-AP - Vodafone Idea Ltd",
+   "now": 1367
+  },
+  {
    "aggregated": 70,
    "asn": 26611,
    "gain": 932,
    "gain_pct": 93.0,
    "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
    "now": 1002
-  },
-  {
-   "aggregated": 460,
-   "asn": 38266,
-   "gain": 906,
-   "gain_pct": 66.3,
-   "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1366
   },
   {
    "aggregated": 268,
@@ -241,12 +241,12 @@
    "now": 725
   }
  ],
- "date": "2026-10-17",
+ "date": "2026-10-18",
  "table": {
-  "aggregated": 128371,
-  "gain": 130221,
+  "aggregated": 128352,
+  "gain": 130164,
   "gain_pct": 50.4,
-  "now": 258592
+  "now": 258516
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
