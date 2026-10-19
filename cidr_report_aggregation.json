@@ -27,10 +27,10 @@
   {
    "aggregated": 597,
    "asn": 11172,
-   "gain": 2492,
+   "gain": 2490,
    "gain_pct": 80.7,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3089
+   "now": 3087
   },
   {
    "aggregated": 40,
@@ -41,12 +41,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3668,
+   "aggregated": 3666,
    "asn": 16509,
-   "gain": 2267,
+   "gain": 2268,
    "gain_pct": 38.2,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5935
+   "now": 5934
   },
   {
    "aggregated": 27,
@@ -57,20 +57,20 @@
    "now": 2126
   },
   {
-   "aggregated": 46,
-   "asn": 32098,
-   "gain": 2076,
-   "gain_pct": 97.8,
-   "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2122
-  },
-  {
    "aggregated": 202,
    "asn": 39891,
-   "gain": 2066,
-   "gain_pct": 91.1,
+   "gain": 2087,
+   "gain_pct": 91.2,
    "name": "ALJAWWALSTC-AS Saudi Telecom Company JSC",
-   "now": 2268
+   "now": 2289
+  },
+  {
+   "aggregated": 66,
+   "asn": 32098,
+   "gain": 2056,
+   "gain_pct": 96.9,
+   "name": "TRANSTELCO-INC - Transtelco Inc",
+   "now": 2122
   },
   {
    "aggregated": 51,
@@ -91,18 +91,18 @@
   {
    "aggregated": 51,
    "asn": 22773,
-   "gain": 1405,
+   "gain": 1404,
    "gain_pct": 96.5,
    "name": "ASN-CXA-ALL-CCI-22773-RDC - Cox Communications Inc.",
-   "now": 1456
+   "now": 1455
   },
   {
-   "aggregated": 50,
+   "aggregated": 49,
    "asn": 12479,
-   "gain": 1273,
-   "gain_pct": 96.2,
+   "gain": 1275,
+   "gain_pct": 96.3,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1323
+   "now": 1324
   },
   {
    "aggregated": 25,
@@ -137,12 +137,12 @@
    "now": 1208
   },
   {
-   "aggregated": 217,
+   "aggregated": 214,
    "asn": 25019,
-   "gain": 1052,
-   "gain_pct": 82.9,
+   "gain": 1058,
+   "gain_pct": 83.2,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1269
+   "now": 1272
   },
   {
    "aggregated": 4,
@@ -169,10 +169,10 @@
    "now": 1118
   },
   {
-   "aggregated": 413,
+   "aggregated": 411,
    "asn": 38266,
-   "gain": 954,
-   "gain_pct": 69.8,
+   "gain": 956,
+   "gain_pct": 69.9,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1367
   },
@@ -193,12 +193,12 @@
    "now": 1136
   },
   {
-   "aggregated": 605,
+   "aggregated": 606,
    "asn": 11664,
    "gain": 827,
-   "gain_pct": 57.8,
+   "gain_pct": 57.7,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1432
+   "now": 1433
   },
   {
    "aggregated": 1518,
@@ -225,10 +225,10 @@
    "now": 1674
   },
   {
-   "aggregated": 58,
+   "aggregated": 59,
    "asn": 812,
-   "gain": 681,
-   "gain_pct": 92.2,
+   "gain": 680,
+   "gain_pct": 92.0,
    "name": "ROGERS-COMMUNICATIONS - Rogers Communications Canada Inc.",
    "now": 739
   },
@@ -241,12 +241,12 @@
    "now": 725
   }
  ],
- "date": "2026-10-18",
+ "date": "2026-10-19",
  "table": {
-  "aggregated": 128352,
-  "gain": 130164,
-  "gain_pct": 50.4,
-  "now": 258516
+  "aggregated": 128453,
+  "gain": 130050,
+  "gain_pct": 50.3,
+  "now": 258503
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
