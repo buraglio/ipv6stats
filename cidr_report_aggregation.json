@@ -27,10 +27,10 @@
   {
    "aggregated": 580,
    "asn": 11172,
-   "gain": 2518,
+   "gain": 2517,
    "gain_pct": 81.3,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3098
+   "now": 3097
   },
   {
    "aggregated": 40,
@@ -41,12 +41,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3768,
+   "aggregated": 3767,
    "asn": 16509,
-   "gain": 2160,
+   "gain": 2159,
    "gain_pct": 36.4,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5928
+   "now": 5926
   },
   {
    "aggregated": 176,
@@ -67,10 +67,10 @@
   {
    "aggregated": 33,
    "asn": 32098,
-   "gain": 2097,
-   "gain_pct": 98.5,
+   "gain": 2096,
+   "gain_pct": 98.4,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2130
+   "now": 2129
   },
   {
    "aggregated": 49,
@@ -83,10 +83,10 @@
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1420,
+   "gain": 1417,
    "gain_pct": 85.5,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1661
+   "now": 1658
   },
   {
    "aggregated": 51,
@@ -121,12 +121,12 @@
    "now": 1208
   },
   {
-   "aggregated": 484,
+   "aggregated": 482,
    "asn": 36992,
    "gain": 1169,
-   "gain_pct": 70.7,
+   "gain_pct": 70.8,
    "name": "ETISALAT MISR - ETISALAT MISR",
-   "now": 1653
+   "now": 1651
   },
   {
    "aggregated": 80,
@@ -139,10 +139,10 @@
   {
    "aggregated": 211,
    "asn": 25019,
-   "gain": 1088,
-   "gain_pct": 83.8,
+   "gain": 1087,
+   "gain_pct": 83.7,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1299
+   "now": 1298
   },
   {
    "aggregated": 4,
@@ -187,10 +187,10 @@
   {
    "aggregated": 606,
    "asn": 11664,
-   "gain": 829,
-   "gain_pct": 57.8,
+   "gain": 826,
+   "gain_pct": 57.7,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1435
+   "now": 1432
   },
   {
    "aggregated": 1516,
@@ -201,12 +201,12 @@
    "now": 2340
   },
   {
-   "aggregated": 531,
+   "aggregated": 547,
    "asn": 12479,
-   "gain": 791,
-   "gain_pct": 59.8,
+   "gain": 776,
+   "gain_pct": 58.7,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1322
+   "now": 1323
   },
   {
    "aggregated": 186,
@@ -241,12 +241,12 @@
    "now": 648
   }
  ],
- "date": "2026-10-25",
+ "date": "2026-10-26",
  "table": {
-  "aggregated": 129663,
-  "gain": 129893,
-  "gain_pct": 50.0,
-  "now": 259556
+  "aggregated": 129980,
+  "gain": 129714,
+  "gain_pct": 49.9,
+  "now": 259694
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
