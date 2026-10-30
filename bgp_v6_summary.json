@@ -52,8 +52,8 @@
   },
   {
    "length": 29,
-   "prefixes": 5909,
-   "share": 2.27
+   "prefixes": 5831,
+   "share": 2.24
   },
   {
    "length": 30,
@@ -67,37 +67,37 @@
   },
   {
    "length": 32,
-   "prefixes": 27401,
-   "share": 10.54
+   "prefixes": 27408,
+   "share": 10.53
   },
   {
    "length": 33,
-   "prefixes": 5742,
-   "share": 2.21
+   "prefixes": 5737,
+   "share": 2.2
   },
   {
    "length": 34,
-   "prefixes": 5395,
-   "share": 2.08
+   "prefixes": 5383,
+   "share": 2.07
   },
   {
    "length": 35,
-   "prefixes": 1890,
+   "prefixes": 1889,
    "share": 0.73
   },
   {
    "length": 36,
-   "prefixes": 9615,
-   "share": 3.7
+   "prefixes": 9602,
+   "share": 3.69
   },
   {
    "length": 37,
-   "prefixes": 1403,
+   "prefixes": 1401,
    "share": 0.54
   },
   {
    "length": 38,
-   "prefixes": 2757,
+   "prefixes": 2760,
    "share": 1.06
   },
   {
@@ -107,17 +107,17 @@
   },
   {
    "length": 40,
-   "prefixes": 24370,
-   "share": 9.38
+   "prefixes": 24384,
+   "share": 9.37
   },
   {
    "length": 41,
-   "prefixes": 1846,
-   "share": 0.71
+   "prefixes": 1910,
+   "share": 0.73
   },
   {
    "length": 42,
-   "prefixes": 2955,
+   "prefixes": 2963,
    "share": 1.14
   },
   {
@@ -127,28 +127,28 @@
   },
   {
    "length": 44,
-   "prefixes": 25180,
+   "prefixes": 25228,
    "share": 9.69
   },
   {
    "length": 45,
-   "prefixes": 4669,
-   "share": 1.8
+   "prefixes": 4664,
+   "share": 1.79
   },
   {
    "length": 46,
-   "prefixes": 5451,
-   "share": 2.1
+   "prefixes": 5447,
+   "share": 2.09
   },
   {
    "length": 47,
-   "prefixes": 8161,
+   "prefixes": 8165,
    "share": 3.14
   },
   {
    "length": 48,
-   "prefixes": 122160,
-   "share": 47.01
+   "prefixes": 122614,
+   "share": 47.09
   },
   {
    "length": 49,
@@ -162,7 +162,7 @@
   },
   {
    "length": 51,
-   "prefixes": 14,
+   "prefixes": 15,
    "share": 0.01
   },
   {
@@ -192,7 +192,7 @@
   },
   {
    "length": 64,
-   "prefixes": 185,
+   "prefixes": 188,
    "share": 0.07
   },
   {
@@ -206,16 +206,16 @@
    "share": 0.0
   }
  ],
- "report_date": "2026-10-29",
+ "report_date": "2026-10-30",
  "stats": {
-  "address_space_prefix": 14.6207,
-  "average_as_path_length": 4.9268,
-  "average_prefix_length": 42.9994,
-  "fib_entries": 259885,
-  "origin_only_ases": 31390,
-  "rib_entries": 1008778,
-  "transit_only_ases": 380,
-  "unique_ases": 37955
+  "address_space_prefix": 14.6259,
+  "average_as_path_length": 4.9414,
+  "average_prefix_length": 43.0128,
+  "fib_entries": 260371,
+  "origin_only_ases": 31385,
+  "rib_entries": 1010704,
+  "transit_only_ases": 379,
+  "unique_ases": 37950
  },
  "url": "https://bgp.potaroo.net/v6/as2.0/index.html"
 }
