@@ -3,10 +3,10 @@
   {
    "aggregated": 705,
    "asn": 9808,
-   "gain": 6486,
+   "gain": 6478,
    "gain_pct": 90.2,
    "name": "CHINAMOBILE-CN - China Mobile Communications Group Co., Ltd.",
-   "now": 7191
+   "now": 7183
   },
   {
    "aggregated": 27,
@@ -15,6 +15,14 @@
    "gain_pct": 99.3,
    "name": "VIETEL-AS-AP - Viettel Group",
    "now": 4044
+  },
+  {
+   "aggregated": 1,
+   "asn": 18403,
+   "gain": 3706,
+   "gain_pct": 100.0,
+   "name": "FPT-VN - FPT Telecom Company",
+   "now": 3707
   },
   {
    "aggregated": 851,
@@ -41,12 +49,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3790,
+   "aggregated": 3791,
    "asn": 16509,
-   "gain": 2168,
-   "gain_pct": 36.4,
+   "gain": 2165,
+   "gain_pct": 36.3,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5958
+   "now": 5956
   },
   {
    "aggregated": 176,
@@ -65,10 +73,10 @@
    "now": 2126
   },
   {
-   "aggregated": 216,
+   "aggregated": 215,
    "asn": 32098,
-   "gain": 1930,
-   "gain_pct": 89.9,
+   "gain": 1931,
+   "gain_pct": 90.0,
    "name": "TRANSTELCO-INC - Transtelco Inc",
    "now": 2146
   },
@@ -121,10 +129,10 @@
    "now": 1208
   },
   {
-   "aggregated": 513,
+   "aggregated": 524,
    "asn": 36992,
-   "gain": 1138,
-   "gain_pct": 68.9,
+   "gain": 1127,
+   "gain_pct": 68.3,
    "name": "ETISALAT MISR - ETISALAT MISR",
    "now": 1651
   },
@@ -177,10 +185,10 @@
    "now": 1361
   },
   {
-   "aggregated": 309,
+   "aggregated": 291,
    "asn": 9829,
-   "gain": 908,
-   "gain_pct": 74.6,
+   "gain": 926,
+   "gain_pct": 76.1,
    "name": "BSNL-NIB - National Internet Backbone",
    "now": 1217
   },
@@ -203,10 +211,10 @@
   {
    "aggregated": 580,
    "asn": 12479,
-   "gain": 749,
-   "gain_pct": 56.4,
+   "gain": 748,
+   "gain_pct": 56.3,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1329
+   "now": 1328
   },
   {
    "aggregated": 186,
@@ -227,26 +235,18 @@
   {
    "aggregated": 110,
    "asn": 812,
-   "gain": 641,
+   "gain": 642,
    "gain_pct": 85.4,
    "name": "ROGERS-COMMUNICATIONS - Rogers Communications Canada Inc.",
-   "now": 751
-  },
-  {
-   "aggregated": 14,
-   "asn": 56167,
-   "gain": 634,
-   "gain_pct": 97.8,
-   "name": "PTML-PK - Plot No 181-186 Street",
-   "now": 648
+   "now": 752
   }
  ],
- "date": "2026-10-31",
+ "date": "2026-11-01",
  "table": {
-  "aggregated": 130694,
-  "gain": 129320,
-  "gain_pct": 49.7,
-  "now": 260014
+  "aggregated": 130592,
+  "gain": 133109,
+  "gain_pct": 50.5,
+  "now": 263701
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
