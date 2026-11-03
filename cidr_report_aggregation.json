@@ -9,28 +9,36 @@
    "now": 7183
   },
   {
-   "aggregated": 27,
+   "aggregated": 6,
    "asn": 7552,
-   "gain": 4017,
-   "gain_pct": 99.3,
+   "gain": 4038,
+   "gain_pct": 99.9,
    "name": "VIETEL-AS-AP - Viettel Group",
    "now": 4044
   },
   {
-   "aggregated": 854,
+   "aggregated": 1,
+   "asn": 18403,
+   "gain": 3697,
+   "gain_pct": 100.0,
+   "name": "FPT-VN - FPT Telecom Company",
+   "now": 3698
+  },
+  {
+   "aggregated": 856,
    "asn": 45609,
-   "gain": 2754,
+   "gain": 2752,
    "gain_pct": 76.3,
    "name": "BHARTI-MOBILITY-AS-AP - Bharti Airtel Ltd. AS for GPRS Service",
    "now": 3608
   },
   {
-   "aggregated": 676,
+   "aggregated": 675,
    "asn": 11172,
-   "gain": 2426,
+   "gain": 2425,
    "gain_pct": 78.2,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3102
+   "now": 3100
   },
   {
    "aggregated": 40,
@@ -41,20 +49,20 @@
    "now": 2312
   },
   {
-   "aggregated": 3802,
+   "aggregated": 3793,
    "asn": 16509,
-   "gain": 2161,
-   "gain_pct": 36.2,
+   "gain": 2165,
+   "gain_pct": 36.3,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5963
+   "now": 5958
   },
   {
-   "aggregated": 176,
+   "aggregated": 199,
    "asn": 39891,
-   "gain": 2143,
-   "gain_pct": 92.4,
+   "gain": 2152,
+   "gain_pct": 91.5,
    "name": "ALJAWWALSTC-AS Saudi Telecom Company JSC",
-   "now": 2319
+   "now": 2351
   },
   {
    "aggregated": 27,
@@ -65,9 +73,9 @@
    "now": 2126
   },
   {
-   "aggregated": 216,
+   "aggregated": 217,
    "asn": 32098,
-   "gain": 1930,
+   "gain": 1929,
    "gain_pct": 89.9,
    "name": "TRANSTELCO-INC - Transtelco Inc",
    "now": 2146
@@ -81,12 +89,12 @@
    "now": 1597
   },
   {
-   "aggregated": 240,
+   "aggregated": 241,
    "asn": 28573,
    "gain": 1422,
-   "gain_pct": 85.6,
+   "gain_pct": 85.5,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1662
+   "now": 1663
   },
   {
    "aggregated": 51,
@@ -121,10 +129,10 @@
    "now": 1208
   },
   {
-   "aggregated": 529,
+   "aggregated": 532,
    "asn": 36992,
-   "gain": 1122,
-   "gain_pct": 68.0,
+   "gain": 1119,
+   "gain_pct": 67.8,
    "name": "ETISALAT MISR - ETISALAT MISR",
    "now": 1651
   },
@@ -137,12 +145,12 @@
    "now": 1194
   },
   {
-   "aggregated": 213,
+   "aggregated": 212,
    "asn": 25019,
-   "gain": 1087,
-   "gain_pct": 83.6,
+   "gain": 1090,
+   "gain_pct": 83.7,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1300
+   "now": 1302
   },
   {
    "aggregated": 4,
@@ -177,20 +185,20 @@
    "now": 1361
   },
   {
-   "aggregated": 291,
+   "aggregated": 289,
    "asn": 9829,
-   "gain": 926,
-   "gain_pct": 76.1,
+   "gain": 928,
+   "gain_pct": 76.3,
    "name": "BSNL-NIB - National Internet Backbone",
    "now": 1217
   },
   {
-   "aggregated": 609,
+   "aggregated": 613,
    "asn": 11664,
-   "gain": 833,
-   "gain_pct": 57.8,
+   "gain": 830,
+   "gain_pct": 57.5,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1442
+   "now": 1443
   },
   {
    "aggregated": 1525,
@@ -201,20 +209,20 @@
    "now": 2352
   },
   {
-   "aggregated": 581,
-   "asn": 12479,
-   "gain": 750,
-   "gain_pct": 56.3,
-   "name": "UNI2-AS Orange Espagne SA",
-   "now": 1331
-  },
-  {
    "aggregated": 186,
    "asn": 4808,
    "gain": 730,
    "gain_pct": 79.7,
    "name": "CHINA169-BJ - China Unicom Beijing Province Network",
    "now": 916
+  },
+  {
+   "aggregated": 601,
+   "asn": 12479,
+   "gain": 730,
+   "gain_pct": 54.8,
+   "name": "UNI2-AS Orange Espagne SA",
+   "now": 1331
   },
   {
    "aggregated": 53,
@@ -225,28 +233,20 @@
    "now": 725
   },
   {
-   "aggregated": 110,
+   "aggregated": 114,
    "asn": 812,
-   "gain": 642,
-   "gain_pct": 85.4,
+   "gain": 639,
+   "gain_pct": 84.9,
    "name": "ROGERS-COMMUNICATIONS - Rogers Communications Canada Inc.",
-   "now": 752
-  },
-  {
-   "aggregated": 14,
-   "asn": 56167,
-   "gain": 634,
-   "gain_pct": 97.8,
-   "name": "PTML-PK - Plot No 181-186 Street",
-   "now": 648
+   "now": 753
   }
  ],
- "date": "2026-11-02",
+ "date": "2026-11-03",
  "table": {
-  "aggregated": 130689,
-  "gain": 129203,
-  "gain_pct": 49.7,
-  "now": 259892
+  "aggregated": 130873,
+  "gain": 133018,
+  "gain_pct": 50.4,
+  "now": 263891
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
