@@ -1,12 +1,12 @@
 {
  "ases": [
   {
-   "aggregated": 1160,
+   "aggregated": 1161,
    "asn": 9808,
    "gain": 6032,
    "gain_pct": 83.9,
    "name": "CHINAMOBILE-CN - China Mobile Communications Group Co., Ltd.",
-   "now": 7192
+   "now": 7193
   },
   {
    "aggregated": 6,
@@ -35,18 +35,18 @@
   {
    "aggregated": 681,
    "asn": 11172,
-   "gain": 2416,
+   "gain": 2418,
    "gain_pct": 78.0,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3097
+   "now": 3099
   },
   {
-   "aggregated": 3673,
+   "aggregated": 3674,
    "asn": 16509,
-   "gain": 2303,
+   "gain": 2304,
    "gain_pct": 38.5,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5976
+   "now": 5978
   },
   {
    "aggregated": 40,
@@ -73,10 +73,10 @@
    "now": 2126
   },
   {
-   "aggregated": 286,
+   "aggregated": 282,
    "asn": 32098,
-   "gain": 1861,
-   "gain_pct": 86.7,
+   "gain": 1865,
+   "gain_pct": 86.9,
    "name": "TRANSTELCO-INC - Transtelco Inc",
    "now": 2147
   },
@@ -113,10 +113,10 @@
    "now": 1716
   },
   {
-   "aggregated": 48,
+   "aggregated": 49,
    "asn": 12479,
-   "gain": 1283,
-   "gain_pct": 96.4,
+   "gain": 1282,
+   "gain_pct": 96.3,
    "name": "UNI2-AS Orange Espagne SA",
    "now": 1331
   },
@@ -137,10 +137,10 @@
    "now": 1288
   },
   {
-   "aggregated": 7,
+   "aggregated": 13,
    "asn": 17853,
-   "gain": 1201,
-   "gain_pct": 99.4,
+   "gain": 1195,
+   "gain_pct": 98.9,
    "name": "LGTELECOM-AS-KR-KR - LGTELECOM",
    "now": 1208
   },
@@ -153,12 +153,12 @@
    "now": 1194
   },
   {
-   "aggregated": 214,
+   "aggregated": 216,
    "asn": 25019,
    "gain": 1090,
-   "gain_pct": 83.6,
+   "gain_pct": 83.5,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1304
+   "now": 1306
   },
   {
    "aggregated": 4,
@@ -185,10 +185,10 @@
    "now": 1118
   },
   {
-   "aggregated": 420,
+   "aggregated": 416,
    "asn": 38266,
-   "gain": 950,
-   "gain_pct": 69.3,
+   "gain": 954,
+   "gain_pct": 69.6,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1370
   },
@@ -203,26 +203,26 @@
   {
    "aggregated": 607,
    "asn": 11664,
-   "gain": 839,
+   "gain": 837,
    "gain_pct": 58.0,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1446
+   "now": 1444
   },
   {
-   "aggregated": 1537,
+   "aggregated": 1546,
    "asn": 20115,
-   "gain": 823,
-   "gain_pct": 34.9,
+   "gain": 822,
+   "gain_pct": 34.7,
    "name": "CHARTER-20115 - Charter Communications LLC",
-   "now": 2360
+   "now": 2368
   },
   {
-   "aggregated": 155,
+   "aggregated": 153,
    "asn": 4808,
    "gain": 762,
-   "gain_pct": 83.1,
+   "gain_pct": 83.3,
    "name": "CHINA169-BJ - China Unicom Beijing Province Network",
-   "now": 917
+   "now": 915
   },
   {
    "aggregated": 920,
@@ -241,12 +241,12 @@
    "now": 1293
   }
  ],
- "date": "2026-11-06",
+ "date": "2026-11-07",
  "table": {
-  "aggregated": 129228,
-  "gain": 135236,
-  "gain_pct": 51.1,
-  "now": 264464
+  "aggregated": 129303,
+  "gain": 135431,
+  "gain_pct": 51.2,
+  "now": 264734
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
