@@ -41,12 +41,12 @@
    "now": 3099
   },
   {
-   "aggregated": 3674,
+   "aggregated": 3669,
    "asn": 16509,
    "gain": 2304,
-   "gain_pct": 38.5,
+   "gain_pct": 38.6,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5978
+   "now": 5973
   },
   {
    "aggregated": 40,
@@ -73,12 +73,12 @@
    "now": 2126
   },
   {
-   "aggregated": 282,
+   "aggregated": 271,
    "asn": 32098,
-   "gain": 1865,
-   "gain_pct": 86.9,
+   "gain": 1877,
+   "gain_pct": 87.4,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2147
+   "now": 2148
   },
   {
    "aggregated": 51,
@@ -91,10 +91,10 @@
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1419,
-   "gain_pct": 85.5,
+   "gain": 1415,
+   "gain_pct": 85.4,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1660
+   "now": 1656
   },
   {
    "aggregated": 51,
@@ -169,12 +169,12 @@
    "now": 1043
   },
   {
-   "aggregated": 284,
+   "aggregated": 287,
    "asn": 45271,
    "gain": 983,
-   "gain_pct": 77.6,
+   "gain_pct": 77.4,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1267
+   "now": 1270
   },
   {
    "aggregated": 146,
@@ -201,20 +201,20 @@
    "now": 1217
   },
   {
-   "aggregated": 607,
+   "aggregated": 608,
    "asn": 11664,
-   "gain": 837,
-   "gain_pct": 58.0,
+   "gain": 835,
+   "gain_pct": 57.9,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1444
+   "now": 1443
   },
   {
-   "aggregated": 1546,
+   "aggregated": 1543,
    "asn": 20115,
-   "gain": 822,
-   "gain_pct": 34.7,
+   "gain": 826,
+   "gain_pct": 34.9,
    "name": "CHARTER-20115 - Charter Communications LLC",
-   "now": 2368
+   "now": 2369
   },
   {
    "aggregated": 153,
@@ -241,12 +241,12 @@
    "now": 1293
   }
  ],
- "date": "2026-11-07",
+ "date": "2026-11-08",
  "table": {
-  "aggregated": 129303,
-  "gain": 135431,
+  "aggregated": 129272,
+  "gain": 135460,
   "gain_pct": 51.2,
-  "now": 264734
+  "now": 264732
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
