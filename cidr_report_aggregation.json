@@ -33,20 +33,20 @@
    "now": 3608
   },
   {
-   "aggregated": 681,
+   "aggregated": 673,
    "asn": 11172,
-   "gain": 2418,
-   "gain_pct": 78.0,
+   "gain": 2423,
+   "gain_pct": 78.3,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3099
+   "now": 3096
   },
   {
-   "aggregated": 3669,
+   "aggregated": 3667,
    "asn": 16509,
-   "gain": 2304,
+   "gain": 2305,
    "gain_pct": 38.6,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5973
+   "now": 5972
   },
   {
    "aggregated": 40,
@@ -75,10 +75,10 @@
   {
    "aggregated": 271,
    "asn": 32098,
-   "gain": 1877,
+   "gain": 1873,
    "gain_pct": 87.4,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2148
+   "now": 2144
   },
   {
    "aggregated": 51,
@@ -91,10 +91,10 @@
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1415,
-   "gain_pct": 85.4,
+   "gain": 1420,
+   "gain_pct": 85.5,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1656
+   "now": 1661
   },
   {
    "aggregated": 51,
@@ -137,10 +137,10 @@
    "now": 1288
   },
   {
-   "aggregated": 13,
+   "aggregated": 74,
    "asn": 17853,
-   "gain": 1195,
-   "gain_pct": 98.9,
+   "gain": 1134,
+   "gain_pct": 93.9,
    "name": "LGTELECOM-AS-KR-KR - LGTELECOM",
    "now": 1208
   },
@@ -153,18 +153,18 @@
    "now": 1194
   },
   {
-   "aggregated": 216,
+   "aggregated": 214,
    "asn": 25019,
-   "gain": 1090,
-   "gain_pct": 83.5,
+   "gain": 1093,
+   "gain_pct": 83.6,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1306
+   "now": 1307
   },
   {
-   "aggregated": 4,
+   "aggregated": 3,
    "asn": 5416,
-   "gain": 1039,
-   "gain_pct": 99.6,
+   "gain": 1040,
+   "gain_pct": 99.7,
    "name": "BEYON B.S.C.",
    "now": 1043
   },
@@ -185,10 +185,10 @@
    "now": 1118
   },
   {
-   "aggregated": 416,
+   "aggregated": 422,
    "asn": 38266,
-   "gain": 954,
-   "gain_pct": 69.6,
+   "gain": 948,
+   "gain_pct": 69.2,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1370
   },
@@ -201,12 +201,12 @@
    "now": 1217
   },
   {
-   "aggregated": 608,
+   "aggregated": 607,
    "asn": 11664,
-   "gain": 835,
-   "gain_pct": 57.9,
+   "gain": 837,
+   "gain_pct": 58.0,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1443
+   "now": 1444
   },
   {
    "aggregated": 1543,
@@ -241,12 +241,12 @@
    "now": 1293
   }
  ],
- "date": "2026-11-08",
+ "date": "2026-11-09",
  "table": {
-  "aggregated": 129272,
-  "gain": 135460,
-  "gain_pct": 51.2,
-  "now": 264732
+  "aggregated": 129503,
+  "gain": 135550,
+  "gain_pct": 51.1,
+  "now": 265053
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
