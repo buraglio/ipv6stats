@@ -19,10 +19,10 @@
   {
    "aggregated": 1,
    "asn": 18403,
-   "gain": 3706,
+   "gain": 3697,
    "gain_pct": 100.0,
    "name": "FPT-VN - FPT Telecom Company",
-   "now": 3707
+   "now": 3698
   },
   {
    "aggregated": 822,
@@ -35,18 +35,18 @@
   {
    "aggregated": 673,
    "asn": 11172,
-   "gain": 2423,
+   "gain": 2424,
    "gain_pct": 78.3,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3096
+   "now": 3097
   },
   {
-   "aggregated": 3667,
+   "aggregated": 3677,
    "asn": 16509,
-   "gain": 2305,
-   "gain_pct": 38.6,
+   "gain": 2306,
+   "gain_pct": 38.5,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5972
+   "now": 5983
   },
   {
    "aggregated": 40,
@@ -75,10 +75,10 @@
   {
    "aggregated": 271,
    "asn": 32098,
-   "gain": 1873,
+   "gain": 1876,
    "gain_pct": 87.4,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2144
+   "now": 2147
   },
   {
    "aggregated": 51,
@@ -89,20 +89,20 @@
    "now": 1597
   },
   {
-   "aggregated": 241,
-   "asn": 28573,
-   "gain": 1420,
-   "gain_pct": 85.5,
-   "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1661
-  },
-  {
    "aggregated": 51,
    "asn": 22773,
    "gain": 1407,
    "gain_pct": 96.5,
    "name": "ASN-CXA-ALL-CCI-22773-RDC - Cox Communications Inc.",
    "now": 1458
+  },
+  {
+   "aggregated": 241,
+   "asn": 28573,
+   "gain": 1404,
+   "gain_pct": 85.3,
+   "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
+   "now": 1645
   },
   {
    "aggregated": 404,
@@ -113,12 +113,12 @@
    "now": 1716
   },
   {
-   "aggregated": 49,
+   "aggregated": 47,
    "asn": 12479,
-   "gain": 1282,
-   "gain_pct": 96.3,
+   "gain": 1285,
+   "gain_pct": 96.5,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1331
+   "now": 1332
   },
   {
    "aggregated": 25,
@@ -137,20 +137,20 @@
    "now": 1288
   },
   {
-   "aggregated": 74,
+   "aggregated": 80,
    "asn": 17853,
-   "gain": 1134,
-   "gain_pct": 93.9,
+   "gain": 1128,
+   "gain_pct": 93.4,
    "name": "LGTELECOM-AS-KR-KR - LGTELECOM",
    "now": 1208
   },
   {
-   "aggregated": 81,
+   "aggregated": 80,
    "asn": 26611,
    "gain": 1113,
-   "gain_pct": 93.2,
+   "gain_pct": 93.3,
    "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
-   "now": 1194
+   "now": 1193
   },
   {
    "aggregated": 214,
@@ -161,10 +161,10 @@
    "now": 1307
   },
   {
-   "aggregated": 3,
+   "aggregated": 4,
    "asn": 5416,
-   "gain": 1040,
-   "gain_pct": 99.7,
+   "gain": 1039,
+   "gain_pct": 99.6,
    "name": "BEYON B.S.C.",
    "now": 1043
   },
@@ -185,10 +185,10 @@
    "now": 1118
   },
   {
-   "aggregated": 422,
+   "aggregated": 423,
    "asn": 38266,
-   "gain": 948,
-   "gain_pct": 69.2,
+   "gain": 947,
+   "gain_pct": 69.1,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1370
   },
@@ -209,14 +209,6 @@
    "now": 1444
   },
   {
-   "aggregated": 1543,
-   "asn": 20115,
-   "gain": 826,
-   "gain_pct": 34.9,
-   "name": "CHARTER-20115 - Charter Communications LLC",
-   "now": 2369
-  },
-  {
    "aggregated": 153,
    "asn": 4808,
    "gain": 762,
@@ -225,28 +217,36 @@
    "now": 915
   },
   {
-   "aggregated": 920,
+   "aggregated": 922,
    "asn": 6167,
-   "gain": 762,
-   "gain_pct": 45.3,
+   "gain": 760,
+   "gain_pct": 45.2,
    "name": "CELLCO-PART - Verizon Business",
    "now": 1682
   },
   {
-   "aggregated": 586,
-   "asn": 30036,
-   "gain": 707,
-   "gain_pct": 54.7,
-   "name": "MEDIACOM-ENTERPRISE-BUSINESS - Mediacom Communications Corp",
-   "now": 1293
+   "aggregated": 1572,
+   "asn": 20115,
+   "gain": 711,
+   "gain_pct": 31.1,
+   "name": null,
+   "now": 2283
+  },
+  {
+   "aggregated": 55,
+   "asn": 812,
+   "gain": 703,
+   "gain_pct": 92.7,
+   "name": null,
+   "now": 758
   }
  ],
- "date": "2026-11-09",
+ "date": "2026-11-10",
  "table": {
-  "aggregated": 129503,
-  "gain": 135550,
+  "aggregated": 129672,
+  "gain": 135240,
   "gain_pct": 51.1,
-  "now": 265053
+  "now": 264912
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
