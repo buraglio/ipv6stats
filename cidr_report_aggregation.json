@@ -1,12 +1,12 @@
 {
  "ases": [
   {
-   "aggregated": 1161,
+   "aggregated": 704,
    "asn": 9808,
-   "gain": 6032,
-   "gain_pct": 83.9,
+   "gain": 6488,
+   "gain_pct": 90.2,
    "name": "CHINAMOBILE-CN - China Mobile Communications Group Co., Ltd.",
-   "now": 7193
+   "now": 7192
   },
   {
    "aggregated": 6,
@@ -19,34 +19,26 @@
   {
    "aggregated": 1,
    "asn": 18403,
-   "gain": 3697,
+   "gain": 3706,
    "gain_pct": 100.0,
    "name": "FPT-VN - FPT Telecom Company",
-   "now": 3698
+   "now": 3707
   },
   {
-   "aggregated": 822,
+   "aggregated": 815,
    "asn": 45609,
    "gain": 2786,
-   "gain_pct": 77.2,
+   "gain_pct": 77.4,
    "name": "BHARTI-MOBILITY-AS-AP - Bharti Airtel Ltd. AS for GPRS Service",
-   "now": 3608
+   "now": 3601
   },
   {
-   "aggregated": 673,
+   "aggregated": 680,
    "asn": 11172,
-   "gain": 2424,
-   "gain_pct": 78.3,
+   "gain": 2412,
+   "gain_pct": 78.0,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3097
-  },
-  {
-   "aggregated": 3677,
-   "asn": 16509,
-   "gain": 2306,
-   "gain_pct": 38.5,
-   "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 5983
+   "now": 3092
   },
   {
    "aggregated": 40,
@@ -55,6 +47,14 @@
    "gain_pct": 98.3,
    "name": "CMNET-Zhejiang-AP - China Mobile communications corporation",
    "now": 2312
+  },
+  {
+   "aggregated": 3850,
+   "asn": 16509,
+   "gain": 2142,
+   "gain_pct": 35.7,
+   "name": "AMAZON-02 - Amazon.com, Inc.",
+   "now": 5992
   },
   {
    "aggregated": 241,
@@ -73,52 +73,44 @@
    "now": 2126
   },
   {
-   "aggregated": 271,
+   "aggregated": 273,
    "asn": 32098,
-   "gain": 1876,
-   "gain_pct": 87.4,
+   "gain": 1881,
+   "gain_pct": 87.3,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2147
+   "now": 2154
   },
   {
-   "aggregated": 51,
+   "aggregated": 49,
    "asn": 56046,
-   "gain": 1546,
-   "gain_pct": 96.8,
+   "gain": 1548,
+   "gain_pct": 96.9,
    "name": "CMNET-Jiangsu-AP - China Mobile communications corporation",
    "now": 1597
   },
   {
    "aggregated": 51,
    "asn": 22773,
-   "gain": 1407,
+   "gain": 1408,
    "gain_pct": 96.5,
    "name": "ASN-CXA-ALL-CCI-22773-RDC - Cox Communications Inc.",
-   "now": 1458
+   "now": 1459
   },
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1404,
+   "gain": 1403,
    "gain_pct": 85.3,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1645
+   "now": 1644
   },
   {
-   "aggregated": 404,
+   "aggregated": 403,
    "asn": 36992,
-   "gain": 1312,
+   "gain": 1313,
    "gain_pct": 76.5,
    "name": "ETISALAT MISR - ETISALAT MISR",
    "now": 1716
-  },
-  {
-   "aggregated": 47,
-   "asn": 12479,
-   "gain": 1285,
-   "gain_pct": 96.5,
-   "name": "UNI2-AS Orange Espagne SA",
-   "now": 1332
   },
   {
    "aggregated": 25,
@@ -129,12 +121,20 @@
    "now": 1253
   },
   {
-   "aggregated": 70,
+   "aggregated": 73,
    "asn": 47331,
-   "gain": 1218,
-   "gain_pct": 94.6,
+   "gain": 1207,
+   "gain_pct": 94.3,
    "name": "TTNET TTNet A.S.",
-   "now": 1288
+   "now": 1280
+  },
+  {
+   "aggregated": 216,
+   "asn": 25019,
+   "gain": 1181,
+   "gain_pct": 84.5,
+   "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
+   "now": 1397
   },
   {
    "aggregated": 80,
@@ -153,26 +153,18 @@
    "now": 1193
   },
   {
-   "aggregated": 214,
-   "asn": 25019,
-   "gain": 1093,
-   "gain_pct": 83.6,
-   "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1307
-  },
-  {
-   "aggregated": 4,
+   "aggregated": 6,
    "asn": 5416,
-   "gain": 1039,
-   "gain_pct": 99.6,
+   "gain": 1037,
+   "gain_pct": 99.4,
    "name": "BEYON B.S.C.",
    "now": 1043
   },
   {
-   "aggregated": 287,
+   "aggregated": 297,
    "asn": 45271,
-   "gain": 983,
-   "gain_pct": 77.4,
+   "gain": 973,
+   "gain_pct": 76.6,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1270
   },
@@ -185,28 +177,44 @@
    "now": 1118
   },
   {
-   "aggregated": 423,
+   "aggregated": 422,
    "asn": 38266,
-   "gain": 947,
-   "gain_pct": 69.1,
+   "gain": 951,
+   "gain_pct": 69.3,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1370
+   "now": 1373
   },
   {
-   "aggregated": 282,
+   "aggregated": 283,
    "asn": 9829,
-   "gain": 935,
-   "gain_pct": 76.8,
+   "gain": 934,
+   "gain_pct": 76.7,
    "name": "BSNL-NIB - National Internet Backbone",
    "now": 1217
   },
   {
-   "aggregated": 607,
+   "aggregated": 614,
    "asn": 11664,
-   "gain": 837,
-   "gain_pct": 58.0,
+   "gain": 831,
+   "gain_pct": 57.5,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1444
+   "now": 1445
+  },
+  {
+   "aggregated": 1548,
+   "asn": 20115,
+   "gain": 830,
+   "gain_pct": 34.9,
+   "name": "CHARTER-20115 - Charter Communications LLC",
+   "now": 2378
+  },
+  {
+   "aggregated": 512,
+   "asn": 12479,
+   "gain": 822,
+   "gain_pct": 61.6,
+   "name": "UNI2-AS Orange Espagne SA",
+   "now": 1334
   },
   {
    "aggregated": 153,
@@ -217,36 +225,28 @@
    "now": 915
   },
   {
-   "aggregated": 922,
-   "asn": 6167,
-   "gain": 760,
-   "gain_pct": 45.2,
-   "name": "CELLCO-PART - Verizon Business",
-   "now": 1682
-  },
-  {
-   "aggregated": 1572,
-   "asn": 20115,
-   "gain": 711,
-   "gain_pct": 31.1,
-   "name": null,
-   "now": 2283
-  },
-  {
    "aggregated": 55,
    "asn": 812,
    "gain": 703,
    "gain_pct": 92.7,
-   "name": null,
+   "name": "ROGERS-COMMUNICATIONS - Rogers Communications Canada Inc.",
    "now": 758
+  },
+  {
+   "aggregated": 599,
+   "asn": 30036,
+   "gain": 693,
+   "gain_pct": 53.6,
+   "name": "MEDIACOM-ENTERPRISE-BUSINESS - Mediacom Communications Corp",
+   "now": 1292
   }
  ],
- "date": "2026-11-10",
+ "date": "2026-11-12",
  "table": {
-  "aggregated": 129672,
-  "gain": 135240,
-  "gain_pct": 51.1,
-  "now": 264912
+  "aggregated": 130325,
+  "gain": 134807,
+  "gain_pct": 50.8,
+  "now": 265132
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
