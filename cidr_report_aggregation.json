@@ -25,20 +25,20 @@
    "now": 3707
   },
   {
-   "aggregated": 815,
+   "aggregated": 816,
    "asn": 45609,
    "gain": 2786,
-   "gain_pct": 77.4,
+   "gain_pct": 77.3,
    "name": "BHARTI-MOBILITY-AS-AP - Bharti Airtel Ltd. AS for GPRS Service",
-   "now": 3601
+   "now": 3602
   },
   {
    "aggregated": 680,
    "asn": 11172,
-   "gain": 2412,
+   "gain": 2413,
    "gain_pct": 78.0,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3092
+   "now": 3093
   },
   {
    "aggregated": 40,
@@ -49,20 +49,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3850,
+   "aggregated": 3858,
    "asn": 16509,
-   "gain": 2142,
-   "gain_pct": 35.7,
+   "gain": 2134,
+   "gain_pct": 35.6,
    "name": "AMAZON-02 - Amazon.com, Inc.",
    "now": 5992
-  },
-  {
-   "aggregated": 241,
-   "asn": 39891,
-   "gain": 2110,
-   "gain_pct": 89.7,
-   "name": "ALJAWWALSTC-AS Saudi Telecom Company JSC",
-   "now": 2351
   },
   {
    "aggregated": 27,
@@ -73,12 +65,20 @@
    "now": 2126
   },
   {
-   "aggregated": 273,
+   "aggregated": 291,
+   "asn": 39891,
+   "gain": 2060,
+   "gain_pct": 87.6,
+   "name": "ALJAWWALSTC-AS Saudi Telecom Company JSC",
+   "now": 2351
+  },
+  {
+   "aggregated": 271,
    "asn": 32098,
-   "gain": 1881,
-   "gain_pct": 87.3,
+   "gain": 1882,
+   "gain_pct": 87.4,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2154
+   "now": 2153
   },
   {
    "aggregated": 49,
@@ -99,10 +99,10 @@
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1403,
+   "gain": 1398,
    "gain_pct": 85.3,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1644
+   "now": 1639
   },
   {
    "aggregated": 403,
@@ -129,12 +129,12 @@
    "now": 1280
   },
   {
-   "aggregated": 216,
+   "aggregated": 217,
    "asn": 25019,
    "gain": 1181,
    "gain_pct": 84.5,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1397
+   "now": 1398
   },
   {
    "aggregated": 80,
@@ -161,14 +161,6 @@
    "now": 1043
   },
   {
-   "aggregated": 297,
-   "asn": 45271,
-   "gain": 973,
-   "gain_pct": 76.6,
-   "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1270
-  },
-  {
    "aggregated": 146,
    "asn": 62240,
    "gain": 972,
@@ -177,12 +169,20 @@
    "now": 1118
   },
   {
-   "aggregated": 422,
-   "asn": 38266,
-   "gain": 951,
-   "gain_pct": 69.3,
+   "aggregated": 311,
+   "asn": 45271,
+   "gain": 959,
+   "gain_pct": 75.5,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1373
+   "now": 1270
+  },
+  {
+   "aggregated": 420,
+   "asn": 38266,
+   "gain": 955,
+   "gain_pct": 69.5,
+   "name": "VIL-AS-AP - Vodafone Idea Ltd",
+   "now": 1375
   },
   {
    "aggregated": 283,
@@ -195,26 +195,26 @@
   {
    "aggregated": 614,
    "asn": 11664,
-   "gain": 831,
+   "gain": 832,
    "gain_pct": 57.5,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1445
+   "now": 1446
   },
   {
-   "aggregated": 1548,
+   "aggregated": 1550,
    "asn": 20115,
    "gain": 830,
    "gain_pct": 34.9,
    "name": "CHARTER-20115 - Charter Communications LLC",
-   "now": 2378
+   "now": 2380
   },
   {
-   "aggregated": 512,
+   "aggregated": 515,
    "asn": 12479,
-   "gain": 822,
-   "gain_pct": 61.6,
+   "gain": 818,
+   "gain_pct": 61.4,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1334
+   "now": 1333
   },
   {
    "aggregated": 153,
@@ -227,26 +227,26 @@
   {
    "aggregated": 55,
    "asn": 812,
-   "gain": 703,
-   "gain_pct": 92.7,
+   "gain": 706,
+   "gain_pct": 92.8,
    "name": "ROGERS-COMMUNICATIONS - Rogers Communications Canada Inc.",
-   "now": 758
+   "now": 761
   },
   {
-   "aggregated": 599,
+   "aggregated": 596,
    "asn": 30036,
-   "gain": 693,
-   "gain_pct": 53.6,
+   "gain": 696,
+   "gain_pct": 53.9,
    "name": "MEDIACOM-ENTERPRISE-BUSINESS - Mediacom Communications Corp",
    "now": 1292
   }
  ],
- "date": "2026-11-12",
+ "date": "2026-11-13",
  "table": {
-  "aggregated": 130325,
-  "gain": 134807,
-  "gain_pct": 50.8,
-  "now": 265132
+  "aggregated": 130834,
+  "gain": 134487,
+  "gain_pct": 50.7,
+  "now": 265321
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
