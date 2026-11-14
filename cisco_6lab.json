@@ -246,11 +246,6 @@
    "name": "Germany"
   },
   {
-   "code": "DJ",
-   "ipv6_users_pct": 0.0,
-   "name": "Djibouti"
-  },
-  {
    "code": "DK",
    "ipv6_users_pct": 5.0,
    "name": "Denmark"
@@ -626,6 +621,11 @@
    "name": "Macau"
   },
   {
+   "code": "MP",
+   "ipv6_users_pct": 0.0,
+   "name": "Northern Mariana Islands"
+  },
+  {
    "code": "MQ",
    "ipv6_users_pct": 23.5,
    "name": "Martinique"
@@ -796,11 +796,6 @@
    "name": "Saudi Arabia"
   },
   {
-   "code": "SB",
-   "ipv6_users_pct": 0.0,
-   "name": "Solomon Islands"
-  },
-  {
    "code": "SC",
    "ipv6_users_pct": 0.1,
    "name": "Seychelles"
@@ -834,11 +829,6 @@
    "code": "SL",
    "ipv6_users_pct": 0.0,
    "name": "Sierra Leone"
-  },
-  {
-   "code": "SM",
-   "ipv6_users_pct": 0.0,
-   "name": "San Marino"
   },
   {
    "code": "SN",
@@ -909,6 +899,11 @@
    "code": "TL",
    "ipv6_users_pct": 0.0,
    "name": "Timor-Leste"
+  },
+  {
+   "code": "TM",
+   "ipv6_users_pct": 0.0,
+   "name": "Turkmenistan"
   },
   {
    "code": "TN",

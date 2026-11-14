@@ -1,38 +1,38 @@
 {
  "by_country": {
-  "AR": 5318.1,
+  "AR": 5325.1,
   "AW": 2.0,
   "BO": 37.0,
   "BQ": 5,
-  "BR": 8477.55,
+  "BR": 8483.55,
   "BZ": 21,
-  "CL": 293.0,
-  "CO": 425.84,
+  "CL": 294.0,
+  "CO": 430.84,
   "CR": 99.06,
   "CU": 6,
   "CW": 14.0,
-  "DO": 204.01,
-  "EC": 255.01,
+  "DO": 205.01,
+  "EC": 257.01,
   "GF": 6,
   "GT": 72.0,
   "GY": 7.0,
   "HN": 102.0,
   "HT": 5.0,
-  "MX": 763.08,
+  "MX": 772.08,
   "NI": 20.0,
-  "PA": 63.07,
-  "PE": 221.0,
-  "PY": 94.0,
+  "PA": 64.07,
+  "PE": 220.0,
+  "PY": 95.0,
   "SR": 4.0,
   "SV": 44.0,
   "SX": 6.0,
   "TT": 32.0,
   "US": 10,
   "UY": 41.06,
-  "VE": 510.0
+  "VE": 514.0
  },
  "countries": 30,
- "file_date": "2026-10-13",
+ "file_date": "2026-11-13",
  "history": [
   {
    "blocks_32": 5.0,
@@ -71,109 +71,109 @@
    "year": 2011
   },
   {
-   "blocks_32": 5834.07,
+   "blocks_32": 5832.07,
    "year": 2012
   },
   {
-   "blocks_32": 6343.34,
+   "blocks_32": 6340.34,
    "year": 2013
   },
   {
-   "blocks_32": 7248.54,
+   "blocks_32": 7245.54,
    "year": 2014
   },
   {
-   "blocks_32": 8057.69,
+   "blocks_32": 8052.69,
    "year": 2015
   },
   {
-   "blocks_32": 8972.89,
+   "blocks_32": 8967.89,
    "year": 2016
   },
   {
-   "blocks_32": 10167.91,
+   "blocks_32": 10161.91,
    "year": 2017
   },
   {
-   "blocks_32": 11337.94,
+   "blocks_32": 11331.94,
    "year": 2018
   },
   {
-   "blocks_32": 12675.17,
+   "blocks_32": 12666.17,
    "year": 2019
   },
   {
-   "blocks_32": 14159.27,
+   "blocks_32": 14148.27,
    "year": 2020
   },
   {
-   "blocks_32": 14695.3,
+   "blocks_32": 14683.3,
    "year": 2021
   },
   {
-   "blocks_32": 15141.44,
+   "blocks_32": 15129.44,
    "year": 2022
   },
   {
-   "blocks_32": 15555.67,
+   "blocks_32": 15542.67,
    "year": 2023
   },
   {
-   "blocks_32": 16090.7,
+   "blocks_32": 16076.7,
    "year": 2024
   },
   {
-   "blocks_32": 16641.78,
+   "blocks_32": 16626.78,
    "year": 2025
   },
   {
-   "blocks_32": 17157.79,
+   "blocks_32": 17193.79,
    "year": 2026
   }
  ],
  "top_countries": [
   {
-   "blocks_32": 8477.55,
+   "blocks_32": 8483.55,
    "code": "BR",
-   "share": 49.41
+   "share": 49.34
   },
   {
-   "blocks_32": 5318.1,
+   "blocks_32": 5325.1,
    "code": "AR",
-   "share": 31.0
+   "share": 30.97
   },
   {
-   "blocks_32": 763.08,
+   "blocks_32": 772.08,
    "code": "MX",
-   "share": 4.45
+   "share": 4.49
   },
   {
-   "blocks_32": 510.0,
+   "blocks_32": 514.0,
    "code": "VE",
-   "share": 2.97
+   "share": 2.99
   },
   {
-   "blocks_32": 425.84,
+   "blocks_32": 430.84,
    "code": "CO",
-   "share": 2.48
+   "share": 2.51
   },
   {
-   "blocks_32": 293.0,
+   "blocks_32": 294.0,
    "code": "CL",
    "share": 1.71
   },
   {
-   "blocks_32": 255.01,
+   "blocks_32": 257.01,
    "code": "EC",
    "share": 1.49
   },
   {
-   "blocks_32": 221.0,
+   "blocks_32": 220.0,
    "code": "PE",
-   "share": 1.29
+   "share": 1.28
   },
   {
-   "blocks_32": 204.01,
+   "blocks_32": 205.01,
    "code": "DO",
    "share": 1.19
   },
@@ -183,6 +183,6 @@
    "share": 0.59
   }
  ],
- "total_blocks_32": 17157.79,
+ "total_blocks_32": 17193.79,
  "url": "https://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-latest"
 }

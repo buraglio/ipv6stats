@@ -6,5 +6,13 @@
    "cloud_hostnames": 66.1,
    "nist_web": 53.6
   }
+ },
+ {
+  "date": "2026-11-14",
+  "values": {
+   "tranco_aaaa": 41.1,
+   "cloud_hostnames": 66.1,
+   "nist_web": 54.1
+  }
  }
 ]

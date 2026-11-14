@@ -1,6 +1,6 @@
 {
  "by_country": {
-  "AO": 32.0,
+  "AO": 33.0,
   "BF": 21.0,
   "BI": 5.0,
   "BJ": 12.0,
@@ -20,7 +20,7 @@
   "GN": 10.0,
   "GQ": 3,
   "GW": 2,
-  "KE": 153.0,
+  "KE": 158.0,
   "KM": 2,
   "LR": 6.0,
   "LS": 6.0,
@@ -48,14 +48,14 @@
   "TD": 3.0,
   "TG": 6.0,
   "TN": 26.0,
-  "TZ": 60.0,
+  "TZ": 59.0,
   "UG": 27.0,
-  "ZA": 5283.08,
-  "ZM": 9.0,
+  "ZA": 5284.08,
+  "ZM": 10.0,
   "ZW": 14.0
  },
  "countries": 53,
- "file_date": "2026-10-14",
+ "file_date": "2026-11-12",
  "history": [
   {
    "blocks_32": 1.0,
@@ -94,72 +94,72 @@
    "year": 2012
   },
   {
-   "blocks_32": 4507.01,
+   "blocks_32": 4506.01,
    "year": 2013
   },
   {
-   "blocks_32": 4554.01,
+   "blocks_32": 4553.01,
    "year": 2014
   },
   {
-   "blocks_32": 8954.01,
+   "blocks_32": 8953.01,
    "year": 2015
   },
   {
-   "blocks_32": 9013.02,
+   "blocks_32": 9012.02,
    "year": 2016
   },
   {
-   "blocks_32": 9111.02,
+   "blocks_32": 9110.02,
    "year": 2017
   },
   {
-   "blocks_32": 9174.02,
+   "blocks_32": 9173.02,
    "year": 2018
   },
   {
-   "blocks_32": 9526.08,
+   "blocks_32": 9525.08,
    "year": 2019
   },
   {
-   "blocks_32": 9611.08,
+   "blocks_32": 9609.08,
    "year": 2020
   },
   {
-   "blocks_32": 9749.09,
+   "blocks_32": 9747.09,
    "year": 2021
   },
   {
-   "blocks_32": 10125.1,
+   "blocks_32": 10122.1,
    "year": 2022
   },
   {
-   "blocks_32": 10531.1,
+   "blocks_32": 10528.1,
    "year": 2023
   },
   {
-   "blocks_32": 10926.1,
+   "blocks_32": 10923.1,
    "year": 2024
   },
   {
-   "blocks_32": 11299.1,
+   "blocks_32": 11296.1,
    "year": 2025
   },
   {
-   "blocks_32": 11642.1,
+   "blocks_32": 11649.1,
    "year": 2026
   }
  ],
  "top_countries": [
   {
-   "blocks_32": 5283.08,
+   "blocks_32": 5284.08,
    "code": "ZA",
-   "share": 45.38
+   "share": 45.36
   },
   {
    "blocks_32": 4141.0,
    "code": "EG",
-   "share": 35.57
+   "share": 35.55
   },
   {
    "blocks_32": 288.0,
@@ -187,9 +187,9 @@
    "share": 2.23
   },
   {
-   "blocks_32": 153.0,
+   "blocks_32": 158.0,
    "code": "KE",
-   "share": 1.31
+   "share": 1.36
   },
   {
    "blocks_32": 133.01,
@@ -197,11 +197,11 @@
    "share": 1.14
   },
   {
-   "blocks_32": 60.0,
+   "blocks_32": 59.0,
    "code": "TZ",
-   "share": 0.52
+   "share": 0.51
   }
  ],
- "total_blocks_32": 11642.1,
+ "total_blocks_32": 11649.1,
  "url": "https://ftp.afrinic.net/pub/stats/afrinic/delegated-afrinic-latest"
 }

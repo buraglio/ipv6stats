@@ -1,1871 +1,1864 @@
 {
  "economies": [
   {
-   "capable": 0.26,
+   "capable": 0.16,
    "code": "AD",
    "name": "Andorra",
-   "preferred": 0.24,
-   "samples": 41276
+   "preferred": 0.15,
+   "samples": 44001
   },
   {
-   "capable": 50.62,
+   "capable": 50.5,
    "code": "AE",
    "name": "United Arab Emirates",
-   "preferred": 49.28,
-   "samples": 1985201
+   "preferred": 48.24,
+   "samples": 1730991
   },
   {
-   "capable": 11.13,
+   "capable": 11.76,
    "code": "AF",
    "name": "Afghanistan",
-   "preferred": 10.75,
-   "samples": 578812
+   "preferred": 11.27,
+   "samples": 623213
   },
   {
-   "capable": 1.02,
+   "capable": 1.45,
    "code": "AG",
    "name": "Antigua and Barbuda",
-   "preferred": 0.96,
-   "samples": 65822
+   "preferred": 1.4,
+   "samples": 64849
   },
   {
-   "capable": 36.21,
+   "capable": 29.6,
    "code": "AI",
    "name": "Anguilla",
-   "preferred": 35.8,
-   "samples": 8467
+   "preferred": 29.1,
+   "samples": 13036
   },
   {
-   "capable": 8.42,
+   "capable": 8.39,
    "code": "AL",
    "name": "Albania",
-   "preferred": 6.15,
-   "samples": 1450247
+   "preferred": 5.78,
+   "samples": 1323478
   },
   {
-   "capable": 8.94,
+   "capable": 9.3,
    "code": "AM",
    "name": "Armenia",
-   "preferred": 8.71,
-   "samples": 1023309
+   "preferred": 8.77,
+   "samples": 1077221
   },
   {
-   "capable": 15.1,
+   "capable": 15.07,
    "code": "AO",
    "name": "Angola",
-   "preferred": 14.68,
-   "samples": 923686
+   "preferred": 14.54,
+   "samples": 1020469
   },
   {
-   "capable": 7.19,
+   "capable": 4.27,
    "code": "AQ",
    "name": "Antartica",
-   "preferred": 5.88,
-   "samples": 153
+   "preferred": 0.61,
+   "samples": 164
   },
   {
-   "capable": 34.5,
+   "capable": 34.51,
    "code": "AR",
    "name": "Argentina",
-   "preferred": 32.35,
-   "samples": 13527167
+   "preferred": 32.05,
+   "samples": 12629566
   },
   {
-   "capable": 1.77,
+   "capable": 2.08,
    "code": "AS",
    "name": "American Samoa",
-   "preferred": 1.69,
-   "samples": 27420
+   "preferred": 2.0,
+   "samples": 23465
   },
   {
-   "capable": 43.92,
+   "capable": 45.71,
    "code": "AT",
    "name": "Austria",
-   "preferred": 42.8,
-   "samples": 2144644
+   "preferred": 43.12,
+   "samples": 2093112
   },
   {
-   "capable": 47.38,
+   "capable": 49.27,
    "code": "AU",
    "name": "Australia",
-   "preferred": 44.27,
-   "samples": 6664964
+   "preferred": 45.47,
+   "samples": 5900281
   },
   {
-   "capable": 0.2,
+   "capable": 0.18,
    "code": "AW",
    "name": "Aruba",
-   "preferred": 0.19,
-   "samples": 48010
+   "preferred": 0.16,
+   "samples": 49621
   },
   {
-   "capable": 71.88,
+   "capable": 72.24,
    "code": "AX",
    "name": "Aland Islands",
-   "preferred": 71.14,
-   "samples": 14818
+   "preferred": 71.18,
+   "samples": 11792
   },
   {
    "capable": 0.35,
    "code": "AZ",
    "name": "Azerbaijan",
-   "preferred": 0.33,
-   "samples": 1791575
+   "preferred": 0.31,
+   "samples": 1489169
   },
   {
-   "capable": 11.42,
+   "capable": 11.63,
    "code": "BA",
    "name": "Bosnia and Herzegovina",
-   "preferred": 11.1,
-   "samples": 840487
+   "preferred": 10.96,
+   "samples": 806844
   },
   {
-   "capable": 22.24,
+   "capable": 22.57,
    "code": "BB",
    "name": "Barbados",
-   "preferred": 21.91,
-   "samples": 226894
+   "preferred": 22.21,
+   "samples": 239444
   },
   {
-   "capable": 17.99,
+   "capable": 17.69,
    "code": "BD",
    "name": "Bangladesh",
-   "preferred": 17.83,
-   "samples": 10949871
+   "preferred": 17.43,
+   "samples": 8702005
   },
   {
-   "capable": 71.25,
+   "capable": 72.61,
    "code": "BE",
    "name": "Belgium",
-   "preferred": 69.93,
-   "samples": 3447791
+   "preferred": 70.61,
+   "samples": 3704439
   },
   {
-   "capable": 10.83,
+   "capable": 10.78,
    "code": "BF",
    "name": "Burkina Faso",
-   "preferred": 9.98,
-   "samples": 744723
+   "preferred": 10.3,
+   "samples": 752748
   },
   {
-   "capable": 23.69,
+   "capable": 24.83,
    "code": "BG",
    "name": "Bulgaria",
-   "preferred": 23.02,
-   "samples": 2297405
+   "preferred": 23.77,
+   "samples": 2356316
   },
   {
-   "capable": 21.73,
+   "capable": 19.58,
    "code": "BH",
    "name": "Bahrain",
-   "preferred": 21.21,
-   "samples": 434611
+   "preferred": 19.09,
+   "samples": 398787
   },
   {
-   "capable": 2.67,
+   "capable": 2.33,
    "code": "BI",
    "name": "Burundi",
-   "preferred": 2.63,
-   "samples": 159081
+   "preferred": 2.29,
+   "samples": 165013
   },
   {
-   "capable": 4.25,
+   "capable": 4.63,
    "code": "BJ",
    "name": "Benin",
-   "preferred": 3.99,
-   "samples": 862760
+   "preferred": 4.45,
+   "samples": 832359
   },
   {
-   "capable": 97.11,
+   "capable": 97.31,
    "code": "BL",
    "name": "Saint Barthelemy",
-   "preferred": 96.06,
-   "samples": 1421
+   "preferred": 94.17,
+   "samples": 3313
   },
   {
-   "capable": 18.95,
+   "capable": 22.09,
    "code": "BM",
    "name": "Bermuda",
-   "preferred": 18.41,
-   "samples": 48667
+   "preferred": 21.43,
+   "samples": 43126
   },
   {
-   "capable": 0.18,
+   "capable": 0.3,
    "code": "BN",
    "name": "Brunei Darussalam",
-   "preferred": 0.16,
-   "samples": 205081
+   "preferred": 0.27,
+   "samples": 222732
   },
   {
-   "capable": 44.47,
+   "capable": 45.51,
    "code": "BO",
    "name": "Bolivia",
-   "preferred": 44.16,
-   "samples": 2474667
+   "preferred": 45.14,
+   "samples": 2344612
   },
   {
-   "capable": 1.45,
+   "capable": 1.22,
    "code": "BQ",
    "name": "Bonaire, Sint Eustatius and Saba",
-   "preferred": 1.42,
-   "samples": 11087
+   "preferred": 1.17,
+   "samples": 12008
   },
   {
-   "capable": 59.5,
+   "capable": 60.56,
    "code": "BR",
    "name": "Brazil",
-   "preferred": 58.14,
-   "samples": 37828470
+   "preferred": 58.57,
+   "samples": 39353485
   },
   {
-   "capable": 39.43,
+   "capable": 40.94,
    "code": "BS",
    "name": "Bahamas",
-   "preferred": 38.68,
-   "samples": 167511
+   "preferred": 39.24,
+   "samples": 170061
   },
   {
-   "capable": 40.31,
+   "capable": 41.13,
    "code": "BT",
    "name": "Bhutan",
-   "preferred": 39.62,
-   "samples": 116647
+   "preferred": 39.72,
+   "samples": 103012
   },
   {
-   "capable": 7.75,
+   "capable": 8.0,
    "code": "BW",
    "name": "Botswana",
-   "preferred": 7.6,
-   "samples": 244350
+   "preferred": 7.85,
+   "samples": 285413
   },
   {
-   "capable": 15.29,
+   "capable": 14.98,
    "code": "BY",
    "name": "Belarus",
-   "preferred": 14.53,
-   "samples": 2892166
+   "preferred": 13.71,
+   "samples": 2910183
   },
   {
-   "capable": 45.34,
+   "capable": 41.94,
    "code": "BZ",
    "name": "Belize",
-   "preferred": 44.33,
-   "samples": 118353
+   "preferred": 41.24,
+   "samples": 137876
   },
   {
-   "capable": 45.0,
+   "capable": 47.07,
    "code": "CA",
    "name": "Canada",
-   "preferred": 43.43,
-   "samples": 15445328
+   "preferred": 43.44,
+   "samples": 15082407
   },
   {
-   "capable": 4.93,
+   "capable": 5.1,
    "code": "CD",
    "name": "Democratic Republic of the Congo",
-   "preferred": 4.85,
-   "samples": 2937272
+   "preferred": 5.02,
+   "samples": 3073094
   },
   {
-   "capable": 18.3,
+   "capable": 17.06,
    "code": "CF",
    "name": "Central African Republic",
-   "preferred": 17.83,
-   "samples": 49454
+   "preferred": 16.59,
+   "samples": 53310
   },
   {
-   "capable": 24.1,
+   "capable": 24.53,
    "code": "CG",
    "name": "Congo",
-   "preferred": 23.91,
-   "samples": 315081
+   "preferred": 24.29,
+   "samples": 286839
   },
   {
-   "capable": 48.75,
+   "capable": 48.61,
    "code": "CH",
    "name": "Switzerland",
-   "preferred": 47.89,
-   "samples": 2199182
+   "preferred": 47.71,
+   "samples": 2080674
   },
   {
-   "capable": 17.59,
+   "capable": 18.97,
    "code": "CI",
    "name": "Cote d'Ivoire",
-   "preferred": 16.76,
-   "samples": 3527868
+   "preferred": 18.34,
+   "samples": 3875289
   },
   {
-   "capable": 37.68,
+   "capable": 61.96,
    "code": "CK",
    "name": "Cook Islands",
-   "preferred": 36.22,
-   "samples": 7240
+   "preferred": 60.94,
+   "samples": 7589
   },
   {
-   "capable": 23.2,
+   "capable": 23.11,
    "code": "CL",
    "name": "Chile",
    "preferred": 22.43,
-   "samples": 5891103
+   "samples": 6105895
   },
   {
-   "capable": 2.08,
+   "capable": 1.9,
    "code": "CM",
    "name": "Cameroon",
-   "preferred": 1.91,
-   "samples": 1242010
+   "preferred": 1.74,
+   "samples": 1367070
   },
   {
-   "capable": 49.65,
+   "capable": 49.1,
    "code": "CN",
    "name": "China",
-   "preferred": 41.21,
-   "samples": 40839827
+   "preferred": 38.76,
+   "samples": 30888382
   },
   {
-   "capable": 21.38,
+   "capable": 22.66,
    "code": "CO",
    "name": "Colombia",
-   "preferred": 20.52,
-   "samples": 9726795
+   "preferred": 21.53,
+   "samples": 10088881
   },
   {
-   "capable": 15.01,
+   "capable": 13.72,
    "code": "CR",
    "name": "Costa Rica",
-   "preferred": 14.43,
-   "samples": 1563312
+   "preferred": 12.81,
+   "samples": 1446058
   },
   {
    "capable": 0.04,
    "code": "CU",
    "name": "Cuba",
-   "preferred": 0.04,
-   "samples": 360086
+   "preferred": 0.03,
+   "samples": 409332
   },
   {
-   "capable": 5.4,
+   "capable": 4.62,
    "code": "CV",
    "name": "Cape Verde",
-   "preferred": 5.32,
-   "samples": 81832
+   "preferred": 4.53,
+   "samples": 86909
   },
   {
-   "capable": 9.18,
+   "capable": 8.98,
    "code": "CW",
    "name": "Curacao",
-   "preferred": 9.14,
-   "samples": 88579
+   "preferred": 8.94,
+   "samples": 98237
   },
   {
-   "capable": 21.41,
+   "capable": 21.92,
    "code": "CY",
    "name": "Cyprus",
-   "preferred": 20.62,
-   "samples": 527127
+   "preferred": 19.85,
+   "samples": 508241
   },
   {
-   "capable": 38.78,
+   "capable": 38.58,
    "code": "CZ",
    "name": "Czech Republic",
-   "preferred": 36.8,
-   "samples": 3221422
+   "preferred": 34.65,
+   "samples": 2891127
   },
   {
-   "capable": 72.9,
+   "capable": 72.82,
    "code": "DE",
    "name": "Germany",
-   "preferred": 71.0,
-   "samples": 16704182
+   "preferred": 69.92,
+   "samples": 14008806
   },
   {
-   "capable": 0.2,
+   "capable": 0.17,
    "code": "DJ",
    "name": "Djibouti",
-   "preferred": 0.19,
-   "samples": 66541
+   "preferred": 0.16,
+   "samples": 74799
   },
   {
-   "capable": 25.06,
+   "capable": 30.07,
    "code": "DK",
    "name": "Denmark",
-   "preferred": 23.31,
-   "samples": 2606154
+   "preferred": 24.46,
+   "samples": 2531954
   },
   {
-   "capable": 39.59,
+   "capable": 40.18,
    "code": "DM",
    "name": "Dominica",
-   "preferred": 39.45,
-   "samples": 46394
+   "preferred": 40.07,
+   "samples": 40751
   },
   {
-   "capable": 39.39,
+   "capable": 39.64,
    "code": "DO",
    "name": "Dominican Republic",
-   "preferred": 38.19,
-   "samples": 1667099
-  },
-  {
-   "capable": 0.31,
-   "code": "DZ",
-   "name": "Algeria",
-   "preferred": 0.27,
-   "samples": 7261074
-  },
-  {
-   "capable": 37.86,
-   "code": "EC",
-   "name": "Ecuador",
-   "preferred": 37.38,
-   "samples": 3350916
-  },
-  {
-   "capable": 47.24,
-   "code": "EE",
-   "name": "Estonia",
-   "preferred": 45.27,
-   "samples": 384277
-  },
-  {
-   "capable": 5.31,
-   "code": "EG",
-   "name": "Egypt",
-   "preferred": 5.2,
-   "samples": 13772627
-  },
-  {
-   "capable": 11.07,
-   "code": "ER",
-   "name": "Eritrea",
-   "preferred": 10.67,
-   "samples": 506
-  },
-  {
-   "capable": 10.71,
-   "code": "ES",
-   "name": "Spain",
-   "preferred": 10.08,
-   "samples": 12100598
-  },
-  {
-   "capable": 0.25,
-   "code": "ET",
-   "name": "Ethiopia",
-   "preferred": 0.24,
-   "samples": 1643539
-  },
-  {
-   "capable": 51.04,
-   "code": "FI",
-   "name": "Finland",
-   "preferred": 49.53,
-   "samples": 1800118
-  },
-  {
-   "capable": 39.84,
-   "code": "FJ",
-   "name": "Fiji",
-   "preferred": 38.51,
-   "samples": 171685
-  },
-  {
-   "capable": 72.61,
-   "code": "FK",
-   "name": "Falkland Islands",
-   "preferred": 70.09,
-   "samples": 1946
-  },
-  {
-   "capable": 17.56,
-   "code": "FM",
-   "name": "Micronesia (Federated States of)",
-   "preferred": 17.14,
-   "samples": 18286
-  },
-  {
-   "capable": 2.48,
-   "code": "FO",
-   "name": "Faeroe Islands",
-   "preferred": 2.35,
-   "samples": 29224
-  },
-  {
-   "capable": 85.63,
-   "code": "FR",
-   "name": "France",
-   "preferred": 84.82,
-   "samples": 22134854
-  },
-  {
-   "capable": 34.24,
-   "code": "GA",
-   "name": "Gabon",
-   "preferred": 31.55,
-   "samples": 142021
-  },
-  {
-   "capable": 54.32,
-   "code": "GB",
-   "name": "United Kingdom of Great Britain and Northern Ireland",
-   "preferred": 53.43,
-   "samples": 15282908
-  },
-  {
-   "capable": 7.1,
-   "code": "GD",
-   "name": "Grenada",
-   "preferred": 7.04,
-   "samples": 57557
-  },
-  {
-   "capable": 12.3,
-   "code": "GE",
-   "name": "Georgia",
-   "preferred": 12.03,
-   "samples": 1040634
-  },
-  {
-   "capable": 44.79,
-   "code": "GF",
-   "name": "French Guiana",
-   "preferred": 43.78,
-   "samples": 71809
-  },
-  {
-   "capable": 0.59,
-   "code": "GG",
-   "name": "Guernsey",
-   "preferred": 0.57,
-   "samples": 32300
-  },
-  {
-   "capable": 1.8,
-   "code": "GH",
-   "name": "Ghana",
-   "preferred": 1.66,
-   "samples": 4411448
-  },
-  {
-   "capable": 0.21,
-   "code": "GI",
-   "name": "Gibraltar",
-   "preferred": 0.21,
-   "samples": 23764
-  },
-  {
-   "capable": 0.26,
-   "code": "GL",
-   "name": "Greenland",
-   "preferred": 0.25,
-   "samples": 45468
-  },
-  {
-   "capable": 0.62,
-   "code": "GM",
-   "name": "Gambia",
-   "preferred": 0.61,
-   "samples": 373236
-  },
-  {
-   "capable": 1.24,
-   "code": "GN",
-   "name": "Guinea",
-   "preferred": 1.22,
-   "samples": 1147839
-  },
-  {
-   "capable": 47.03,
-   "code": "GP",
-   "name": "Guadeloupe",
-   "preferred": 46.35,
-   "samples": 218647
-  },
-  {
-   "capable": 1.14,
-   "code": "GQ",
-   "name": "Equatorial Guinea",
-   "preferred": 1.06,
-   "samples": 59163
-  },
-  {
-   "capable": 57.04,
-   "code": "GR",
-   "name": "Greece",
-   "preferred": 56.08,
-   "samples": 3003797
-  },
-  {
-   "capable": 57.47,
-   "code": "GT",
-   "name": "Guatemala",
-   "preferred": 56.49,
-   "samples": 1106818
-  },
-  {
-   "capable": 6.58,
-   "code": "GU",
-   "name": "Guam",
-   "preferred": 6.4,
-   "samples": 75970
-  },
-  {
-   "capable": 14.28,
-   "code": "GW",
-   "name": "Guinea-Bissau",
-   "preferred": 14.09,
-   "samples": 22911
-  },
-  {
-   "capable": 28.37,
-   "code": "GY",
-   "name": "Guyana",
-   "preferred": 27.36,
-   "samples": 377211
-  },
-  {
-   "capable": 9.67,
-   "code": "HK",
-   "name": "Hong Kong Special Administrative Region of China",
-   "preferred": 2.47,
-   "samples": 4706261
-  },
-  {
-   "capable": 22.79,
-   "code": "HN",
-   "name": "Honduras",
-   "preferred": 22.31,
-   "samples": 869382
-  },
-  {
-   "capable": 6.06,
-   "code": "HR",
-   "name": "Croatia",
-   "preferred": 5.97,
-   "samples": 1237297
-  },
-  {
-   "capable": 10.26,
-   "code": "HT",
-   "name": "Haiti",
-   "preferred": 10.07,
-   "samples": 691259
-  },
-  {
-   "capable": 55.97,
-   "code": "HU",
-   "name": "Hungary",
-   "preferred": 53.91,
-   "samples": 2925581
-  },
-  {
-   "capable": 29.4,
-   "code": "ID",
-   "name": "Indonesia",
-   "preferred": 28.48,
-   "samples": 41501091
-  },
-  {
-   "capable": 44.59,
-   "code": "IE",
-   "name": "Ireland",
-   "preferred": 43.85,
-   "samples": 1438204
-  },
-  {
-   "capable": 63.96,
-   "code": "IL",
-   "name": "Israel",
-   "preferred": 58.93,
-   "samples": 2801363
-  },
-  {
-   "capable": 26.04,
-   "code": "IM",
-   "name": "Isle of Man",
-   "preferred": 25.54,
-   "samples": 53684
-  },
-  {
-   "capable": 76.63,
-   "code": "IN",
-   "name": "India",
-   "preferred": 74.22,
-   "samples": 123526515
-  },
-  {
-   "capable": 0.45,
-   "code": "IO",
-   "name": "British Indian Ocean Territory",
-   "preferred": 0.45,
-   "samples": 449
-  },
-  {
-   "capable": 1.26,
-   "code": "IQ",
-   "name": "Iraq",
-   "preferred": 1.2,
-   "samples": 7326553
-  },
-  {
-   "capable": 21.74,
-   "code": "IR",
-   "name": "Iran (Islamic Republic of)",
-   "preferred": 20.86,
-   "samples": 83502
-  },
-  {
-   "capable": 13.5,
-   "code": "IS",
-   "name": "Iceland",
-   "preferred": 12.85,
-   "samples": 176290
-  },
-  {
-   "capable": 19.37,
-   "code": "IT",
-   "name": "Italy",
-   "preferred": 18.06,
-   "samples": 13764930
-  },
-  {
-   "capable": 0.24,
-   "code": "JE",
-   "name": "Jersey",
-   "preferred": 0.23,
-   "samples": 56760
-  },
-  {
-   "capable": 16.51,
-   "code": "JM",
-   "name": "Jamaica",
-   "preferred": 16.26,
-   "samples": 681856
-  },
-  {
-   "capable": 19.87,
-   "code": "JO",
-   "name": "Jordan",
-   "preferred": 19.06,
-   "samples": 2259817
-  },
-  {
-   "capable": 61.94,
-   "code": "JP",
-   "name": "Japan",
-   "preferred": 59.64,
-   "samples": 76293912
-  },
-  {
-   "capable": 16.66,
-   "code": "KE",
-   "name": "Kenya",
-   "preferred": 16.48,
-   "samples": 3018637
-  },
-  {
-   "capable": 1.56,
-   "code": "KG",
-   "name": "Kyrgyzstan",
-   "preferred": 1.49,
-   "samples": 1000339
-  },
-  {
-   "capable": 0.49,
-   "code": "KH",
-   "name": "Cambodia",
-   "preferred": 0.46,
-   "samples": 1405898
-  },
-  {
-   "capable": 58.03,
-   "code": "KI",
-   "name": "Kiribati",
-   "preferred": 57.57,
-   "samples": 16270
-  },
-  {
-   "capable": 0.55,
-   "code": "KM",
-   "name": "Comoros",
-   "preferred": 0.55,
-   "samples": 43817
-  },
-  {
-   "capable": 0.23,
-   "code": "KN",
-   "name": "Saint Kitts and Nevis",
-   "preferred": 0.21,
-   "samples": 36713
-  },
-  {
-   "capable": 29.23,
-   "code": "KR",
-   "name": "Republic of Korea",
-   "preferred": 28.42,
-   "samples": 16767093
-  },
-  {
-   "capable": 26.1,
-   "code": "KW",
-   "name": "Kuwait",
-   "preferred": 25.61,
-   "samples": 1196639
-  },
-  {
-   "capable": 1.3,
-   "code": "KY",
-   "name": "Cayman Islands",
-   "preferred": 1.26,
-   "samples": 36798
-  },
-  {
-   "capable": 28.27,
-   "code": "KZ",
-   "name": "Kazakhstan",
-   "preferred": 26.36,
-   "samples": 6740996
-  },
-  {
-   "capable": 4.44,
-   "code": "LA",
-   "name": "Lao People's Democratic Republic",
-   "preferred": 4.37,
-   "samples": 716433
-  },
-  {
-   "capable": 0.51,
-   "code": "LB",
-   "name": "Lebanon",
-   "preferred": 0.46,
-   "samples": 1939488
-  },
-  {
-   "capable": 14.78,
-   "code": "LC",
-   "name": "Saint Lucia",
-   "preferred": 14.68,
-   "samples": 87639
-  },
-  {
-   "capable": 49.99,
-   "code": "LI",
-   "name": "Liechtenstein",
-   "preferred": 49.55,
-   "samples": 13089
-  },
-  {
-   "capable": 62.0,
-   "code": "LK",
-   "name": "Sri Lanka",
-   "preferred": 61.43,
-   "samples": 1445841
-  },
-  {
-   "capable": 5.71,
-   "code": "LR",
-   "name": "Liberia",
-   "preferred": 5.38,
-   "samples": 404827
-  },
-  {
-   "capable": 0.21,
-   "code": "LS",
-   "name": "Lesotho",
-   "preferred": 0.2,
-   "samples": 82923
-  },
-  {
-   "capable": 25.43,
-   "code": "LT",
-   "name": "Lithuania",
-   "preferred": 23.94,
-   "samples": 826716
-  },
-  {
-   "capable": 56.07,
-   "code": "LU",
-   "name": "Luxembourg",
-   "preferred": 54.65,
-   "samples": 219983
-  },
-  {
-   "capable": 35.98,
-   "code": "LV",
-   "name": "Latvia",
-   "preferred": 34.59,
-   "samples": 742633
-  },
-  {
-   "capable": 4.08,
-   "code": "LY",
-   "name": "Libya",
-   "preferred": 4.02,
-   "samples": 1747539
-  },
-  {
-   "capable": 3.49,
-   "code": "MA",
-   "name": "Morocco",
-   "preferred": 3.4,
-   "samples": 3489917
-  },
-  {
-   "capable": 1.08,
-   "code": "MC",
-   "name": "Monaco",
-   "preferred": 0.32,
-   "samples": 16034
-  },
-  {
-   "capable": 19.19,
-   "code": "MD",
-   "name": "Republic of Moldova",
-   "preferred": 19.05,
-   "samples": 819051
-  },
-  {
-   "capable": 0.13,
-   "code": "ME",
-   "name": "Montenegro",
-   "preferred": 0.12,
-   "samples": 326486
-  },
-  {
-   "capable": 51.65,
-   "code": "MF",
-   "name": "Saint Martin (French part)",
-   "preferred": 50.93,
-   "samples": 8240
-  },
-  {
-   "capable": 5.48,
-   "code": "MG",
-   "name": "Madagascar",
-   "preferred": 5.38,
-   "samples": 213446
-  },
-  {
-   "capable": 29.43,
-   "code": "MH",
-   "name": "Marshall Islands",
-   "preferred": 28.73,
-   "samples": 10904
-  },
-  {
-   "capable": 0.18,
-   "code": "MK",
-   "name": "North Macedonia",
-   "preferred": 0.15,
-   "samples": 704487
-  },
-  {
-   "capable": 17.35,
-   "code": "ML",
-   "name": "Mali",
-   "preferred": 17.07,
-   "samples": 928683
-  },
-  {
-   "capable": 8.57,
-   "code": "MM",
-   "name": "Myanmar",
-   "preferred": 8.46,
-   "samples": 720507
-  },
-  {
-   "capable": 46.67,
-   "code": "MN",
-   "name": "Mongolia",
-   "preferred": 45.1,
-   "samples": 963925
-  },
-  {
-   "capable": 50.02,
-   "code": "MO",
-   "name": "Macao Special Administrative Region of China",
-   "preferred": 44.63,
-   "samples": 507089
-  },
-  {
-   "capable": 21.46,
-   "code": "MP",
-   "name": "Northern Mariana Islands",
-   "preferred": 20.93,
-   "samples": 10004
-  },
-  {
-   "capable": 50.07,
-   "code": "MQ",
-   "name": "Martinique",
-   "preferred": 49.39,
-   "samples": 168818
-  },
-  {
-   "capable": 5.27,
-   "code": "MR",
-   "name": "Mauritania",
-   "preferred": 5.19,
-   "samples": 359113
-  },
-  {
-   "capable": 0.2,
-   "code": "MT",
-   "name": "Malta",
-   "preferred": 0.18,
-   "samples": 186520
+   "preferred": 38.23,
+   "samples": 1769901
   },
   {
    "capable": 0.32,
-   "code": "MU",
-   "name": "Mauritius",
-   "preferred": 0.3,
-   "samples": 455828
+   "code": "DZ",
+   "name": "Algeria",
+   "preferred": 0.26,
+   "samples": 5236912
   },
   {
-   "capable": 16.75,
-   "code": "MV",
-   "name": "Maldives",
-   "preferred": 16.59,
-   "samples": 236832
+   "capable": 38.73,
+   "code": "EC",
+   "name": "Ecuador",
+   "preferred": 38.24,
+   "samples": 3617894
   },
   {
-   "capable": 1.38,
-   "code": "MW",
-   "name": "Malawi",
-   "preferred": 1.34,
-   "samples": 519876
+   "capable": 50.8,
+   "code": "EE",
+   "name": "Estonia",
+   "preferred": 46.79,
+   "samples": 396162
   },
   {
-   "capable": 58.32,
-   "code": "MX",
-   "name": "Mexico",
-   "preferred": 57.77,
-   "samples": 25507708
+   "capable": 5.56,
+   "code": "EG",
+   "name": "Egypt",
+   "preferred": 5.4,
+   "samples": 12607070
   },
   {
-   "capable": 73.25,
-   "code": "MY",
-   "name": "Malaysia",
-   "preferred": 72.42,
-   "samples": 8234722
+   "capable": 11.25,
+   "code": "ER",
+   "name": "Eritrea",
+   "preferred": 11.25,
+   "samples": 329
   },
   {
-   "capable": 4.32,
-   "code": "MZ",
-   "name": "Mozambique",
-   "preferred": 4.25,
-   "samples": 702062
+   "capable": 12.2,
+   "code": "ES",
+   "name": "Spain",
+   "preferred": 10.32,
+   "samples": 12389955
+  },
+  {
+   "capable": 0.43,
+   "code": "ET",
+   "name": "Ethiopia",
+   "preferred": 0.41,
+   "samples": 1144210
+  },
+  {
+   "capable": 52.98,
+   "code": "FI",
+   "name": "Finland",
+   "preferred": 49.91,
+   "samples": 1804306
+  },
+  {
+   "capable": 42.92,
+   "code": "FJ",
+   "name": "Fiji",
+   "preferred": 41.96,
+   "samples": 170525
+  },
+  {
+   "capable": 56.08,
+   "code": "FK",
+   "name": "Falkland Islands",
+   "preferred": 55.02,
+   "samples": 1612
+  },
+  {
+   "capable": 23.4,
+   "code": "FM",
+   "name": "Micronesia (Federated States of)",
+   "preferred": 22.54,
+   "samples": 19988
+  },
+  {
+   "capable": 0.86,
+   "code": "FO",
+   "name": "Faeroe Islands",
+   "preferred": 0.84,
+   "samples": 28257
+  },
+  {
+   "capable": 84.59,
+   "code": "FR",
+   "name": "France",
+   "preferred": 83.31,
+   "samples": 21907644
+  },
+  {
+   "capable": 25.14,
+   "code": "GA",
+   "name": "Gabon",
+   "preferred": 24.3,
+   "samples": 243095
+  },
+  {
+   "capable": 55.24,
+   "code": "GB",
+   "name": "United Kingdom of Great Britain and Northern Ireland",
+   "preferred": 53.5,
+   "samples": 14651810
+  },
+  {
+   "capable": 5.89,
+   "code": "GD",
+   "name": "Grenada",
+   "preferred": 5.82,
+   "samples": 72828
+  },
+  {
+   "capable": 12.64,
+   "code": "GE",
+   "name": "Georgia",
+   "preferred": 12.33,
+   "samples": 1008772
+  },
+  {
+   "capable": 43.22,
+   "code": "GF",
+   "name": "French Guiana",
+   "preferred": 42.1,
+   "samples": 81250
+  },
+  {
+   "capable": 1.02,
+   "code": "GG",
+   "name": "Guernsey",
+   "preferred": 1.01,
+   "samples": 31713
+  },
+  {
+   "capable": 1.96,
+   "code": "GH",
+   "name": "Ghana",
+   "preferred": 1.79,
+   "samples": 4121358
+  },
+  {
+   "capable": 0.2,
+   "code": "GI",
+   "name": "Gibraltar",
+   "preferred": 0.12,
+   "samples": 21955
+  },
+  {
+   "capable": 0.13,
+   "code": "GL",
+   "name": "Greenland",
+   "preferred": 0.12,
+   "samples": 46919
+  },
+  {
+   "capable": 0.4,
+   "code": "GM",
+   "name": "Gambia",
+   "preferred": 0.38,
+   "samples": 450475
+  },
+  {
+   "capable": 1.0,
+   "code": "GN",
+   "name": "Guinea",
+   "preferred": 0.98,
+   "samples": 1475807
+  },
+  {
+   "capable": 44.34,
+   "code": "GP",
+   "name": "Guadeloupe",
+   "preferred": 42.72,
+   "samples": 237371
+  },
+  {
+   "capable": 0.69,
+   "code": "GQ",
+   "name": "Equatorial Guinea",
+   "preferred": 0.64,
+   "samples": 53597
+  },
+  {
+   "capable": 58.84,
+   "code": "GR",
+   "name": "Greece",
+   "preferred": 57.55,
+   "samples": 2931943
+  },
+  {
+   "capable": 57.74,
+   "code": "GT",
+   "name": "Guatemala",
+   "preferred": 56.62,
+   "samples": 1218728
+  },
+  {
+   "capable": 1.43,
+   "code": "GU",
+   "name": "Guam",
+   "preferred": 1.37,
+   "samples": 88278
+  },
+  {
+   "capable": 12.56,
+   "code": "GW",
+   "name": "Guinea-Bissau",
+   "preferred": 12.41,
+   "samples": 31780
+  },
+  {
+   "capable": 27.29,
+   "code": "GY",
+   "name": "Guyana",
+   "preferred": 26.37,
+   "samples": 404724
+  },
+  {
+   "capable": 8.55,
+   "code": "HK",
+   "name": "Hong Kong Special Administrative Region of China",
+   "preferred": 2.66,
+   "samples": 4077207
+  },
+  {
+   "capable": 22.6,
+   "code": "HN",
+   "name": "Honduras",
+   "preferred": 21.92,
+   "samples": 867425
+  },
+  {
+   "capable": 6.05,
+   "code": "HR",
+   "name": "Croatia",
+   "preferred": 5.95,
+   "samples": 1312556
+  },
+  {
+   "capable": 9.26,
+   "code": "HT",
+   "name": "Haiti",
+   "preferred": 9.1,
+   "samples": 866352
+  },
+  {
+   "capable": 56.12,
+   "code": "HU",
+   "name": "Hungary",
+   "preferred": 53.04,
+   "samples": 3220059
+  },
+  {
+   "capable": 29.97,
+   "code": "ID",
+   "name": "Indonesia",
+   "preferred": 28.92,
+   "samples": 40700117
+  },
+  {
+   "capable": 47.88,
+   "code": "IE",
+   "name": "Ireland",
+   "preferred": 46.49,
+   "samples": 1463968
+  },
+  {
+   "capable": 66.23,
+   "code": "IL",
+   "name": "Israel",
+   "preferred": 59.94,
+   "samples": 2843624
+  },
+  {
+   "capable": 31.84,
+   "code": "IM",
+   "name": "Isle of Man",
+   "preferred": 31.15,
+   "samples": 53661
+  },
+  {
+   "capable": 76.82,
+   "code": "IN",
+   "name": "India",
+   "preferred": 73.86,
+   "samples": 113547372
+  },
+  {
+   "capable": 2.19,
+   "code": "IO",
+   "name": "British Indian Ocean Territory",
+   "preferred": 2.19,
+   "samples": 684
+  },
+  {
+   "capable": 1.28,
+   "code": "IQ",
+   "name": "Iraq",
+   "preferred": 1.22,
+   "samples": 6283612
+  },
+  {
+   "capable": 20.86,
+   "code": "IR",
+   "name": "Iran (Islamic Republic of)",
+   "preferred": 19.24,
+   "samples": 80407
+  },
+  {
+   "capable": 15.36,
+   "code": "IS",
+   "name": "Iceland",
+   "preferred": 13.6,
+   "samples": 171779
+  },
+  {
+   "capable": 20.16,
+   "code": "IT",
+   "name": "Italy",
+   "preferred": 18.14,
+   "samples": 13113841
   },
   {
    "capable": 0.55,
-   "code": "NA",
-   "name": "Namibia",
-   "preferred": 0.54,
-   "samples": 184554
+   "code": "JE",
+   "name": "Jersey",
+   "preferred": 0.53,
+   "samples": 54791
   },
   {
-   "capable": 12.6,
-   "code": "NC",
-   "name": "New Caledonia",
-   "preferred": 11.77,
-   "samples": 76786
+   "capable": 17.59,
+   "code": "JM",
+   "name": "Jamaica",
+   "preferred": 17.3,
+   "samples": 715333
   },
   {
-   "capable": 11.17,
-   "code": "NE",
-   "name": "Niger",
-   "preferred": 10.8,
-   "samples": 368177
+   "capable": 20.39,
+   "code": "JO",
+   "name": "Jordan",
+   "preferred": 19.66,
+   "samples": 2313969
   },
   {
-   "capable": 5.49,
-   "code": "NG",
-   "name": "Nigeria",
-   "preferred": 4.98,
-   "samples": 12381940
+   "capable": 63.56,
+   "code": "JP",
+   "name": "Japan",
+   "preferred": 59.53,
+   "samples": 98620958
   },
   {
-   "capable": 33.97,
-   "code": "NI",
-   "name": "Nicaragua",
-   "preferred": 32.93,
-   "samples": 808202
+   "capable": 16.8,
+   "code": "KE",
+   "name": "Kenya",
+   "preferred": 16.6,
+   "samples": 3387408
   },
   {
-   "capable": 52.44,
-   "code": "NL",
-   "name": "Netherlands",
-   "preferred": 51.18,
-   "samples": 5769887
-  },
-  {
-   "capable": 53.51,
-   "code": "NO",
-   "name": "Norway",
-   "preferred": 50.62,
-   "samples": 2055515
-  },
-  {
-   "capable": 61.67,
-   "code": "NP",
-   "name": "Nepal",
-   "preferred": 60.5,
-   "samples": 2359010
-  },
-  {
-   "capable": 49.55,
-   "code": "NR",
-   "name": "Nauru",
-   "preferred": 48.72,
-   "samples": 3754
-  },
-  {
-   "capable": 9.46,
-   "code": "NU",
-   "name": "Niue",
-   "preferred": 9.34,
-   "samples": 846
-  },
-  {
-   "capable": 33.05,
-   "code": "NZ",
-   "name": "New Zealand",
-   "preferred": 29.4,
-   "samples": 1953833
-  },
-  {
-   "capable": 29.82,
-   "code": "OM",
-   "name": "Oman",
-   "preferred": 29.22,
-   "samples": 1292874
-  },
-  {
-   "capable": 3.95,
-   "code": "PA",
-   "name": "Panama",
-   "preferred": 3.85,
-   "samples": 955579
-  },
-  {
-   "capable": 34.81,
-   "code": "PE",
-   "name": "Peru",
-   "preferred": 34.36,
-   "samples": 6252532
-  },
-  {
-   "capable": 18.69,
-   "code": "PF",
-   "name": "French Polynesia",
-   "preferred": 16.69,
-   "samples": 78514
-  },
-  {
-   "capable": 26.78,
-   "code": "PG",
-   "name": "Papua New Guinea",
-   "preferred": 24.29,
-   "samples": 202256
-  },
-  {
-   "capable": 20.95,
-   "code": "PH",
-   "name": "Philippines",
-   "preferred": 20.33,
-   "samples": 15031833
-  },
-  {
-   "capable": 23.21,
-   "code": "PK",
-   "name": "Pakistan",
-   "preferred": 22.62,
-   "samples": 12422043
-  },
-  {
-   "capable": 19.59,
-   "code": "PL",
-   "name": "Poland",
-   "preferred": 18.99,
-   "samples": 7627737
-  },
-  {
-   "capable": 0.09,
-   "code": "PM",
-   "name": "Saint Pierre and Miquelon",
-   "preferred": 0.09,
-   "samples": 6598
-  },
-  {
-   "capable": 54.02,
-   "code": "PR",
-   "name": "Puerto Rico",
-   "preferred": 52.05,
-   "samples": 1013447
-  },
-  {
-   "capable": 0.53,
-   "code": "PS",
-   "name": "State of Palestine",
-   "preferred": 0.39,
-   "samples": 912138
-  },
-  {
-   "capable": 48.23,
-   "code": "PT",
-   "name": "Portugal",
-   "preferred": 47.66,
-   "samples": 3752955
+   "capable": 1.68,
+   "code": "KG",
+   "name": "Kyrgyzstan",
+   "preferred": 1.61,
+   "samples": 1079463
   },
   {
    "capable": 0.46,
+   "code": "KH",
+   "name": "Cambodia",
+   "preferred": 0.42,
+   "samples": 1075551
+  },
+  {
+   "capable": 60.77,
+   "code": "KI",
+   "name": "Kiribati",
+   "preferred": 60.46,
+   "samples": 20187
+  },
+  {
+   "capable": 0.45,
+   "code": "KM",
+   "name": "Comoros",
+   "preferred": 0.44,
+   "samples": 49342
+  },
+  {
+   "capable": 0.59,
+   "code": "KN",
+   "name": "Saint Kitts and Nevis",
+   "preferred": 0.54,
+   "samples": 35284
+  },
+  {
+   "capable": 30.63,
+   "code": "KR",
+   "name": "Republic of Korea",
+   "preferred": 28.42,
+   "samples": 15012497
+  },
+  {
+   "capable": 27.25,
+   "code": "KW",
+   "name": "Kuwait",
+   "preferred": 26.61,
+   "samples": 1082356
+  },
+  {
+   "capable": 1.86,
+   "code": "KY",
+   "name": "Cayman Islands",
+   "preferred": 1.82,
+   "samples": 33120
+  },
+  {
+   "capable": 30.38,
+   "code": "KZ",
+   "name": "Kazakhstan",
+   "preferred": 28.2,
+   "samples": 6274170
+  },
+  {
+   "capable": 8.52,
+   "code": "LA",
+   "name": "Lao People's Democratic Republic",
+   "preferred": 8.36,
+   "samples": 743337
+  },
+  {
+   "capable": 0.37,
+   "code": "LB",
+   "name": "Lebanon",
+   "preferred": 0.32,
+   "samples": 1875172
+  },
+  {
+   "capable": 13.21,
+   "code": "LC",
+   "name": "Saint Lucia",
+   "preferred": 13.1,
+   "samples": 89325
+  },
+  {
+   "capable": 55.42,
+   "code": "LI",
+   "name": "Liechtenstein",
+   "preferred": 55.05,
+   "samples": 13610
+  },
+  {
+   "capable": 61.43,
+   "code": "LK",
+   "name": "Sri Lanka",
+   "preferred": 60.89,
+   "samples": 1597950
+  },
+  {
+   "capable": 5.38,
+   "code": "LR",
+   "name": "Liberia",
+   "preferred": 5.07,
+   "samples": 545992
+  },
+  {
+   "capable": 0.53,
+   "code": "LS",
+   "name": "Lesotho",
+   "preferred": 0.51,
+   "samples": 75308
+  },
+  {
+   "capable": 31.01,
+   "code": "LT",
+   "name": "Lithuania",
+   "preferred": 27.22,
+   "samples": 802439
+  },
+  {
+   "capable": 56.05,
+   "code": "LU",
+   "name": "Luxembourg",
+   "preferred": 54.92,
+   "samples": 200614
+  },
+  {
+   "capable": 41.75,
+   "code": "LV",
+   "name": "Latvia",
+   "preferred": 38.74,
+   "samples": 785566
+  },
+  {
+   "capable": 4.58,
+   "code": "LY",
+   "name": "Libya",
+   "preferred": 4.51,
+   "samples": 1637844
+  },
+  {
+   "capable": 3.82,
+   "code": "MA",
+   "name": "Morocco",
+   "preferred": 3.71,
+   "samples": 3641026
+  },
+  {
+   "capable": 6.42,
+   "code": "MC",
+   "name": "Monaco",
+   "preferred": 1.35,
+   "samples": 12177
+  },
+  {
+   "capable": 19.13,
+   "code": "MD",
+   "name": "Republic of Moldova",
+   "preferred": 19.01,
+   "samples": 847490
+  },
+  {
+   "capable": 0.07,
+   "code": "ME",
+   "name": "Montenegro",
+   "preferred": 0.07,
+   "samples": 305155
+  },
+  {
+   "capable": 45.24,
+   "code": "MF",
+   "name": "Saint Martin (French part)",
+   "preferred": 44.42,
+   "samples": 7889
+  },
+  {
+   "capable": 6.17,
+   "code": "MG",
+   "name": "Madagascar",
+   "preferred": 6.05,
+   "samples": 221447
+  },
+  {
+   "capable": 37.43,
+   "code": "MH",
+   "name": "Marshall Islands",
+   "preferred": 36.68,
+   "samples": 12078
+  },
+  {
+   "capable": 0.19,
+   "code": "MK",
+   "name": "North Macedonia",
+   "preferred": 0.17,
+   "samples": 637442
+  },
+  {
+   "capable": 16.86,
+   "code": "ML",
+   "name": "Mali",
+   "preferred": 16.47,
+   "samples": 1108904
+  },
+  {
+   "capable": 7.66,
+   "code": "MM",
+   "name": "Myanmar",
+   "preferred": 7.51,
+   "samples": 705708
+  },
+  {
+   "capable": 48.52,
+   "code": "MN",
+   "name": "Mongolia",
+   "preferred": 46.52,
+   "samples": 1097437
+  },
+  {
+   "capable": 46.47,
+   "code": "MO",
+   "name": "Macao Special Administrative Region of China",
+   "preferred": 42.12,
+   "samples": 297978
+  },
+  {
+   "capable": 45.66,
+   "code": "MP",
+   "name": "Northern Mariana Islands",
+   "preferred": 44.51,
+   "samples": 5278
+  },
+  {
+   "capable": 41.17,
+   "code": "MQ",
+   "name": "Martinique",
+   "preferred": 40.17,
+   "samples": 224604
+  },
+  {
+   "capable": 4.87,
+   "code": "MR",
+   "name": "Mauritania",
+   "preferred": 4.81,
+   "samples": 364726
+  },
+  {
+   "capable": 0.15,
+   "code": "MT",
+   "name": "Malta",
+   "preferred": 0.12,
+   "samples": 155617
+  },
+  {
+   "capable": 0.21,
+   "code": "MU",
+   "name": "Mauritius",
+   "preferred": 0.19,
+   "samples": 473766
+  },
+  {
+   "capable": 16.73,
+   "code": "MV",
+   "name": "Maldives",
+   "preferred": 16.55,
+   "samples": 224921
+  },
+  {
+   "capable": 1.06,
+   "code": "MW",
+   "name": "Malawi",
+   "preferred": 1.03,
+   "samples": 546747
+  },
+  {
+   "capable": 57.47,
+   "code": "MX",
+   "name": "Mexico",
+   "preferred": 56.91,
+   "samples": 24148018
+  },
+  {
+   "capable": 72.79,
+   "code": "MY",
+   "name": "Malaysia",
+   "preferred": 71.7,
+   "samples": 8741455
+  },
+  {
+   "capable": 4.42,
+   "code": "MZ",
+   "name": "Mozambique",
+   "preferred": 4.34,
+   "samples": 766378
+  },
+  {
+   "capable": 0.1,
+   "code": "NA",
+   "name": "Namibia",
+   "preferred": 0.09,
+   "samples": 152257
+  },
+  {
+   "capable": 12.0,
+   "code": "NC",
+   "name": "New Caledonia",
+   "preferred": 11.51,
+   "samples": 53670
+  },
+  {
+   "capable": 12.48,
+   "code": "NE",
+   "name": "Niger",
+   "preferred": 12.1,
+   "samples": 365981
+  },
+  {
+   "capable": 6.87,
+   "code": "NG",
+   "name": "Nigeria",
+   "preferred": 6.4,
+   "samples": 11940206
+  },
+  {
+   "capable": 34.92,
+   "code": "NI",
+   "name": "Nicaragua",
+   "preferred": 33.87,
+   "samples": 889362
+  },
+  {
+   "capable": 52.77,
+   "code": "NL",
+   "name": "Netherlands",
+   "preferred": 50.99,
+   "samples": 5593847
+  },
+  {
+   "capable": 58.76,
+   "code": "NO",
+   "name": "Norway",
+   "preferred": 51.46,
+   "samples": 1883975
+  },
+  {
+   "capable": 59.41,
+   "code": "NP",
+   "name": "Nepal",
+   "preferred": 58.01,
+   "samples": 2520943
+  },
+  {
+   "capable": 43.06,
+   "code": "NR",
+   "name": "Nauru",
+   "preferred": 42.67,
+   "samples": 3084
+  },
+  {
+   "capable": 6.01,
+   "code": "NU",
+   "name": "Niue",
+   "preferred": 5.83,
+   "samples": 1731
+  },
+  {
+   "capable": 33.35,
+   "code": "NZ",
+   "name": "New Zealand",
+   "preferred": 29.35,
+   "samples": 1848234
+  },
+  {
+   "capable": 30.45,
+   "code": "OM",
+   "name": "Oman",
+   "preferred": 29.65,
+   "samples": 1242270
+  },
+  {
+   "capable": 4.38,
+   "code": "PA",
+   "name": "Panama",
+   "preferred": 4.17,
+   "samples": 1170423
+  },
+  {
+   "capable": 34.88,
+   "code": "PE",
+   "name": "Peru",
+   "preferred": 34.26,
+   "samples": 6134389
+  },
+  {
+   "capable": 16.57,
+   "code": "PF",
+   "name": "French Polynesia",
+   "preferred": 12.74,
+   "samples": 66959
+  },
+  {
+   "capable": 26.89,
+   "code": "PG",
+   "name": "Papua New Guinea",
+   "preferred": 24.69,
+   "samples": 187414
+  },
+  {
+   "capable": 22.07,
+   "code": "PH",
+   "name": "Philippines",
+   "preferred": 21.22,
+   "samples": 12906381
+  },
+  {
+   "capable": 23.97,
+   "code": "PK",
+   "name": "Pakistan",
+   "preferred": 23.19,
+   "samples": 12329014
+  },
+  {
+   "capable": 20.21,
+   "code": "PL",
+   "name": "Poland",
+   "preferred": 18.79,
+   "samples": 7045146
+  },
+  {
+   "capable": 0.32,
+   "code": "PM",
+   "name": "Saint Pierre and Miquelon",
+   "preferred": 0.32,
+   "samples": 3733
+  },
+  {
+   "capable": 56.51,
+   "code": "PR",
+   "name": "Puerto Rico",
+   "preferred": 53.32,
+   "samples": 958505
+  },
+  {
+   "capable": 0.62,
+   "code": "PS",
+   "name": "State of Palestine",
+   "preferred": 0.34,
+   "samples": 944202
+  },
+  {
+   "capable": 47.23,
+   "code": "PT",
+   "name": "Portugal",
+   "preferred": 46.37,
+   "samples": 4230590
+  },
+  {
+   "capable": 0.18,
    "code": "PW",
    "name": "Palau",
-   "preferred": 0.45,
-   "samples": 10544
+   "preferred": 0.17,
+   "samples": 11084
   },
   {
-   "capable": 45.15,
+   "capable": 45.45,
    "code": "PY",
    "name": "Paraguay",
-   "preferred": 43.74,
-   "samples": 1285846
+   "preferred": 43.3,
+   "samples": 1303978
   },
   {
-   "capable": 48.42,
+   "capable": 52.74,
    "code": "QA",
    "name": "Qatar",
-   "preferred": 46.52,
-   "samples": 896445
+   "preferred": 49.85,
+   "samples": 823319
   },
   {
-   "capable": 36.99,
+   "capable": 36.84,
    "code": "RE",
    "name": "Reunion",
-   "preferred": 36.45,
-   "samples": 362924
+   "preferred": 36.04,
+   "samples": 366575
   },
   {
-   "capable": 33.12,
+   "capable": 34.98,
    "code": "RO",
    "name": "Romania",
-   "preferred": 32.84,
-   "samples": 3921346
+   "preferred": 34.64,
+   "samples": 3941656
   },
   {
-   "capable": 7.11,
+   "capable": 6.44,
    "code": "RS",
    "name": "Serbia",
-   "preferred": 6.95,
-   "samples": 2275462
+   "preferred": 6.13,
+   "samples": 2093079
   },
   {
-   "capable": 5.57,
+   "capable": 10.72,
    "code": "RU",
    "name": "Russian Federation",
-   "preferred": 4.25,
-   "samples": 76644
+   "preferred": 7.44,
+   "samples": 61271
   },
   {
-   "capable": 9.41,
+   "capable": 8.72,
    "code": "RW",
    "name": "Rwanda",
-   "preferred": 9.3,
-   "samples": 496905
+   "preferred": 8.61,
+   "samples": 538481
   },
   {
-   "capable": 74.31,
+   "capable": 74.97,
    "code": "SA",
    "name": "Saudi Arabia",
-   "preferred": 72.98,
-   "samples": 8908390
+   "preferred": 73.16,
+   "samples": 9303310
   },
   {
-   "capable": 15.27,
+   "capable": 14.86,
    "code": "SB",
    "name": "Solomon Islands",
-   "preferred": 14.84,
-   "samples": 27079
+   "preferred": 14.63,
+   "samples": 27491
   },
   {
-   "capable": 3.29,
+   "capable": 4.59,
    "code": "SC",
    "name": "Seychelles",
-   "preferred": 1.9,
-   "samples": 133086
+   "preferred": 1.94,
+   "samples": 109590
   },
   {
-   "capable": 10.18,
+   "capable": 8.99,
    "code": "SD",
    "name": "Sudan",
-   "preferred": 10.08,
-   "samples": 1131247
+   "preferred": 8.84,
+   "samples": 1125492
   },
   {
-   "capable": 34.22,
+   "capable": 38.71,
    "code": "SE",
    "name": "Sweden",
-   "preferred": 31.31,
-   "samples": 4567032
+   "preferred": 31.6,
+   "samples": 4238198
   },
   {
-   "capable": 21.7,
+   "capable": 22.02,
    "code": "SG",
    "name": "Singapore",
-   "preferred": 15.72,
-   "samples": 2428898
+   "preferred": 16.22,
+   "samples": 2415817
   },
   {
-   "capable": 15.06,
+   "capable": 27.78,
    "code": "SH",
    "name": "Saint Helena, Ascension, and Tristan da Cunha",
-   "preferred": 12.97,
-   "samples": 239
+   "preferred": 26.98,
+   "samples": 252
   },
   {
-   "capable": 9.66,
+   "capable": 9.01,
    "code": "SI",
    "name": "Slovenia",
-   "preferred": 9.5,
-   "samples": 480211
+   "preferred": 8.88,
+   "samples": 491426
   },
   {
-   "capable": 4.88,
-   "code": "SJ",
-   "name": "Svalbard and Jan Mayen Islands",
-   "preferred": 4.88,
-   "samples": 123
-  },
-  {
-   "capable": 13.24,
+   "capable": 14.88,
    "code": "SK",
    "name": "Slovakia",
-   "preferred": 12.87,
-   "samples": 1479385
+   "preferred": 13.81,
+   "samples": 1372918
   },
   {
-   "capable": 1.61,
+   "capable": 1.47,
    "code": "SL",
    "name": "Sierra Leone",
-   "preferred": 1.54,
-   "samples": 760089
+   "preferred": 1.4,
+   "samples": 969281
   },
   {
-   "capable": 0.08,
+   "capable": 0.24,
    "code": "SM",
    "name": "San Marino",
-   "preferred": 0.05,
-   "samples": 16043
+   "preferred": 0.04,
+   "samples": 15740
   },
   {
-   "capable": 34.23,
+   "capable": 32.97,
    "code": "SN",
    "name": "Senegal",
-   "preferred": 33.67,
-   "samples": 2518213
+   "preferred": 32.55,
+   "samples": 2689562
   },
   {
-   "capable": 0.49,
+   "capable": 0.46,
    "code": "SO",
    "name": "Somalia",
-   "preferred": 0.48,
-   "samples": 698860
+   "preferred": 0.46,
+   "samples": 769260
   },
   {
-   "capable": 57.28,
+   "capable": 60.68,
    "code": "SR",
    "name": "Suriname",
-   "preferred": 56.24,
-   "samples": 221330
+   "preferred": 59.72,
+   "samples": 228302
   },
   {
-   "capable": 22.94,
+   "capable": 26.16,
    "code": "SS",
    "name": "South Sudan",
-   "preferred": 22.57,
-   "samples": 83384
+   "preferred": 25.72,
+   "samples": 87114
   },
   {
-   "capable": 3.49,
+   "capable": 6.18,
    "code": "ST",
    "name": "Sao Tome and Principe",
-   "preferred": 3.37,
-   "samples": 11992
+   "preferred": 5.95,
+   "samples": 11448
   },
   {
-   "capable": 14.07,
+   "capable": 11.63,
    "code": "SV",
    "name": "El Salvador",
-   "preferred": 13.73,
-   "samples": 974973
+   "preferred": 11.23,
+   "samples": 969941
   },
   {
-   "capable": 27.1,
+   "capable": 30.36,
    "code": "SX",
    "name": "Sint Maarten (Dutch part)",
-   "preferred": 26.63,
-   "samples": 24067
+   "preferred": 29.38,
+   "samples": 23727
   },
   {
-   "capable": 0.72,
+   "capable": 0.67,
    "code": "SY",
    "name": "Syrian Arab Republic",
-   "preferred": 0.69,
-   "samples": 2183263
+   "preferred": 0.64,
+   "samples": 1876220
   },
   {
-   "capable": 2.55,
+   "capable": 2.52,
    "code": "SZ",
    "name": "Swaziland",
-   "preferred": 2.49,
-   "samples": 135716
+   "preferred": 2.47,
+   "samples": 134687
   },
   {
-   "capable": 31.09,
+   "capable": 33.64,
    "code": "TC",
    "name": "Turks and Caicos Islands",
-   "preferred": 30.61,
-   "samples": 18523
+   "preferred": 33.03,
+   "samples": 22068
   },
   {
-   "capable": 11.26,
+   "capable": 10.23,
    "code": "TD",
    "name": "Chad",
-   "preferred": 11.0,
-   "samples": 243811
+   "preferred": 10.0,
+   "samples": 263821
   },
   {
-   "capable": 18.01,
+   "capable": 18.76,
    "code": "TG",
    "name": "Togo",
-   "preferred": 16.5,
-   "samples": 533133
+   "preferred": 18.04,
+   "samples": 506167
   },
   {
-   "capable": 52.41,
+   "capable": 53.18,
    "code": "TH",
    "name": "Thailand",
-   "preferred": 51.53,
-   "samples": 12914890
+   "preferred": 51.54,
+   "samples": 13033451
   },
   {
-   "capable": 1.11,
+   "capable": 1.28,
    "code": "TJ",
    "name": "Tajikistan",
-   "preferred": 1.04,
-   "samples": 575811
+   "preferred": 1.2,
+   "samples": 462947
   },
   {
-   "capable": 19.88,
+   "capable": 49.76,
    "code": "TK",
    "name": "Tokelau",
-   "preferred": 18.67,
-   "samples": 166
+   "preferred": 49.76,
+   "samples": 207
   },
   {
-   "capable": 10.62,
+   "capable": 8.3,
    "code": "TL",
    "name": "Timor-Leste",
-   "preferred": 10.31,
-   "samples": 88704
+   "preferred": 8.04,
+   "samples": 89137
   },
   {
-   "capable": 0.36,
+   "capable": 2.13,
    "code": "TM",
    "name": "Turkmenistan",
-   "preferred": 0.36,
-   "samples": 4167
+   "preferred": 1.57,
+   "samples": 3706
   },
   {
-   "capable": 27.38,
+   "capable": 29.29,
    "code": "TN",
    "name": "Tunisia",
-   "preferred": 26.6,
-   "samples": 2955684
+   "preferred": 28.23,
+   "samples": 3301917
   },
   {
-   "capable": 30.17,
+   "capable": 29.08,
    "code": "TO",
    "name": "Tonga",
-   "preferred": 25.85,
-   "samples": 17216
+   "preferred": 28.06,
+   "samples": 18896
   },
   {
-   "capable": 21.71,
+   "capable": 22.48,
    "code": "TR",
    "name": "Turkey",
-   "preferred": 20.9,
-   "samples": 15633152
+   "preferred": 21.45,
+   "samples": 15661383
   },
   {
-   "capable": 25.17,
+   "capable": 24.63,
    "code": "TT",
    "name": "Trinidad and Tobago",
-   "preferred": 24.45,
-   "samples": 919295
+   "preferred": 24.52,
+   "samples": 827512
   },
   {
-   "capable": 49.99,
+   "capable": 54.52,
    "code": "TV",
    "name": "Tuvalu",
-   "preferred": 48.4,
-   "samples": 3351
+   "preferred": 54.09,
+   "samples": 2786
   },
   {
-   "capable": 59.17,
+   "capable": 62.2,
    "code": "TW",
    "name": "Taiwan",
-   "preferred": 56.23,
-   "samples": 10154238
+   "preferred": 58.06,
+   "samples": 13985827
   },
   {
-   "capable": 0.58,
+   "capable": 0.52,
    "code": "TZ",
    "name": "United Republic of Tanzania",
-   "preferred": 0.55,
-   "samples": 2459436
+   "preferred": 0.48,
+   "samples": 2827297
   },
   {
-   "capable": 14.52,
+   "capable": 16.74,
    "code": "UA",
    "name": "Ukraine",
-   "preferred": 13.84,
-   "samples": 9607865
+   "preferred": 14.93,
+   "samples": 9245023
   },
   {
-   "capable": 1.92,
+   "capable": 2.22,
    "code": "UG",
    "name": "Uganda",
-   "preferred": 1.9,
-   "samples": 2273592
+   "preferred": 2.2,
+   "samples": 2216759
   },
   {
-   "capable": 61.9,
+   "capable": 65.24,
    "code": "US",
    "name": "United States of America",
-   "preferred": 59.85,
-   "samples": 97679957
+   "preferred": 60.43,
+   "samples": 86941271
   },
   {
-   "capable": 61.93,
+   "capable": 63.3,
    "code": "UY",
    "name": "Uruguay",
-   "preferred": 60.81,
-   "samples": 1346002
+   "preferred": 61.85,
+   "samples": 1248747
   },
   {
-   "capable": 10.92,
+   "capable": 8.21,
    "code": "UZ",
    "name": "Uzbekistan",
-   "preferred": 9.62,
-   "samples": 3332325
+   "preferred": 5.92,
+   "samples": 3493540
   },
   {
-   "capable": 1.41,
+   "capable": 1.65,
    "code": "VA",
    "name": "Holy See",
-   "preferred": 0.94,
-   "samples": 213
+   "preferred": 1.65,
+   "samples": 303
   },
   {
-   "capable": 15.83,
+   "capable": 14.72,
    "code": "VC",
    "name": "Saint Vincent and the Grenadines",
-   "preferred": 15.63,
-   "samples": 52041
+   "preferred": 14.59,
+   "samples": 61002
   },
   {
-   "capable": 10.49,
+   "capable": 10.74,
    "code": "VE",
    "name": "Venezuela",
-   "preferred": 10.35,
-   "samples": 7701771
+   "preferred": 10.57,
+   "samples": 7670369
   },
   {
-   "capable": 16.33,
+   "capable": 14.71,
    "code": "VG",
    "name": "British Virgin Islands",
-   "preferred": 15.97,
-   "samples": 23488
+   "preferred": 14.36,
+   "samples": 23269
   },
   {
-   "capable": 9.74,
+   "capable": 12.2,
    "code": "VI",
    "name": "United States Virgin Islands",
-   "preferred": 8.77,
-   "samples": 46678
+   "preferred": 8.83,
+   "samples": 42227
   },
   {
-   "capable": 64.32,
+   "capable": 64.79,
    "code": "VN",
    "name": "Vietnam",
-   "preferred": 62.91,
-   "samples": 26589580
+   "preferred": 62.96,
+   "samples": 25973562
   },
   {
-   "capable": 20.94,
+   "capable": 16.86,
    "code": "VU",
    "name": "Vanuatu",
-   "preferred": 20.58,
-   "samples": 1385
+   "preferred": 16.67,
+   "samples": 1044
   },
   {
-   "capable": 37.89,
+   "capable": 38.41,
    "code": "WF",
    "name": "Wallis and Futuna Islands",
-   "preferred": 37.2,
-   "samples": 6068
+   "preferred": 37.03,
+   "samples": 5147
   },
   {
-   "capable": 9.41,
+   "capable": 8.57,
    "code": "WS",
    "name": "Samoa",
-   "preferred": 9.26,
-   "samples": 34588
+   "preferred": 8.45,
+   "samples": 35949
   },
   {
-   "capable": 9.38,
+   "capable": 10.0,
    "code": "YE",
    "name": "Yemen",
-   "preferred": 9.05,
-   "samples": 321256
+   "preferred": 9.65,
+   "samples": 329326
   },
   {
-   "capable": 24.56,
+   "capable": 25.25,
    "code": "YT",
    "name": "Mayotte",
-   "preferred": 24.04,
-   "samples": 27033
+   "preferred": 24.71,
+   "samples": 33459
   },
   {
-   "capable": 4.15,
+   "capable": 4.61,
    "code": "ZA",
    "name": "South Africa",
-   "preferred": 4.03,
-   "samples": 5442085
+   "preferred": 4.45,
+   "samples": 4904038
   },
   {
-   "capable": 3.98,
+   "capable": 3.73,
    "code": "ZM",
    "name": "Zambia",
-   "preferred": 3.88,
-   "samples": 1039859
+   "preferred": 3.63,
+   "samples": 995275
   },
   {
-   "capable": 26.03,
+   "capable": 26.14,
    "code": "ZW",
    "name": "Zimbabwe",
-   "preferred": 25.61,
-   "samples": 1111855
+   "preferred": 25.67,
+   "samples": 1074568
   }
  ],
  "regions": [
   {
-   "capable": 51.0,
+   "capable": 52.43,
    "code": "XC",
    "name": "Americas",
-   "preferred": 49.62,
-   "samples": 171761189
+   "preferred": 49.83,
+   "samples": 167549364
   },
   {
-   "capable": 50.21,
+   "capable": 50.44,
    "code": "XD",
    "name": "Asia",
-   "preferred": 46.38,
-   "samples": 552325624
+   "preferred": 45.78,
+   "samples": 539934960
   },
   {
-   "capable": 42.77,
+   "capable": 44.26,
    "code": "XF",
    "name": "Oceania",
-   "preferred": 39.73,
-   "samples": 7103833
+   "preferred": 40.66,
+   "samples": 6918938
   },
   {
-   "capable": 36.87,
+   "capable": 38.54,
    "code": "XE",
    "name": "Europe",
-   "preferred": 35.72,
-   "samples": 134455991
+   "preferred": 36.25,
+   "samples": 130932934
   },
   {
-   "capable": 6.5,
+   "capable": 6.85,
    "code": "XB",
    "name": "Africa",
-   "preferred": 6.26,
-   "samples": 106684416
+   "preferred": 6.62,
+   "samples": 104545539
   },
   {
-   "capable": 1.85,
+   "capable": 2.44,
    "code": "XG",
    "name": "Unclassified",
-   "preferred": 1.72,
-   "samples": 16151
+   "preferred": 2.31,
+   "samples": 11456
   }
  ],
  "subregions": [
   {
-   "capable": 71.93,
+   "capable": 71.8,
    "code": "QO",
    "name": "Western Europe",
-   "preferred": 70.57,
-   "samples": 37288892
+   "preferred": 69.72,
+   "samples": 36273301
   },
   {
-   "capable": 65.81,
+   "capable": 65.89,
    "code": "XT",
    "name": "Southern Asia",
-   "preferred": 63.77,
-   "samples": 181359377
+   "preferred": 63.36,
+   "samples": 177797545
   },
   {
-   "capable": 59.7,
+   "capable": 62.89,
    "code": "XQ",
    "name": "Northern America",
-   "preferred": 57.71,
-   "samples": 65674864
+   "preferred": 58.22,
+   "samples": 63880264
   },
   {
-   "capable": 52.67,
+   "capable": 51.94,
    "code": "XO",
    "name": "Central America",
-   "preferred": 52.1,
-   "samples": 26660578
+   "preferred": 51.32,
+   "samples": 26054905
   },
   {
-   "capable": 49.88,
-   "code": "XS",
-   "name": "Eastern Asia",
-   "preferred": 42.67,
-   "samples": 223627186
-  },
-  {
-   "capable": 48.61,
+   "capable": 50.73,
    "code": "QM",
    "name": "Northern Europe",
-   "preferred": 47.3,
-   "samples": 22638066
+   "preferred": 47.75,
+   "samples": 22027545
   },
   {
-   "capable": 44.87,
+   "capable": 50.09,
+   "code": "XS",
+   "name": "Eastern Asia",
+   "preferred": 41.38,
+   "samples": 217785927
+  },
+  {
+   "capable": 46.5,
    "code": "QP",
    "name": "Australia and New Zealand",
-   "preferred": 41.67,
-   "samples": 6351776
+   "preferred": 42.66,
+   "samples": 6182154
   },
   {
-   "capable": 44.57,
+   "capable": 45.37,
    "code": "XP",
    "name": "South America",
-   "preferred": 43.4,
-   "samples": 74017851
+   "preferred": 43.77,
+   "samples": 72329997
   },
   {
-   "capable": 36.9,
+   "capable": 37.42,
    "code": "XU",
    "name": "South-Eastern Asia",
-   "preferred": 35.99,
-   "samples": 85014815
+   "preferred": 36.24,
+   "samples": 83283423
   },
   {
-   "capable": 27.11,
+   "capable": 27.75,
    "code": "QQ",
    "name": "Melanesia",
-   "preferred": 25.21,
-   "samples": 586918
+   "preferred": 26.16,
+   "samples": 575501
   },
   {
-   "capable": 25.93,
+   "capable": 26.4,
    "code": "XV",
    "name": "Western Asia",
-   "preferred": 25.15,
-   "samples": 51837272
+   "preferred": 25.36,
+   "samples": 50811898
   },
   {
-   "capable": 24.92,
+   "capable": 25.09,
    "code": "XN",
    "name": "Caribbean",
-   "preferred": 24.19,
-   "samples": 5407850
+   "preferred": 24.15,
+   "samples": 5284154
   },
   {
-   "capable": 18.68,
+   "capable": 19.5,
    "code": "QN",
    "name": "Southern Europe",
-   "preferred": 17.84,
-   "samples": 24881610
+   "preferred": 17.9,
+   "samples": 24234166
   },
   {
-   "capable": 18.13,
-   "code": "QS",
-   "name": "Polynesia",
-   "preferred": 16.44,
-   "samples": 100037
-  },
-  {
-   "capable": 16.95,
+   "capable": 17.93,
    "code": "QR",
    "name": "Micronesia",
-   "preferred": 16.63,
-   "samples": 65056
+   "preferred": 17.54,
+   "samples": 63516
   },
   {
-   "capable": 15.25,
-   "code": "XR",
-   "name": "Central Asia",
-   "preferred": 13.94,
-   "samples": 10486915
-  },
-  {
-   "capable": 14.29,
+   "capable": 17.59,
    "code": "XW",
    "name": "Eastern Europe",
-   "preferred": 13.21,
-   "samples": 49647377
+   "preferred": 15.14,
+   "samples": 48397873
   },
   {
-   "capable": 8.66,
+   "capable": 17.07,
+   "code": "QS",
+   "name": "Polynesia",
+   "preferred": 14.76,
+   "samples": 97719
+  },
+  {
+   "capable": 15.0,
+   "code": "XR",
+   "name": "Central Asia",
+   "preferred": 13.11,
+   "samples": 10256109
+  },
+  {
+   "capable": 9.59,
    "code": "XL",
    "name": "Western Africa",
-   "preferred": 8.17,
-   "samples": 31230223
+   "preferred": 9.17,
+   "samples": 30601670
   },
   {
-   "capable": 8.21,
+   "capable": 7.88,
    "code": "XI",
    "name": "Middle Africa",
-   "preferred": 7.92,
-   "samples": 7754529
+   "preferred": 7.64,
+   "samples": 7625037
   },
   {
-   "capable": 6.08,
+   "capable": 6.23,
    "code": "XJ",
    "name": "Northern Africa",
-   "preferred": 5.95,
-   "samples": 32344118
+   "preferred": 6.05,
+   "samples": 31648939
   },
   {
-   "capable": 4.78,
+   "capable": 4.87,
    "code": "XH",
    "name": "Eastern Africa",
-   "preferred": 4.7,
-   "samples": 26154853
+   "preferred": 4.79,
+   "samples": 25690696
   },
   {
-   "capable": 4.06,
+   "capable": 4.45,
    "code": "XK",
    "name": "Southern Africa",
-   "preferred": 3.94,
-   "samples": 9200631
+   "preferred": 4.3,
+   "samples": 8979132
   }
  ],
  "url": "https://stats.labs.apnic.net/ipv6/",
  "world": {
-  "capable": 43.65,
+  "capable": 44.31,
   "code": "XA",
   "name": "World",
-  "preferred": 41.02,
-  "samples": 972331706
+  "preferred": 40.84,
+  "samples": 949882332
  }
 }

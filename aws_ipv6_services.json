@@ -3,22 +3,22 @@
   "dual_stack": {
    "no": 62,
    "partial": 3,
-   "yes": 126
+   "yes": 127
   },
   "ipv6_only": {
-   "no": 153,
+   "no": 154,
    "partial": 3,
    "yes": 35
   },
   "private_endpoints": {
    "no": 24,
    "partial": 1,
-   "yes": 150
+   "yes": 151
   },
   "public_endpoints": {
    "no": 9,
    "partial": 1,
-   "yes": 181
+   "yes": 182
   }
  },
  "services": [
@@ -663,6 +663,13 @@
    "dual_stack": "no",
    "ipv6_only": "no",
    "name": "Amazon GuardDuty",
+   "private_endpoints": "yes",
+   "public_endpoints": "yes"
+  },
+  {
+   "dual_stack": "yes",
+   "ipv6_only": "no",
+   "name": "AWS Health",
    "private_endpoints": "yes",
    "public_endpoints": "yes"
   },
@@ -1360,6 +1367,6 @@
    "public_endpoints": "yes"
   }
  ],
- "total": 191,
+ "total": 192,
  "url": "https://docs.aws.amazon.com/vpc/latest/userguide/aws-ipv6-support.html"
 }

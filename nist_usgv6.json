@@ -3,39 +3,39 @@
   {
    "dns": {
     "none": 1,
-    "operational": 120
+    "operational": 118
    },
-   "domains": 121,
+   "domains": 119,
    "mail": {
-    "none": 29,
+    "none": 28,
     "not_applicable": 65,
-    "operational": 27
+    "operational": 26
    },
    "name": "Department of Health and Human Services",
    "web": {
     "in_progress": 1,
     "none": 38,
-    "not_applicable": 19,
+    "not_applicable": 17,
     "operational": 63
    }
   },
   {
    "dns": {
     "none": 2,
-    "operational": 88
+    "operational": 89
    },
-   "domains": 90,
+   "domains": 91,
    "mail": {
     "none": 7,
-    "not_applicable": 68,
+    "not_applicable": 69,
     "operational": 15
    },
    "name": "General Services Administration",
    "web": {
     "in_progress": 7,
-    "none": 22,
-    "not_applicable": 19,
-    "operational": 42
+    "none": 23,
+    "not_applicable": 18,
+    "operational": 43
    }
   },
   {
@@ -50,10 +50,10 @@
    },
    "name": "Department of the Treasury",
    "web": {
-    "in_progress": 16,
+    "in_progress": 15,
     "none": 6,
     "not_applicable": 13,
-    "operational": 52
+    "operational": 53
    }
   },
   {
@@ -76,13 +76,32 @@
   },
   {
    "dns": {
+    "none": 1,
+    "operational": 64
+   },
+   "domains": 65,
+   "mail": {
+    "none": 3,
+    "not_applicable": 35,
+    "operational": 27
+   },
+   "name": "Department of the Interior",
+   "web": {
+    "in_progress": 5,
+    "none": 22,
+    "not_applicable": 7,
+    "operational": 31
+   }
+  },
+  {
+   "dns": {
     "operational": 64
    },
    "domains": 64,
    "mail": {
     "none": 2,
-    "not_applicable": 39,
-    "operational": 23
+    "not_applicable": 38,
+    "operational": 24
    },
    "name": "Department of Commerce",
    "web": {
@@ -94,32 +113,13 @@
   },
   {
    "dns": {
-    "none": 1,
-    "operational": 63
-   },
-   "domains": 64,
-   "mail": {
-    "none": 2,
-    "not_applicable": 35,
-    "operational": 27
-   },
-   "name": "Department of the Interior",
-   "web": {
-    "in_progress": 7,
-    "none": 23,
-    "not_applicable": 7,
-    "operational": 27
-   }
-  },
-  {
-   "dns": {
     "operational": 62
    },
    "domains": 62,
    "mail": {
-    "none": 12,
-    "not_applicable": 27,
-    "operational": 23
+    "none": 17,
+    "not_applicable": 34,
+    "operational": 11
    },
    "name": "Department of Justice",
    "web": {
@@ -175,8 +175,7 @@
    },
    "domains": 41,
    "mail": {
-    "in_progress": 1,
-    "none": 11,
+    "none": 12,
     "not_applicable": 28,
     "operational": 1
    },
@@ -223,8 +222,8 @@
   },
   {
    "dns": {
-    "none": 3,
-    "operational": 27
+    "none": 4,
+    "operational": 26
    },
    "domains": 30,
    "mail": {
@@ -235,8 +234,8 @@
    "name": "Department of Agriculture",
    "web": {
     "none": 19,
-    "not_applicable": 4,
-    "operational": 7
+    "not_applicable": 3,
+    "operational": 8
    }
   },
   {
@@ -305,8 +304,8 @@
    "name": "Office of Personnel Management",
    "web": {
     "none": 2,
-    "not_applicable": 8,
-    "operational": 12
+    "not_applicable": 7,
+    "operational": 13
    }
   },
   {
@@ -317,8 +316,8 @@
    "domains": 21,
    "mail": {
     "none": 11,
-    "not_applicable": 9,
-    "operational": 1
+    "not_applicable": 8,
+    "operational": 2
    },
    "name": ".gov Administration",
    "web": {
@@ -329,25 +328,25 @@
   {
    "dns": {
     "none": 1,
-    "operational": 18
+    "operational": 17
    },
-   "domains": 19,
+   "domains": 18,
    "mail": {
     "none": 2,
-    "not_applicable": 14,
+    "not_applicable": 13,
     "operational": 3
    },
    "name": "Department of Transportation",
    "web": {
     "none": 1,
     "not_applicable": 2,
-    "operational": 16
+    "operational": 15
    }
   },
   {
    "dns": {
-    "none": 4,
-    "operational": 12
+    "none": 2,
+    "operational": 14
    },
    "domains": 16,
    "mail": {
@@ -409,7 +408,8 @@
    },
    "name": "Federal Trade Commission",
    "web": {
-    "none": 6,
+    "none": 5,
+    "not_applicable": 1,
     "operational": 8
    }
   },
@@ -468,7 +468,7 @@
   },
   {
    "dns": {
-    "in_progress": 1,
+    "none": 1,
     "operational": 11
    },
    "domains": 12,
@@ -479,8 +479,7 @@
    },
    "name": "Corporation for National and Community Service",
    "web": {
-    "none": 1,
-    "not_applicable": 9,
+    "not_applicable": 10,
     "operational": 2
    }
   },
@@ -546,7 +545,7 @@
    },
    "name": "Consumer Financial Protection Bureau",
    "web": {
-    "none": 1,
+    "not_applicable": 1,
     "operational": 8
    }
   },
@@ -1162,8 +1161,7 @@
    },
    "domains": 2,
    "mail": {
-    "in_progress": 1,
-    "none": 1
+    "none": 2
    },
    "name": "Open World Leadership Center",
    "web": {
@@ -2117,24 +2115,24 @@
    }
   }
  ],
- "domains": 1320,
+ "domains": 1319,
  "totals": {
   "dns": {
-   "in_progress": 9,
+   "in_progress": 8,
    "none": 86,
    "operational": 1225
   },
   "mail": {
-   "in_progress": 9,
-   "none": 225,
-   "not_applicable": 718,
-   "operational": 368
+   "in_progress": 7,
+   "none": 232,
+   "not_applicable": 723,
+   "operational": 357
   },
   "web": {
-   "in_progress": 41,
-   "none": 318,
-   "not_applicable": 254,
-   "operational": 707
+   "in_progress": 38,
+   "none": 315,
+   "not_applicable": 252,
+   "operational": 714
   }
  },
  "url": "https://usgv6-deploymon.nist.gov/"

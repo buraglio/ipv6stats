@@ -2,8 +2,8 @@
  "url": "https://pulse.internetsociety.org/",
  "users_ipv6": {
   "latest": {
-   "date": "2026-10-01",
-   "value": 44.09
+   "date": "2026-11-01",
+   "value": 44.55
   },
   "series": [
    {
@@ -19813,6 +19813,10 @@
    {
     "date": "2026-10-01",
     "value": 44.09
+   },
+   {
+    "date": "2026-11-01",
+    "value": 44.55
    }
   ]
  },

@@ -1,6 +1,6 @@
 {
- "ipv4_prefixes": 7862,
- "ipv6_prefixes": 3473,
+ "ipv4_prefixes": 7954,
+ "ipv6_prefixes": 3530,
  "services": 26,
  "services_with_ipv6": 15,
  "url": "https://ip-ranges.amazonaws.com/ip-ranges.json"
