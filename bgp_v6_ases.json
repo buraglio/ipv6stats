@@ -1,6 +1,6 @@
 {
- "current": 38146,
- "current_at": "2026-11-15T04:45:06+00:00",
+ "current": 38139,
+ "current_at": "2026-11-16T04:45:06+00:00",
  "daily": [
   {
    "ases": 294,
@@ -34325,6 +34325,10 @@
   {
    "ases": 38146,
    "date": "2026-11-15"
+  },
+  {
+   "ases": 38139,
+   "date": "2026-11-16"
   }
  ],
  "url": "https://bgp.potaroo.net/v6/as2.0/index.html"

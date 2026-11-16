@@ -49,26 +49,26 @@
    "now": 2312
   },
   {
-   "aggregated": 3824,
-   "asn": 16509,
-   "gain": 2176,
-   "gain_pct": 36.3,
-   "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 6000
-  },
-  {
-   "aggregated": 176,
+   "aggregated": 139,
    "asn": 39891,
-   "gain": 2175,
-   "gain_pct": 92.5,
+   "gain": 2212,
+   "gain_pct": 94.1,
    "name": "ALJAWWALSTC-AS Saudi Telecom Company JSC",
    "now": 2351
   },
   {
-   "aggregated": 23,
+   "aggregated": 3829,
+   "asn": 16509,
+   "gain": 2177,
+   "gain_pct": 36.2,
+   "name": "AMAZON-02 - Amazon.com, Inc.",
+   "now": 6006
+  },
+  {
+   "aggregated": 30,
    "asn": 32098,
-   "gain": 2136,
-   "gain_pct": 98.9,
+   "gain": 2129,
+   "gain_pct": 98.6,
    "name": "TRANSTELCO-INC - Transtelco Inc",
    "now": 2159
   },
@@ -105,18 +105,18 @@
    "now": 1639
   },
   {
-   "aggregated": 29,
+   "aggregated": 30,
    "asn": 12479,
-   "gain": 1305,
+   "gain": 1304,
    "gain_pct": 97.8,
    "name": "UNI2-AS Orange Espagne SA",
    "now": 1334
   },
   {
-   "aggregated": 434,
+   "aggregated": 436,
    "asn": 36992,
-   "gain": 1282,
-   "gain_pct": 74.7,
+   "gain": 1280,
+   "gain_pct": 74.6,
    "name": "ETISALAT MISR - ETISALAT MISR",
    "now": 1716
   },
@@ -145,34 +145,34 @@
    "now": 1208
   },
   {
-   "aggregated": 215,
+   "aggregated": 216,
    "asn": 25019,
-   "gain": 1181,
+   "gain": 1183,
    "gain_pct": 84.6,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1396
+   "now": 1399
   },
   {
-   "aggregated": 80,
+   "aggregated": 83,
    "asn": 26611,
-   "gain": 1113,
-   "gain_pct": 93.3,
+   "gain": 1124,
+   "gain_pct": 93.1,
    "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
-   "now": 1193
+   "now": 1207
   },
   {
-   "aggregated": 4,
+   "aggregated": 3,
    "asn": 5416,
-   "gain": 1039,
-   "gain_pct": 99.6,
+   "gain": 1040,
+   "gain_pct": 99.7,
    "name": "BEYON B.S.C.",
    "now": 1043
   },
   {
-   "aggregated": 283,
+   "aggregated": 297,
    "asn": 45271,
-   "gain": 989,
-   "gain_pct": 77.8,
+   "gain": 975,
+   "gain_pct": 76.7,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1272
   },
@@ -233,20 +233,20 @@
    "now": 915
   },
   {
-   "aggregated": 560,
-   "asn": 30036,
-   "gain": 732,
-   "gain_pct": 56.7,
-   "name": "MEDIACOM-ENTERPRISE-BUSINESS - Mediacom Communications Corp",
-   "now": 1292
+   "aggregated": 40,
+   "asn": 812,
+   "gain": 729,
+   "gain_pct": 94.8,
+   "name": "ROGERS-COMMUNICATIONS - Rogers Communications Canada Inc.",
+   "now": 769
   }
  ],
- "date": "2026-11-15",
+ "date": "2026-11-16",
  "table": {
-  "aggregated": 129125,
-  "gain": 137100,
+  "aggregated": 129368,
+  "gain": 137284,
   "gain_pct": 51.5,
-  "now": 266225
+  "now": 266652
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
