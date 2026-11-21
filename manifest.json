@@ -56,33 +56,33 @@
     "ttl_seconds": 2592000
   },
   "bgp_v6_ases": {
-    "error": null,
-    "last_attempt": "2026-11-20T06:42:58+00:00",
+    "error": "ConnectionError: HTTPSConnectionPool(host='bgp.potaroo.net', port=443): Max retries exceeded with url: /v6/as2.0/bgp-as-count.txt (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7bcbddeda570>: Failed to establish a new connection: [Errno 101] Network is unreachable'))",
+    "last_attempt": "2026-11-21T06:36:32+00:00",
     "last_success": "2026-11-20T06:42:58+00:00",
     "schema": 1,
-    "status": "ok",
+    "status": "error",
     "ttl_seconds": 86400
   },
   "bgp_v6_summary": {
-    "error": null,
-    "last_attempt": "2026-11-20T06:42:58+00:00",
+    "error": "ConnectionError: HTTPSConnectionPool(host='bgp.potaroo.net', port=443): Max retries exceeded with url: /v6/as2.0/index.html (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7bcbddeda780>: Failed to establish a new connection: [Errno 101] Network is unreachable'))",
+    "last_attempt": "2026-11-21T06:36:32+00:00",
     "last_success": "2026-11-20T06:42:58+00:00",
     "schema": 1,
-    "status": "ok",
+    "status": "error",
     "ttl_seconds": 86400
   },
   "bgp_v6_table": {
-    "error": null,
-    "last_attempt": "2026-11-20T06:42:58+00:00",
+    "error": "ConnectionError: HTTPSConnectionPool(host='bgp.potaroo.net', port=443): Max retries exceeded with url: /v6/as2.0/bgp-active.txt (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7bcbddeb2bd0>: Failed to establish a new connection: [Errno 101] Network is unreachable'))",
+    "last_attempt": "2026-11-21T06:36:32+00:00",
     "last_success": "2026-11-20T06:42:58+00:00",
     "schema": 1,
-    "status": "ok",
+    "status": "error",
     "ttl_seconds": 86400
   },
   "cidr_report_aggregation": {
     "error": null,
-    "last_attempt": "2026-11-20T06:42:58+00:00",
-    "last_success": "2026-11-20T06:42:58+00:00",
+    "last_attempt": "2026-11-21T06:36:32+00:00",
+    "last_success": "2026-11-21T06:36:32+00:00",
     "schema": 1,
     "status": "ok",
     "ttl_seconds": 86400
@@ -257,8 +257,8 @@
   },
   "routeviews_collectors": {
     "error": null,
-    "last_attempt": "2026-11-20T06:42:58+00:00",
-    "last_success": "2026-11-20T06:42:58+00:00",
+    "last_attempt": "2026-11-21T06:36:32+00:00",
+    "last_success": "2026-11-21T06:36:32+00:00",
     "schema": 1,
     "status": "ok",
     "ttl_seconds": 86400
