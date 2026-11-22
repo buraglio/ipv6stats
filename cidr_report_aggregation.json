@@ -49,12 +49,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3782,
+   "aggregated": 3778,
    "asn": 16509,
-   "gain": 2252,
+   "gain": 2251,
    "gain_pct": 37.3,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 6034
+   "now": 6029
   },
   {
    "aggregated": 186,
@@ -65,12 +65,12 @@
    "now": 2383
   },
   {
-   "aggregated": 31,
+   "aggregated": 33,
    "asn": 32098,
-   "gain": 2133,
-   "gain_pct": 98.6,
+   "gain": 2132,
+   "gain_pct": 98.5,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2164
+   "now": 2165
   },
   {
    "aggregated": 27,
@@ -97,20 +97,20 @@
    "now": 1461
   },
   {
-   "aggregated": 240,
+   "aggregated": 241,
    "asn": 28573,
    "gain": 1398,
    "gain_pct": 85.3,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1638
+   "now": 1639
   },
   {
-   "aggregated": 55,
+   "aggregated": 58,
    "asn": 12479,
-   "gain": 1282,
-   "gain_pct": 95.9,
+   "gain": 1278,
+   "gain_pct": 95.7,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1337
+   "now": 1336
   },
   {
    "aggregated": 449,
@@ -153,28 +153,12 @@
    "now": 1220
   },
   {
-   "aggregated": 116,
-   "asn": 26611,
-   "gain": 1105,
-   "gain_pct": 90.5,
-   "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
-   "now": 1221
-  },
-  {
    "aggregated": 4,
    "asn": 5416,
    "gain": 1039,
    "gain_pct": 99.6,
    "name": "BEYON B.S.C.",
    "now": 1043
-  },
-  {
-   "aggregated": 406,
-   "asn": 38266,
-   "gain": 975,
-   "gain_pct": 70.6,
-   "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1381
   },
   {
    "aggregated": 147,
@@ -185,6 +169,14 @@
    "now": 1118
   },
   {
+   "aggregated": 414,
+   "asn": 38266,
+   "gain": 967,
+   "gain_pct": 70.0,
+   "name": "VIL-AS-AP - Vodafone Idea Ltd",
+   "now": 1381
+  },
+  {
    "aggregated": 304,
    "asn": 45271,
    "gain": 966,
@@ -193,12 +185,28 @@
    "now": 1270
   },
   {
-   "aggregated": 286,
+   "aggregated": 83,
+   "asn": 26611,
+   "gain": 959,
+   "gain_pct": 92.0,
+   "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
+   "now": 1042
+  },
+  {
+   "aggregated": 280,
    "asn": 9829,
-   "gain": 931,
-   "gain_pct": 76.5,
+   "gain": 937,
+   "gain_pct": 77.0,
    "name": "BSNL-NIB - National Internet Backbone",
    "now": 1217
+  },
+  {
+   "aggregated": 607,
+   "asn": 11664,
+   "gain": 845,
+   "gain_pct": 58.2,
+   "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
+   "now": 1452
   },
   {
    "aggregated": 1557,
@@ -209,20 +217,12 @@
    "now": 2402
   },
   {
-   "aggregated": 607,
-   "asn": 11664,
-   "gain": 841,
-   "gain_pct": 58.1,
-   "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1448
-  },
-  {
-   "aggregated": 462,
+   "aggregated": 467,
    "asn": 30036,
-   "gain": 832,
-   "gain_pct": 64.3,
+   "gain": 829,
+   "gain_pct": 64.0,
    "name": "MEDIACOM-ENTERPRISE-BUSINESS - Mediacom Communications Corp",
-   "now": 1294
+   "now": 1296
   },
   {
    "aggregated": 923,
@@ -241,12 +241,12 @@
    "now": 914
   }
  ],
- "date": "2026-11-21",
+ "date": "2026-11-22",
  "table": {
-  "aggregated": 129758,
-  "gain": 137644,
+  "aggregated": 129768,
+  "gain": 137615,
   "gain_pct": 51.5,
-  "now": 267402
+  "now": 267383
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
