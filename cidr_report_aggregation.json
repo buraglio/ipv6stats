@@ -27,10 +27,10 @@
   {
    "aggregated": 723,
    "asn": 11172,
-   "gain": 2988,
+   "gain": 2989,
    "gain_pct": 80.5,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3711
+   "now": 3712
   },
   {
    "aggregated": 818,
@@ -49,12 +49,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3778,
+   "aggregated": 3767,
    "asn": 16509,
    "gain": 2251,
-   "gain_pct": 37.3,
+   "gain_pct": 37.4,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 6029
+   "now": 6018
   },
   {
    "aggregated": 186,
@@ -67,10 +67,10 @@
   {
    "aggregated": 33,
    "asn": 32098,
-   "gain": 2132,
+   "gain": 2131,
    "gain_pct": 98.5,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2165
+   "now": 2164
   },
   {
    "aggregated": 27,
@@ -99,18 +99,18 @@
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1398,
+   "gain": 1401,
    "gain_pct": 85.3,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1639
+   "now": 1642
   },
   {
-   "aggregated": 58,
+   "aggregated": 59,
    "asn": 12479,
-   "gain": 1278,
-   "gain_pct": 95.7,
+   "gain": 1276,
+   "gain_pct": 95.6,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1336
+   "now": 1335
   },
   {
    "aggregated": 449,
@@ -137,12 +137,12 @@
    "now": 1280
   },
   {
-   "aggregated": 218,
+   "aggregated": 217,
    "asn": 25019,
    "gain": 1184,
    "gain_pct": 84.5,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1402
+   "now": 1401
   },
   {
    "aggregated": 110,
@@ -169,44 +169,44 @@
    "now": 1118
   },
   {
-   "aggregated": 414,
+   "aggregated": 416,
    "asn": 38266,
-   "gain": 967,
+   "gain": 969,
    "gain_pct": 70.0,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1381
+   "now": 1385
   },
   {
-   "aggregated": 304,
+   "aggregated": 302,
    "asn": 45271,
    "gain": 966,
-   "gain_pct": 76.1,
+   "gain_pct": 76.2,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1270
+   "now": 1268
   },
   {
-   "aggregated": 83,
+   "aggregated": 79,
    "asn": 26611,
-   "gain": 959,
-   "gain_pct": 92.0,
+   "gain": 955,
+   "gain_pct": 92.4,
    "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
-   "now": 1042
+   "now": 1034
   },
   {
-   "aggregated": 280,
+   "aggregated": 293,
    "asn": 9829,
-   "gain": 937,
-   "gain_pct": 77.0,
+   "gain": 924,
+   "gain_pct": 75.9,
    "name": "BSNL-NIB - National Internet Backbone",
    "now": 1217
   },
   {
    "aggregated": 607,
    "asn": 11664,
-   "gain": 845,
+   "gain": 846,
    "gain_pct": 58.2,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1452
+   "now": 1453
   },
   {
    "aggregated": 1557,
@@ -241,12 +241,12 @@
    "now": 914
   }
  ],
- "date": "2026-11-22",
+ "date": "2026-11-23",
  "table": {
-  "aggregated": 129768,
-  "gain": 137615,
-  "gain_pct": 51.5,
-  "now": 267383
+  "aggregated": 129907,
+  "gain": 137465,
+  "gain_pct": 51.4,
+  "now": 267372
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
