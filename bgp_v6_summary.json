@@ -52,43 +52,43 @@
   },
   {
    "length": 29,
-   "prefixes": 5834,
-   "share": 2.18
+   "prefixes": 5806,
+   "share": 2.17
   },
   {
    "length": 30,
-   "prefixes": 747,
+   "prefixes": 749,
    "share": 0.28
   },
   {
    "length": 31,
-   "prefixes": 377,
+   "prefixes": 376,
    "share": 0.14
   },
   {
    "length": 32,
-   "prefixes": 27686,
-   "share": 10.35
+   "prefixes": 27692,
+   "share": 10.36
   },
   {
    "length": 33,
-   "prefixes": 5772,
+   "prefixes": 5776,
    "share": 2.16
   },
   {
    "length": 34,
-   "prefixes": 5382,
+   "prefixes": 5369,
    "share": 2.01
   },
   {
    "length": 35,
-   "prefixes": 1871,
+   "prefixes": 1872,
    "share": 0.7
   },
   {
    "length": 36,
-   "prefixes": 9746,
-   "share": 3.64
+   "prefixes": 9762,
+   "share": 3.65
   },
   {
    "length": 37,
@@ -97,57 +97,57 @@
   },
   {
    "length": 38,
-   "prefixes": 2809,
+   "prefixes": 2810,
    "share": 1.05
   },
   {
    "length": 39,
-   "prefixes": 1866,
+   "prefixes": 1869,
    "share": 0.7
   },
   {
    "length": 40,
-   "prefixes": 24398,
+   "prefixes": 24388,
    "share": 9.12
   },
   {
    "length": 41,
-   "prefixes": 1915,
+   "prefixes": 1918,
    "share": 0.72
   },
   {
    "length": 42,
-   "prefixes": 2982,
-   "share": 1.12
+   "prefixes": 2979,
+   "share": 1.11
   },
   {
    "length": 43,
-   "prefixes": 1509,
+   "prefixes": 1505,
    "share": 0.56
   },
   {
    "length": 44,
-   "prefixes": 26538,
-   "share": 9.92
+   "prefixes": 26552,
+   "share": 9.93
   },
   {
    "length": 45,
-   "prefixes": 4704,
+   "prefixes": 4703,
    "share": 1.76
   },
   {
    "length": 46,
-   "prefixes": 6159,
+   "prefixes": 6149,
    "share": 2.3
   },
   {
    "length": 47,
-   "prefixes": 9723,
-   "share": 3.64
+   "prefixes": 9709,
+   "share": 3.63
   },
   {
    "length": 48,
-   "prefixes": 125348,
+   "prefixes": 125365,
    "share": 46.88
   },
   {
@@ -206,16 +206,16 @@
    "share": 0.0
   }
  ],
- "report_date": "2026-11-23",
+ "report_date": "2026-11-24",
  "stats": {
-  "address_space_prefix": 14.6234,
-  "average_as_path_length": 4.8765,
-  "average_prefix_length": 43.0802,
-  "fib_entries": 267409,
-  "origin_only_ases": 31660,
-  "rib_entries": 1028124,
-  "transit_only_ases": 375,
-  "unique_ases": 38255
+  "address_space_prefix": 14.6251,
+  "average_as_path_length": 4.8772,
+  "average_prefix_length": 43.0813,
+  "fib_entries": 267392,
+  "origin_only_ases": 31699,
+  "rib_entries": 1028122,
+  "transit_only_ases": 370,
+  "unique_ases": 38278
  },
  "url": "https://bgp.potaroo.net/v6/as2.0/index.html"
 }
