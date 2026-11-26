@@ -3,10 +3,10 @@
   {
    "aggregated": 1144,
    "asn": 9808,
-   "gain": 6042,
-   "gain_pct": 84.1,
+   "gain": 6081,
+   "gain_pct": 84.2,
    "name": "CHINAMOBILE-CN - China Mobile Communications Group Co., Ltd.",
-   "now": 7186
+   "now": 7225
   },
   {
    "aggregated": 6,
@@ -25,12 +25,12 @@
    "now": 3707
   },
   {
-   "aggregated": 723,
+   "aggregated": 715,
    "asn": 11172,
-   "gain": 2990,
-   "gain_pct": 80.5,
+   "gain": 3001,
+   "gain_pct": 80.8,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3713
+   "now": 3716
   },
   {
    "aggregated": 818,
@@ -49,12 +49,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3785,
+   "aggregated": 3792,
    "asn": 16509,
-   "gain": 2254,
+   "gain": 2257,
    "gain_pct": 37.3,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 6039
+   "now": 6049
   },
   {
    "aggregated": 186,
@@ -65,20 +65,20 @@
    "now": 2383
   },
   {
-   "aggregated": 35,
+   "aggregated": 45,
    "asn": 32098,
-   "gain": 2125,
-   "gain_pct": 98.4,
+   "gain": 2118,
+   "gain_pct": 97.9,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2160
+   "now": 2163
   },
   {
    "aggregated": 27,
    "asn": 24547,
-   "gain": 2099,
+   "gain": 2107,
    "gain_pct": 98.7,
    "name": "CMNET-V4HEBEI-AS-AP - Hebei Mobile Communication Company Limited",
-   "now": 2126
+   "now": 2134
   },
   {
    "aggregated": 51,
@@ -99,26 +99,18 @@
   {
    "aggregated": 241,
    "asn": 28573,
-   "gain": 1401,
+   "gain": 1403,
    "gain_pct": 85.3,
    "name": "AS28573 - Claro NXT Telecomunicacoes Ltda",
-   "now": 1642
+   "now": 1644
   },
   {
-   "aggregated": 414,
-   "asn": 36992,
-   "gain": 1302,
-   "gain_pct": 75.9,
-   "name": "ETISALAT MISR - ETISALAT MISR",
-   "now": 1716
-  },
-  {
-   "aggregated": 64,
+   "aggregated": 71,
    "asn": 12479,
-   "gain": 1273,
-   "gain_pct": 95.2,
+   "gain": 1265,
+   "gain_pct": 94.7,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1337
+   "now": 1336
   },
   {
    "aggregated": 25,
@@ -137,12 +129,28 @@
    "now": 1280
   },
   {
-   "aggregated": 217,
+   "aggregated": 216,
    "asn": 25019,
    "gain": 1184,
-   "gain_pct": 84.5,
+   "gain_pct": 84.6,
    "name": "SAUDINETSTC-AS Saudi Telecom Company JSC",
-   "now": 1401
+   "now": 1400
+  },
+  {
+   "aggregated": 571,
+   "asn": 36992,
+   "gain": 1145,
+   "gain_pct": 66.7,
+   "name": "ETISALAT MISR - ETISALAT MISR",
+   "now": 1716
+  },
+  {
+   "aggregated": 90,
+   "asn": 26611,
+   "gain": 1127,
+   "gain_pct": 92.6,
+   "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
+   "now": 1217
   },
   {
    "aggregated": 110,
@@ -161,6 +169,14 @@
    "now": 1043
   },
   {
+   "aggregated": 410,
+   "asn": 38266,
+   "gain": 975,
+   "gain_pct": 70.4,
+   "name": "VIL-AS-AP - Vodafone Idea Ltd",
+   "now": 1385
+  },
+  {
    "aggregated": 147,
    "asn": 62240,
    "gain": 971,
@@ -169,28 +185,12 @@
    "now": 1118
   },
   {
-   "aggregated": 418,
-   "asn": 38266,
-   "gain": 967,
-   "gain_pct": 69.8,
-   "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1385
-  },
-  {
    "aggregated": 303,
    "asn": 45271,
    "gain": 967,
    "gain_pct": 76.1,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
    "now": 1270
-  },
-  {
-   "aggregated": 80,
-   "asn": 26611,
-   "gain": 956,
-   "gain_pct": 92.3,
-   "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
-   "now": 1036
   },
   {
    "aggregated": 286,
@@ -203,26 +203,26 @@
   {
    "aggregated": 1557,
    "asn": 20115,
-   "gain": 847,
-   "gain_pct": 35.2,
+   "gain": 852,
+   "gain_pct": 35.4,
    "name": "CHARTER-20115 - Charter Communications LLC",
-   "now": 2404
+   "now": 2409
   },
   {
-   "aggregated": 607,
+   "aggregated": 613,
    "asn": 11664,
-   "gain": 846,
-   "gain_pct": 58.2,
+   "gain": 838,
+   "gain_pct": 57.8,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1453
+   "now": 1451
   },
   {
-   "aggregated": 461,
+   "aggregated": 458,
    "asn": 30036,
-   "gain": 829,
-   "gain_pct": 64.3,
+   "gain": 838,
+   "gain_pct": 64.7,
    "name": "MEDIACOM-ENTERPRISE-BUSINESS - Mediacom Communications Corp",
-   "now": 1290
+   "now": 1296
   },
   {
    "aggregated": 923,
@@ -233,20 +233,20 @@
    "now": 1687
   },
   {
-   "aggregated": 153,
+   "aggregated": 152,
    "asn": 4808,
    "gain": 761,
-   "gain_pct": 83.3,
+   "gain_pct": 83.4,
    "name": "CHINA169-BJ - China Unicom Beijing Province Network",
-   "now": 914
+   "now": 913
   }
  ],
- "date": "2026-11-24",
+ "date": "2026-11-26",
  "table": {
-  "aggregated": 129799,
-  "gain": 137593,
-  "gain_pct": 51.5,
-  "now": 267392
+  "aggregated": 130258,
+  "gain": 137381,
+  "gain_pct": 51.3,
+  "now": 267639
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
