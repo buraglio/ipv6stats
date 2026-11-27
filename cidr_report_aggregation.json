@@ -11,10 +11,10 @@
   {
    "aggregated": 6,
    "asn": 7552,
-   "gain": 4038,
+   "gain": 4000,
    "gain_pct": 99.9,
    "name": "VIETEL-AS-AP - Viettel Group",
-   "now": 4044
+   "now": 4006
   },
   {
    "aggregated": 1,
@@ -25,20 +25,20 @@
    "now": 3707
   },
   {
-   "aggregated": 715,
+   "aggregated": 694,
    "asn": 11172,
-   "gain": 3001,
-   "gain_pct": 80.8,
+   "gain": 3028,
+   "gain_pct": 81.4,
    "name": "AS11172 - Alestra, S. de R.L. de C.V.",
-   "now": 3716
+   "now": 3722
   },
   {
-   "aggregated": 818,
+   "aggregated": 821,
    "asn": 45609,
    "gain": 2792,
    "gain_pct": 77.3,
    "name": "BHARTI-MOBILITY-AS-AP - Bharti Airtel Ltd. AS for GPRS Service",
-   "now": 3610
+   "now": 3613
   },
   {
    "aggregated": 40,
@@ -49,12 +49,12 @@
    "now": 2312
   },
   {
-   "aggregated": 3792,
+   "aggregated": 3793,
    "asn": 16509,
    "gain": 2257,
    "gain_pct": 37.3,
    "name": "AMAZON-02 - Amazon.com, Inc.",
-   "now": 6049
+   "now": 6050
   },
   {
    "aggregated": 186,
@@ -65,12 +65,12 @@
    "now": 2383
   },
   {
-   "aggregated": 45,
+   "aggregated": 46,
    "asn": 32098,
-   "gain": 2118,
+   "gain": 2123,
    "gain_pct": 97.9,
    "name": "TRANSTELCO-INC - Transtelco Inc",
-   "now": 2163
+   "now": 2169
   },
   {
    "aggregated": 27,
@@ -107,18 +107,26 @@
   {
    "aggregated": 71,
    "asn": 12479,
-   "gain": 1265,
+   "gain": 1267,
    "gain_pct": 94.7,
    "name": "UNI2-AS Orange Espagne SA",
-   "now": 1336
+   "now": 1338
   },
   {
-   "aggregated": 25,
+   "aggregated": 23,
    "asn": 56044,
    "gain": 1228,
-   "gain_pct": 98.0,
+   "gain_pct": 98.2,
    "name": "CMNET-AS-Liaoning - China Mobile communications corporation",
-   "now": 1253
+   "now": 1251
+  },
+  {
+   "aggregated": 12,
+   "asn": 17853,
+   "gain": 1208,
+   "gain_pct": 99.0,
+   "name": "LGTELECOM-AS-KR-KR - LGTELECOM",
+   "now": 1220
   },
   {
    "aggregated": 73,
@@ -145,20 +153,12 @@
    "now": 1716
   },
   {
-   "aggregated": 90,
+   "aggregated": 87,
    "asn": 26611,
-   "gain": 1127,
-   "gain_pct": 92.6,
+   "gain": 1135,
+   "gain_pct": 92.9,
    "name": "AS26611 - COMUNICACION CELULAR S.A. COMCEL S.A.",
-   "now": 1217
-  },
-  {
-   "aggregated": 110,
-   "asn": 17853,
-   "gain": 1110,
-   "gain_pct": 91.0,
-   "name": "LGTELECOM-AS-KR-KR - LGTELECOM",
-   "now": 1220
+   "now": 1222
   },
   {
    "aggregated": 4,
@@ -169,12 +169,12 @@
    "now": 1043
   },
   {
-   "aggregated": 410,
+   "aggregated": 411,
    "asn": 38266,
-   "gain": 975,
+   "gain": 976,
    "gain_pct": 70.4,
    "name": "VIL-AS-AP - Vodafone Idea Ltd",
-   "now": 1385
+   "now": 1387
   },
   {
    "aggregated": 147,
@@ -209,12 +209,12 @@
    "now": 2409
   },
   {
-   "aggregated": 613,
+   "aggregated": 605,
    "asn": 11664,
-   "gain": 838,
-   "gain_pct": 57.8,
+   "gain": 850,
+   "gain_pct": 58.4,
    "name": "AS11664 - Techtel LMDS Comunicaciones Interactivas S.A.",
-   "now": 1451
+   "now": 1455
   },
   {
    "aggregated": 458,
@@ -225,10 +225,10 @@
    "now": 1296
   },
   {
-   "aggregated": 923,
+   "aggregated": 925,
    "asn": 6167,
-   "gain": 764,
-   "gain_pct": 45.3,
+   "gain": 762,
+   "gain_pct": 45.2,
    "name": "CELLCO-PART - Verizon Business",
    "now": 1687
   },
@@ -241,12 +241,12 @@
    "now": 913
   }
  ],
- "date": "2026-11-26",
+ "date": "2026-11-27",
  "table": {
-  "aggregated": 130258,
-  "gain": 137381,
+  "aggregated": 130468,
+  "gain": 137492,
   "gain_pct": 51.3,
-  "now": 267639
+  "now": 267960
  },
  "url": "https://www.cidr-report.org/v6/as2.0/"
 }
