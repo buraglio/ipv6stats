@@ -1,6 +1,6 @@
 {
- "current": 267960,
- "current_at": "2026-11-27T06:45:06+00:00",
+ "current": 267602,
+ "current_at": "2026-11-28T06:45:05+00:00",
  "daily": [
   {
    "date": "2003-02-10",
@@ -34368,7 +34368,11 @@
   },
   {
    "date": "2026-11-27",
-   "prefixes": 267960
+   "prefixes": 267757
+  },
+  {
+   "date": "2026-11-28",
+   "prefixes": 267602
   }
  ],
  "url": "https://bgp.potaroo.net/v6/as2.0/index.html"
